@@ -1,0 +1,147 @@
+//翻转单链表
+public ListNode reverseListNode(ListNode head){
+	ListNode next = null;
+	ListNode pre = null;
+	while(head != null){
+		next = head.next;
+		head.next = pre;
+		pre= head;
+		head =next;
+	}
+	return pre;
+}
+
+
+//双链表翻转
+public DoubleNode reverseDoubleNode(DoubleNode head){
+
+	DoubleNode next = null;
+	DoubleNode pre = null;
+
+	while(head != null){
+		next = head.next;
+		head.next = pre;
+		head.pre = next;
+		pre = head;
+		head = next;
+	}
+}
+
+//冒泡排序
+public void sort(int[] arr){
+
+	for(int i =0;i< arr.length()-1;i++){
+		for (int j = 0;j< arr.length()-i-1;j++){
+			if(arr[j]>arr[j+1]){
+				swap(arr,j,j+1);
+			}
+		}
+	}
+}
+
+
+//选择排序
+public void sort(int[] arr){
+
+	for(int i=0; i< arr.length()-1;i++){
+		for(int j =i+1;j< arr.length();j++){
+
+			if(arr[j] < arr[i]){
+				swap(arr,j,i)
+			}
+		}
+	}
+}
+
+//插入排序
+public void sort(int[] arr){
+
+	for(int i = 1;i<arr.length();i++){
+
+		int j = i-1;
+
+		while(j>=0){
+			if(arr[j]>arr[j+1]){
+				swap(arr,j,j+1);
+			}
+			j--;
+		}
+	}
+}
+
+
+//快速排序
+public void sort(int[] arr){
+	if(arr = null || arr.length() <2) return;
+	sort(arr,0,arr.length-1);
+}
+
+public void sort(int[] arr,int start,int end){
+	if(start > end) return;
+	int[] mid = partition(arr,start,end)
+	sort(arr,start,mid[0])
+	sort(arr,mid[1],end)
+}
+
+public int[] partition(int[] arr,int l,int r){
+
+	int less = l-1;
+	int more = r +1;
+	int index = l;
+	int num = arr[r];
+
+	while(index <more){
+
+		if(arr[index] > num){
+			swap(arr,index,--more)
+		}else if(arr[index] < num){
+			swap(arr,index++,++less)
+		}else{
+			index++;
+		}
+	}
+	return new int[]{less,more}
+}
+
+
+//归并排序
+
+
+
+//堆排序
+public void sort(int[] array){
+	if(array == null ||arr.length<2)return;
+	for(int i=0;i<array.length;i++){
+		heapInsert(array,i)
+	}
+	int heaSize = array.length
+	swap(array,--heaSize,0)
+	while(heaSize >0){
+		heapFy(array,0,heaSize);
+		swap(array,0,--heaSize);
+	}
+}
+
+
+
+
+public void heapInsert(int[] array,int index){
+	// 如果孩子节点比父亲节点大
+	while(array[index] > array[(index-1) /2]){
+		swap(array,index,(index-1)/2)
+		index = (index -1) /2;
+	}
+}
+
+public void heapFy(int[] array,int index,int heapSize){
+	int left = index *2 +1;
+	while(left< heaSize){
+		int largest = array[left + 1]> array[left] &&left + 1 < heaSize ? left +1:left;
+		largest = array[largest]> array[index]? largest:index;
+		if(largest == index) break;
+
+		swap(array,index,largest);
+		index=largestl
+		left = index *2 +1;
+	}
+}

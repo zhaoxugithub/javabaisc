@@ -1,0 +1,37 @@
+join,底层是调用wait方法
+
+
+首先明确：wait和sleep之间的区别
+
+    sleep:
+
+        1.使用 sleep 方法可以让让当前线程休眠，时间一到当前线程继续往下执行，
+            在任何地方都能使用，但需要捕获 InterruptedException 异常。
+        2.线程方法
+        3.当前线程休眠
+        4.不释放锁
+
+
+    wait:
+        1.wait 方法则必须放在 synchronized 块里面，
+            同样需要捕获 InterruptedException 异常，并且需要获取对象的锁。
+        2.释放锁
+        3.结合notify/ notifyAll
+
+
+Synchronized 和 ReentrantLock 区别
+
+    Synchronized：
+        1.Synchronized是重量级锁。重量级锁需要将线程从内核态和用户态来回切换。如：A线程切换到B线程，
+          A线程需要保存当前现场，B线程切换也需要保存现场。这样做的缺点是耗费系统资源。
+
+    ReentrantLock：
+       1.ReentrantLock是轻量级锁。采用cas+volatile管理线程，不需要线程切换切换，
+         获取锁线程觉得自己肯定能成功，这是一种乐观的思想（可能失败）。
+
+
+      (1) synchronized 是Java的一个内置关键字，而ReentrantLock是Java的一个类。
+      (2) synchronized只能是非公平锁。而ReentrantLock可以实现公平锁和非公平锁两种。
+      (3) synchronized不能中断一个等待锁的线程，而Lock可以中断一个试图获取锁的线程。
+      (4) synchronized不能设置超时，而Lock可以设置超时。
+      (5) synchronized会自动释放锁，而ReentrantLock不会自动释放锁，必须手动释放，否则可能会导致死锁。
