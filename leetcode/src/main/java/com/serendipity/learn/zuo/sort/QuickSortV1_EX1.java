@@ -1,6 +1,7 @@
 package com.serendipity.learn.zuo.sort;
 
-import com.datastruct.zuo.common.ArrayUtils;
+
+import com.serendipity.utils.ArrayUtils;
 
 import java.util.Arrays;
 

@@ -46,7 +46,7 @@ public class GenericsTest_04 {
     public static void testGetObject() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
         GenericsTest_04 genericsTest04 = new GenericsTest_04();
         Object object = genericsTest04.getObject(Class.forName("com.old.generics.A"));
-        if (object instanceof A) {
+        if (object instanceof GenericsTest_06.A) {
             System.out.println("is A");
         } else {
             System.out.println("error");

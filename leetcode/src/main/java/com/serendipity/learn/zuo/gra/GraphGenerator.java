@@ -1,8 +1,6 @@
 package com.serendipity.learn.zuo.gra;
 
-import com.datastruct.zuo.gra.struct.Edge;
-import com.datastruct.zuo.gra.struct.Graph;
-import com.datastruct.zuo.gra.struct.Node;
+import com.serendipity.node.struct.*;
 
 /**
  * ClassName GraphGenerator

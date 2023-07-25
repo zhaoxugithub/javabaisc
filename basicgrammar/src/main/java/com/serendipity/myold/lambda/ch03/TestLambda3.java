@@ -1,6 +1,6 @@
 package com.serendipity.myold.lambda.ch03;
 
-import com.old.lambda.ch01.Employee;
+import com.serendipity.myold.lambda.ch01.Employee;
 import org.junit.Test;
 
 import java.io.PrintStream;

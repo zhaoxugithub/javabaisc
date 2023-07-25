@@ -1,21 +1,17 @@
 package com.serendipity.learn.zuo.sort;
 
-
-import static com.datastruct.zuo.common.ArrayUtils.generateRandomArray;
-import static com.datastruct.zuo.common.ArrayUtils.printArr;
+import static com.serendipity.utils.ArrayUtils.generateRandomArray;
+import static com.serendipity.utils.ArrayUtils.printArr;
 
 /**
  * 快排2.0
  */
 public class QuickSort_02 {
-
     public static void sort(int[] arr) {
-
         if (arr == null || arr.length == 0) {
             return;
         }
         sort(arr, 0, arr.length - 1);
-
     }
 
     public static void sort(int[] arr, int L, int R) {
@@ -48,7 +44,7 @@ public class QuickSort_02 {
         int num = arr[R];
         while (index < more) {
 
-            //如果遍历值比预选值小
+            // 如果遍历值比预选值小
             if (arr[index] < num) {
                 swap(arr, ++less, index++);
             } else if (arr[index] > num) {

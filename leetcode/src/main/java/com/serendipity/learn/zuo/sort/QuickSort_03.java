@@ -1,13 +1,12 @@
 package com.serendipity.learn.zuo.sort;
 
-import static com.datastruct.zuo.common.ArrayUtils.generateRandomArray;
-import static com.datastruct.zuo.common.ArrayUtils.printArr;
+import static com.serendipity.utils.ArrayUtils.generateRandomArray;
+import static com.serendipity.utils.ArrayUtils.printArr;
 
 /**
  * 快排3.0
  */
 public class QuickSort_03 {
-
     public static void sort(int[] arr) {
         if (arr == null || arr.length == 0) {
             return;
@@ -33,14 +32,11 @@ public class QuickSort_03 {
     }
 
     public static int[] partition(int[] array, int L, int R) {
-
         int index = L;
         int less = L - 1;
         int more = R + 1;
         int num = array[R];
-
         while (index < more) {
-
             if (array[index] > num) {
                 swap(array, --more, index);
             } else if (array[index] < num) {
@@ -58,6 +54,4 @@ public class QuickSort_03 {
         sort(array);
         printArr(array);
     }
-
-
 }

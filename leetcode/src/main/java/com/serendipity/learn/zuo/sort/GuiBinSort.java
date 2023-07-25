@@ -1,6 +1,6 @@
 package com.serendipity.learn.zuo.sort;
 
-import com.datastruct.zuo.common.ArrayUtils;
+import com.serendipity.utils.ArrayUtils;
 
 /**
  * 归并排序:先分再合并

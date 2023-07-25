@@ -1,9 +1,6 @@
 package com.serendipity.learn.zuo.sort;
 
-
-import com.datastruct.zuo.common.ArrayUtils;
-
-import static com.datastruct.zuo.common.ArrayUtils.generateRandomArray;
+import com.serendipity.utils.ArrayUtils;
 
 /**
  * 快排1.0

@@ -1,12 +1,10 @@
 package com.serendipity.learn.zuo.heap;
 
-import com.datastruct.zuo.common.ArrayUtils;
+import com.serendipity.utils.ArrayUtils;
 
 public class Code02_Test {
-
-
-    //从下往上看
-    //转变成大跟堆
+    // 从下往上看
+    // 转变成大跟堆
     public static void toMaxHeap(int[] nums, int index) {
         if (nums == null) return;
         while (nums[(index - 1) / 2] < nums[index]) {
@@ -27,7 +25,7 @@ public class Code02_Test {
         ArrayUtils.swap(ints, 0, --heapSize);
 
         while (heapSize > 0) {
-            //在0-heapSize 的区间范围内凑成大根堆
+            // 在0-heapSize 的区间范围内凑成大根堆
             heapfy(ints, 0, heapSize);
             ArrayUtils.swap(ints, 0, --heapSize);
         }
@@ -39,7 +37,7 @@ public class Code02_Test {
         while (left < heapSize) {
             int largest = left + 1 < heapSize && ints[left + 1] > ints[left] ? left + 1 : left;
             largest = ints[largest] > ints[i] ? largest : i;
-            //如果最大值就是父亲自己，返回
+            // 如果最大值就是父亲自己，返回
             if (largest == i) {
                 break;
             }

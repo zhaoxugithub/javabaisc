@@ -1,9 +1,8 @@
 package com.serendipity.learn.zuo.tree;
 
-import com.datastruct.zuo.common.ArrayUtils;
-import com.datastruct.zuo.common.TreeNode;
-import com.datastruct.zuo.common.TreeUtil;
-
+import com.serendipity.node.TreeNode;
+import com.serendipity.utils.ArrayUtils;
+import com.serendipity.utils.TreeUtil;
 
 /**
  * ClassName Code01_TreeMaxDepth
@@ -37,6 +36,7 @@ public class Code01_TreeMaxDepth {
         // 后序遍历位置
         depth--;
     }
+
     public int maxDepth(TreeNode root) {
         if (root == null) {
             return 0;

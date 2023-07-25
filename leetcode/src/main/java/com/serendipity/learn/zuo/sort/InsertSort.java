@@ -1,6 +1,6 @@
 package com.serendipity.learn.zuo.sort;
 
-import com.datastruct.zuo.common.ArrayUtils;
+import com.serendipity.utils.ArrayUtils;
 
 /*
     插入排序： 首先保证在0 ~0 上有序

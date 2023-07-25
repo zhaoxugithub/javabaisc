@@ -1,6 +1,7 @@
 package com.serendipity.learn.c2_classloader;
 
-import com.mashibing.jvm.Hello;
+
+import com.serendipity.learn.Hello;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -20,19 +21,19 @@ public class T007_MSBClassLoaderWithEncription extends ClassLoader {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             int b = 0;
 
-            while ((b=fis.read()) !=0) {
+            while ((b = fis.read()) != 0) {
                 baos.write(b ^ seed);
             }
 
             byte[] bytes = baos.toByteArray();
             baos.close();
-            fis.close();//可以写的更加严谨
+            fis.close();// 可以写的更加严谨
 
             return defineClass(name, bytes, 0, bytes.length);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return super.findClass(name); //throws ClassNotFoundException
+        return super.findClass(name); // throws ClassNotFoundException
     }
 
     public static void main(String[] args) throws Exception {
@@ -41,7 +42,7 @@ public class T007_MSBClassLoaderWithEncription extends ClassLoader {
 
         ClassLoader l = new T007_MSBClassLoaderWithEncription();
         Class clazz = l.loadClass("com.mashibing.jvm.Hello");
-        Hello h = (Hello)clazz.newInstance();
+        Hello h = (Hello) clazz.newInstance();
         h.m();
 
         System.out.println(l.getClass().getClassLoader());
@@ -54,7 +55,7 @@ public class T007_MSBClassLoaderWithEncription extends ClassLoader {
         FileOutputStream fos = new FileOutputStream(new File("c:/test/", name.replaceAll(".", "/").concat(".msbclass")));
         int b = 0;
 
-        while((b = fis.read()) != -1) {
+        while ((b = fis.read()) != -1) {
             fos.write(b ^ seed);
         }
 

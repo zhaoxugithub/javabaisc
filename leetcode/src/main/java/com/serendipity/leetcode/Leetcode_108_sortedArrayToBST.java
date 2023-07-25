@@ -1,6 +1,7 @@
 package com.serendipity.leetcode;
 
-import com.common.TreeNode;
+
+import com.serendipity.node.TreeNode;
 
 /**
  * ClassName Leetcode_108_sortedArrayToBST

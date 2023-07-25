@@ -1,19 +1,15 @@
 package com.serendipity.learn.zuo.sort;
 
-import com.datastruct.zuo.common.ArrayUtils;
+import com.serendipity.utils.ArrayUtils;
 
 public class SelectionSort {
-
-
     /*
-
         算法思想：
             1.在0 ~ n-1 上不断的找最小数然后依次放到指定位置上
      */
     public static void sort(int[] arr) {
         // 在 0 ~ n-1 上遍历
         for (int i = 0; i < arr.length - 1; i++) {
-
             // 这个循环是在i+1 ~ n-1 上找最小元素，找到的话，放到i位置上
             for (int j = i + 1; j < arr.length; j++) {
                 if (arr[i] > arr[j]) {

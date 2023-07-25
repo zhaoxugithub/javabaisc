@@ -1,6 +1,7 @@
 package com.serendipity.learn.c2_classloader;
 
-import com.mashibing.jvm.Hello;
+
+import com.serendipity.learn.Hello;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

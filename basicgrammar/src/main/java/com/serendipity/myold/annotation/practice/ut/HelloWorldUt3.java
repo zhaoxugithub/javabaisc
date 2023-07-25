@@ -37,7 +37,6 @@ public class HelloWorldUt3 extends TestCase {
 
     @Override
     protected void tearDown() throws Exception {
-
         super.tearDown();
         hw = null;
     }

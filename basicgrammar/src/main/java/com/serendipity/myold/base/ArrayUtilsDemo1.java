@@ -1,6 +1,5 @@
 package com.serendipity.myold.base;
 
-import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -17,7 +16,6 @@ import java.util.stream.Collectors;
  * Date 2023-04-05:15:47
  * Version 1.0
  **/
-@Slf4j
 @SuppressWarnings("all")
 public class ArrayUtilsDemo1 {
     /*
@@ -103,7 +101,7 @@ public class ArrayUtilsDemo1 {
     @Test
     public void test6() {
         List<String> list = Arrays.asList("1", "2", "3", "4", "5");
-       System.out.println(Arrays.toString(list.toArray()));
+        System.out.println(Arrays.toString(list.toArray()));
     }
 
     /**

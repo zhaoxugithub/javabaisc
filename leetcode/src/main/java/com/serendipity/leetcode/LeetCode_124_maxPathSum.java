@@ -1,8 +1,8 @@
 package com.serendipity.leetcode;
 
-import com.common.ArrayUtils;
-import com.common.TreeNode;
-import com.common.TreeUtil;
+import com.serendipity.node.TreeNode;
+import com.serendipity.utils.ArrayUtils;
+import com.serendipity.utils.TreeUtil;
 
 /**
  * ClassName LeetCode_124_maxPathSum

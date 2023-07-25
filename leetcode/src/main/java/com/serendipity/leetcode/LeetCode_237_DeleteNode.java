@@ -1,7 +1,7 @@
 package com.serendipity.leetcode;
 
 
-import com.common.ListNode;
+import com.serendipity.node.ListNode;
 
 /**
  * ClassName LeetCode_237_DeleteNode

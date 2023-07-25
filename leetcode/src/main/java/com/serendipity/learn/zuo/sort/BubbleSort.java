@@ -1,6 +1,7 @@
 package com.serendipity.learn.zuo.sort;
 
-import com.datastruct.zuo.common.ArrayUtils;
+
+import com.serendipity.utils.ArrayUtils;
 
 public class BubbleSort {
 
@@ -9,10 +10,8 @@ public class BubbleSort {
         for (int i = 0; i < 100; i++) {
             int[] originArr = ArrayUtils.generateRandomArray(10, 30, 0);
             int[] copyArr = ArrayUtils.copyArray(originArr);
-
             sort(originArr);
             sort3(copyArr);
-
             for (int i1 = 0; i1 < originArr.length; i1++) {
                 if (originArr[i1] != copyArr[i1]) {
                     System.out.println("error");

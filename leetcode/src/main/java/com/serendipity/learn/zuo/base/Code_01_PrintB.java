@@ -1,6 +1,5 @@
 package com.serendipity.learn.zuo.base;
 
-
 import org.junit.Test;
 
 /**
@@ -11,7 +10,6 @@ import org.junit.Test;
  * Version 1.0
  **/
 public class Code_01_PrintB {
-
     // 给定一个整数int(有符号)，打印打他的32位0,1
     public static void print(int num) {
         for (int i = 31; i >= 0; i--) {
