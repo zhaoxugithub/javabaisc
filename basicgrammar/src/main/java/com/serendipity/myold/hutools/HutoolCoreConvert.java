@@ -93,5 +93,18 @@ public class HutoolCoreConvert {
         System.out.println(l);
     }
 
+    // 金额大小写转换
+    @Test
+    public void test07() {
+        double a = 1234.555;
+        String s = Convert.digitToChinese(a);
+        System.out.println(s);
 
+        // ONE HUNDRED AND CENTS TWENTY THREE ONLY
+        String format = Convert.numberToWord(100.23);
+        System.out.println(format);
+        // 1.2k
+        String format1 = Convert.numberToSimple(1200);
+        System.out.println(format1);
+    }
 }
