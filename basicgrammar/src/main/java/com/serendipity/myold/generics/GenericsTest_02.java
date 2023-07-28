@@ -1,5 +1,6 @@
 package com.serendipity.myold.generics;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -49,6 +50,6 @@ public class GenericsTest_02 {
     }
 
     public static void main(String[] args) {
-
+        funD(new ArrayList<>());
     }
 }

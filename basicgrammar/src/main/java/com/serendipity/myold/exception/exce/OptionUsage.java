@@ -35,9 +35,9 @@ public class OptionUsage {
         // Optional.empty() 创建一个空的Optional容器
         Optional<Object> empty = Optional.empty();
         if (empty.isPresent()) {
-            log.info("user is null");
-        } else {
             log.info("user is not null");
+        } else {
+            log.info("user is null");
         }
     }
 

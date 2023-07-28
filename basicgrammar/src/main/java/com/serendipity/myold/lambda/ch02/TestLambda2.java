@@ -26,7 +26,6 @@ import java.util.function.Supplier;
  * Predicate<T> 断言型接口
  */
 public class TestLambda2 {
-
     // 断言型接口
     public void test4() {
         List<String> strings = Arrays.asList("hello", "atguigu", "Lambda", "www", "ok");
@@ -53,7 +52,6 @@ public class TestLambda2 {
         return function.apply(str);
     }
 
-
     // 供给型接口
     public void test02() {
         filterStr3(10, () -> (int) (Math.random() * 100)).forEach(System.out::print);
@@ -61,7 +59,6 @@ public class TestLambda2 {
 
     public List<Integer> filterStr3(int nu, Supplier<Integer> supplier) {
         List<Integer> res = new ArrayList<>();
-
         for (int i = 0; i < nu; i++) {
             Integer integer = supplier.get();
             res.add(integer);

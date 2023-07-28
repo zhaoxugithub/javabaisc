@@ -10,7 +10,6 @@ import java.util.Stack;
  * Description: com.toOffer_v2
  */
 public class Code_01_CQueue {
-
     Stack<Integer> s1 = new Stack<>();
     Stack<Integer> s2 = new Stack<>();
 
@@ -24,15 +23,12 @@ public class Code_01_CQueue {
 
     public int deleteHead() {
 
-        if(s2.empty()){
-           while(!s1.empty()){
-               Integer pop = s1.pop();
-               s2.add(pop);
-           }
+        if (s2.empty()) {
+            while (!s1.empty()) {
+                Integer pop = s1.pop();
+                s2.add(pop);
+            }
         }
-        return s2.empty()?-1:s2.pop();
+        return s2.empty() ? -1 : s2.pop();
     }
-
-
-
 }

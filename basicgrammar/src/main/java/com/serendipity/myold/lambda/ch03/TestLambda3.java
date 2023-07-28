@@ -9,7 +9,6 @@ import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
-
 /*
     一、方法引用：若 Lambda 体中的内容有方法已经实现了，我们可以使用"方法引用"
             （可以理解为方法引用是 Lambda 表达式的另外一种表现形式）
@@ -43,6 +42,13 @@ public class TestLambda3 {
 
     @Test
     public void test02() {
+        Supplier<Employee> supplier1 = new Supplier<Employee>() {
+            @Override
+            public Employee get() {
+                return new Employee();
+
+            }
+        };
         // 传统
         Supplier<Employee> supplier = () -> new Employee("张三", 10, 10.00);
         Employee employee = supplier.get();

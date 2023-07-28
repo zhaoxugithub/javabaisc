@@ -12,7 +12,6 @@ import com.serendipity.utils.TreeUtil;
  * Version 1.0
  **/
 public class LeetCode_124_maxPathSum {
-
     private static int sum = 0;
 
     public static int maxPathSum(TreeNode root) {
@@ -30,8 +29,6 @@ public class LeetCode_124_maxPathSum {
         Integer[] integers = ArrayUtils.intToInteger(ints);
         TreeNode tree = TreeUtil.createTree(integers);
         TreeUtil.printNode(tree);
-
         System.out.println("maxPathSum(tree) = " + maxPathSum(tree));
-
     }
 }

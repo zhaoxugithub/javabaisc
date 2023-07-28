@@ -1,5 +1,8 @@
 package com.serendipity.myold.generics;
 
+import com.serendipity.myold.reflect.Person;
+import org.junit.Test;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -17,7 +20,6 @@ import java.util.List;
 
 @SuppressWarnings("all")
 public class GenericsTest_03 {
-
     // 首先，我们泛型数组相关的申明：
     public void test() {
 //        List<String>[] list11 = new ArrayList<String>[10]; //编译错误，非法创建
@@ -33,24 +35,29 @@ public class GenericsTest_03 {
         List<String> strings = new ArrayList<>();
         // list 里面装的是string[]
         List<String[]> li = new ArrayList<>();
-
         // 数组元素是一个list
-//        List<String>[] lii = new ArrayList<String>[100];
+        // List<String>[] lii = new ArrayList<String>[100];
         List<?>[] list15 = new ArrayList<?>[10]; // OK
         list15[1] = new LinkedList<>();
         List<String>[] list6 = new ArrayList[10]; // OK，但是会有警告
+
+        List<?>[] lll = new ArrayList[10];
     }
 
     // 证明Java是类型擦除
     public void test3() {
         ArrayList<String> list1 = new ArrayList<String>();
         list1.add("abc");
-
         ArrayList<Integer> list2 = new ArrayList<Integer>();
         list2.add(123);
-
         System.out.println(list1.getClass() == list2.getClass()); // true
+    }
 
+    @Test
+    public void test31() {
+        ArrayList<String> list1 = new ArrayList<>();
+        ArrayList<Person> people = new ArrayList<>();
+        System.out.println(list1.getClass() == people.getClass()); // true
     }
 
 
@@ -74,10 +81,9 @@ public class GenericsTest_03 {
         Integer add = GenericsTest_03.add(1, 2);
         Number add1 = GenericsTest_03.add(1, 2.22);
         Object sdas = GenericsTest_03.add(1, "sdas");
-
         // 指定范型
         int a = GenericsTest_03.<Integer>add(1, 2); // 指定了Integer，所以只能为Integer类型或者其子类
-//        int b = GenericsTest_03.<Integer>add(1, 2.2); //编译错误，指定了Integer，不能为Float
+        // int b = GenericsTest_03.<Integer>add(1, 2.2); // 编译错误，指定了Integer，不能为Float
         Number c = GenericsTest_03.<Number>add(1, 2.2); // 指定为Number，所以可以为Integer和Float
     }
 
@@ -88,24 +94,20 @@ public class GenericsTest_03 {
 
     /**
      * 重点！！！！
-     * 类型检查就是针对引用的，谁是一个引用，用这个引用调用泛型方法，就会对这个引用调用的方法进行类型检测，而无关它真正引用的对象。
+     * 类型检查就是针对引用的，谁是一个引用，用这个引用调用泛型方法，
+     * 就会对这个引用调用的方法进行类型检测，而无关它真正引用的对象。
      */
     public void test06() {
-
-
         ArrayList<String> list1 = new ArrayList();
         list1.add("1"); // 编译通过
 //        list1.add(1); //编译错误
         String str1 = list1.get(0); // 返回类型就是String
-
         ArrayList list2 = new ArrayList<String>();
         list2.add("1"); // 编译通过
         list2.add(1); // 编译通过
         Object object = list2.get(0); // 返回类型就是Object
-
         new ArrayList<String>().add("11"); // 编译通过
 //        new ArrayList<String>().add(22); //编译错误
-
         String str2 = new ArrayList<String>().get(0); // 返回类型就是String
 
     }

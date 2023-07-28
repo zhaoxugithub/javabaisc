@@ -12,16 +12,12 @@ import java.util.ArrayList;
 public class GenericsTest_09 {
 
     public static void main(String[] args) {
-
-
         // ArrayList<String> list1 = new ArrayList<Object>();// 编译错误
         // 原因如下：
         ArrayList<Object> objects = new ArrayList<Object>();
         objects.add(new Object());
         objects.add(new Object());
         // ArrayList<String> list1 = objects;  编译错误
-
-
         // ArrayList<Object> list2 = new ArrayList<String>(); // 编译错误
         ArrayList<String> strings = new ArrayList<>();
         strings.add(new String());

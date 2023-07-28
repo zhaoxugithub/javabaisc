@@ -47,4 +47,10 @@ public class TestLambda4 {
         Optional<String> str2 = op.flatMap((e) -> Optional.of(e.getName()));
         System.out.println(str2.get());
     }
+
+    @Test
+    public void test05() {
+        Optional<Object> o = Optional.ofNullable(null);
+        System.out.println(o.get());
+    }
 }

@@ -13,7 +13,6 @@ public class GenericsTest_01 {
 //    public int test(T t) {
 //        return 0;
 //    }
-
 //    在名称之前
     class Ed<E> {
         public void test01(E d) {

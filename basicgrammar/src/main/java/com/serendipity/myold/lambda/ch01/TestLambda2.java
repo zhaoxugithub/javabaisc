@@ -1,5 +1,3 @@
-package com.serendipity.myold.lambda.ch01;
-
 import org.junit.Test;
 
 import java.util.ArrayList;

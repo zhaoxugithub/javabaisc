@@ -10,11 +10,8 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Employee {
-
     public enum Status {
-        FREE,
-        BUSY,
-        VOCATION;
+        FREE, BUSY, VOCATION;
     }
 
     private Integer id;
@@ -42,11 +39,7 @@ public class Employee {
             return false;
         }
         Employee employee = (Employee) o;
-        return Double.compare(employee.salary, salary) == 0 &&
-                Objects.equals(id, employee.id) &&
-                Objects.equals(name, employee.name) &&
-                Objects.equals(age, employee.age) &&
-                status == employee.status;
+        return Double.compare(employee.salary, salary) == 0 && Objects.equals(id, employee.id) && Objects.equals(name, employee.name) && Objects.equals(age, employee.age) && status == employee.status;
     }
 
     @Override
@@ -56,12 +49,6 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", salary=" + salary +
-                ", status=" + status +
-                '}';
+        return "Employee{" + "id=" + id + ", name='" + name + '\'' + ", age=" + age + ", salary=" + salary + ", status=" + status + '}';
     }
 }

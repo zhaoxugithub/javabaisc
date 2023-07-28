@@ -30,15 +30,10 @@ public class TestLambda1 {
 
     public void test02_2() {
         TreeSet<Integer> integers = new TreeSet<Integer>(Integer::compareTo);
+        TreeSet<Employee> employees1 = new TreeSet<>((Comparator.comparingInt(Employee::getAge)));
     }
 
-    List<Employee> employees = Arrays.asList(
-            new Employee("张三", 10, 10.00),
-            new Employee("李四", 20, 20.00),
-            new Employee("王五", 30, 30.00),
-            new Employee("赵六", 40, 40.00),
-            new Employee("田七", 50, 50.00)
-    );
+    List<Employee> employees = Arrays.asList(new Employee("张三", 10, 10.00), new Employee("李四", 20, 20.00), new Employee("王五", 30, 30.00), new Employee("赵六", 40, 40.00), new Employee("田七", 50, 50.00));
 
     // 需求；获取当前公司中员工年龄大于30的员工信息
     public void test03() {

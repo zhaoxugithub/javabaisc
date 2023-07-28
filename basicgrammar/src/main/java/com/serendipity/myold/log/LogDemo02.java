@@ -24,12 +24,9 @@ TRACE
 需要结合配置文件使用
  */
 public class LogDemo02 {
-
     public static void main(String[] args) {
-
         Log log = LogFactory.getLog(LogDemo02.class);
         log.info("start ....");
         log.warn("end..");
-
     }
 }

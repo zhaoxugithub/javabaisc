@@ -14,14 +14,11 @@ import java.util.Base64;
  */
 public class Base64Demo {
 
-
-
     public static void main(String[] args) {
         final String text = "Lets learn java8!";
         // 将text按照base64 UTF-8 进行编码
         final String encoded = Base64.getEncoder().encodeToString(text.getBytes(StandardCharsets.UTF_8));
         System.out.println(encoded);
-
         // 按照base64 UTF-8 进行解码
         String s = new String(Base64.getDecoder().decode(encoded), StandardCharsets.UTF_8);
         System.out.println(s);

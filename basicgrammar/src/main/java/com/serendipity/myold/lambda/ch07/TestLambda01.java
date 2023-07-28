@@ -23,7 +23,6 @@ public class TestLambda01 {
         private String message;
 
         Person() {
-
         }
 
         Person(String name, String message) {
@@ -41,21 +40,12 @@ public class TestLambda01 {
 
         @Override
         public String toString() {
-            return "Person{" +
-                    "name='" + name + '\'' +
-                    ", message='" + message + '\'' +
-                    '}';
+            return "Person{" + "name='" + name + '\'' + ", message='" + message + '\'' + '}';
         }
     }
 
 
-    final List<Person> people = Arrays.asList(
-            new Person("p1", "p1 message"),
-            new Person("p1", "p2 message2222"),
-            new Person("p2", "p2 message"),
-            new Person("p3", "p3 message"),
-            new Person("p4", "p4 message")
-    );
+    final List<Person> people = Arrays.asList(new Person("p1", "p1 message"), new Person("p1", "p2 message2222"), new Person("p2", "p2 message"), new Person("p3", "p3 message"), new Person("p4", "p4 message"));
 
     public void test01() {
         final List<Integer> list = Arrays.asList(1, 2, 3, 4);
@@ -124,7 +114,6 @@ public class TestLambda01 {
     public void test08() {
         IntStream.range(0, 1000).map(x -> (x * 12));
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
-
     }
 
 
