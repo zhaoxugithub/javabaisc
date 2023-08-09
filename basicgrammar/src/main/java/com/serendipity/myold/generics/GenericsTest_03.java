@@ -40,7 +40,6 @@ public class GenericsTest_03 {
         List<?>[] list15 = new ArrayList<?>[10]; // OK
         list15[1] = new LinkedList<>();
         List<String>[] list6 = new ArrayList[10]; // OK，但是会有警告
-
         List<?>[] lll = new ArrayList[10];
     }
 
@@ -60,14 +59,14 @@ public class GenericsTest_03 {
         System.out.println(list1.getClass() == people.getClass()); // true
     }
 
-
     // 在相同类型的list里面添加不同类型的数据
     public void test4() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
         ArrayList<Integer> strings = new ArrayList<>();
         strings.add(11);
         // 报错
 //        strings.add(22);
-        Method add = strings.getClass().getMethod("add", Object.class);
+        Method add = strings.getClass()
+                            .getMethod("add", Object.class);
         add.invoke(strings, "qweqwr");
 //        add.invoke(strings,new Date());
         for (int i = 0; i < strings.size(); i++) {

@@ -10,7 +10,6 @@ import java.util.ArrayList;
  * Version 1.0
  **/
 public class GenericsTest_09 {
-
     public static void main(String[] args) {
         // ArrayList<String> list1 = new ArrayList<Object>();// 编译错误
         // 原因如下：

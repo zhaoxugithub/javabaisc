@@ -129,7 +129,7 @@ public class AllOps {
         //- f(!x);
         //- f(x && y);
         //- f(x || y);
-        //按位运算符：
+        // 按位运算符：
         x = (byte) ~y;
         x = (byte) (x & y);
         x = (byte) (x | y);
@@ -413,7 +413,6 @@ public class AllOps {
         long l = (long) x;
         float f = (float) x;
     }
-
 
     public static void main(String[] args) {
         AllOps allOps = new AllOps();

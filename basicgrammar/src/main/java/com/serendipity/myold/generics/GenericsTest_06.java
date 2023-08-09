@@ -4,7 +4,6 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class GenericsTest_06<T> {
-
     class A {
         @Override
         public String toString() {
@@ -21,7 +20,6 @@ public class GenericsTest_06<T> {
             strings[i] = 10 + i + "";
         }
         System.out.println(Arrays.toString(strings));
-
     }
 
     /**

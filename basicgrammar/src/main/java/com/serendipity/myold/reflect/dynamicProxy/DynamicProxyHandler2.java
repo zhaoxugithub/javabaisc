@@ -62,8 +62,25 @@ public class DynamicProxyHandler2 {
     }
 
     public Object getProxyClass(Object target) {
-        return Proxy.newProxyInstance(target.getClass().getClassLoader(),
-                target.getClass().getInterfaces(), new DynamicProxyHandlerDemo(target));
+        return Proxy.newProxyInstance(target.getClass()
+                                            .getClassLoader(), target.getClass()
+                                                                     .getInterfaces(), new DynamicProxyHandlerDemo(target));
+    }
+
+
+    // 自带jdk生成动态代理对象
+    private Object getProxyClass2(Object target) {
+        return Proxy.newProxyInstance(target.getClass()
+                                            .getClassLoader(), target.getClass()
+                                                                     .getInterfaces(), new InvocationHandler() {
+            @Override
+            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                System.out.println("动态代理对象开始....." + method.getName() + "---params:" + Arrays.toString(args));
+                Object result = method.invoke(target, args);
+                System.out.println("动态代理对象结束....." + method.getName() + "---params:" + Arrays.toString(args));
+                return result;
+            }
+        });
     }
 
     @Test
@@ -71,6 +88,8 @@ public class DynamicProxyHandler2 {
         // 生成动态代理对象
         AInterface proxyClass = (AInterface) getProxyClass(new A());
         proxyClass.function1("params111111");
-    }
 
+        AInterface proxyClass2 = (AInterface) getProxyClass2(new A());
+        proxyClass2.function1("sdfadfsafdas");
+    }
 }

@@ -15,7 +15,6 @@ import java.util.List;
  * Version 1.0
  **/
 public class HutoolCoreCopyClass {
-
     @AllArgsConstructor
     @Data
     private class B {
@@ -27,7 +26,6 @@ public class HutoolCoreCopyClass {
     private class C {
         private String cname;
     }
-
 
     @Data
     private class A implements Cloneable {
@@ -58,7 +56,6 @@ public class HutoolCoreCopyClass {
         A cloneA2 = (A) a.clone();
         System.out.println(cloneA1);
         System.out.println(cloneA2);
-
         System.out.println(cloneA1 == cloneA2);
     }
 }

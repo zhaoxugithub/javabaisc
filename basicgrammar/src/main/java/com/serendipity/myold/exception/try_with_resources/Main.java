@@ -13,7 +13,6 @@ import java.io.IOException;
  * 解决使用try finally 的资源泄漏隐患
  **/
 public class Main {
-
     /**
      * 传统的方式实现对资源的关闭
      *
@@ -56,14 +55,12 @@ public class Main {
      * @return
      */
     private String newTryWithResources() throws IOException {
-
         // 1.单个资源关闭
         // try (BufferedReader bufferedReader = new BufferedReader(new FileReader(""))) {
         //     return bufferedReader.readLine();
         // }
         // 2.多个资源关闭
-        try (FileInputStream in = new FileInputStream("");
-             FileOutputStream out = new FileOutputStream("")) {
+        try (FileInputStream in = new FileInputStream(""); FileOutputStream out = new FileOutputStream("")) {
             byte[] bytes = new byte[100];
             int n = 0;
             while ((n = in.read(bytes)) != -1) {
@@ -74,12 +71,14 @@ public class Main {
     }
 
     public static void main(String[] args) throws MyException {
-    /*        AutoClose autoClose = new AutoClose();
+    /*
+        AutoClose autoClose = new AutoClose();
             try {
                 autoClose.work();
             } finally {
                 autoClose.close();
-            }*/
+            }
+    */
         // 这个可以把所有的异常全部抛出来
         try (AutoClose autoClose1 = new AutoClose()) {
             autoClose1.work();

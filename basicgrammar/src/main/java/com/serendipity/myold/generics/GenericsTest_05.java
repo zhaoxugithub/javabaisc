@@ -5,7 +5,6 @@ public class GenericsTest_05 {
         // 返回泛型数组
         Integer[] i = fun1(1, 2, 3, 4, 5, 6);
         fun2(i);
-
         String[] str = fun1("a", "b", "c", "d", "e", "f");
         fun2(str);
     }

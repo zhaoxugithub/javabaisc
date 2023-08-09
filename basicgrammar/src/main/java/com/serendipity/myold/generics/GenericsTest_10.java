@@ -10,9 +10,7 @@ import java.util.Date;
  * Version 1.0
  **/
 public class GenericsTest_10 {
-
     private static class Pair<T> {
-
         private T value;
 
         public T getValue() {
@@ -25,7 +23,6 @@ public class GenericsTest_10 {
     }
 
     private static class DateInter extends Pair<Date> {
-
         @Override
         public void setValue(Date value) {
             super.setValue(value);

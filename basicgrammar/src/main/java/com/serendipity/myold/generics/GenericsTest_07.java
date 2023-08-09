@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class GenericsTest_07 {
-
     public static void test1() {
         ArrayList<String> list1 = new ArrayList<>();
         ArrayList<Integer> list2 = new ArrayList<>();
@@ -16,7 +15,9 @@ public class GenericsTest_07 {
         ArrayList<Integer> list1 = new ArrayList<Integer>();
         list1.add(2);
         // 有异常产生
-        list1.getClass().getMethod("add", Object.class).invoke(list1, "asd");
+        list1.getClass()
+             .getMethod("add", Object.class)
+             .invoke(list1, "asd");
 
         list1.forEach(System.out::println);
     }
@@ -34,13 +35,12 @@ public class GenericsTest_07 {
         // 这两个参数一个是Integer，一个是String，所以取同一父类的最小级，为Object
         Object add2 = GenericsTest_07.add(1, "asd");
         System.out.println();
-
         /**指定泛型的时候*/
-        //指定了Integer，所以只能为Integer类型或者其子类
+        // 指定了Integer，所以只能为Integer类型或者其子类
         Integer l1 = GenericsTest_07.<Integer>add(1, 2);
-        //编译错误，指定了Integer，不能为Float
+        // 编译错误，指定了Integer，不能为Float
         // Integer l2 = GenericsTest_07.<Integer>add(1, 1.2);
-        //指定为Number，所以可以为Integer和Float
+        // 指定为Number，所以可以为Integer和Float
         Number add3 = GenericsTest_07.<Number>add(1, 1.2);
     }
 

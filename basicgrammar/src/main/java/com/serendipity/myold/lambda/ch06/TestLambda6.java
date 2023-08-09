@@ -14,23 +14,17 @@ import java.util.List;
     3. 终止操作（终端操作）
  */
 public class TestLambda6 {
-    List<Employee> employees = Arrays.asList(
-            new Employee("张三", 18, 9999.99),
-            new Employee("李四", 39, 5555.55),
-            new Employee("王五", 50, 666.99),
-            new Employee("赵六", 16, 6666.66),
-            new Employee("田七", 8, 8888.88),
-            new Employee("田七", 8, 8888.88),
-            new Employee("田七", 8, 8888.88)
-    );
+    List<Employee> employees = Arrays.asList(new Employee("张三", 18, 9999.99), new Employee("李四", 39, 5555.55), new Employee("王五", 50, 666.99), new Employee("赵六", 16, 6666.66), new Employee("田七", 8, 8888.88), new Employee("田七", 8, 8888.88), new Employee("田七", 8, 8888.88));
 
     // 内部迭代：迭代操作由 Stream API 完成
     @Test
     public void test1() {
-        employees.stream().filter((x) -> {
-            System.out.println("内部迭代");
-            return x.getAge() > 5;
-        }).forEach(System.out::print);
+        employees.stream()
+                 .filter((x) -> {
+                     System.out.println("内部迭代");
+                     return x.getAge() > 5;
+                 })
+                 .forEach(System.out::print);
     }
 
     // 外部迭代
@@ -52,20 +46,20 @@ public class TestLambda6 {
     @Test
     public void test3() {
         employees.stream()
-                .filter((e) -> {
-                    System.out.println("短路！");//&&  ||
-                    return e.getSalary() > 500;
-                })
-                .limit(2)
-                .forEach(System.out::println);
+                 .filter((e) -> {
+                     System.out.println("短路！");//&&  ||
+                     return e.getSalary() > 500;
+                 })
+                 .limit(2)
+                 .forEach(System.out::println);
     }
 
     public void test4() {
         employees.stream()
-                .filter((e) -> e.getSalary() > 5000)
-                .skip(2)
-                .distinct()
-                .forEach(System.out::println);
+                 .filter((e) -> e.getSalary() > 5000)
+                 .skip(2)
+                 .distinct()
+                 .forEach(System.out::println);
     }
 
 }

@@ -15,7 +15,6 @@ import java.io.BufferedOutputStream;
  * Version 1.0
  **/
 public class HutoolCoreIOUtil {
-
     @Test
     public void test01() {
         BufferedInputStream inputStream = FileUtil.getInputStream("HutoolCoreConvert.java");

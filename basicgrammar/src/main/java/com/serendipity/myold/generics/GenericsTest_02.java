@@ -10,10 +10,7 @@ import java.util.List;
  * FileName: GenericsTest_02
  * Description: com.base
  */
-
-
 public class GenericsTest_02 {
-
     static class A {
     }
 
@@ -38,8 +35,6 @@ public class GenericsTest_02 {
 //        funC(listB); // Unresolved compilation problem: The method doPrint(List<A>) in the type test is not applicable for the arguments (List<B>)
 //        // ...
 //    }
-
-
     public static void funC(List<? extends A> listA) {
         // ...
     }

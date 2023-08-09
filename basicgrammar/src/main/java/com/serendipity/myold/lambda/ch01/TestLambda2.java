@@ -54,8 +54,8 @@ public class TestLambda2 {
     public void test03() {
         // 这行代码并未做什么实际性的工作，filter只是描述了Stream，没有产生新的集合。
         Stream<Integer> integerStream = list.stream()
-                .filter(f -> f > 5)
-                .filter(f -> f.equals(6));
+                                            .filter(f -> f > 5)
+                                            .filter(f -> f.equals(6));
 
         // 及早求值方法
         // collect最终会从Stream产生新值，拥有终止操作。
@@ -68,21 +68,30 @@ public class TestLambda2 {
     @Test
     public void test04() {
         // 顺序流
-        List<Integer> collect = list.stream().filter(f -> f > 5).collect(Collectors.toList());
+        List<Integer> collect = list.stream()
+                                    .filter(f -> f > 5)
+                                    .collect(Collectors.toList());
         Integer[] integers = list.toArray(new Integer[0]);
         // 并行流
-        List<Integer> collect1 = list.stream().parallel().filter(f -> f > 5).collect(Collectors.toList());
+        List<Integer> collect1 = list.stream()
+                                     .parallel()
+                                     .filter(f -> f > 5)
+                                     .collect(Collectors.toList());
     }
 
     // 方法引用
     @Test
     public void test05() {
         // 1.静态方法引用ClassName :: staticMethodName
-        Arrays.asList("d", "b", "c", "a").forEach(TestLambda2::println);
+        Arrays.asList("d", "b", "c", "a")
+              .forEach(TestLambda2::println);
         // lambda表达式使用：
-        Arrays.asList(new String[]{"a", "c", "b"}).forEach(s -> TestLambda2.println(s));
+        Arrays.asList(new String[]{"a", "c", "b"})
+              .forEach(s -> TestLambda2.println(s));
         // 静态方法引用：
-        Arrays.asList(new String[]{"a", "c", "b"}).stream().forEach(TestLambda2::println);
+        Arrays.asList(new String[]{"a", "c", "b"})
+              .stream()
+              .forEach(TestLambda2::println);
 
         System.out.println("-------------------------------------------------");
 
@@ -139,7 +148,9 @@ public class TestLambda2 {
 
 
     public static void filter(List<String> names, Predicate<String> condition) {
-        names.stream().filter(condition).forEach(System.out::println);
+        names.stream()
+             .filter(condition)
+             .forEach(System.out::println);
         System.out.println("------------------");
     }
 
@@ -152,13 +163,18 @@ public class TestLambda2 {
         // 断言的规则
         Predicate<String> stringPredicate = (n) -> n.startsWith("J");
         Predicate<String> predicateLength = (n) -> n.length() > 4;
-        languages.stream().filter(stringPredicate.and(predicateLength)).forEach(System.out::println);
+        languages.stream()
+                 .filter(stringPredicate.and(predicateLength))
+                 .forEach(System.out::println);
     }
 
 
     public void test08() {
         List<Integer> costBeforeTax = Arrays.asList(100, 200, 300, 400, 500);
-        Double aDouble = costBeforeTax.stream().map(x -> (x + x * 0.12)).reduce(Double::sum).get();
+        Double aDouble = costBeforeTax.stream()
+                                      .map(x -> (x + x * 0.12))
+                                      .reduce(Double::sum)
+                                      .get();
         System.out.println(aDouble);
     }
 

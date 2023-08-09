@@ -25,7 +25,8 @@ public class TestLambda5 {
         int[] nums3 = (int[]) Array.newInstance(int.class, 5);
         int[] nums4 = nums3.clone();
         int[] nums5 = Arrays.copyOf(nums3, nums3.length);
-        Integer[] array = (Integer[]) Stream.of(1, 2, 3, 4).toArray();
+        Integer[] array = (Integer[]) Stream.of(1, 2, 3, 4)
+                                            .toArray();
     }
 
 
@@ -39,7 +40,8 @@ public class TestLambda5 {
         List<Integer> list2_1 = Arrays.asList(1, 2, 3);
         List<Integer> list3 = Collections.singletonList(1);
         List<Integer> list4 = List.of(1, 2, 3, 4, 5);
-        List<Integer> list5 = Stream.of(1, 2, 3, 4).toList();
+        List<Integer> list5 = Stream.of(1, 2, 3, 4)
+                                    .toList();
     }
 
     /**
@@ -66,18 +68,21 @@ public class TestLambda5 {
         // 数组 -> list
         String[] strs = {"a", "b", "c"};
         List<String> list1 = Arrays.asList(strs);
-        List<String> list2 = Arrays.stream(strs).toList();
+        List<String> list2 = Arrays.stream(strs)
+                                   .toList();
         List<String> list3 = new ArrayList<String>(Arrays.asList(strs));
 
         List<String> list4 = new ArrayList<>();
         Collections.addAll(list4, strs);
 
-        List<String> collect = Stream.of(strs).toList();
+        List<String> collect = Stream.of(strs)
+                                     .toList();
 
 
         // list -> 数组
         String[] array = list2.toArray(new String[0]);
-        String[] array1 = list2.stream().toArray(String[]::new);
+        String[] array1 = list2.stream()
+                               .toArray(String[]::new);
 
 
     }
@@ -97,10 +102,14 @@ public class TestLambda5 {
         // 4. 创建无限流
         // 迭代
         Stream<Integer> iterate = Stream.iterate(0, x -> x + 2);
-        iterate.limit(10).forEach(System.out::print);
+        iterate.limit(10)
+               .forEach(System.out::print);
         // 生成
         System.out.println();
-        Stream.generate(() -> Math.random()).limit(5).forEach(System.out::println);
-        Stream<Double> limit = Stream.generate(() -> Math.random()).limit(10);
+        Stream.generate(() -> Math.random())
+              .limit(5)
+              .forEach(System.out::println);
+        Stream<Double> limit = Stream.generate(() -> Math.random())
+                                     .limit(10);
     }
 }

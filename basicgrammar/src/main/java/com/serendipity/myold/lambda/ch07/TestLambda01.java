@@ -60,7 +60,10 @@ public class TestLambda01 {
 
     @Test
     public void test02() {
-        final List<Person> p1 = people.stream().filter(f -> f.getName().equals("p1")).collect(Collectors.toList());
+        final List<Person> p1 = people.stream()
+                                      .filter(f -> f.getName()
+                                                    .equals("p1"))
+                                      .collect(Collectors.toList());
         System.out.println(p1.get(0));
     }
 
@@ -78,10 +81,15 @@ public class TestLambda01 {
     public void test04() {
         long t0 = System.nanoTime();
         // 初始化一个范围100万整数流,求能被2整除的数字，toArray()是终点方法
-        int a[] = IntStream.range(0, 1_000_000_000).filter(p -> p % 2 == 0).toArray();
+        int a[] = IntStream.range(0, 1_000_000_000)
+                           .filter(p -> p % 2 == 0)
+                           .toArray();
         long t1 = System.nanoTime();
         // 和上面功能一样，这里是用并行流来计算
-        int b[] = IntStream.range(0, 1_000_000_000).parallel().filter(p -> p % 2 == 0).toArray();
+        int b[] = IntStream.range(0, 1_000_000_000)
+                           .parallel()
+                           .filter(p -> p % 2 == 0)
+                           .toArray();
         long t2 = System.nanoTime();
         // 我本机的结果是serial: 0.06s, parallel 0.02s，证明并行流确实比顺序流快
         System.out.printf("serial: %.2fs, parallel %.2fs%n", (t1 - t0) * 1e-9, (t2 - t1) * 1e-9);
@@ -106,20 +114,27 @@ public class TestLambda01 {
 
     @Test
     public void test07() {
-        Predicate<Person> p1 = (x) -> x.getName().equals("p1");
-        Predicate<Person> p2 = (x) -> x.getMessage().equals("p1 message");
-        people.stream().filter(p1.and(p2)).forEach(System.out::println);
+        Predicate<Person> p1 = (x) -> x.getName()
+                                       .equals("p1");
+        Predicate<Person> p2 = (x) -> x.getMessage()
+                                       .equals("p1 message");
+        people.stream()
+              .filter(p1.and(p2))
+              .forEach(System.out::println);
     }
 
     public void test08() {
-        IntStream.range(0, 1000).map(x -> (x * 12));
+        IntStream.range(0, 1000)
+                 .map(x -> (x * 12));
         List<Integer> list = Arrays.asList(1, 2, 3, 4, 5, 6);
     }
 
 
     public void filter(List<String> names, Predicate<String> condition) {
-        names.stream().filter(condition).forEach((name) -> {
-            System.out.println(name + " ");
-        });
+        names.stream()
+             .filter(condition)
+             .forEach((name) -> {
+                 System.out.println(name + " ");
+             });
     }
 }
