@@ -94,14 +94,14 @@ public class TestLambda02 {
         System.out.println(collect);
     }
 
-    //FlatMap
+    // FlatMap
     @Test
     public void test03() {
         final List<Integer> collect = Stream.of(Arrays.asList(1, 3), Arrays.asList(5, 6)).flatMap(a -> a.stream()).collect(Collectors.toList());
         System.out.println(collect);
     }
 
-    //distinct
+    // distinct
     @Test
     public void test04() {
         final List<String> collect = people.stream().map(Person::getName).distinct().collect(Collectors.toList());
