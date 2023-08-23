@@ -12,16 +12,16 @@ import java.util.List;
  */
 public class Streams {
 
-    private enum Status{
-        OPEN,CLOSED
+    private enum Status {
+        OPEN, CLOSED
     }
 
-    private static final class Task{
+    private static final class Task {
 
         private final Status status;
         private final Integer ponints;
 
-        Task(final Status status,final Integer points){
+        Task(final Status status, final Integer points) {
             this.ponints = points;
             this.status = status;
         }
@@ -36,25 +36,18 @@ public class Streams {
 
         @Override
         public String toString() {
-            return "Task{" +
-                    "status=" + status +
-                    ", ponints=" + ponints +
-                    '}';
+            return "Task{" + "status=" + status + ", ponints=" + ponints + '}';
         }
     }
 
     public static void main(String[] args) {
 
-        final List<Task> tasks = Arrays.asList(
-                new Task(Status.OPEN, 5),
-                new Task(Status.OPEN, 13),
-                new Task(Status.CLOSED, 8)
-        );
+        final List<Task> tasks = Arrays.asList(new Task(Status.OPEN, 5), new Task(Status.OPEN, 13), new Task(Status.CLOSED, 8));
 
-        final int sum = tasks
-                .stream()
-                .filter(task -> task.status == Status.OPEN)
-                .mapToInt(Task::getPonints).sum();
-        System.out.println("Total points: "+ sum);
+        final int sum = tasks.stream()
+                             .filter(task -> task.status == Status.OPEN)
+                             .mapToInt(Task::getPonints)
+                             .sum();
+        System.out.println("Total points: " + sum);
     }
 }

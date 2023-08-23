@@ -11,7 +11,6 @@ import java.util.Iterator;
 import java.util.Scanner;
 
 public class GroupChatClient {
-
     private final String HOST = "127.0.0.1";
     private final Integer PORT = 6667;
     private Selector selector;
@@ -23,7 +22,8 @@ public class GroupChatClient {
         socketChannel = SocketChannel.open(new InetSocketAddress(HOST, PORT));
         socketChannel.configureBlocking(false);
         socketChannel.register(selector, SelectionKey.OP_READ);
-        userName = socketChannel.getLocalAddress().toString();
+        userName = socketChannel.getLocalAddress()
+                                .toString();
         System.out.println(userName + "--上线了...");
     }
 
@@ -41,14 +41,14 @@ public class GroupChatClient {
         try {
             int select = selector.select();
             if (select > 0) {
-                Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
+                Iterator<SelectionKey> iterator = selector.selectedKeys()
+                                                          .iterator();
                 while (iterator.hasNext()) {
                     SelectionKey selectionKey = iterator.next();
                     if (selectionKey.isReadable()) {
                         SocketChannel channel = (SocketChannel) selectionKey.channel();
                         ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
                         channel.read(byteBuffer);
-
                         String msg = new String(byteBuffer.array());
                         System.out.println("from server:" + msg);
                     }
@@ -63,25 +63,18 @@ public class GroupChatClient {
     }
 
     public static void main(String[] args) throws IOException {
-
         GroupChatClient chatClient = new GroupChatClient();
-
-        //创建一个线程，每隔3s,从服务器中读取数据
-        new Thread() {
-            @Override
-            public void run() {
-                while (true) {
-                    chatClient.readInfo();
-                    try {
-                        Thread.sleep(3000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        // 创建一个线程，每隔3s,从服务器中读取数据
+        new Thread(() -> {
+            while (true) {
+                chatClient.readInfo();
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-
             }
-        }.start();
-
+        }).start();
         Scanner scanner = new Scanner(System.in);
         while (scanner.hasNextLine()) {
             String nextLine = scanner.nextLine();

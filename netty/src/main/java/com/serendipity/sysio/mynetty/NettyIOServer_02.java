@@ -15,13 +15,16 @@ public class NettyIOServer_02 {
             NioEventLoopGroup boss = new NioEventLoopGroup(1);
             NioEventLoopGroup worker = new NioEventLoopGroup(2);
             ServerBootstrap serverBootstrap = new ServerBootstrap();
-            ChannelFuture future = serverBootstrap.group(boss, worker).channel(NioServerSocketChannel.class).childHandler(new ChannelInitializer<NioSocketChannel>() {
-                @Override
-                protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                    ChannelPipeline pipeline = nioSocketChannel.pipeline();
-                    pipeline.addLast(new AcceptClientHandler());
-                }
-            }).bind(new InetSocketAddress("192.168.1.100", 9991));
+            ChannelFuture future = serverBootstrap.group(boss, worker)
+                                                  .channel(NioServerSocketChannel.class)
+                                                  .childHandler(new ChannelInitializer<NioSocketChannel>() {
+                                                      @Override
+                                                      protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
+                                                          ChannelPipeline pipeline = nioSocketChannel.pipeline();
+                                                          pipeline.addLast(new AcceptClientHandler());
+                                                      }
+                                                  })
+                                                  .bind(new InetSocketAddress("192.168.1.100", 9991));
             // 对上述添加监听
             future.addListener(new ChannelFutureListener() {
                 @Override
@@ -34,7 +37,10 @@ public class NettyIOServer_02 {
                 }
             });
             System.out.println("服务端9991启动成功...");
-            future.sync().channel().closeFuture().sync();
+            future.sync()
+                  .channel()
+                  .closeFuture()
+                  .sync();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -88,25 +94,30 @@ public class NettyIOServer_02 {
                 }
             }, 1, TimeUnit.SECONDS);*/
 
-            ctx.channel().eventLoop().execute(new Runnable() {
-                @Override
-                public void run() {
-                    // 这里是wile死循环，如果worker
-                    try {
-                        Thread.sleep(1000);
-                        // 如果是字符需要指定编码格式
-                        String msg = Thread.currentThread().getName() + "-" + ctx.channel().remoteAddress() + "\n";
-                        ctx.writeAndFlush(Unpooled.copiedBuffer(msg.getBytes()));
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
-                    }
-                }
-            });
+            ctx.channel()
+               .eventLoop()
+               .execute(new Runnable() {
+                   @Override
+                   public void run() {
+                       // 这里是wile死循环，如果worker
+                       try {
+                           Thread.sleep(1000);
+                           // 如果是字符需要指定编码格式
+                           String msg = Thread.currentThread()
+                                              .getName() + "-" + ctx.channel()
+                                                                    .remoteAddress() + "\n";
+                           ctx.writeAndFlush(Unpooled.copiedBuffer(msg.getBytes()));
+                       } catch (InterruptedException e) {
+                           throw new RuntimeException(e);
+                       }
+                   }
+               });
         }
 
         @Override
         public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-            ctx.writeAndFlush(Unpooled.copiedBuffer(("hello" + ctx.channel().remoteAddress() + "\n").getBytes()));
+            ctx.writeAndFlush(Unpooled.copiedBuffer(("hello" + ctx.channel()
+                                                                  .remoteAddress() + "\n").getBytes()));
         }
     }
 }

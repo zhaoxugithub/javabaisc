@@ -14,15 +14,16 @@ public class GroupChatServer {
 
     public GroupChatServer() {
         try {
-            //创建一个serverSocketChannel
+            // 创建一个serverSocketChannel
             serverSocketChannel = ServerSocketChannel.open();
-            //创建一个selector
+            // 创建一个selector
             selector = Selector.open();
-            //绑定一个端口
-            serverSocketChannel.socket().bind(new InetSocketAddress(6667));
-            //设置非阻塞
+            // 绑定一个端口
+            serverSocketChannel.socket()
+                               .bind(new InetSocketAddress(8889));
+            // 设置非阻塞
             serverSocketChannel.configureBlocking(false);
-            //serverSocket绑定selector
+            // serverSocket绑定selector
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
         } catch (IOException e) {
             System.out.println("初始化错误");
@@ -31,32 +32,31 @@ public class GroupChatServer {
     }
 
     public void listen() {
-        System.out.println("当前线程：" + Thread.currentThread().getName());
+        System.out.println("当前线程：" + Thread.currentThread()
+                                               .getName());
         while (true) {
             try {
-                //阻塞两秒
+                // 阻塞两秒
                 int select = selector.select(2000);
-                //说明有客户端进行连接
+                // 说明有客户端进行连接
                 if (select > 0) {
-                    //获取客户端连接关系对象集合
+                    // 获取客户端连接关系对象集合
                     Set<SelectionKey> selectionKeys = selector.selectedKeys();
                     Iterator<SelectionKey> iterator = selectionKeys.iterator();
                     while (iterator.hasNext()) {
                         SelectionKey selectionKey = iterator.next();
                         if (selectionKey.isAcceptable()) {
-                            //todo 打印selectionKey.channel
+                            // todo 打印selectionKey.channel
                             SocketChannel socketChannel = serverSocketChannel.accept();
                             socketChannel.configureBlocking(false);
                             socketChannel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024));
-
-                            //提示
+                            // 提示
                             System.out.println(socketChannel.getRemoteAddress() + "上线了。。");
                         }
                         if (selectionKey.isReadable()) {
                             readData(selectionKey);
                         }
-
-                        //如果这个selectionKey已经被处理过之后就可以remove了
+                        // 如果这个selectionKey已经被处理过之后就可以remove了
                         selectionKeys.remove(selectionKey);
                     }
                 }
@@ -73,7 +73,7 @@ public class GroupChatServer {
         try {
             channel = (SocketChannel) selectionKey.channel();
             ByteBuffer byteBuffer = (ByteBuffer) selectionKey.attachment();
-            //todo ? 如果buffer中的内存不够怎么办？
+            // todo ? 如果buffer中的内存不够怎么办？
             int read = channel.read(byteBuffer);
             if (read > 0) {
                 String msg = new String(byteBuffer.array());
@@ -82,7 +82,7 @@ public class GroupChatServer {
             }
         } catch (IOException e) {
             try {
-                //提示了
+                // 提示了
                 System.out.println(channel.getRemoteAddress() + "下线了。。");
                 selectionKey.cancel();
                 channel.close();
@@ -101,7 +101,8 @@ public class GroupChatServer {
      */
     public void sendToOtherClient(SelectionKey selectionKey, String msg) throws IOException {
         System.out.println("服务器转发消息中。。。");
-        System.out.println("服务器转发数据给客户端线程：" + Thread.currentThread().getName());
+        System.out.println("服务器转发数据给客户端线程：" + Thread.currentThread()
+                                                                 .getName());
         Set<SelectionKey> selectionKeys = selector.selectedKeys();
         for (SelectionKey key : selectionKeys) {
             SelectableChannel channel = key.channel();

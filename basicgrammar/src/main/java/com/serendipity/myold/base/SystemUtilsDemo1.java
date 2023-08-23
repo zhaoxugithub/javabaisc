@@ -83,10 +83,8 @@ public class SystemUtilsDemo1 {
         Console console = System.console();
         System.out.println("please input your name:");
         String name = console.readLine();
-
         System.out.println("please input password:");
         char[] readPassword = console.readPassword();
-
         String password = String.valueOf(readPassword);
         System.out.println("your name:" + name + " your password:" + password);
     }

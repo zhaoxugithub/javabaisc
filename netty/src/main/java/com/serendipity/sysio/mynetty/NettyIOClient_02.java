@@ -10,15 +10,21 @@ public class NettyIOClient_02 {
         try {
             NioEventLoopGroup eventExecutors = new NioEventLoopGroup(1);
             Bootstrap bootstrap = new Bootstrap();
-            ChannelFuture connect = bootstrap.group(eventExecutors).channel(NioSocketChannel.class).handler(new ChannelInitializer<NioSocketChannel>() {
-                @Override
-                protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                    ChannelPipeline pipeline = nioSocketChannel.pipeline();
-                    pipeline.addLast(new NioClientHandler());
-                }
-            }).connect("192.168.1.100", 9991);
+            ChannelFuture connect = bootstrap.group(eventExecutors)
+                                             .channel(NioSocketChannel.class)
+                                             .handler(new ChannelInitializer<NioSocketChannel>() {
+                                                 @Override
+                                                 protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
+                                                     ChannelPipeline pipeline = nioSocketChannel.pipeline();
+                                                     pipeline.addLast(new NioClientHandler());
+                                                 }
+                                             })
+                                             .connect("192.168.1.100", 9991);
             System.out.println("客户端已经连接。。");
-            connect.sync().channel().closeFuture().sync();
+            connect.sync()
+                   .channel()
+                   .closeFuture()
+                   .sync();
 
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
@@ -27,7 +33,7 @@ public class NettyIOClient_02 {
 
     private static class NioClientHandler extends ChannelInboundHandlerAdapter {
 
-        //当通道就绪就会触发这个方法
+        // 当通道就绪就会触发这个方法
         @Override
         public void channelActive(ChannelHandlerContext ctx) throws Exception {
             super.channelActive(ctx);
@@ -50,7 +56,7 @@ public class NettyIOClient_02 {
             }, 5, TimeUnit.SECONDS);*/
         }
 
-        //给服务端发送信息
+        // 给服务端发送信息
         @Override
         public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
 

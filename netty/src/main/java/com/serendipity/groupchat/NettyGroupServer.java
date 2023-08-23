@@ -25,20 +25,25 @@ public class NettyGroupServer {
 
     public void serverStart() {
         NioEventLoopGroup boss = new NioEventLoopGroup(1);
-        NioEventLoopGroup worker = new NioEventLoopGroup(3);
+        NioEventLoopGroup worker = new NioEventLoopGroup(1);
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
-            ServerBootstrap bootstrap = serverBootstrap.group(boss, worker).channel(NioServerSocketChannel.class).childHandler(new ChannelInitializer<NioSocketChannel>() {
-                @Override
-                protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                    ChannelPipeline pipeline = nioSocketChannel.pipeline();
-                    pipeline.addLast("decoder", new StringDecoder());
-                    pipeline.addLast("encoder", new StringEncoder());
-                    pipeline.addLast(new NettyGroupServerHandler());
-                }
-            });
-            ChannelFuture bind = bootstrap.bind(port).sync();
-            bind.channel().closeFuture().sync();
+            ServerBootstrap bootstrap = serverBootstrap.group(boss, worker)
+                                                       .channel(NioServerSocketChannel.class)
+                                                       .childHandler(new ChannelInitializer<NioSocketChannel>() {
+                                                           @Override
+                                                           protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
+                                                               ChannelPipeline pipeline = nioSocketChannel.pipeline();
+                                                               pipeline.addLast("decoder", new StringDecoder());
+                                                               pipeline.addLast("encoder", new StringEncoder());
+                                                               pipeline.addLast(new NettyGroupServerHandler());
+                                                           }
+                                                       });
+            ChannelFuture bind = bootstrap.bind(port)
+                                          .sync();
+            bind.channel()
+                .closeFuture()
+                .sync();
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         } finally {
@@ -49,13 +54,13 @@ public class NettyGroupServer {
 
     private static class NettyGroupServerHandler extends SimpleChannelInboundHandler<String> {
 
-        //注意：加上static,全局只有一个
+        // 注意：加上static,全局只有一个
         private static ChannelGroup channelGroup = new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
         private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-        //handlerAdded 和 handlerRemoved 方法是给客户单看的
+        // handlerAdded 和 handlerRemoved 方法是给客户单看的
 
-        //当客户端一旦连接第一时间触发这个方法
+        // 当客户端一旦连接第一时间触发这个方法
         @Override
         public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
             Channel channel = ctx.channel();
@@ -87,8 +92,9 @@ public class NettyGroupServer {
         @Override
         protected void channelRead0(ChannelHandlerContext channelHandlerContext, String s) throws Exception {
             Channel channel = channelHandlerContext.channel();
+            EventLoop eventExecutors = channel.eventLoop();
             channelGroup.forEach(ch -> {
-                if(channel != ch) { //不是当前的channel,转发消息
+                if (channel != ch) { // 不是当前的channel,转发消息
                     ch.writeAndFlush("[客户]" + channel.remoteAddress() + " 发送了消息:" + s);
                 }
             });

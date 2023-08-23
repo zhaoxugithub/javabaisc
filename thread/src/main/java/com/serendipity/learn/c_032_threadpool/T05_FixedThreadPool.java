@@ -40,7 +40,6 @@ public class T05_FixedThreadPool {
         for (int i = start; i <= end; i++) {
             if (isPrime(i)) results.add(i);
         }
-
         return results;
     }
 

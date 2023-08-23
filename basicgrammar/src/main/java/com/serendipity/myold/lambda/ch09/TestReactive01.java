@@ -1,0 +1,184 @@
+package com.serendipity.myold.lambda.ch09;
+
+import cn.hutool.core.lang.func.Func;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+import java.util.function.Function;
+
+/**
+ * ClassName TestReactive01
+ * Description TODO
+ * Author 11931
+ * Date 2023-08-14:4:27
+ * Version 1.0
+ * 测试响应式编程范式
+ **/
+@Slf4j
+public class TestReactive01 {
+
+    @Test
+    public void test01() {
+
+        // Flux 实现了Publish
+        Flux.just("Ben", "Michael", "Mark")
+
+            // Subscriber 是订阅者/观察者
+            .subscribe(new Subscriber<String>() {
+                @Override
+                public void onSubscribe(Subscription s) {
+                    s.request(3);
+                }
+
+                @Override
+                public void onNext(String s) {
+                    System.out.println("Hello " + s + "!");
+                }
+
+                // OnError 和 onComplete 性质上是一样的
+                // 都是用来终止操作
+                @Override
+                public void onError(Throwable t) {
+                    System.out.println(t.getMessage());
+                }
+
+                @Override
+                public void onComplete() {
+                    System.out.println("Completed");
+                }
+            });
+    }
+
+
+    // 是test01的优化
+    @Test
+    public void test02() {
+        Flux.just("Ben", "Michael", "Mark")
+            .doOnNext(s -> System.out.println("Hello " + s + "!"))
+            .doOnComplete(() -> System.out.println("Completed"))
+            .doOnError(throwable -> System.out.println(throwable.getMessage()))
+            .subscribe();
+    }
+
+
+    @Test
+    public void test03() {
+        Flux.range(1, 10000)
+            .takeWhile(i -> i < 10)
+            .subscribe(System.out::println);
+    }
+
+    @Test
+    public void test04() {
+        Flux.just(1, 2)
+            .concatWith(Mono.error(new IllegalAccessError()))
+            .subscribe(System.out::println, System.err::println);
+    }
+
+    @Test
+    public void test05() {
+        Flux.just(1, 2)
+            .concatWith(Mono.error(new IllegalAccessError()))
+            .onErrorReturn(0)
+            .subscribe(System.out::println);
+
+        Flux.just(1, 2)
+            .concatWith(Mono.error(new IllegalStateException()))
+            .onErrorResume(e -> {
+                if (e instanceof IllegalStateException) {
+                    return Mono.just(0);
+                } else if (e instanceof IllegalArgumentException) {
+                    return Mono.just(0);
+                }
+                return Mono.empty();
+            })
+            .subscribe(System.out::println);
+    }
+
+    @Test
+    public void test06() {
+        Flux.just(1, 2)
+            .concatWith(Mono.error(new IllegalStateException()))
+            .retry(1)
+            .subscribe(System.out::println);
+    }
+
+    @Test
+    public void test07() {
+        Flux.just(1, 0)
+            .map(x -> 1 / x)
+            .checkpoint("test")
+            .subscribe(System.out::println);
+    }
+
+    @Test
+    public void test08() {
+        Flux.range(1, 2)
+            .log("Range")
+            .subscribe(System.out::println);
+    }
+
+    @Test
+    public void test09() throws InterruptedException {
+        Flux<Long> source = Flux.interval(Duration.ofMillis(1000))
+                                .take(10)
+                                .publish()
+                                .autoConnect();
+
+        source.subscribe();
+        Thread.sleep(5000);
+        source.toStream()
+              .forEach(System.out::println);
+    }
+
+    Function<Long, Long> log() {
+        return aLong -> {
+            log.info("num is {}", aLong);
+            return aLong;
+        };
+    }
+
+    Function<Long, Flux<Long>> longOfFlux() {
+        return aLong -> {
+            log.info("num is {}", aLong);
+            return Flux.just(aLong);
+        };
+    }
+
+    @Test
+    public void test10() {
+        Flux<Long> longFlux = Flux.interval(Duration.of(100, ChronoUnit.MILLIS))
+                                  // 在当前线程执行
+                                  .map(log())
+                                  //// 在当前线程执行
+                                  .flatMap(longOfFlux());
+        longFlux.subscribe();
+    }
+
+    @Test
+    public void test11() throws InterruptedException {
+        Mono<Date> m1 = Mono.just(new Date());
+        // 懒创建
+        Mono<Date> m2 = Mono.defer(() -> Mono.just(new Date()));
+        m1.subscribe(System.out::println);
+        m2.subscribe(System.out::println);
+
+        Thread.sleep(5000);
+
+        m1.subscribe(System.out::println);
+        m2.subscribe(System.out::println);
+        /*
+        Mon Aug 14 19:05:26 CST 2023
+        Mon Aug 14 19:05:26 CST 2023
+        Mon Aug 14 19:05:26 CST 2023
+        Mon Aug 14 19:05:31 CST 2023
+         */
+    }
+}
