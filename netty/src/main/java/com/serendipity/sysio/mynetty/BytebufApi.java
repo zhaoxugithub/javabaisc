@@ -9,16 +9,19 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.CharsetUtil;
+import org.junit.Test;
 
 import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class BytebufApi {
 
     public static void myBytebuf() {
 
-        //主要记住几点：是否池化，是否是堆内还是堆外
+        // 主要记住几点：是否池化，是否是堆内还是堆外
 //        ByteBuf buf = ByteBufAllocator.DEFAULT.buffer(8, 20);
-        //pool
+        // pool
 //        ByteBuf buf = UnpooledByteBufAllocator.DEFAULT.heapBuffer(8, 20);
         ByteBuf buf = PooledByteBufAllocator.DEFAULT.heapBuffer(8, 20);
         print(buf);
@@ -57,7 +60,7 @@ public class BytebufApi {
      */
 
     public static void loopExecutor() throws Exception {
-        //group  线程池
+        // group  线程池
         NioEventLoopGroup selector = new NioEventLoopGroup(2);
         selector.execute(() -> {
             try {
@@ -84,20 +87,22 @@ public class BytebufApi {
 
     public void clientMode() throws Exception {
         NioEventLoopGroup thread = new NioEventLoopGroup(1);
-        //客户端模式：
+        // 客户端模式：
         NioSocketChannel client = new NioSocketChannel();
-        thread.register(client);  //epoll_ctl(5,ADD,3)
-        //响应式：
+        thread.register(client);  // epoll_ctl(5,ADD,3)
+        // 响应式：
         ChannelPipeline p = client.pipeline();
         p.addLast(new MyInHandler());
-        //reactor  异步的特征
+        // reactor  异步的特征
         ChannelFuture connect = client.connect(new InetSocketAddress("192.168.1.101", 9991));
         ChannelFuture sync = connect.sync();
         ByteBuf buf = Unpooled.copiedBuffer("hello server".getBytes());
         ChannelFuture send = client.writeAndFlush(buf);
         send.sync();
-        //马老师的多线程
-        sync.channel().closeFuture().sync();
+        // 马老师的多线程
+        sync.channel()
+            .closeFuture()
+            .sync();
         System.out.println("client over....");
     }
 
@@ -115,18 +120,20 @@ public class BytebufApi {
         NioEventLoopGroup thread = new NioEventLoopGroup(1);
         NioSocketChannel client = new NioSocketChannel();
         thread.register(client);
-        //reactor 异步的特征
+        // reactor 异步的特征
         ChannelFuture connect = client.connect(new InetSocketAddress("192.168.1.101", 9991));
         ChannelFuture sync = connect.sync();
 
-        //异步发送
+        // 异步发送
         ByteBuf byteBuf = Unpooled.copiedBuffer("hello world".getBytes());
         ChannelFuture send = client.writeAndFlush(byteBuf);
         send.sync();
 
 
-        //当服务端断开连接的时候就会断开，阻塞同步
-        sync.channel().closeFuture().sync();
+        // 当服务端断开连接的时候就会断开，阻塞同步
+        sync.channel()
+            .closeFuture()
+            .sync();
 
         System.out.println("client over...");
     }
@@ -141,10 +148,13 @@ public class BytebufApi {
         pipeline.addLast(new MyAcceptHandler(thread, new MyInHandler()));
         thread.register(server);
         ChannelFuture bind = server.bind(new InetSocketAddress("192.168.1.100", 9991));
-        bind.sync().channel().closeFuture().sync();
+        bind.sync()
+            .channel()
+            .closeFuture()
+            .sync();
     }
 
-    public void serverModel2(){
+    public void serverModel2() {
         NioEventLoopGroup eventExecutors = new NioEventLoopGroup(1);
 
     }
@@ -172,10 +182,10 @@ public class BytebufApi {
 
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-            //服务端接收到应该是SocketChannel
+            // 服务端接收到应该是SocketChannel
             SocketChannel client = (SocketChannel) msg;
             System.out.println(client.remoteAddress() + ":连接成功。。");
-            //把客户端注册进去
+            // 把客户端注册进去
             ChannelPipeline pipeline = client.pipeline();
             pipeline.addLast(channelHandler);
             selector.register(client);
@@ -205,10 +215,17 @@ public class BytebufApi {
             ctx.writeAndFlush(buf);
         }
     }
+    @Test
+    public void test() {
+        ByteBuf byteBuf = Unpooled.copiedBuffer("hello,world", StandardCharsets.UTF_8);
+        System.out.println(byteBuf.readableBytes());
+        int i = byteBuf.readInt();
+        System.out.println(byteBuf.readableBytes());
+        System.out.println(i);
+    }
 
     public static void main(String[] args) throws Exception {
         BytebufApi bytebufApi = new BytebufApi();
         bytebufApi.serverMode01();
     }
-
 }
