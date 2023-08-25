@@ -57,7 +57,5 @@ public class T004_lock_condition {
                 lock.unlock();
             }
         }).start();
-
-
     }
 }

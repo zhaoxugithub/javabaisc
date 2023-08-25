@@ -12,33 +12,25 @@ import java.util.concurrent.*;
 public class S_01_FutureDemo {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
+        // newCachedThreadPool 线程池中的这个队列没有元素,来一个任务开辟一个线程,没有核心线程
         ExecutorService executorService = Executors.newCachedThreadPool();
-        // 异步执行
-//        Future<?> submit = executorService.submit(new Runnable() {
-//            @Override
-//            public void run() {
-//                try {
-//                    System.out.println(Thread.currentThread().getName() + "run....");
-//                    TimeUnit.SECONDS.sleep(1);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                System.out.println("over");
-//            }
-//        });
-        // 下面这个方法采用lambda
+        /*
+               submit(runnable) runnable里面没有返回值
+               submit(callable) callable里面有返回值
+         */
         Future<?> submit = executorService.submit(() -> {
-            try {
-                System.out.println(Thread.currentThread().getName() + "run....");
-                TimeUnit.SECONDS.sleep(2);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            System.out.println(Thread.currentThread()
+                                     .getName() + "run....");
+            TimeUnit.SECONDS.sleep(2);
             System.out.println("over");
+            return "OK";
         });
-        // get方法一直处于阻塞状态,直到上面over执行完之后才会执行
+        System.out.println("main start :" + System.currentTimeMillis());
+        // 锁的释放和IO阻塞会导致用户态内核态切换以及线程的上下文切换
+        // get方法一直处于阻塞状态,直到上面over执行完之后才会执行,这里会不会涉及到上下文切换,也不会设计内核态和用户态的切换
         Object o = submit.get();
         System.out.println(o);
+        System.out.println("main end :" + System.currentTimeMillis());
         System.out.println(submit.isDone());
         System.out.println(submit.isCancelled());
         System.out.println(submit.cancel(true));
