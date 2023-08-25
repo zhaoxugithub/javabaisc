@@ -15,50 +15,39 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * 假设你能够提供一个服务
  * 这个服务查询各大电商网站同一类产品的价格并汇总展示
- *
+ * <p>
  * CompletableFuture:可以管理线程任务
  */
 public class T03_CompletableFuture {
-
-
     public static void main(String[] args) {
-
         long start, end;
-
      /* start = System.currentTimeMillis();
         priceJD();
         priceTB();
         priceTM();
         end = System.currentTimeMillis();
         System.out.println(end - start);*/
-
         start = System.currentTimeMillis();
         CompletableFuture<Double> futureTM = CompletableFuture.supplyAsync(T03_CompletableFuture::priceTM);
         CompletableFuture<Double> futureTB = CompletableFuture.supplyAsync(T03_CompletableFuture::priceTB);
         CompletableFuture<Double> futureJD = CompletableFuture.supplyAsync(T03_CompletableFuture::priceJD);
-
         // join 方法是执行线程的意思。异步执行
 //        futureJD.join();
 //        futureTM.join();
 //        futureTB.join();
-
-        //还有另外一种方法，通过allof将三个线程任务放到一起执行
+        // 还有另外一种方法，通过allof将三个线程任务放到一起执行
 //        CompletableFuture.allOf(futureJD, futureTB, futureTM).join();
-
         CompletableFuture.supplyAsync(T03_CompletableFuture::priceTM)
-                .thenApply(String::valueOf).thenApply(str -> "price:" + str)
-                .thenAccept(System.out::println);
-
+                         .thenApply(String::valueOf)
+                         .thenApply(str -> "price:" + str)
+                         .thenAccept(System.out::println);
         end = System.currentTimeMillis();
-
         System.out.println(end - start);
-
         try {
             System.in.read();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public static double priceTM() {
@@ -66,12 +55,10 @@ public class T03_CompletableFuture {
         return 1.00;
     }
 
-
     public static double priceTB() {
         delay();
         return 2.00;
     }
-
 
     public static double priceJD() {
         delay();
@@ -87,5 +74,4 @@ public class T03_CompletableFuture {
         }
         System.out.println(time);
     }
-
 }
