@@ -10,7 +10,6 @@ import java.nio.channels.FileChannel;
  */
 public class NIOFileChannel06 {
     public static void main(String[] args) throws IOException {
-
         RandomAccessFile randomAccessFile = new RandomAccessFile("netty/src/randomAccessFile.txt", "rw");
         //获取对应的通道
         FileChannel channel = randomAccessFile.getChannel();
@@ -20,12 +19,9 @@ public class NIOFileChannel06 {
          * 参数3：5 是映射到内存的的大小，即将1.txt的多少个字节映射到内存可以直接修改的内存的范围是0-5
          */
         MappedByteBuffer map = channel.map(FileChannel.MapMode.READ_WRITE, 0, 5);
-
         map.put(0,(byte)'H');
         map.put(3,(byte)'A');
-
         randomAccessFile.close();
         System.out.println("修改成功。。。");
-
     }
 }

@@ -1,6 +1,5 @@
 package com.serendipity.nio;
 
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -23,7 +22,7 @@ public class GroupChatClient {
         socketChannel.configureBlocking(false);
         socketChannel.register(selector, SelectionKey.OP_READ);
         userName = socketChannel.getLocalAddress()
-                                .toString();
+                .toString();
         System.out.println(userName + "--上线了...");
     }
 
@@ -42,7 +41,7 @@ public class GroupChatClient {
             int select = selector.select();
             if (select > 0) {
                 Iterator<SelectionKey> iterator = selector.selectedKeys()
-                                                          .iterator();
+                        .iterator();
                 while (iterator.hasNext()) {
                     SelectionKey selectionKey = iterator.next();
                     if (selectionKey.isReadable()) {

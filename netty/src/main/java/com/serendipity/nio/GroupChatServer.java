@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class GroupChatServer {
-
     private Selector selector;
     private ServerSocketChannel serverSocketChannel;
 
@@ -20,7 +19,7 @@ public class GroupChatServer {
             selector = Selector.open();
             // 绑定一个端口
             serverSocketChannel.socket()
-                               .bind(new InetSocketAddress(8889));
+                    .bind(new InetSocketAddress(8889));
             // 设置非阻塞
             serverSocketChannel.configureBlocking(false);
             // serverSocket绑定selector
@@ -33,7 +32,7 @@ public class GroupChatServer {
 
     public void listen() {
         System.out.println("当前线程：" + Thread.currentThread()
-                                               .getName());
+                .getName());
         while (true) {
             try {
                 // 阻塞两秒
@@ -102,7 +101,7 @@ public class GroupChatServer {
     public void sendToOtherClient(SelectionKey selectionKey, String msg) throws IOException {
         System.out.println("服务器转发消息中。。。");
         System.out.println("服务器转发数据给客户端线程：" + Thread.currentThread()
-                                                                 .getName());
+                .getName());
         Set<SelectionKey> selectionKeys = selector.selectedKeys();
         for (SelectionKey key : selectionKeys) {
             SelectableChannel channel = key.channel();
@@ -117,6 +116,5 @@ public class GroupChatServer {
     public static void main(String[] args) {
         GroupChatServer groupChatServer = new GroupChatServer();
         groupChatServer.listen();
-
     }
 }

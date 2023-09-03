@@ -29,7 +29,6 @@ public class NIOClient {
                 System.out.println("因为连接事件，客户端不会阻塞，可以做其他工作，。。");
             }
         }
-
         //连接成功之后的逻辑
         String str = "hello,尚硅谷。。";
         //申请与字符串大小相同的buffer

@@ -6,7 +6,6 @@ import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
 public class NIOFileChannel01 {
-
     public static void main(String[] args) throws IOException {
         // 创建输出流路径
         FileOutputStream outputStream = new FileOutputStream("netty/src/NIOFIleChannel01.txt");
