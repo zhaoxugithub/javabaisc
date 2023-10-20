@@ -16,6 +16,7 @@ public class Code_01_PrintAllSort {
 
     static List<List<Integer>> res = new ArrayList<>();
 
+    // 1 2 3
     public static void allSort(int[] nums) {
         if (nums == null) {
             return;
@@ -81,5 +82,13 @@ public class Code_01_PrintAllSort {
         System.out.println(result.size());
 
         // 4 3 2 1
+        int abs = Math.abs(-1);
+        System.out.println(abs);
+
+        int[][] arr = new int[10][10];
+        if (arr.length == 0) {
+        }
+        if (arr[0].length == 0) {
+        }
     }
 }

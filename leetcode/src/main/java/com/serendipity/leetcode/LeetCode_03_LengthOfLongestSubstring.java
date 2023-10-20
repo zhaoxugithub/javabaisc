@@ -70,6 +70,5 @@ public class LeetCode_03_LengthOfLongestSubstring {
     public static void main(String[] args) {
         int abcabcbb = lengthOfLongestSubstring("abcabcbb");
         System.out.println("abcabcbb = " + abcabcbb);
-
     }
 }

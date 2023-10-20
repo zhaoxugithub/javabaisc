@@ -1,5 +1,7 @@
 package com.serendipity.myold.base;
 
+import org.junit.Test;
+
 import java.util.Arrays;
 
 /**
@@ -82,10 +84,25 @@ public class BaseDataType {
         String str = "aaa";
         System.out.println(str == s2); // false
 
+        // 这个返回的字符串常量池中引用
         String s3 = s1.intern();
         System.out.println(s1 == s3); // false
 
         System.out.println(s3 == s1.intern()); // true
+    }
+
+    @Test
+    public void test05() {
+        // 在字符串常量池中初始化一个引用指向堆上的字符串对象
+        // 返回是字符串对象引用
+        String str = "abc";
+        // 如果字符串常量池中没有abc的引用，首先安装String str = "abc"的方式创建字符串对象，然后再堆上创建另外一个对象
+        // 如果字符串常量池中有abc的引用，只是在堆上创建一个对象。
+        // 返回的堆上对象的引用
+        String str1 = new String("abc");
+        System.out.println(str == str1);  // false
+        // str1.intern() 返回的字符串常量池的引用
+        System.out.println(str == str1.intern()); // true
     }
 
     private static class Dog {
@@ -146,6 +163,16 @@ public class BaseDataType {
         // 上面那个相当于下面这行
         s1 = (short) (s1 + 1);
     }
+
+    @Test
+    public void test01() {
+        // 装箱 xxx.valueOf()
+        Integer i = Integer.valueOf(1000);
+
+        // 拆箱 xxxValue()
+        int i1 = i.intValue();
+    }
+
 
     public static void main(String[] args) {
         // test1();

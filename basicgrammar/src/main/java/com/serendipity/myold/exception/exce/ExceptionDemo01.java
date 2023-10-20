@@ -11,7 +11,6 @@ import java.util.Arrays;
  * Description: com.exception
  */
 public class ExceptionDemo01 {
-
     public void exec() {
         String s = "abc";
         // 这里会抛出来一个异常
@@ -29,8 +28,8 @@ public class ExceptionDemo01 {
 
     public static void test01(String s) {
         try {
-            //process1();
-            //process2();
+            // process1();
+            // process2();
             s.getBytes("GBK");
             // TODO: 2022/4/7
         } catch (UnsupportedEncodingException e) {
@@ -40,15 +39,11 @@ public class ExceptionDemo01 {
         }
     }
 
-
     public static void test02() {
-
-
     }
 
     public static void main(String[] args) {
         byte[] dfafds = toGBK("中文");
         System.out.println(Arrays.toString(dfafds));
-
     }
 }

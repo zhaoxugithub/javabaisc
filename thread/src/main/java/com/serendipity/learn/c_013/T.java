@@ -8,8 +8,7 @@ package com.serendipity.learn.c_013;
  * Description: com.java.thread.c_013
  */
 public class T {
-
-    //无法保证原子性
+    // 无法保证原子性
     private volatile int count = 0;
 
     public void m() {
