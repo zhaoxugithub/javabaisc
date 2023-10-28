@@ -16,14 +16,10 @@ public class T {
         t.usingCountDownLatch();
 //        t.usingJoin();
     }
-
     public void usingCountDownLatch() {
-
         Thread[] threads = new Thread[100];
         CountDownLatch latch = new CountDownLatch(threads.length);
-
         for (int i = 0; i < threads.length - 1; i++) {
-
             threads[i] = new Thread(() -> {
                 int result = 0;
                 for (int j = 0; j < 10000; j++) {
@@ -32,11 +28,9 @@ public class T {
                 latch.countDown();
             });
         }
-
         for (int i = 0; i < threads.length - 1; i++) {
             threads[i].start();
         }
-
         try {
             //  latch.countDown(); 门栓变成0的时候才会执行后面的代码
             latch.await();
@@ -48,18 +42,15 @@ public class T {
 
     private void usingJoin() {
         Thread[] threads = new Thread[100];
-
         for (int i = 0; i < threads.length; i++) {
             threads[i] = new Thread(() -> {
                 int result = 0;
                 for (int j = 0; j < 10000; j++) result += j;
             });
         }
-
         for (Thread value : threads) {
             value.start();
         }
-
         for (Thread thread : threads) {
             try {
                 thread.join();
@@ -67,8 +58,6 @@ public class T {
                 e.printStackTrace();
             }
         }
-
         System.out.println("end join");
     }
-
 }

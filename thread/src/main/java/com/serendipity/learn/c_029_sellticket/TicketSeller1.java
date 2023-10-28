@@ -11,6 +11,7 @@ import java.util.concurrent.TimeUnit;
  * FileName: TicketSeller1
  * Description: com.java.thread.c_029_sellticket
  */
+@SuppressWarnings("all")
 public class TicketSeller1 {
     private static List<String> list = new ArrayList<>();
 

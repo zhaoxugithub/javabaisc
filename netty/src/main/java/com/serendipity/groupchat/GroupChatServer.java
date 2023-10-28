@@ -44,10 +44,7 @@ public class GroupChatServer {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-
         }
-
     }
 
     private void readHandler(SelectionKey key) {
@@ -68,10 +65,10 @@ public class GroupChatServer {
                         sendToOtherClient(s, client);
                     }
                 } else if (read == 0) {
-                    //读取完毕
+                    // 读取完毕
                     break;
                 } else {
-                    //客户端断开连接。。
+                    // 客户端断开连接。。
                     System.out.println(client.getRemoteAddress() + "断开连接");
                     key.cancel();
                     client.close();
@@ -114,9 +111,7 @@ public class GroupChatServer {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
-
 
     public static void main(String[] args) {
         new GroupChatServer().init();

@@ -17,17 +17,16 @@ import java.util.List;
  * FileName: GenericsTest_03
  * Description: com.base
  */
-
 @SuppressWarnings("all")
 public class GenericsTest_03 {
     // 首先，我们泛型数组相关的申明：
     public void test() {
-//        List<String>[] list11 = new ArrayList<String>[10]; //编译错误，非法创建
-//        List<String>[] list12 = new ArrayList<?>[10]; //编译错误，需要强转类型
-//        List<String>[] list13 = (List<String>[]) new ArrayList<?>[10]; //OK，但是会有警告
-//        List<?>[] list14 = new ArrayList<String>[10]; //编译错误，非法创建
-//        List<?>[] list15 = new ArrayList<?>[10]; //OK
-//        List<String>[] list6 = new ArrayList[10]; //OK，但是会有警告
+        // List<String>[] list11 = new ArrayList<String>[10]; //编译错误，非法创建
+        // List<String>[] list12 = new ArrayList<?>[10]; //编译错误，需要强转类型
+        // List<String>[] list13 = (List<String>[]) new ArrayList<?>[10]; //OK，但是会有警告
+        // List<?>[] list14 = new ArrayList<String>[10]; //编译错误，非法创建
+        // List<?>[] list15 = new ArrayList<?>[10]; //OK
+        // List<String>[] list6 = new ArrayList[10]; //OK，但是会有警告
     }
 
     public void test2() {
@@ -64,11 +63,11 @@ public class GenericsTest_03 {
         ArrayList<Integer> strings = new ArrayList<>();
         strings.add(11);
         // 报错
-//        strings.add(22);
+        // strings.add(22);
         Method add = strings.getClass()
                             .getMethod("add", Object.class);
         add.invoke(strings, "qweqwr");
-//        add.invoke(strings,new Date());
+        // add.invoke(strings,new Date());
         for (int i = 0; i < strings.size(); i++) {
             System.out.println(strings.get(i));
         }
@@ -99,16 +98,15 @@ public class GenericsTest_03 {
     public void test06() {
         ArrayList<String> list1 = new ArrayList();
         list1.add("1"); // 编译通过
-//        list1.add(1); //编译错误
+        // list1.add(1); //编译错误
         String str1 = list1.get(0); // 返回类型就是String
         ArrayList list2 = new ArrayList<String>();
         list2.add("1"); // 编译通过
         list2.add(1); // 编译通过
         Object object = list2.get(0); // 返回类型就是Object
         new ArrayList<String>().add("11"); // 编译通过
-//        new ArrayList<String>().add(22); //编译错误
+        // new ArrayList<String>().add(22); //编译错误
         String str2 = new ArrayList<String>().get(0); // 返回类型就是String
-
     }
 
 
@@ -129,7 +127,7 @@ public class GenericsTest_03 {
     }
 
     public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
-//        new GenericsTest_03().max(new ArrayList<E>())
+        // new GenericsTest_03().max(new ArrayList<E>())
         GenericsTest_03 genericsTest_03 = new GenericsTest_03();
     }
 }

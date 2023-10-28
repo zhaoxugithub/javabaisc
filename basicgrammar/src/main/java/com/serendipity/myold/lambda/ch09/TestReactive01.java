@@ -26,15 +26,14 @@ public class TestReactive01 {
 
     @Test
     public void test01() {
-
         // Flux 实现了Publish
         Flux.just("Ben", "Michael", "Mark")
-
             // Subscriber 是订阅者/观察者
             .subscribe(new Subscriber<String>() {
                 @Override
                 public void onSubscribe(Subscription s) {
-                    s.request(3);
+                    // 需要两个元素
+                    s.request(2);
                 }
 
                 @Override
@@ -61,8 +60,11 @@ public class TestReactive01 {
     @Test
     public void test02() {
         Flux.just("Ben", "Michael", "Mark")
+            .limitRequest(2) //  s.request(2);
             .doOnNext(s -> System.out.println("Hello " + s + "!"))
+            // 在数据消费完之后执行
             .doOnComplete(() -> System.out.println("Completed"))
+            // 在消费数据有异常的时候执行
             .doOnError(throwable -> System.out.println(throwable.getMessage()))
             .subscribe();
     }
@@ -86,18 +88,86 @@ public class TestReactive01 {
     public void test05() {
         Flux.just(1, 2)
             .concatWith(Mono.error(new IllegalAccessError()))
+            // 在数据有异常的时候返回
             .onErrorReturn(0)
             .subscribe(System.out::println);
 
-        Flux.just(1, 2)
-            .concatWith(Mono.error(new IllegalStateException()))
-            .onErrorResume(e -> {
-                if (e instanceof IllegalStateException) {
-                    return Mono.just(0);
-                } else if (e instanceof IllegalArgumentException) {
-                    return Mono.just(0);
-                }
-                return Mono.empty();
+        // Flux.just(1, 2)
+        //     .concatWith(Mono.error(new IllegalStateException()))
+        //     .onErrorResume(e -> {
+        //         if (e instanceof IllegalStateException) {
+        //             return Mono.just(0);
+        //         } else if (e instanceof IllegalArgumentException) {
+        //             return Mono.just(0);
+        //         }
+        //         return Mono.empty();
+        //     })
+        //     .subscribe(System.out::println);
+    }
+
+    @Test
+    public void test05_1() {
+        // Flux.range(1, 5)
+        //     .map(i -> i == 2 ? i / 0 : i)
+        //     .subscribe(System.out::println);
+
+        // Flux.range(1, 5)
+        //     .map(i -> i == 2 ? i / 0 : 1)
+        //     // 异常捕获,不会打印日志,有异常直接返回,并且后面的数据也不进行消费了
+        //     .onErrorReturn(0)
+        //     .subscribe(System.out::println);
+
+        // Flux.range(1, 5)
+        //     .map(i -> i == 2 ? i / 0 : 1)
+        //     // 异常捕获,有错误,后面也不会继续消费了,自定义返回
+        //     .onErrorResume(err -> {
+        //         // 打印错误日志
+        //         System.out.println(err.getMessage());
+        //         return Mono.just(-1);
+        //     })
+        //     .subscribe(System.out::println);
+
+        // Flux.range(1, 5)
+        //     .map(i -> i == 2 ? i / 0 : 1)
+        //     // 异常捕获,后面不继续消费了
+        //     .doOnError(err -> {
+        //         System.out.println(err.getMessage());
+        //         // 无返回值
+        //     })
+        //     .subscribe(System.out::println);
+
+        Flux.range(1, 5)
+            .map(i -> i == 2 ? i / 0 : 1)
+            .onErrorMap(err -> {
+                System.out.println(err.getMessage());
+                // 这里强制返回err
+                return err;
+            })
+            .subscribe(System.out::println);
+    }
+
+    @Test
+    public void test05_2() {
+        // Flux.range(1, 5)
+        //     .map(i -> i == 2 ? i / 0 : 1)
+        //     // 异常捕获,有错误,后面也不会继续消费了,自定义返回
+        //     .onErrorResume(err -> {
+        //         // 打印错误日志
+        //         System.out.println(err.getMessage());
+        //         return Mono.just(-1);
+        //     })
+        //     .subscribe(System.out::println);
+
+
+        Flux.range(1, 5)
+            .flatMap(i -> {
+                Mono.just(i)
+                    .map(k -> k == 2 ? k / 0 : 1)
+                    .onErrorResume(err -> {
+                        System.out.println(err.getMessage());
+                        return Mono.empty();
+                    });
+                return Mono.just(i);
             })
             .subscribe(System.out::println);
     }
@@ -105,6 +175,8 @@ public class TestReactive01 {
     @Test
     public void test06() {
         Flux.just(1, 2)
+
+            // 在数据流的后面加上这个异常
             .concatWith(Mono.error(new IllegalStateException()))
             .retry(1)
             .subscribe(System.out::println);

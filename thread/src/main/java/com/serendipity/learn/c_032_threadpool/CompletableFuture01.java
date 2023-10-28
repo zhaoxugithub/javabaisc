@@ -6,8 +6,6 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 
-import static java.util.concurrent.Executors.newSingleThreadExecutor;
-
 /**
  * ClassName CompletableFuture01
  * Description TODO
@@ -83,7 +81,7 @@ public class CompletableFuture01 {
         });
 
         // 异步任务,无返回值,使用自定义线程池
-        CompletableFuture<Void> future2 = CompletableFuture.runAsync(() -> System.out.println("异步任务,无返回值,使用自定义线程池"), newSingleThreadExecutor());
+        CompletableFuture<Void> future2 = CompletableFuture.runAsync(() -> System.out.println("异步任务,无返回值,使用自定义线程池"));
 
         // 异步任务,有返回值,使用内部默认的线程池
         CompletableFuture<String> future3 = CompletableFuture.supplyAsync(() -> {

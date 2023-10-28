@@ -86,7 +86,8 @@ class NioThread extends Thread {
     NioThread(Selector sel) {
         this.selector = sel;
         id = idx.getAndIncrement() % selectors;
-        System.out.println("worker: " + id + " 启动");}
+        System.out.println("worker: " + id + " 启动");
+    }
 
     @Override
     public void run() {
@@ -111,7 +112,8 @@ class NioThread extends Thread {
                     SocketChannel client = queue[id].take();
                     client.register(selector, SelectionKey.OP_READ, buffer);
                     System.out.println("-------------------------------------------");
-                    System.out.println("新客户端：" + client.socket().getPort() + "分配到：" + (id));
+                    System.out.println("新客户端：" + client.socket()
+                                                           .getPort() + "分配到：" + (id));
                     System.out.println("-------------------------------------------");
                 }
             }

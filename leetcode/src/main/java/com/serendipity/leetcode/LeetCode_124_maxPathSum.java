@@ -1,7 +1,6 @@
 package com.serendipity.leetcode;
 
 import com.serendipity.node.TreeNode;
-import com.serendipity.utils.ArrayUtils;
 import com.serendipity.utils.TreeUtil;
 import org.junit.Test;
 
@@ -32,23 +31,29 @@ public class LeetCode_124_maxPathSum {
 
 
     public void preShow(TreeNode root) {
-        if (root == null) return;
+        if (root == null) {
+            return;
+        }
         System.out.println(root.value);
         preShow(root.left);
         preShow(root.right);
     }
 
     public void midShow(TreeNode root) {
-        if (root == null) return;
+        if (root == null) {
+            return;
+        }
         midShow(root.left);
         System.out.println(root.value);
         midShow(root.right);
     }
 
     public void postShow(TreeNode root) {
-        if (root == null) return;
-        midShow(root.left);
-        midShow(root.right);
+        if (root == null) {
+            return;
+        }
+        postShow(root.left);
+        postShow(root.right);
         System.out.println(root.value);
     }
 
@@ -56,10 +61,10 @@ public class LeetCode_124_maxPathSum {
     public void test01() {
         TreeNode tree = TreeUtil.createTree(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
         TreeUtil.printNode(tree);
-        preShow(tree);
-        System.out.println("=======");
-        midShow(tree);
-        System.out.println("=======");
+        // preShow(tree);
+        // System.out.println("=======");
+        // midShow(tree);
+        // System.out.println("=======");
         postShow(tree);
     }
 

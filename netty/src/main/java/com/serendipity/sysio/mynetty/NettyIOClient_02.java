@@ -32,7 +32,6 @@ public class NettyIOClient_02 {
     }
 
     private static class NioClientHandler extends ChannelInboundHandlerAdapter {
-
         // 当通道就绪就会触发这个方法
         @Override
         public void channelActive(ChannelHandlerContext ctx) throws Exception {
@@ -58,7 +57,7 @@ public class NettyIOClient_02 {
 
         // 给服务端发送信息
         @Override
-        public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
+        public void channelReadComplete(ChannelHandlerContext ctx) {
 
         }
 
