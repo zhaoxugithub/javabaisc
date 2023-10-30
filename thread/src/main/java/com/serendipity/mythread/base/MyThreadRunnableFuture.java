@@ -48,7 +48,6 @@ public class MyThreadRunnableFuture {
         public Object get() throws InterruptedException, ExecutionException {
             return null;
         }
-
         @Override
         public Object get(long timeout, TimeUnit unit) throws InterruptedException, ExecutionException, TimeoutException {
             return null;

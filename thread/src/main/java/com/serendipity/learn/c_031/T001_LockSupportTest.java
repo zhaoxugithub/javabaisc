@@ -15,36 +15,30 @@ import java.util.concurrent.locks.LockSupport;
  * LockSupport 的好处是可以唤醒指定的线程
  */
 public class T001_LockSupportTest {
-
     static Thread t2 = null;
     static Thread t1 = null;
 
     public static void main(String[] args) {
-
         String nums = "1234567";
         String str = "ABCDEFG";
         char[] numsChar = nums.toCharArray();
         char[] chars = str.toCharArray();
         t1 = new Thread(() -> {
-
             for (char c : numsChar) {
                 System.out.print(c);
-                //先把自己阻塞
+                // 先把自己阻塞
                 LockSupport.park();
-                //唤醒具体的某一个线程
+                // 唤醒具体的某一个线程
                 LockSupport.unpark(t2);
-
             }
         });
-
         t2 = new Thread(() -> {
             for (char aChar : chars) {
                 System.out.print(aChar);
-                //唤醒t1
+                // 唤醒t1
                 LockSupport.unpark(t1);
-                //自己阻塞
+                // 自己阻塞
                 LockSupport.park();
-
             }
         });
         t1.start();

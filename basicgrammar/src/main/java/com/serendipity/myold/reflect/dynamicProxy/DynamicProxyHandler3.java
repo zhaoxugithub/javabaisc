@@ -62,6 +62,18 @@ public class DynamicProxyHandler3 {
         return enhancer.create();
     }
 
+    class B {
+        public void run() {
+            System.out.println("B run");
+        }
+    }
+
+    @Test
+    public void test03() {
+        B bProxy = (B) getProxyClass(new B());
+        bProxy.run();
+    }
+
     @Test
     public void test01() {
         A proxyClass = (A) getProxyClass(new A());

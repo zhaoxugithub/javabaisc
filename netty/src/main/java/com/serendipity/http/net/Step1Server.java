@@ -7,7 +7,7 @@ import java.util.function.Function;
 
 public class Step1Server {
     private ServerSocket serverSocket = null;
-    private Function<String, String> handler = null;
+    private final Function<String, String> handler;
 
     public Step1Server(Function<String, String> handler) {
         this.handler = handler;
@@ -26,10 +26,10 @@ public class Step1Server {
             System.out.println("socket created");
             DataInputStream inputStream = new DataInputStream(client.getInputStream());
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            StringBuilder stringBuilder = new StringBuilder();
-            String line = "";
-            while ((line = bufferedReader.readLine()) != null && line.length() != 0) {
-                stringBuilder.append(line);
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null && !line.isEmpty()) {
+                sb.append(line);
             }
             String request = bufferedReader.toString();
             System.out.println(request);
@@ -44,8 +44,6 @@ public class Step1Server {
     }
 
     public static void main(String[] args) throws IOException {
-        new Step1Server((s) -> {
-            return "HTTP/1.1 200 ok\n\nhello ssssss\n";
-        }).listen();
+        new Step1Server((s) -> "HTTP/1.1 200 ok\n\nhello ssssss\n").listen();
     }
 }

@@ -13,7 +13,7 @@ import java.util.Set;
 public class SocketMultiplexingSingleThreadv2 {
 
     private ServerSocketChannel server = null;
-    private Selector selector = null;   //linux 多路复用器（select poll epoll） nginx  event{}
+    private Selector selector = null;   // linux 多路复用器（select poll epoll） nginx  event{}
     int port = 9090;
 
     public void initServer() {
@@ -44,17 +44,17 @@ public class SocketMultiplexingSingleThreadv2 {
                         if (key.isAcceptable()) {
                             acceptHandler(key);
                         } else if (key.isReadable()) {
-                            key.cancel();  //现在多路复用器里把key  cancel了，因为是采用多线程，开辟了一个新的线程，主线程执行while循环，由于read事件还没及时结束，所以会校测到，又去执行了一遍。因此，要把read事件取消掉
-                            readHandler(key);//还是阻塞的嘛？ 即便以抛出了线程去读取，但是在时差里，这个key的read事件会被重复触发
+                            key.cancel();  // 现在多路复用器里把key  cancel了，因为是采用多线程，开辟了一个新的线程，主线程执行while循环，由于read事件还没及时结束，所以会校测到，又去执行了一遍。因此，要把read事件取消掉
+                            readHandler(key);// 还是阻塞的嘛？ 即便以抛出了线程去读取，但是在时差里，这个key的read事件会被重复触发
 
-                        } else if (key.isWritable()) {  //我之前没讲过写的事件！！！！！
-                            //写事件<--  send-queue  只要是空的，就一定会给你返回可以写的事件，就会回调我们的写方法
-                            //你真的要明白：什么时候写？不是依赖send-queue是不是有空间
-                            //1，你准备好要写什么了，这是第一步
-                            //2，第二步你才关心send-queue是否有空间
-                            //3，so，读 read 一开始就要注册，但是write依赖以上关系，什么时候用什么时候注册
-                            //4，如果一开始就注册了write的事件，进入死循环，一直调起！！！
-                            key.cancel(); //会执行系统调用
+                        } else if (key.isWritable()) {  // 我之前没讲过写的事件！！！！！
+                            // 写事件<--  send-queue  只要是空的，就一定会给你返回可以写的事件，就会回调我们的写方法
+                            // 你真的要明白：什么时候写？不是依赖send-queue是不是有空间
+                            // 1，你准备好要写什么了，这是第一步
+                            // 2，第二步你才关心send-queue是否有空间
+                            // 3，so，读 read 一开始就要注册，但是write依赖以上关系，什么时候用什么时候注册
+                            // 4，如果一开始就注册了write的事件，进入死循环，一直调起！！！
+                            key.cancel(); // 会执行系统调用
                             writeHandler(key);
                         }
                     }
@@ -120,7 +120,8 @@ public class SocketMultiplexingSingleThreadv2 {
             try {
                 while (true) {
                     read = client.read(buffer);
-                    System.out.println(Thread.currentThread().getName() + " " + read);
+                    System.out.println(Thread.currentThread()
+                                             .getName() + " " + read);
                     if (read > 0) {
                         client.register(key.selector(), SelectionKey.OP_WRITE, buffer);
                     } else if (read == 0) {

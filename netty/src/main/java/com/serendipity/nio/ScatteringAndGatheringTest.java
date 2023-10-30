@@ -16,7 +16,8 @@ public class ScatteringAndGatheringTest {
         ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
         InetSocketAddress inetSocketAddress = new InetSocketAddress(7000);
         // 将服务端的socket 与 地址进行绑定
-        serverSocketChannel.socket().bind(inetSocketAddress);
+        serverSocketChannel.socket()
+                           .bind(inetSocketAddress);
         // 定义buffer数组
         ByteBuffer[] byteBuffers = new ByteBuffer[2];
         byteBuffers[0] = ByteBuffer.allocate(5);
@@ -34,18 +35,21 @@ public class ScatteringAndGatheringTest {
                 System.out.println("byteRead" + byteRead);
                 // 使用流打印，看看当前的这个buffer的position 和limit
                 Arrays.asList(byteBuffers)
-                        .stream()
-                        .map(buffer -> "position:" + buffer.position() + ",limit:" + buffer.limit())
-                        .forEach(System.out::print);
+                      .stream()
+                      .map(buffer -> "position:" + buffer.position() + ",limit:" + buffer.limit())
+                      .forEach(System.out::print);
             }
             // 将buffer进行翻转
-            Arrays.asList(byteBuffers).stream().forEach(byteBuffer -> byteBuffer.flip());
+            Arrays.asList(byteBuffers)
+                  .stream()
+                  .forEach(byteBuffer -> byteBuffer.flip());
             long byteWrite = 0;
             while (byteWrite < messageLength) {
                 long l = socketChannel.write(byteBuffers);
                 byteWrite += l;
             }
-            Arrays.asList(byteBuffers).forEach(byteBuffer -> byteBuffer.clear());
+            Arrays.asList(byteBuffers)
+                  .forEach(byteBuffer -> byteBuffer.clear());
             System.out.println("byteRead=" + byteRead + ",byteWrite=" + byteWrite + ",messageLength=" + messageLength);
         }
     }

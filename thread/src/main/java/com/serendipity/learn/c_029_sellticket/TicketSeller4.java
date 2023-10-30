@@ -17,20 +17,23 @@ public class TicketSeller4 {
     static Queue<String> tickets = new ConcurrentLinkedQueue<>();
 
     static {
-        for (int i = 0; i < 1000; i++) tickets.add("票编号：" + i);
+        for (int i = 0; i < 1000; i++) {
+            tickets.add("票编号：" + i);
+        }
     }
 
     public static void main(String[] args) {
         for (int i = 0; i < Constants.THREAD_COUNT; i++) {
             new Thread(() -> {
                 while (true) {
-                    //这个原子性的实现不是用synchronized实现，使用无锁CAS实现的,这个poll 不是阻塞的
+                    // 这个原子性的实现不是用synchronized实现，使用无锁CAS实现的,这个poll 不是阻塞的
                     String poll = tickets.poll();
                     if (poll == null) {
                         System.out.println("over");
                         break;
                     }
-                    System.out.println(Thread.currentThread().getName() + "售出了票" + poll);
+                    System.out.println(Thread.currentThread()
+                                             .getName() + "售出了票" + poll);
                 }
             }).start();
         }

@@ -15,12 +15,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * 读写锁（共享锁和排他锁）
  */
 public class T {
-
     private static Lock reLock = new ReentrantLock();
     static ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
     static Lock readLock = readWriteLock.readLock();
     static Lock writeLock = readWriteLock.writeLock();
-
     private static int v;
 
     public static void read(Lock lock) {
@@ -54,7 +52,6 @@ public class T {
                 read(readLock);
             }).start();
         }
-
         for (int i = 0; i < 5; i++) {
             int finalI = i;
             new Thread(() -> {

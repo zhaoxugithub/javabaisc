@@ -12,20 +12,17 @@ import io.netty.util.CharsetUtil;
 import org.junit.Test;
 
 import java.net.InetSocketAddress;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 
 public class BytebufApi {
 
     public static void myBytebuf() {
-
         // 主要记住几点：是否池化，是否是堆内还是堆外
-//        ByteBuf buf = ByteBufAllocator.DEFAULT.buffer(8, 20);
+        // ByteBuf buf = ByteBufAllocator.DEFAULT.buffer(8, 20);
         // pool
-//        ByteBuf buf = UnpooledByteBufAllocator.DEFAULT.heapBuffer(8, 20);
+        // ByteBuf buf = UnpooledByteBufAllocator.DEFAULT.heapBuffer(8, 20);
         ByteBuf buf = PooledByteBufAllocator.DEFAULT.heapBuffer(8, 20);
         print(buf);
-
         buf.writeBytes(new byte[]{1, 2, 3, 4});
         print(buf);
         buf.writeBytes(new byte[]{1, 2, 3, 4});
@@ -36,7 +33,6 @@ public class BytebufApi {
         print(buf);
         buf.writeBytes(new byte[]{1, 2, 3, 4});
         print(buf);
-
     }
 
     public static void print(ByteBuf buf) {
@@ -52,13 +48,12 @@ public class BytebufApi {
         System.out.println("--------------");
     }
 
-      /*
-    客户端
-    连接别人
-    1，主动发送数据
-    2，别人什么时候给我发？  event  selector
-     */
-
+    /*
+  客户端
+  连接别人
+  1，主动发送数据
+  2，别人什么时候给我发？  event  selector
+   */
     public static void loopExecutor() throws Exception {
         // group  线程池
         NioEventLoopGroup selector = new NioEventLoopGroup(2);
@@ -101,8 +96,8 @@ public class BytebufApi {
         send.sync();
         // 马老师的多线程
         sync.channel()
-                .closeFuture()
-                .sync();
+            .closeFuture()
+            .sync();
         System.out.println("client over....");
     }
 
@@ -123,44 +118,36 @@ public class BytebufApi {
         // reactor 异步的特征
         ChannelFuture connect = client.connect(new InetSocketAddress("192.168.1.101", 9991));
         ChannelFuture sync = connect.sync();
-
         // 异步发送
         ByteBuf byteBuf = Unpooled.copiedBuffer("hello world".getBytes());
         ChannelFuture send = client.writeAndFlush(byteBuf);
         send.sync();
-
-
         // 当服务端断开连接的时候就会断开，阻塞同步
         sync.channel()
-                .closeFuture()
-                .sync();
-
+            .closeFuture()
+            .sync();
         System.out.println("client over...");
     }
 
 
     public void serverMode01() throws Exception {
-
         NioEventLoopGroup thread = new NioEventLoopGroup(1);
         NioServerSocketChannel server = new NioServerSocketChannel();
-
         ChannelPipeline pipeline = server.pipeline();
         pipeline.addLast(new MyAcceptHandler(thread, new MyInHandler()));
         thread.register(server);
         ChannelFuture bind = server.bind(new InetSocketAddress("192.168.1.100", 9991));
         bind.sync()
-                .channel()
-                .closeFuture()
-                .sync();
+            .channel()
+            .closeFuture()
+            .sync();
     }
 
     public void serverModel2() {
         NioEventLoopGroup eventExecutors = new NioEventLoopGroup(1);
-
     }
 
     private class MyAcceptHandler extends ChannelInboundHandlerAdapter {
-
         private NioEventLoopGroup selector;
         private ChannelHandler channelHandler;
 
@@ -169,7 +156,6 @@ public class BytebufApi {
             this.channelHandler = channelHandler;
         }
 
-        //
         @Override
         public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
             System.out.println("server  registed...");
@@ -189,26 +175,25 @@ public class BytebufApi {
             ChannelPipeline pipeline = client.pipeline();
             pipeline.addLast(channelHandler);
             selector.register(client);
-
         }
     }
 
     @ChannelHandler.Sharable
     private class MyInHandler extends ChannelInboundHandlerAdapter {
         @Override
-        public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+        public void channelRegistered(ChannelHandlerContext ctx) {
             System.out.println("client  registed...");
         }
 
         @Override
-        public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        public void channelActive(ChannelHandlerContext ctx) {
             System.out.println("client active...");
         }
 
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
             ByteBuf buf = (ByteBuf) msg;
-            // CharSequence str = buf.readCharSequence(buf.readableBytes(), CharsetUtil.UTF_8);
+//        CharSequence str = buf.readCharSequence(buf.readableBytes(), CharsetUtil.UTF_8);
             CharSequence str = buf.getCharSequence(0, buf.readableBytes(), CharsetUtil.UTF_8);
             System.out.println(str);
             ctx.writeAndFlush(buf);

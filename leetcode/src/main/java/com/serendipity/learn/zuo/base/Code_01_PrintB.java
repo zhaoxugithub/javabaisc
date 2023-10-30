@@ -13,10 +13,18 @@ public class Code_01_PrintB {
     // 给定一个整数int(有符号)，打印打他的32位0,1
     public static void print(int num) {
         for (int i = 31; i >= 0; i--) {
+            // 1 << i 左移i个元素
             System.out.print((num & (1 << i)) == 0 ? "0" : "1");
         }
         System.out.println();
     }
+
+
+    public static void main(String[] args) {
+        String binaryString = Integer.toBinaryString(1 << 2);
+        System.out.println(binaryString);
+    }
+
 
     public static void print1() {
         for (int i = 31; i >= 0; i--) {
@@ -41,12 +49,10 @@ public class Code_01_PrintB {
         print(t << 4);
     }
 
-
     public static void print4() {
         System.out.println("-----------");
         print(-1);
         print(Integer.MIN_VALUE);
-
         //[-2^31,2^31-1]
         System.out.println("------------");
         print(Integer.MAX_VALUE);
@@ -72,17 +78,14 @@ public class Code_01_PrintB {
     }
 
     public static void print7() {
-
         // 取反操作
         int a = 10;
         int b = -10;
-
         // 一个数的相反数=一个数的取反+1
         int c = (~a) + 1;
         System.out.println(a);
         System.out.println(b);
         System.out.println(c);
-
         System.out.println("--------------");
         print(a);
         print(c);
@@ -92,35 +95,7 @@ public class Code_01_PrintB {
     public void test8() {
         int a = 1;
         int b = -1;
-
         print(a);
         print(b);
-    }
-
-
-    public void method(int num) {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 31; i >= 0; i--) {
-            // 1左移i位
-            String s = ((num & (1 << i)) == 0 ? "0" : "1");
-            sb.append(s);
-        }
-        System.out.println(sb.toString());
-    }
-
-    @Test
-    public void test09() {
-        method(10);
-    }
-
-    // int 32 位
-    public static void main(String[] args) {
-        // print(10);
-        // print2(10);
-        print3();
-        // print5();
-        // System.out.println("-----");
-        // print6();
-        // print7();
     }
 }
