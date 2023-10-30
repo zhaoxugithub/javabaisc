@@ -97,14 +97,30 @@ public class Code_01_PrintB {
         print(b);
     }
 
+
+    public void method(int num) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 31; i >= 0; i--) {
+            // 1左移i位
+            String s = ((num & (1 << i)) == 0 ? "0" : "1");
+            sb.append(s);
+        }
+        System.out.println(sb.toString());
+    }
+
+    @Test
+    public void test09() {
+        method(10);
+    }
+
     // int 32 位
     public static void main(String[] args) {
         // print(10);
         // print2(10);
-        // print3();
+        print3();
         // print5();
         // System.out.println("-----");
         // print6();
-        print7();
+        // print7();
     }
 }

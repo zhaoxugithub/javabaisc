@@ -1,5 +1,7 @@
 package com.serendipity.nio;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -7,6 +9,7 @@ import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.Set;
 
+@Slf4j
 public class GroupChatServer {
     private Selector selector;
     private ServerSocketChannel serverSocketChannel;
@@ -25,8 +28,7 @@ public class GroupChatServer {
             // serverSocket绑定selector
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
         } catch (IOException e) {
-            System.out.println("初始化错误");
-            e.printStackTrace();
+            log.error("init error:{}", e.getMessage());
         }
     }
 
@@ -61,7 +63,6 @@ public class GroupChatServer {
                 }
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
 
             }
         }

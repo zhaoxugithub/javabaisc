@@ -26,10 +26,10 @@ public class NettyGroupClient {
                 @Override
                 protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
                     ChannelPipeline pipeline = nioSocketChannel.pipeline();
-                    //加入相关handler
+                    // 加入相关handler
                     pipeline.addLast("decoder", new StringDecoder());
                     pipeline.addLast("encoder", new StringEncoder());
-                    //加入自定义的handler
+                    // 加入自定义的handler
                     pipeline.addLast(new NettyGroupClientHandler());
                 }
             }).connect(host, port).sync();
@@ -57,10 +57,8 @@ public class NettyGroupClient {
         }
     }
 
-
     private class NettyGroupClientHandler extends SimpleChannelInboundHandler<String> {
-
-        //读取来自服务端的数据
+        // 读取来自服务端的数据
         @Override
         protected void channelRead0(ChannelHandlerContext channelHandlerContext, String s) throws Exception {
             System.out.println("来自服务端数据:" + s);
@@ -70,5 +68,4 @@ public class NettyGroupClient {
     public static void main(String[] args) {
         new NettyGroupClient("192.168.1.100", 8888).clientStart();
     }
-
 }

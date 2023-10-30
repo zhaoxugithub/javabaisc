@@ -16,25 +16,24 @@ import java.util.concurrent.Executors;
  */
 public class HttpServerV2 {
     private ServerSocket serverSocket = null;
+
     public HttpServerV2(int port) throws IOException {
         serverSocket = new ServerSocket(port);
     }
+
     public void listen() {
         try {
             System.out.println("服务器启动。。。");
-            //创建一个线程池
+            // 创建一个线程池
             ExecutorService service = Executors.newCachedThreadPool();
             for (; ; ) {
                 Socket accept = serverSocket.accept();
                 System.out.println("client[" + accept.getRemoteSocketAddress() + ":" + accept.getPort() + "]");
-                service.submit(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            handle(accept);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
+                service.submit(() -> {
+                    try {
+                        handle(accept);
+                    } catch (IOException e) {
+                        e.printStackTrace();
                     }
                 });
             }
@@ -48,13 +47,13 @@ public class HttpServerV2 {
         accept.close();
     }
 
-    //这种模型基本上可以返回数据了
+    // 这种模型基本上可以返回数据了
     public void analysisSocket(Socket accept) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(accept.getInputStream()));
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(accept.getOutputStream()));
         System.out.println(reader.readLine());
         bufferedWriter.write("HTTP/1.1 200 OK\n");
-        //协议头和body之间需要加一个/n
+        // 协议头和body之间需要加一个/n
         bufferedWriter.write("\n");
         bufferedWriter.write("<h1>dsadsa</h1>");
         bufferedWriter.flush();
@@ -68,12 +67,9 @@ public class HttpServerV2 {
         String method = s[0];
         String url = s[1];
         String version = s[2];
-
         HashMap<String, String> stringStringHashMap = new HashMap<>();
-
         String line = "";
-
-        while ((line = reader.readLine()) != null && line.length() != 0) {
+        while ((line = reader.readLine()) != null && !line.isEmpty()) {
             String[] split = line.split(":");
             stringStringHashMap.put(split[0], split[1]);
         }
@@ -101,7 +97,6 @@ public class HttpServerV2 {
         bufferedWriter.write(resp);
         bufferedWriter.flush();
     }
-
 
     public static void main(String[] args) throws IOException {
         HttpServerV2 httpServerV2 = new HttpServerV2(8082);

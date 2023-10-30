@@ -1,5 +1,6 @@
 package com.serendipity.groupchat.demo01;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.io.BufferedReader;
@@ -15,16 +16,17 @@ import java.net.Socket;
  * Date 2023-08-21:22:57
  * Version 1.0
  **/
+@Slf4j
 public class ServerDemo01 {
     @Test
     public void client01() {
         final int DEFAULT_PORT = 8888;
         try (ServerSocket serverSocket = new ServerSocket(DEFAULT_PORT)) {
-            System.out.println("ServerSocket start,The Port is :" + DEFAULT_PORT);
+            log.info("serverSocket start,the port is {}", DEFAULT_PORT);
             while (true) {
                 // server不停监听和端口
                 Socket socket = serverSocket.accept();
-                System.out.println("Client[" + socket.getPort() + "] Online");
+                log.info("client[" + socket.getPort() + "] online");
                 // 接收消息
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             }
@@ -35,8 +37,7 @@ public class ServerDemo01 {
 
     @Test
     public void server01() {
-        while (true){
-            System.out.println("aaa");
+        while (true) {
         }
     }
 }

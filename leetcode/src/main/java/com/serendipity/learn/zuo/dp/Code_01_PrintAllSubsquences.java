@@ -26,7 +26,6 @@ public class Code_01_PrintAllSubsquences {
     }
 
     private static void process(List<String> res, int index, String path, char[] chars) {
-
         if (index == chars.length) {
             res.add(path);
             return;
@@ -74,13 +73,11 @@ public class Code_01_PrintAllSubsquences {
             while (j < nums.length && nums[i] == nums[j]) {
                 count++;
                 j++;
-
             }
             i = j;
         }
         return nums.length - count;
     }
-
 
     public static void main(String[] args) {
         // List<String> abc = allSort("abc");

@@ -1,5 +1,7 @@
 package com.serendipity.bio;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
@@ -7,6 +9,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@Slf4j
 public class BIOServer01 {
     public static void main(String[] args) throws IOException {
         /**
@@ -21,40 +24,34 @@ public class BIOServer01 {
         System.out.println("服务端启动...");
         while (true) {
             // 如果客户端没有建立连接，就会阻塞在这
-            System.out.println("线程信息 id=" + Thread.currentThread().getId() + "name =" + Thread.currentThread().getName());
-            System.out.println("等待客户端连接...");
+            log.info("线程信息 id=" + Thread.currentThread().getId() + ",name =" + Thread.currentThread().getName());
+            log.info("wait for client connecting...");
             final Socket accept = serverSocket.accept();
-            System.out.println("客户端已经建立连接...");
-            newCachedThreadPool.execute(new Runnable() {
-                public void run() {
-                    handle(accept);
-                }
-            });
+            log.info("client has been connected...");
+            newCachedThreadPool.execute(() -> handle(accept));
         }
     }
 
     public static void handle(Socket socket) {
-        System.out.println("线程信息 id=" + Thread.currentThread().getId() + "name =" + Thread.currentThread().getName());
+        log.info("线程信息 id=" + Thread.currentThread().getId() + ",name =" + Thread.currentThread().getName());
         try {
             // 获取客户端的输入流
             InputStream inputStream = socket.getInputStream();
-            byte[] bytes = new byte[1024];
+            byte[] bytes = new byte[10];
             while (true) {
-                System.out.println("线程信息 id=" + Thread.currentThread().getId() + "name =" + Thread.currentThread().getName());
-                System.out.println("真正读取客户端的数据...");
-
+                log.info("线程信息 id=" + Thread.currentThread().getId() + ",name =" + Thread.currentThread().getName());
+                log.info("真正读取客户端的数据...");
                 // 系统调用，一个字节一个字节的去读取
                 int read = inputStream.read(bytes);
-                if (read != -1) {
-                    System.out.println(new String(bytes, 0, read));
-                } else {
+                if (read == -1) {
                     break;
                 }
+                log.info(new String(bytes, 0, read));
             }
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            System.out.println("关闭socket连接...");
+            log.info("关闭socket连接...");
             try {
                 socket.close();
             } catch (IOException e) {

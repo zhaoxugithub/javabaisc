@@ -101,8 +101,8 @@ public class BytebufApi {
         send.sync();
         // 马老师的多线程
         sync.channel()
-            .closeFuture()
-            .sync();
+                .closeFuture()
+                .sync();
         System.out.println("client over....");
     }
 
@@ -132,8 +132,8 @@ public class BytebufApi {
 
         // 当服务端断开连接的时候就会断开，阻塞同步
         sync.channel()
-            .closeFuture()
-            .sync();
+                .closeFuture()
+                .sync();
 
         System.out.println("client over...");
     }
@@ -149,9 +149,9 @@ public class BytebufApi {
         thread.register(server);
         ChannelFuture bind = server.bind(new InetSocketAddress("192.168.1.100", 9991));
         bind.sync()
-            .channel()
-            .closeFuture()
-            .sync();
+                .channel()
+                .closeFuture()
+                .sync();
     }
 
     public void serverModel2() {
@@ -195,7 +195,6 @@ public class BytebufApi {
 
     @ChannelHandler.Sharable
     private class MyInHandler extends ChannelInboundHandlerAdapter {
-
         @Override
         public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
             System.out.println("client  registed...");
@@ -209,12 +208,13 @@ public class BytebufApi {
         @Override
         public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
             ByteBuf buf = (ByteBuf) msg;
-//        CharSequence str = buf.readCharSequence(buf.readableBytes(), CharsetUtil.UTF_8);
+            // CharSequence str = buf.readCharSequence(buf.readableBytes(), CharsetUtil.UTF_8);
             CharSequence str = buf.getCharSequence(0, buf.readableBytes(), CharsetUtil.UTF_8);
             System.out.println(str);
             ctx.writeAndFlush(buf);
         }
     }
+
     @Test
     public void test() {
         ByteBuf byteBuf = Unpooled.copiedBuffer("hello,world", StandardCharsets.UTF_8);

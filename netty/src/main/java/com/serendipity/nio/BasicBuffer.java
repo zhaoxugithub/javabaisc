@@ -6,9 +6,8 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 public class BasicBuffer {
-
     /*
-        读写转换之后，postion会变成0,limit=position
+      读写转换之后，postion会变成0,limit=position
      */
     @Test
     public void test01() {
@@ -16,30 +15,26 @@ public class BasicBuffer {
         System.out.println(allocate.position()); // 0
         System.out.println(allocate.limit());  // 10
         System.out.println(allocate.capacity()); // 10
-
         allocate.put("1234".getBytes());
         System.out.println("----");
         System.out.println(allocate.position()); // 4
         System.out.println(allocate.limit()); // 10
         System.out.println(allocate.capacity()); // 10
-
         // write -> read
         allocate.flip();
         System.out.println("----");
-        System.out.println(allocate.position()); //position =0
+        System.out.println(allocate.position()); // position =0
         System.out.println(allocate.limit()); // limit = postion = 4 (要插入的️下标)
         System.out.println(allocate.capacity());
-
         byte b = allocate.get();
         System.out.println("----");
-        System.out.println(allocate.position()); //position =  1
+        System.out.println(allocate.position()); // position =  1
         System.out.println(allocate.limit()); // limit = 4 (要插入的️下标)
         System.out.println(allocate.capacity());
-
         // read -> write
         allocate.flip();
         System.out.println("----");
-        System.out.println(allocate.position()); //position =0
+        System.out.println(allocate.position()); // position =0
         System.out.println(allocate.limit()); // limit = postion =1 (要插入的️下标)
         System.out.println(allocate.capacity());
     }

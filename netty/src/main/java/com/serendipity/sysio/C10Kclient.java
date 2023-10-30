@@ -5,16 +5,11 @@ import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
 import java.util.LinkedList;
 
-/**
- * @author: 马士兵教育
- * @create: 2020-06-06 15:12
- */
 public class C10Kclient {
-
     public static void main(String[] args) {
         LinkedList<SocketChannel> clients = new LinkedList<>();
         InetSocketAddress serverAddr = new InetSocketAddress("192.168.1.102", 10999);
-        //端口号的问题：65535
+        // 端口号的问题：65535
         //  windows
         long startTime = System.currentTimeMillis();
         System.out.println(startTime);

@@ -1,5 +1,7 @@
 package com.serendipity.groupchat;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -7,21 +9,20 @@ import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.Set;
 
+@Slf4j
 public class GroupChatServer {
-
-    private Selector selector;
-    private ServerSocketChannel serverSocketChannel;
-    private int port = 9990;
+    private final Selector selector;
 
     public GroupChatServer() {
         try {
             selector = Selector.open();
-            serverSocketChannel = ServerSocketChannel.open();
-            serverSocketChannel.bind(new InetSocketAddress(port));
+            ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+            serverSocketChannel.bind(new InetSocketAddress(9990));
             serverSocketChannel.configureBlocking(false);
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-            System.out.println("server start...");
+            log.info("server start ...");
         } catch (IOException e) {
+            log.info("server start ");
             throw new RuntimeException(e);
         }
     }
@@ -44,10 +45,7 @@ public class GroupChatServer {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-
-
         }
-
     }
 
     private void readHandler(SelectionKey key) {
@@ -55,7 +53,6 @@ public class GroupChatServer {
         ByteBuffer bytebuffer = (ByteBuffer) key.attachment();
         bytebuffer.clear();
         try {
-
             while (true) {
                 int read = client.read(bytebuffer);
                 if (read > 0) {
@@ -68,10 +65,10 @@ public class GroupChatServer {
                         sendToOtherClient(s, client);
                     }
                 } else if (read == 0) {
-                    //读取完毕
+                    // 读取完毕
                     break;
                 } else {
-                    //客户端断开连接。。
+                    // 客户端断开连接。。
                     System.out.println(client.getRemoteAddress() + "断开连接");
                     key.cancel();
                     client.close();
@@ -114,9 +111,7 @@ public class GroupChatServer {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
     }
-
 
     public static void main(String[] args) {
         new GroupChatServer().init();
