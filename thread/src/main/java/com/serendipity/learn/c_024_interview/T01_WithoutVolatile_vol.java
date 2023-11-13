@@ -13,9 +13,8 @@ import java.util.concurrent.TimeUnit;
  */
 
 
-//可以得
+// 可以得
 public class T01_WithoutVolatile_vol {
-
     private volatile List<Object> list = new ArrayList<>();
 
     public void add(Object obj) {
@@ -40,18 +39,13 @@ public class T01_WithoutVolatile_vol {
 
     public static void main(String[] args) {
         T01_WithoutVolatile_vol wv = new T01_WithoutVolatile_vol();
-
         new Thread(() -> {
             while (wv.size() < 20) {
             }
             System.out.println("5 end");
         }).start();
-
         new Thread(() -> {
             for (int i = 0; i < 100; i++, wv.add(i)) ;
         }).start();
-
-
     }
-
 }

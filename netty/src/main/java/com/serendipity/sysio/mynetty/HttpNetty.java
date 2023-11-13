@@ -15,13 +15,12 @@ import java.net.URI;
 public class HttpNetty {
 
     public static void main(String[] args) {
-
         try {
             NioEventLoopGroup boss = new NioEventLoopGroup(1);
             NioEventLoopGroup worker = new NioEventLoopGroup(3);
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             ServerBootstrap bootstrap = serverBootstrap.group(boss, worker).channel(NioServerSocketChannel.class).childHandler(new ChannelInitializer<NioSocketChannel>() {
-                //初始化通道
+                // 初始化通道
                 @Override
                 protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
                     ChannelPipeline pipeline = nioSocketChannel.pipeline();
@@ -34,7 +33,6 @@ public class HttpNetty {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     /**
@@ -42,8 +40,7 @@ public class HttpNetty {
      * HttpObject 客户端和服务器端相互通讯的数据被封装成 HttpObject
      */
     private static class TestHttpServerHandler extends SimpleChannelInboundHandler<HttpObject> {
-
-        //HttpRequest 继承HttpObject
+        // HttpRequest 继承HttpObject
         @Override
         protected void channelRead0(ChannelHandlerContext channelHandlerContext, HttpObject httpObject) throws Exception {
             if (httpObject instanceof HttpRequest) {

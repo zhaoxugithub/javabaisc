@@ -67,12 +67,9 @@ public class HttpServerV2 {
         String method = s[0];
         String url = s[1];
         String version = s[2];
-
         HashMap<String, String> stringStringHashMap = new HashMap<>();
-
         String line = "";
-
-        while ((line = reader.readLine()) != null && line.length() != 0) {
+        while ((line = reader.readLine()) != null && !line.isEmpty()) {
             String[] split = line.split(":");
             stringStringHashMap.put(split[0], split[1]);
         }
@@ -100,7 +97,6 @@ public class HttpServerV2 {
         bufferedWriter.write(resp);
         bufferedWriter.flush();
     }
-
 
     public static void main(String[] args) throws IOException {
         HttpServerV2 httpServerV2 = new HttpServerV2(8082);
