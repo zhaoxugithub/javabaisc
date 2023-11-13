@@ -10,6 +10,6 @@ public class BIOServer02 {
     public static void main(String[] args) throws IOException {
         ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();
         final ServerSocket serverSocket = new ServerSocket(6666);
-        System.out.println("服务端启动...");
+       System.out.println("服务端启动...");
     }
 }

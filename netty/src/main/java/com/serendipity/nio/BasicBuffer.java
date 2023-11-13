@@ -1,47 +1,42 @@
 package com.serendipity.nio;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
+/**
+ * @author 11931
+ */
+@Slf4j
 public class BasicBuffer {
-
-    /*
-        读写转换之后，postion会变成0,limit=position
-     */
     @Test
     public void test01() {
         ByteBuffer allocate = ByteBuffer.allocate(10);
-        System.out.println(allocate.position()); // 0
-        System.out.println(allocate.limit());  // 10
-        System.out.println(allocate.capacity()); // 10
-
+        log.info("position={}", allocate.position());
+        log.info("limit={}", allocate.limit());
+        log.info("capacity={}", allocate.capacity());
         allocate.put("1234".getBytes());
-        System.out.println("----");
-        System.out.println(allocate.position()); // 4
-        System.out.println(allocate.limit()); // 10
-        System.out.println(allocate.capacity()); // 10
-
-        // write -> read
+        log.info("------------------------------------------");
+        log.info("position={}", allocate.position());
+        log.info("limit={}", allocate.limit());
+        log.info("capacity={}", allocate.capacity());
+        log.info("----------write--->read------------------");
         allocate.flip();
-        System.out.println("----");
-        System.out.println(allocate.position()); //position =0
-        System.out.println(allocate.limit()); // limit = postion = 4 (要插入的️下标)
-        System.out.println(allocate.capacity());
-
-        byte b = allocate.get();
-        System.out.println("----");
-        System.out.println(allocate.position()); //position =  1
-        System.out.println(allocate.limit()); // limit = 4 (要插入的️下标)
-        System.out.println(allocate.capacity());
-
-        // read -> write
+        log.info("position={}", allocate.position());
+        log.info("limit={}", allocate.limit());
+        log.info("capacity={}", allocate.capacity());
+        allocate.get();
+        log.info("-----------------------------------------");
+        log.info("position={}", allocate.position());
+        log.info("limit={}", allocate.limit());
+        log.info("capacity={}", allocate.capacity());
+        log.info("---------read-->write--------------------");
         allocate.flip();
-        System.out.println("----");
-        System.out.println(allocate.position()); //position =0
-        System.out.println(allocate.limit()); // limit = postion =1 (要插入的️下标)
-        System.out.println(allocate.capacity());
+        log.info("position={}", allocate.position());
+        log.info("limit={}", allocate.limit());
+        log.info("capacity={}", allocate.capacity());
     }
 
     public static void main(String[] args) {
@@ -55,7 +50,8 @@ public class BasicBuffer {
         intBuffer.flip();
         while (intBuffer.hasRemaining()) {
             // get方法中维护一个索引，每次get方法之后索引会移动一次
-            System.out.println(intBuffer.get());
+            int i = intBuffer.get();
+            log.info("intBuffer={}", i);
         }
     }
 }

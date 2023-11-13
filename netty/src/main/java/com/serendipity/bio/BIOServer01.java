@@ -1,5 +1,7 @@
 package com.serendipity.bio;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.ServerSocket;
@@ -7,6 +9,8 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@SuppressWarnings("all")
+@Slf4j
 public class BIOServer01 {
     public static void main(String[] args) throws IOException {
         /**
@@ -21,7 +25,9 @@ public class BIOServer01 {
         System.out.println("服务端启动...");
         while (true) {
             // 如果客户端没有建立连接，就会阻塞在这
-            System.out.println("线程信息 id=" + Thread.currentThread().getId() + "name =" + Thread.currentThread().getName());
+            System.out.println("线程信息 id=" + Thread.currentThread()
+                                                      .getId() + "name =" + Thread.currentThread()
+                                                                                  .getName());
             System.out.println("等待客户端连接...");
             final Socket accept = serverSocket.accept();
             System.out.println("客户端已经建立连接...");
@@ -34,13 +40,17 @@ public class BIOServer01 {
     }
 
     public static void handle(Socket socket) {
-        System.out.println("线程信息 id=" + Thread.currentThread().getId() + "name =" + Thread.currentThread().getName());
+        System.out.println("线程信息 id=" + Thread.currentThread()
+                                                  .getId() + "name =" + Thread.currentThread()
+                                                                              .getName());
         try {
             // 获取客户端的输入流
             InputStream inputStream = socket.getInputStream();
             byte[] bytes = new byte[1024];
             while (true) {
-                System.out.println("线程信息 id=" + Thread.currentThread().getId() + "name =" + Thread.currentThread().getName());
+                System.out.println("线程信息 id=" + Thread.currentThread()
+                                                          .getId() + "name =" + Thread.currentThread()
+                                                                                      .getName());
                 System.out.println("真正读取客户端的数据...");
 
                 // 系统调用，一个字节一个字节的去读取

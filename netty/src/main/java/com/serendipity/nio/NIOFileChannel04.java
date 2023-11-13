@@ -23,7 +23,6 @@ public class NIOFileChannel04 {
             }
             byteBuffer.flip();
             outputStreamChannel.write(byteBuffer);
-
         }
         inputStream.close();
         outputStream.close();

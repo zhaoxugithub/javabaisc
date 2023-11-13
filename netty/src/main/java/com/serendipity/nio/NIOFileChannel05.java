@@ -5,6 +5,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 
+/**
+ * @author 11931
+ */
 public class NIOFileChannel05 {
 
     public static void main(String[] args) throws IOException {

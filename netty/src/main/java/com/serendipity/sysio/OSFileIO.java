@@ -1,13 +1,16 @@
 package com.serendipity.sysio;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.file.Files;
 
+@Slf4j
+@SuppressWarnings("all")
 public class OSFileIO {
-
     static byte[] data = "123456789\n".getBytes();
     static String path = "out.txt";
 
@@ -17,7 +20,6 @@ public class OSFileIO {
         // test3();
         switch (args[0]) {
             case "0":
-                // 没有buffer
                 test1();
                 break;
             case "1":
@@ -26,7 +28,7 @@ public class OSFileIO {
             case "2":
                 test3();
             case "3":
-//                whatByteBuffer();
+                // whatByteBuffer();
             default:
         }
         // testRandomAccessFileWrite();
@@ -37,7 +39,8 @@ public class OSFileIO {
             File file = new File("out1.txt");
             try (FileOutputStream fileOutputStream = new FileOutputStream(file)) {
                 // 判断当前线程是否发生了中断
-                while (!Thread.currentThread().isInterrupted()) {
+                while (!Thread.currentThread()
+                              .isInterrupted()) {
                     fileOutputStream.write(data);
                 }
             } catch (IOException e) {
@@ -55,7 +58,8 @@ public class OSFileIO {
             File file = new File("out2.txt");
             // 先把数据写到jvm缓存里面，然后复制到java进程，然后8k刷写到pagecache 上，然后刷写到硬盘上
             try (BufferedOutputStream out = new BufferedOutputStream(Files.newOutputStream(file.toPath()))) {
-                while (!Thread.currentThread().isInterrupted()) {
+                while (!Thread.currentThread()
+                              .isInterrupted()) {
                     out.write(data);
                 }
             } catch (IOException e) {
@@ -67,13 +71,13 @@ public class OSFileIO {
         thread.interrupt();
     }
 
-
     public static void test3() throws InterruptedException {
         Thread thread = new Thread(() -> {
             try (RandomAccessFile raf = new RandomAccessFile("out3.txt", "rw")) {
                 FileChannel channel = raf.getChannel();
                 MappedByteBuffer map = channel.map(FileChannel.MapMode.READ_WRITE, 0, 1024 * 1024 * 1024);
-                while (!Thread.currentThread().isInterrupted()) {
+                while (!Thread.currentThread()
+                              .isInterrupted()) {
                     map.put(data);
                 }
                 map.force();

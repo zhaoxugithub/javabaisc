@@ -23,9 +23,10 @@ public class HttpServerV4 {
 
     public void listen() throws IOException {
         for (; ; ) {
-            Socket socket = channel.accept().socket();
+            Socket socket = channel.accept()
+                                   .socket();
             if (socket == null) {
-                //TODO 没有客户端连接
+                // TODO 没有客户端连接
             }
             handle(socket);
         }

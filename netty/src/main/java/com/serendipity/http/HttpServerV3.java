@@ -17,7 +17,6 @@ import java.util.concurrent.Executors;
  * Description: myhttp
  */
 public class HttpServerV3 {
-
     private ServerSocketChannel channel = null;
     private SocketChannel accept = null;
 
@@ -30,26 +29,22 @@ public class HttpServerV3 {
     public void listen() {
         try {
             System.out.println("服务器启动。。。");
-            //创建一个线程池
+            // 创建一个线程池
             ExecutorService service = Executors.newCachedThreadPool();
             for (; ; ) {
-                //非阻塞
+                // 非阻塞
                 accept = channel.accept();
                 if (accept != null) {
                     Socket socket = accept.socket();
                     System.out.println("client[" + socket.getRemoteSocketAddress() + ":" + socket.getPort() + "]");
-                    service.submit(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                handle(socket);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                    service.submit(() -> {
+                        try {
+                            handle(socket);
+                        } catch (IOException e) {
+                            e.printStackTrace();
                         }
                     });
                 } else {
-//                    System.out.println("error");
                 }
             }
         } catch (IOException e) {
@@ -62,13 +57,13 @@ public class HttpServerV3 {
         accept.close();
     }
 
-    //这种模型基本上可以返回数据了
+    // 这种模型基本上可以返回数据了
     public void analysisSocket(Socket accept) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(accept.getInputStream()));
         BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(accept.getOutputStream()));
         System.out.println(reader.readLine());
         bufferedWriter.write("HTTP/1.1 200 OK\n");
-        //协议头和body之间需要加一个/n
+        // 协议头和body之间需要加一个/n
         bufferedWriter.write("\n");
         bufferedWriter.write("<h1>dsadsa</h1>");
         bufferedWriter.flush();
@@ -82,11 +77,8 @@ public class HttpServerV3 {
         String method = s[0];
         String url = s[1];
         String version = s[2];
-
         HashMap<String, String> stringStringHashMap = new HashMap<>();
-
         String line = "";
-
         while ((line = reader.readLine()) != null && line.length() != 0) {
             String[] split = line.split(":");
             stringStringHashMap.put(split[0], split[1]);

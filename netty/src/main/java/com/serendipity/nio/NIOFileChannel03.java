@@ -9,6 +9,7 @@ import java.nio.channels.FileChannel;
 
 /**
  * 文件的拷贝
+ * @author 11931
  */
 public class NIOFileChannel03 {
     public static void main(String[] args) throws IOException {

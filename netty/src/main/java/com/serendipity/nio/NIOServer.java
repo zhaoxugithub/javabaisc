@@ -1,5 +1,7 @@
 package com.serendipity.nio;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -16,7 +18,10 @@ import java.util.Set;
  * 2.OP_CONNECT:代表连接已经建立，值为8
  * 3.OP_READ:代表读操作，值为1
  * 4.OP_WRITE:代表写操作：值为4
+ *
+ * @author 11931
  */
+@Slf4j
 public class NIOServer {
     public static void main(String[] args) throws IOException {
         // 创建一个服务端ServerSocketChannel
@@ -34,7 +39,7 @@ public class NIOServer {
         while (true) {
             // 如果监听没有客户端进行连接selector==0
             if (selector.select(3000) == 0) {
-                System.out.println("暂时没有客户端连接。。。。");
+                log.info("There is currently no client connection");
                 continue;
             }
             // 说明有客户端连接到服务端
@@ -63,7 +68,7 @@ public class NIOServer {
                     ByteBuffer byteBuffer = (ByteBuffer) selectionKey.attachment();
                     // 读取到buffer
                     channel.read(byteBuffer);
-                    System.out.println("获取客户端发送过来的数据:" + new String(byteBuffer.array()));
+                    log.info("get the data sent by the client:{}", new String(byteBuffer.array()));
                 }
                 iterator.remove();
             }

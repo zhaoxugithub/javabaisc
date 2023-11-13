@@ -1,5 +1,7 @@
 package com.serendipity.nio;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -7,6 +9,7 @@ import java.nio.channels.*;
 import java.util.Iterator;
 import java.util.Set;
 
+@Slf4j
 public class GroupChatServer {
     private Selector selector;
     private ServerSocketChannel serverSocketChannel;
@@ -19,20 +22,19 @@ public class GroupChatServer {
             selector = Selector.open();
             // 绑定一个端口
             serverSocketChannel.socket()
-                    .bind(new InetSocketAddress(8889));
+                               .bind(new InetSocketAddress(8889));
             // 设置非阻塞
             serverSocketChannel.configureBlocking(false);
             // serverSocket绑定selector
             serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
         } catch (IOException e) {
-            System.out.println("初始化错误");
-            e.printStackTrace();
+            log.error("init error={}", e.getMessage());
         }
     }
 
     public void listen() {
-        System.out.println("当前线程：" + Thread.currentThread()
-                .getName());
+        log.info("currentThread is ={}", Thread.currentThread()
+                                               .getName());
         while (true) {
             try {
                 // 阻塞两秒
@@ -49,8 +51,7 @@ public class GroupChatServer {
                             SocketChannel socketChannel = serverSocketChannel.accept();
                             socketChannel.configureBlocking(false);
                             socketChannel.register(selector, SelectionKey.OP_READ, ByteBuffer.allocate(1024));
-                            // 提示
-                            System.out.println(socketChannel.getRemoteAddress() + "上线了。。");
+                            log.warn(socketChannel.getRemoteAddress() + "上线了..");
                         }
                         if (selectionKey.isReadable()) {
                             readData(selectionKey);
@@ -60,9 +61,7 @@ public class GroupChatServer {
                     }
                 }
             } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-
+                log.error("listen error={}", e.getMessage());
             }
         }
     }
@@ -76,19 +75,18 @@ public class GroupChatServer {
             int read = channel.read(byteBuffer);
             if (read > 0) {
                 String msg = new String(byteBuffer.array());
-                System.out.println("from 客户端：" + msg);
+                log.info("from client:{}", msg);
                 sendToOtherClient(selectionKey, msg);
             }
         } catch (IOException e) {
             try {
-                // 提示了
-                System.out.println(channel.getRemoteAddress() + "下线了。。");
+                log.info("remote address={},offline", channel.getRemoteAddress());
                 selectionKey.cancel();
                 channel.close();
             } catch (IOException ex) {
-                ex.printStackTrace();
+                log.error("offline={}", ex.getMessage());
             }
-            e.printStackTrace();
+            log.error("readData error:{}", e.getMessage());
         }
     }
 
@@ -99,9 +97,7 @@ public class GroupChatServer {
      * @param msg
      */
     public void sendToOtherClient(SelectionKey selectionKey, String msg) throws IOException {
-        System.out.println("服务器转发消息中。。。");
-        System.out.println("服务器转发数据给客户端线程：" + Thread.currentThread()
-                .getName());
+        log.info("server forwards messages to client...");
         Set<SelectionKey> selectionKeys = selector.selectedKeys();
         for (SelectionKey key : selectionKeys) {
             SelectableChannel channel = key.channel();

@@ -12,6 +12,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
+import lombok.extern.slf4j.Slf4j;
 
 import java.time.LocalDateTime;
 
@@ -22,10 +23,9 @@ import java.time.LocalDateTime;
  * Date 2023-08-24:1:04
  * Version 1.0
  **/
+@Slf4j
 public class MyServer {
-
     public static void main(String[] args) throws InterruptedException {
-
         NioEventLoopGroup boss = new NioEventLoopGroup(1);
         NioEventLoopGroup worker = new NioEventLoopGroup(1);
         try {
@@ -37,13 +37,11 @@ public class MyServer {
                 @Override
                 protected void initChannel(SocketChannel socketChannel) throws Exception {
                     ChannelPipeline pipeline = socketChannel.pipeline();
-
                     // 基于http协议,使用http的编码和解码
                     pipeline.addLast(new HttpServerCodec());
                     // 是以块方式写,添加ChunkedWriteHandler处理器
                     pipeline.addLast(new ChunkedWriteHandler());
-
-                                        /*
+                    /*
                     说明
                     1. http数据在传输过程中是分段, HttpObjectAggregator ，就是可以将多个段聚合
                     2. 这就就是为什么，当浏览器发送大量数据时，就会发出多次http请求
@@ -58,38 +56,36 @@ public class MyServer {
                     5. 是通过一个 状态码 101
                      */
                     pipeline.addLast(new WebSocketServerProtocolHandler("/hello2"));
-
                     pipeline.addLast(new SimpleChannelInboundHandler<TextWebSocketFrame>() {
-
                         // 当web客户端连接后， 触发方法
                         @Override
-                        public void handlerAdded(ChannelHandlerContext ctx) throws Exception {
+                        public void handlerAdded(ChannelHandlerContext ctx) {
                             // id 表示唯一的值，LongText 是唯一的 ShortText 不是唯一
-                            System.out.println("handlerAdded 被调用" + ctx.channel()
-                                                                          .id()
-                                                                          .asLongText());
-                            System.out.println("handlerAdded 被调用" + ctx.channel()
-                                                                          .id()
-                                                                          .asShortText());
-                        }
-
-
-                        @Override
-                        public void handlerRemoved(ChannelHandlerContext ctx) throws Exception {
-                            System.out.println("handlerRemoved 被调用" + ctx.channel()
-                                                                            .id()
-                                                                            .asLongText());
+                            log.info("handlerAdded 被调用:{}", ctx.channel()
+                                                                  .id()
+                                                                  .asLongText());
+                            log.info("handlerAdded 被调用:{}", ctx.channel()
+                                                                  .id()
+                                                                  .asShortText());
                         }
 
                         @Override
-                        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-                            System.out.println("异常发生 " + cause.getMessage());
-                            ctx.close(); // 关闭连接
+                        public void handlerRemoved(ChannelHandlerContext ctx) {
+                            log.info("handlerRemoved 被调用:{}", ctx.channel()
+                                                                    .id()
+                                                                    .asLongText());
                         }
 
                         @Override
-                        protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) throws Exception {
-                            System.out.println("服务器收到消息:" + msg.text());
+                        public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+                            log.info("异常发生:{}", cause.getMessage());
+                            // 关闭连接
+                            ctx.close();
+                        }
+
+                        @Override
+                        protected void channelRead0(ChannelHandlerContext ctx, TextWebSocketFrame msg) {
+                            log.info("服务器收到消息:{}", msg.text());
                             // 往channel 里面写
                             ctx.channel()
                                .writeAndFlush(new TextWebSocketFrame("服务器时间" + LocalDateTime.now() + " " + msg.text()));
@@ -97,7 +93,6 @@ public class MyServer {
                     });
                 }
             });
-
             ChannelFuture channelFuture = serverBootstrap.bind(7000)
                                                          .sync();
             channelFuture.channel()

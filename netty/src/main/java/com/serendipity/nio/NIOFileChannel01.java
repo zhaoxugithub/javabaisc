@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
+/**
+ * @author 11931
+ */
 public class NIOFileChannel01 {
     public static void main(String[] args) throws IOException {
         // 创建输出流路径

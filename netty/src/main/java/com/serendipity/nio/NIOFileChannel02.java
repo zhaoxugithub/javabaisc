@@ -1,13 +1,15 @@
 package com.serendipity.nio;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
+@Slf4j
 public class NIOFileChannel02 {
-
     public static void main(String[] args) throws IOException {
         File file = new File("netty/src/NIOFIleChannel01.txt");
         FileInputStream inputStream = new FileInputStream(file);
@@ -16,7 +18,7 @@ public class NIOFileChannel02 {
         // 分配相同大小的buffer空间
         ByteBuffer byteBuffer = ByteBuffer.allocate((int) file.length());
         channel.read(byteBuffer);
-        System.out.println(new String(byteBuffer.array()));
+        log.info(new String(byteBuffer.array()));
         inputStream.close();
     }
 }
