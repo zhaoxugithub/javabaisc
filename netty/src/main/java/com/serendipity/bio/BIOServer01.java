@@ -22,15 +22,15 @@ public class BIOServer01 {
          */
         ExecutorService newCachedThreadPool = Executors.newCachedThreadPool();
         final ServerSocket serverSocket = new ServerSocket(6666);
-        System.out.println("服务端启动...");
+        log.info("server start...");
         while (true) {
             // 如果客户端没有建立连接，就会阻塞在这
-            System.out.println("线程信息 id=" + Thread.currentThread()
-                                                      .getId() + "name =" + Thread.currentThread()
-                                                                                  .getName());
-            System.out.println("等待客户端连接...");
+            log.info("thread id={},thread name={}", Thread.currentThread()
+                                                          .getId(), Thread.currentThread()
+                                                                          .getName());
+            log.info("wait for client connecting...");
             final Socket accept = serverSocket.accept();
-            System.out.println("客户端已经建立连接...");
+            log.info("client has been connected...");
             newCachedThreadPool.execute(new Runnable() {
                 public void run() {
                     handle(accept);
@@ -40,23 +40,22 @@ public class BIOServer01 {
     }
 
     public static void handle(Socket socket) {
-        System.out.println("线程信息 id=" + Thread.currentThread()
-                                                  .getId() + "name =" + Thread.currentThread()
-                                                                              .getName());
+        log.info("thread id={},thread name={}", Thread.currentThread()
+                                                      .getId(), Thread.currentThread()
+                                                                      .getName());
         try {
             // 获取客户端的输入流
             InputStream inputStream = socket.getInputStream();
             byte[] bytes = new byte[1024];
             while (true) {
-                System.out.println("线程信息 id=" + Thread.currentThread()
-                                                          .getId() + "name =" + Thread.currentThread()
-                                                                                      .getName());
-                System.out.println("真正读取客户端的数据...");
-
+                log.info("thread id={},thread name={}", Thread.currentThread()
+                                                              .getId(), Thread.currentThread()
+                                                                              .getName());
+                log.info("read data from client...");
                 // 系统调用，一个字节一个字节的去读取
                 int read = inputStream.read(bytes);
                 if (read != -1) {
-                    System.out.println(new String(bytes, 0, read));
+                    log.info(new String(bytes, 0, read));
                 } else {
                     break;
                 }
@@ -64,7 +63,7 @@ public class BIOServer01 {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            System.out.println("关闭socket连接...");
+            log.warn("close socket connected...");
             try {
                 socket.close();
             } catch (IOException e) {

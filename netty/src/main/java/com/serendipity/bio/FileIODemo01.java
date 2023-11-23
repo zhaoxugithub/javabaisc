@@ -1,5 +1,6 @@
 package com.serendipity.bio;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.io.FileInputStream;
@@ -13,6 +14,8 @@ import java.io.RandomAccessFile;
  * Date 2023-08-17:3:38
  * Version 1.0
  **/
+
+@Slf4j
 public class FileIODemo01 {
     @Test
     public void test01() throws IOException {
@@ -20,7 +23,7 @@ public class FileIODemo01 {
         FileInputStream fileInputStream = new FileInputStream("D:\\document\\idea\\javabaisc\\netty\\src\\main\\java\\com\\serendipity\\bio\\file01.txt");
         // 获取可用的字节数
         int available = fileInputStream.available();
-        System.out.println(available);
+        log.info("available={}", available);
         byte[] bytes = fileInputStream.readAllBytes();
         String s = new String(bytes);
         System.out.println(s);

@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
  * Description: com.java.thread.c_024_interview
  */
 public class T01_WithoutVolatile_syn {
-
     private static final List<Object> list = new ArrayList<>();
 
     public synchronized void add(Object obj) {
@@ -37,18 +36,17 @@ public class T01_WithoutVolatile_syn {
 
     public static void main(String[] args) {
         T01_WithoutVolatile_syn wv = new T01_WithoutVolatile_syn();
-
         new Thread(() -> {
-            //每执行一次都会释放锁
+            // 每执行一次都会释放锁
             while (wv.size() < 5) {
             }
-            System.out.println(Thread.currentThread().getName() + "5 end");
+            System.out.println(Thread.currentThread()
+                                     .getName() + "5 end");
         }).start();
 
         new Thread(() -> {
             for (int i = 0; i < 10; i++, wv.add(i)) ;
         }).start();
     }
-
 }
 

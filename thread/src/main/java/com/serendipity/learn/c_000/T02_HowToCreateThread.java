@@ -23,7 +23,8 @@ public class T02_HowToCreateThread {
     }
 
     public static void method() {
-        System.out.println(Thread.currentThread().getName());
+        System.out.println(Thread.currentThread()
+                                 .getName());
     }
 
     // new Thread(方法 / 实现线程runnable,继承Thread 的类   )
@@ -33,12 +34,7 @@ public class T02_HowToCreateThread {
         // 第二种方法
         new Thread(new MyRun()).start();
         // 第三种方法
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("myRun start ........");
-            }
-        }).start();
+        new Thread(() -> System.out.println("myRun start ........")).start();
         // 第四种方法
         new Thread(() -> System.out.println("my start...")).start();
         new Thread(T02_HowToCreateThread::method).start();
