@@ -45,6 +45,5 @@ public class HutoolCoreDateUtilTest {
         // 结果：00:00:00
         String formatTime = DateUtil.formatTime(date);
         System.out.println(formatTime);
-
     }
 }

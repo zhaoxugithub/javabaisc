@@ -11,7 +11,6 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 @SuppressWarnings("all")
 public class T05_SourceCode {
-
     public static void main(String[] args) {
         ReentrantLock lock = new ReentrantLock();
         lock.lock();

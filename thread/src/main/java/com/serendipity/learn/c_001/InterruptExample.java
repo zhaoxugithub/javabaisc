@@ -8,7 +8,6 @@ package com.serendipity.learn.c_001;
  * Description: com.java.thread.c_001
  */
 public class InterruptExample {
-
     private static class MyThread1 extends Thread {
         @Override
         public void run() {
@@ -26,7 +25,6 @@ public class InterruptExample {
         }
     }
 
-
     public static void main(String[] args) throws InterruptedException {
         Thread thread1 = new MyThread1();
         thread1.start();
@@ -34,6 +32,4 @@ public class InterruptExample {
         thread1.interrupt();
         System.out.println("Main run");
     }
-
-
 }

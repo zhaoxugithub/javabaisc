@@ -22,10 +22,11 @@ public class AwaitSignalExample {
     private Condition condition = lock.newCondition();
 
     public void before() {
-        System.out.println(Thread.currentThread().getName()+":"+Thread.currentThread().getState()+":"+"before");
+        log.info("threadName={},threadState={},before", Thread.currentThread().getName(), Thread.currentThread().getState());
+
         lock.lock();
         try {
-            System.out.println(Thread.currentThread().getName()+":"+Thread.currentThread().getState()+":"+"before");
+            System.out.println(Thread.currentThread().getName() + ":" + Thread.currentThread().getState() + ":" + "before");
             // condition.signalAll();
             Thread.sleep(10000);
         } catch (InterruptedException e) {
@@ -40,7 +41,7 @@ public class AwaitSignalExample {
         try {
             // await现
             condition.await();
-            System.out.println(Thread.currentThread().getName()+":"+Thread.currentThread().getState()+":"+"after");
+            System.out.println(Thread.currentThread().getName() + ":" + Thread.currentThread().getState() + ":" + "after");
             log.info(Thread.currentThread().getName());
         } catch (InterruptedException e) {
             e.printStackTrace();

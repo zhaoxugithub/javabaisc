@@ -1,5 +1,7 @@
 package com.serendipity.learn.c_000;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Copyright (C), 2017-2021, 赵旭
  * Author: serendipity
@@ -10,13 +12,13 @@ package com.serendipity.learn.c_000;
  * <p>
  * sleep,wait,join 区别
  */
+@Slf4j
 @SuppressWarnings("all")
 public class T03_Sleep_Yield_Join {
-
     public static void main(String[] args) {
-        // testSleep();
+        testSleep();
         // testYield();
-        testJoin();
+        // testJoin();
     }
 
     /**
@@ -29,11 +31,11 @@ public class T03_Sleep_Yield_Join {
     public static void testJoin() {
         Thread thread = new Thread(() -> {
             for (int i = 0; i < 10; i++) {
-                System.out.println("A" + i);
+                log.info("A={}", i);
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("exception={}", e.getMessage());
                 }
             }
         });
@@ -43,18 +45,17 @@ public class T03_Sleep_Yield_Join {
                 // 先去执行thread方法，底层是调用wait方法，让当前线程先进入到等待队列
                 thread.join();
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error("exception={}", e.getMessage());
             }
             for (int i = 0; i < 10; i++) {
-                System.out.println("B" + i);
+                log.info("B={}", i);
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("exception={}", e.getMessage());
                 }
             }
         });
-
         thread.start();
         thread1.start();
     }
@@ -69,15 +70,14 @@ public class T03_Sleep_Yield_Join {
     public static void testYield() {
         new Thread(() -> {
             for (int i = 0; i < 100; i++) {
-                System.out.println("A" + i);
+                log.info("A" + i);
                 // 虽然yield，但是并不表示其他线程就一定执行，有可能依然是当前线程执行
                 if (i % 2 == 0) Thread.yield();
             }
         }).start();
-
         new Thread(() -> {
             for (int i = 0; i < 100; i++) {
-                System.out.println("B" + i);
+                log.info("B" + i);
                 if (i % 2 == 1) Thread.yield();
             }
         }).start();
@@ -93,11 +93,11 @@ public class T03_Sleep_Yield_Join {
     public static void testSleep() {
         new Thread(() -> {
             for (int i = 0; i < 100; i++) {
-                System.out.println("A" + i);
+                log.info("A={}" + i);
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("exception={}", e.getMessage());
                 }
             }
         }).start();

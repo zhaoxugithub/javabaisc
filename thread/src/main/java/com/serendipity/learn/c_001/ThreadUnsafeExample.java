@@ -19,7 +19,6 @@ public class ThreadUnsafeExample {
         for (int i = 0; i < 1000; i++) {
             cnt++;
         }
-
     }
 
     public int get() {
@@ -32,7 +31,6 @@ public class ThreadUnsafeExample {
         for (int i = 0; i < 100; i++) {
             threads[i] = new Thread(threadUnsafeExample::add);
         }
-
         Arrays.stream(threads).forEach(Thread::start);
         Arrays.stream(threads).forEach(t -> {
             try {
@@ -45,7 +43,6 @@ public class ThreadUnsafeExample {
     }
 
     public static void est() {
-
         ThreadUnsafeExample threadUnsafeExample = new ThreadUnsafeExample();
         Thread[] threads = new Thread[100];
         for (int i = 0; i < 100; i++) {
@@ -57,7 +54,6 @@ public class ThreadUnsafeExample {
             t.start();
             latch.countDown();
         });
-
         try {
             latch.await();
         } catch (InterruptedException e) {

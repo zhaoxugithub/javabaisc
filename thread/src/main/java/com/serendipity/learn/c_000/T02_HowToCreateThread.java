@@ -1,5 +1,7 @@
 package com.serendipity.learn.c_000;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Copyright (C), 2017-2021, 赵旭
  * Author: serendipity
@@ -7,24 +9,25 @@ package com.serendipity.learn.c_000;
  * FileName: T02_HowToCreateThread
  * Description: com.java.thread.c_001
  */
+@Slf4j
+@SuppressWarnings("all")
 public class T02_HowToCreateThread {
     public static class MyThread extends Thread {
         @Override
         public void run() {
-            System.out.println("MyThread start ...");
+            log.info("MyThread start ...");
         }
     }
 
     public static class MyRun implements Runnable {
         @Override
         public void run() {
-            System.out.println("MyRun start ....");
+            log.info("MyRun start ....");
         }
     }
 
     public static void method() {
-        System.out.println(Thread.currentThread()
-                                 .getName());
+        log.info("thread main={}", Thread.currentThread().getName());
     }
 
     // new Thread(方法 / 实现线程runnable,继承Thread 的类   )
@@ -34,9 +37,14 @@ public class T02_HowToCreateThread {
         // 第二种方法
         new Thread(new MyRun()).start();
         // 第三种方法
-        new Thread(() -> System.out.println("myRun start ........")).start();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                log.info("myRun start ........");
+            }
+        }).start();
         // 第四种方法
-        new Thread(() -> System.out.println("my start...")).start();
+        new Thread(() -> log.info("my start...")).start();
         new Thread(T02_HowToCreateThread::method).start();
     }
 }

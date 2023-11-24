@@ -1,5 +1,7 @@
 package com.serendipity.learn.c_000;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -9,6 +11,7 @@ import java.util.concurrent.TimeUnit;
  * FileName: T01_WhatIsThread
  * Description: com.java.thread.c_001
  */
+@Slf4j
 public class T01_WhatIsThread {
     // 这个对象可以被多个线程访问
     private static class T1 extends Thread {
@@ -18,9 +21,9 @@ public class T01_WhatIsThread {
                 try {
                     TimeUnit.MICROSECONDS.sleep(1);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("exception={}", e.getMessage());
                 }
-                System.out.println(Thread.currentThread().getName());
+                log.info("thread name ={}", Thread.currentThread().getName());
             }
         }
     }
@@ -33,9 +36,9 @@ public class T01_WhatIsThread {
             try {
                 TimeUnit.MICROSECONDS.sleep(1);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                log.error("exception={}", e.getMessage());
             }
-            System.out.println("main");
+            log.info("main thread = {}", Thread.currentThread().getName());
         }
     }
 }

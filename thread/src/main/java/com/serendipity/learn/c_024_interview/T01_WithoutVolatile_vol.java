@@ -11,8 +11,6 @@ import java.util.concurrent.TimeUnit;
  * FileName: T01_WithoutVolatile_vol
  * Description: com.java.thread.c_024_interview
  */
-
-
 // 可以得
 public class T01_WithoutVolatile_vol {
     private volatile List<Object> list = new ArrayList<>();

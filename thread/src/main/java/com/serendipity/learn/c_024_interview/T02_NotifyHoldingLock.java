@@ -23,10 +23,8 @@ public class T02_NotifyHoldingLock {
     }
 
     public static void main(String[] args) {
-
         T02_NotifyHoldingLock holdingLock = new T02_NotifyHoldingLock();
         Object obj = new Object();
-
         new Thread(() -> {
             synchronized (obj) {
                 System.out.println("t2 启动");
@@ -42,7 +40,6 @@ public class T02_NotifyHoldingLock {
                 obj.notify();
             }
         }, "t2").start();
-
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {

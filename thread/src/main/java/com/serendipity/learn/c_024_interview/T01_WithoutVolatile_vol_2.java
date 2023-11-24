@@ -12,7 +12,6 @@ import java.util.List;
  * Description: com.java.thread.c_024_interview
  */
 public class T01_WithoutVolatile_vol_2 {
-
     private volatile List<Object> list = Collections.synchronizedList(new ArrayList<>());
 
     public void add(Object obj) {
@@ -25,13 +24,11 @@ public class T01_WithoutVolatile_vol_2 {
 
     public static void main(String[] args) {
         T01_WithoutVolatile_read_write wv = new T01_WithoutVolatile_read_write();
-
         new Thread(() -> {
             while (wv.size() < 5) {
             }
             System.out.println("5 end");
         }).start();
-
         new Thread(() -> {
             for (int i = 0; i < 10; i++) {
                 System.out.println("put" + i);

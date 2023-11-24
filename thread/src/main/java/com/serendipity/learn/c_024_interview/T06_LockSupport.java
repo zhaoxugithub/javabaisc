@@ -14,7 +14,6 @@ import java.util.concurrent.locks.LockSupport;
  * Description: com.java.thread.c_024_interview
  */
 public class T06_LockSupport {
-
     // 添加volatile，使t2能够得到通知
     volatile List lists = new ArrayList();
 
@@ -32,17 +31,11 @@ public class T06_LockSupport {
         Thread t2 = new Thread(() -> {
             System.out.println("t2启动");
             if (c.size() != 5) {
-
                 LockSupport.park();
-
             }
             System.out.println("t2 结束");
-
-
         }, "t2");
-
         t2.start();
-
         try {
             TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e1) {
@@ -54,19 +47,15 @@ public class T06_LockSupport {
             for (int i = 0; i < 10; i++) {
                 c.add(new Object());
                 System.out.println("add " + i);
-
                 if (c.size() == 5) {
                     LockSupport.unpark(t2);
                 }
-
-				try {
-					TimeUnit.SECONDS.sleep(1);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-
         }, "t1").start();
-
     }
 }

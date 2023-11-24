@@ -8,7 +8,6 @@ package com.serendipity.learn.c_001;
  * Description: com.java.thread.c_001
  */
 public class T {
-
     private Object obj = new Object();
     private int count = 10;
 

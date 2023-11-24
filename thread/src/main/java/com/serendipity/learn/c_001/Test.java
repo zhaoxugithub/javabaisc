@@ -2,7 +2,6 @@ package com.serendipity.learn.c_001;
 
 public class Test {
 
-
     public void toS() {
         System.out.println("toS...");
     }
@@ -15,6 +14,5 @@ public class Test {
         Test test = new Test();
         new Thread(test::toC).start();
         new Thread(test::toS).start();
-
     }
 }

@@ -23,16 +23,12 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * 第一个想法：读写锁（共享锁和拍他锁）
  */
 public class T01_WithoutVolatile_read_write {
-
     private static List<Object> list = new ArrayList<>();
-
     private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
     private Lock readLock = readWriteLock.readLock();
     private Lock writeLock = readWriteLock.writeLock();
 
-
     public void add(Object obj) {
-
         try {
             writeLock.lock();
             list.add(obj);
@@ -42,7 +38,6 @@ public class T01_WithoutVolatile_read_write {
         } finally {
             writeLock.unlock();
         }
-
     }
 
     public int size() {
@@ -60,7 +55,6 @@ public class T01_WithoutVolatile_read_write {
 
     public static void main(String[] args) {
         T01_WithoutVolatile_read_write wv = new T01_WithoutVolatile_read_write();
-
         new Thread(() -> {
             while (wv.size() < 5) {
             }

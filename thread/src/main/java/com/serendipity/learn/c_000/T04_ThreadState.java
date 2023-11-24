@@ -1,5 +1,7 @@
 package com.serendipity.learn.c_000;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Copyright (C), 2017-2021, 赵旭
  * Author: serendipity
@@ -21,39 +23,39 @@ package com.serendipity.learn.c_000;
  * <p>
  * TERMINATED:进程结束状态。
  */
+@Slf4j
 public class T04_ThreadState {
     public static class MyThread extends Thread {
         @Override
         public void run() {
-            //RUNNABLE,等待操作系统执行
-            System.out.println(this.getState());
+            // RUNNABLE,等待操作系统执行
+            log.info(String.valueOf(this.getState()));
             for (int i = 0; i < 10; i++) {
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    log.error("exception={}", e.getMessage());
                 }
-                System.out.println(i);
+                log.info("i={}", i);
             }
         }
     }
 
     public static void main(String[] args) {
         MyThread myThread = new MyThread();
-        //NEW,线程对象已经创建完成
-        System.out.println(myThread.getState());
+        // NEW,线程对象已经创建完成
+        log.info(String.valueOf(myThread.getState()));
         myThread.start();
-
         try {
-            //mythread线程强制执行,其他线程必须等到mythread 线程执行完毕之后才能执行
+            // mythread线程强制执行,其他线程必须等到mythread 线程执行完毕之后才能执行
             myThread.join();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error("exception={}", e.getMessage());
         }
         for (int i = 0; i < 10; i++) {
-            System.out.println("main" + i);
+            log.info("main thread:{}", i);
         }
-        //TERMINATED
-        System.out.println(myThread.getState());
+        // TERMINATED
+        log.info("myState={}", myThread.getState());
     }
 }
