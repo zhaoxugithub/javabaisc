@@ -52,7 +52,8 @@ public class NutritionFacts {
 
     // 当参数特别多的时候可以使用builder方法
     // 针对很多不可变的对象
-/*     public static class Builder {
+    /*
+        public static class Builder {
         private final int servingSize; // (mL) required 必填
         private final int servings; // (per container) required 必填
         private int calories; // (per serving) optional 选填
