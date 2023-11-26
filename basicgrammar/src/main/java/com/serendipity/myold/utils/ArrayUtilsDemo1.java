@@ -1,5 +1,6 @@
-package com.serendipity.myold.base;
+package com.serendipity.myold.utils;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -17,6 +18,7 @@ import java.util.stream.Collectors;
  * Version 1.0
  **/
 @SuppressWarnings("all")
+@Slf4j
 public class ArrayUtilsDemo1 {
     /*
         parallelSort
@@ -27,6 +29,7 @@ public class ArrayUtilsDemo1 {
     public void test1() {
         int[] test1 = {1, 2, 3, 4, 5, 6};
         // 1 3
+        // IntBinaryOperator:  (int,int) -> int
         Arrays.parallelPrefix(test1, Integer::sum);
         System.out.println(Arrays.toString(test1));
         Arrays.parallelPrefix(test1, new IntBinaryOperator() {
@@ -52,6 +55,12 @@ public class ArrayUtilsDemo1 {
     }
 
     @Test
+    public void test2_1() {
+        BinaryOperator<Object> t1 = (n1, n2) -> String.valueOf(n2) + n1;
+        BinaryOperator<Object> t2 = (n3, n4) -> n3.toString() + n4.toString();
+    }
+
+    @Test
     public void test3() {
         int[] test2 = {1, 2, 3, 4, 5, 6};
         // 二分查找
@@ -61,12 +70,10 @@ public class ArrayUtilsDemo1 {
 
     @Test
     public void test4() {
-
         int[] arr1 = {1, 2, 3, 4, 5};
         int[] arr2 = {1, 2, 3, 4};
         int[] arr3 = {1, 2, 3, 4};
         int[] arr4 = {1, 2, 3, 5};
-
         System.out.println(Arrays.equals(arr1, arr2));
         System.out.println(Arrays.equals(arr3, arr4));
         System.out.println(Arrays.equals(arr2, arr3));
@@ -142,7 +149,6 @@ public class ArrayUtilsDemo1 {
         System.out.println(Arrays.toString(arr));
     }
 
-
     /**
      * parallelSetAll方法
      */
@@ -166,7 +172,8 @@ public class ArrayUtilsDemo1 {
     @Test
     public void test13() {
         Integer[] arr = {1, 2, 3, 4, 5};
-        List<Integer> collect = Arrays.stream(arr).collect(Collectors.toList());
+        List<Integer> collect = Arrays.stream(arr)
+                                      .collect(Collectors.toList());
         System.out.println(collect);
     }
 }
