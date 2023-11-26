@@ -5,14 +5,14 @@ import org.junit.Test;
 import java.util.Arrays;
 
 /**
- * ClassName BaseDataType
+ * ClassName IntegerDataType
  * Description TODO
  * Author 11931
  * Date 2022-12-31:14:59
  * Version 1.0
  **/
 @SuppressWarnings("all")
-public class BaseDataType {
+public class IntegerDataType {
     public static void test1() {
         Integer x1 = new Integer(123);
         Integer x2 = new Integer(123);
@@ -168,11 +168,9 @@ public class BaseDataType {
     public void test01() {
         // 装箱 xxx.valueOf()
         Integer i = Integer.valueOf(1000);
-
         // 拆箱 xxxValue()
         int i1 = i.intValue();
     }
-
 
     public static void main(String[] args) {
         // test1();

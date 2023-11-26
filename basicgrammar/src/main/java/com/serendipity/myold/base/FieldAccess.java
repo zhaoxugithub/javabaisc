@@ -1,34 +1,40 @@
 package com.serendipity.myold.base;
 
-class Super {
-    public int field = 0;
 
-    public int getField() {
-        return field;
-    }
-}
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 
-class Sub extends Super {
-    public int field = 1;
-
-    @Override
-    public int getField() {
-        return field;
-    }
-
-    public int getSuperField() {
-        return super.field;
-    }
-}
-
+/**
+ * @author 11931
+ */
+@Slf4j
 public class FieldAccess {
-    public static void main(String[] args) {
-        Super sup = new Sub(); // Upcast
-        System.out.println("sup.field = " + sup.field +
-                ", sup.getField() = " + sup.getField());
+    class SuperClass {
+        public int field = -1;
+
+        public int getField() {
+            return field;
+        }
+    }
+
+    class Sub extends SuperClass {
+        public int field = 1;
+
+        @Override
+        public int getField() {
+            return field;
+        }
+
+        public int getSuperField() {
+            return super.field;
+        }
+    }
+
+    @Test
+    public void test() {
+        SuperClass sup = new Sub();
+        log.info("sup.field ={},sup.getField()={} ", sup.field, sup.getField());
         Sub sub = new Sub();
-        System.out.println("sub.field = " + sub.field +
-                ", sub.getField() = " + sub.getField()
-                + ", sub.getSuperField() = " + sub.getSuperField());
+        log.info("sub.field = {},sub.getField()={},sub.getSuperField()={}", sub.field, sub.getField(), sub.getSuperField());
     }
 }

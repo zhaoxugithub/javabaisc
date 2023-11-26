@@ -1,5 +1,7 @@
 package com.serendipity.myold.base;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * Copyright (C), 2017-2022, 赵旭
  * Author: 11931
@@ -9,10 +11,10 @@ package com.serendipity.myold.base;
  */
 /*
 不可以变类
-
  */
+@Slf4j
+@SuppressWarnings("all")
 public final class Point {
-
     private final int x;
     private final int y;
 
@@ -21,7 +23,7 @@ public final class Point {
         this.y = y;
     }
 
-    //final 修饰了x,所以没有办法set
+    // final 修饰了x,所以没有办法set
     public int getX() {
         return x;
     }

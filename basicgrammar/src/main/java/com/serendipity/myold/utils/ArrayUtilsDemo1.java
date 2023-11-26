@@ -1,4 +1,4 @@
-package com.serendipity.myold.base.array.utils;
+package com.serendipity.myold.utils;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
@@ -148,7 +148,6 @@ public class ArrayUtilsDemo1 {
         Arrays.setAll(arr, i -> arr[i] * 2);
         System.out.println(Arrays.toString(arr));
     }
-
 
     /**
      * parallelSetAll方法

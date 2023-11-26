@@ -13,7 +13,6 @@ import java.util.Random;
  * Description: com.base
  */
 public class PointMain {
-
     public static void main(String[] args) {
         // 生成一个随机数x, 0 <= x < 1
         double random = Math.random();
@@ -24,11 +23,9 @@ public class PointMain {
         double max = 50;
         double y = x * (max - min) + min;
         long n = (long) y;
-
         System.out.println(y);
         System.out.println(n);
         System.out.println("-----------------------------------");
-
         /*
         有些童鞋可能注意到Java标准库还提供了一个StrictMath，它提供了和Math几乎一模一样的方法。
         这两个类的区别在于，由于浮点数计算存在误差，不同的平台（例如x86和ARM）计算的结果可能不一致（指误差不同），
@@ -37,7 +34,6 @@ public class PointMain {
          */
         Random random1 = new Random();
         int i = random1.nextInt();
-
         //[0,10)
         int i1 = random1.nextInt(10);
         long l = random1.nextLong();
