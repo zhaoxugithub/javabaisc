@@ -8,7 +8,8 @@ import org.junit.Test;
  * @author 11931
  */
 @Slf4j
-public class FieldAccess {
+@SuppressWarnings("all")
+public class FieldAccessDemo {
     class SuperClass {
         public int field = -1;
 

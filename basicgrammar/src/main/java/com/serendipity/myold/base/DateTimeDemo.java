@@ -9,7 +9,7 @@ import java.time.*;
  * FileName: DateTimeAPI
  * Description: com.java8.base
  */
-public class DateTimeAPI {
+public class DateTimeDemo {
 
     public static void main(String[] args) {
 

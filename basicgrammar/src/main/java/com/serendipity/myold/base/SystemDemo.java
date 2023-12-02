@@ -16,7 +16,27 @@ import java.util.Properties;
  * https://blog.csdn.net/Goodbye_Youth/article/details/80983007
  **/
 @SuppressWarnings("all")
-public class SystemUtilsDemo1 {
+public class SystemDemo {
+
+    private final class Point {
+        private final int x;
+        private final int y;
+
+        public Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+
+        // final 修饰了x,所以没有办法set
+        public int getX() {
+            return x;
+        }
+
+        public int getY() {
+            return y;
+        }
+    }
+
     @Test
     public void test01() {
         Map<String, String> env = System.getenv();
@@ -61,7 +81,6 @@ public class SystemUtilsDemo1 {
         }
     }
 
-
     @Test
     public void test6() {
         System.setProperty("key1", "value1");
@@ -88,7 +107,6 @@ public class SystemUtilsDemo1 {
         String password = String.valueOf(readPassword);
         System.out.println("your name:" + name + " your password:" + password);
     }
-
 
     @Test
     public void test9() {

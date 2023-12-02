@@ -21,7 +21,7 @@ public class OptionalDemo {
         log.info("Full Name is set?" + fullName.isPresent());
         // 如果是空取None,否则就是fullName
         log.info("Full Name :" + fullName.orElse("[none]"));
-        // 如果是空就拼接，否则就是hey Stranger
+        // 如果不为空就拼接，否则就是hey Stranger
         log.info(fullName.map(s -> "Hey " + s + "|")
                          .orElse("Hey Stranger"));
         final Optional<String> firstName = Optional.of("Tom");

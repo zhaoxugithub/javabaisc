@@ -11,7 +11,7 @@ import java.lang.management.ThreadMXBean;
  * Date 2023-08-17:19:29
  * Version 1.0
  **/
-public class MultiThread {
+public class MultiThreadDemo {
     public static void main(String[] args) {
         // 获取Java线程管理的MXBean
         ThreadMXBean threadMXBean = ManagementFactory.getThreadMXBean();

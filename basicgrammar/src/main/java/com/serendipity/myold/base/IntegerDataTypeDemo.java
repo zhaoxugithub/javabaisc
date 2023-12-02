@@ -12,7 +12,7 @@ import java.util.Arrays;
  * Version 1.0
  **/
 @SuppressWarnings("all")
-public class IntegerDataType {
+public class IntegerDataTypeDemo {
     public static void test1() {
         Integer x1 = new Integer(123);
         Integer x2 = new Integer(123);

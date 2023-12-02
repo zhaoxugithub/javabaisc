@@ -1,5 +1,8 @@
 package com.serendipity.myold.base;
 
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,14 +13,14 @@ import java.util.List;
  * FileName: Streams
  * Description: com.java8.base
  */
-public class Streams {
-
+@SuppressWarnings("all")
+@Slf4j
+public class StreamsDemo {
     private enum Status {
         OPEN, CLOSED
     }
 
     private static final class Task {
-
         private final Status status;
         private final Integer ponints;
 
@@ -40,14 +43,14 @@ public class Streams {
         }
     }
 
-    public static void main(String[] args) {
-
+    @Test
+    void test() {
         final List<Task> tasks = Arrays.asList(new Task(Status.OPEN, 5), new Task(Status.OPEN, 13), new Task(Status.CLOSED, 8));
 
         final int sum = tasks.stream()
                              .filter(task -> task.status == Status.OPEN)
                              .mapToInt(Task::getPonints)
                              .sum();
-        System.out.println("Total points: " + sum);
+        log.info("Total points: " + sum);
     }
 }
