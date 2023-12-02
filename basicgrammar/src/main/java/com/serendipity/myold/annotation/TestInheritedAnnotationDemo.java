@@ -1,4 +1,4 @@
-package com.serendipity.myold.annotation.base.inherited;
+package com.serendipity.myold.annotation;
 
 import org.junit.Test;
 

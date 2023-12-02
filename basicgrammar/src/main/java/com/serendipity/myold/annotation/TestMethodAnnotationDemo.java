@@ -1,4 +1,4 @@
-package com.serendipity.myold.annotation.anno;
+package com.serendipity.myold.annotation;
 
 import java.io.FileNotFoundException;
 import java.lang.annotation.*;

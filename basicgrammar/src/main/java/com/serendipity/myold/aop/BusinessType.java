@@ -1,4 +1,4 @@
-package com.serendipity.myold.annotation.practice.aop;
+package com.serendipity.myold.aop;
 
 /**
  * ClassName BusinessType

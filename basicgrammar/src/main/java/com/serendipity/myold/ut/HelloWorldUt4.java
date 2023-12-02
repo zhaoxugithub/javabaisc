@@ -1,4 +1,4 @@
-package com.serendipity.myold.annotation.practice.ut;
+package com.serendipity.myold.ut;
 
 import org.junit.After;
 import org.junit.Before;

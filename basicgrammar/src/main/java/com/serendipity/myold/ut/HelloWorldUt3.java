@@ -1,4 +1,4 @@
-package com.serendipity.myold.annotation.practice.ut;
+package com.serendipity.myold.ut;
 
 import junit.framework.TestCase;
 import lombok.extern.slf4j.Slf4j;

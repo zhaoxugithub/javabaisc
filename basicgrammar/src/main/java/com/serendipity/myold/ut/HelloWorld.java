@@ -1,4 +1,4 @@
-package com.serendipity.myold.annotation.practice.ut;
+package com.serendipity.myold.ut;
 
 public class HelloWorld {
 
