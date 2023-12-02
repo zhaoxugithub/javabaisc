@@ -1,7 +1,7 @@
 package com.serendipity.myold.annotation.anno;
 
 import java.io.FileNotFoundException;
-import java.lang.annotation.Annotation;
+import java.lang.annotation.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,15 @@ import java.util.List;
  * FileName: TestMethodAnnotation
  * Description: com.anno
  */
-public class TestMethodAnnotation {
+public class TestMethodAnnotationDemo {
+    @Target(ElementType.METHOD)
+    @Retention(RetentionPolicy.RUNTIME)
+    public @interface MyMethodAnnotation {
+        String title() default "";
+
+        String description() default "";
+    }
+
     @Override
     @MyMethodAnnotation(title = "toStringMethod", description = "override toString method")
     public String toString() {
@@ -35,7 +43,7 @@ public class TestMethodAnnotation {
     }
 
     public static void main(String[] args) {
-        Method[] methods = TestMethodAnnotation.class.getMethods();
+        Method[] methods = TestMethodAnnotationDemo.class.getMethods();
         for (Method method : methods) {
             // boolean isAnnotationPresent(Class<?extends Annotation> annotationClass)
             // 判断该程序元素上是否包含指定类型的注解，存在则返回true，否则返回false。注意：此方法会忽略注解对应的注解容器。

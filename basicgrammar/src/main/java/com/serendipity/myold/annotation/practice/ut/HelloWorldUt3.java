@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
  * Junit3 实现UT
  */
 @Slf4j
+@SuppressWarnings("all")
 public class HelloWorldUt3 extends TestCase {
 
     private HelloWorld hw;

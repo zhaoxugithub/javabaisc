@@ -1,5 +1,6 @@
 package com.serendipity.myold.annotation.anno;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.lang.annotation.*;
@@ -17,30 +18,29 @@ import java.lang.reflect.Method;
  * @Target({ElementType.FIELD, ElementType.METHOD}):作用于方法和变量上
  */
 
+@Slf4j
+@SuppressWarnings("all")
+public class DocAnnotationDemo {
+    @Retention(RetentionPolicy.RUNTIME)
+    @Documented
+    @Target({ElementType.FIELD, ElementType.METHOD})
+    public @interface TestDocAnnotation {
+        public String value() default "default";
+    }
 
-@Retention(RetentionPolicy.RUNTIME)
-@Documented
-@Target({ElementType.FIELD, ElementType.METHOD})
-public @interface TestDocAnnotation {
-    public String value() default "default";
-}
+    class A {
+        @TestDocAnnotation("dsdasd")
+        public void test1() {
+        }
 
-class A {
-    @TestDocAnnotation("dsdasd")
-    public void test1() {
-
+        @Test
+        @TestDocAnnotation("test2")
+        public void test2() {
+        }
     }
 
     @Test
-    @TestDocAnnotation("test2")
-    public void test2() {
-
-    }
-}
-
-
-class MainTest {
-    public static void main(String[] args) {
+    public void test() {
         Method[] methods = A.class.getMethods();
         for (Method method : methods) {
             if (method.isAnnotationPresent(TestDocAnnotation.class)) {
