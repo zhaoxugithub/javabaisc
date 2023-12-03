@@ -47,7 +47,6 @@ public class ArrayUtilsDemo2 {
             oneDimensionArray[i] = (int) (Math.random() * 100);
         }
 
-
         for (int i = 0; i < twoDimensionsArray.length; i++) {
             for (int j = 0; j < twoDimensionsArray[i].length; j++) {
                 twoDimensionsArray[i][j] = (int) (Math.random() * 100);
