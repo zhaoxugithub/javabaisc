@@ -7,11 +7,8 @@ package com.serendipity.myold.enums;
  * FileName: EmumsDemo01
  * Description: com.enums
  */
-
-
 /*
 使用常量的时候，可以这么引用：
-
 if (day == Weekday.SAT || day == Weekday.SUN) {
     // TODO: work at home
 }
