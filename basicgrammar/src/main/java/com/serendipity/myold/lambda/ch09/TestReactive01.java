@@ -1,6 +1,5 @@
 package com.serendipity.myold.lambda.ch09;
 
-import cn.hutool.core.lang.func.Func;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.reactivestreams.Subscriber;
@@ -91,7 +90,6 @@ public class TestReactive01 {
             // 在数据有异常的时候返回
             .onErrorReturn(0)
             .subscribe(System.out::println);
-
         // Flux.just(1, 2)
         //     .concatWith(Mono.error(new IllegalStateException()))
         //     .onErrorResume(e -> {
@@ -110,13 +108,11 @@ public class TestReactive01 {
         // Flux.range(1, 5)
         //     .map(i -> i == 2 ? i / 0 : i)
         //     .subscribe(System.out::println);
-
         // Flux.range(1, 5)
         //     .map(i -> i == 2 ? i / 0 : 1)
         //     // 异常捕获,不会打印日志,有异常直接返回,并且后面的数据也不进行消费了
         //     .onErrorReturn(0)
         //     .subscribe(System.out::println);
-
         // Flux.range(1, 5)
         //     .map(i -> i == 2 ? i / 0 : 1)
         //     // 异常捕获,有错误,后面也不会继续消费了,自定义返回
@@ -126,7 +122,6 @@ public class TestReactive01 {
         //         return Mono.just(-1);
         //     })
         //     .subscribe(System.out::println);
-
         // Flux.range(1, 5)
         //     .map(i -> i == 2 ? i / 0 : 1)
         //     // 异常捕获,后面不继续消费了

@@ -36,12 +36,10 @@ public class GenericsTest_02 {
 //        // ...
 //    }
     public static void funC(List<? extends A> listA) {
-        // ...
     }
 
     public static void funD(List<B> listB) {
-        funC(listB); // OK
-        // ...
+        funC(listB);
     }
 
     public static void main(String[] args) {

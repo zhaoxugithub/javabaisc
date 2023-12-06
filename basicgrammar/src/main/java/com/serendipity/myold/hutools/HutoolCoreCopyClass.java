@@ -2,6 +2,7 @@ package com.serendipity.myold.hutools;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ import java.util.List;
  * Date 2023-07-28:23:27
  * Version 1.0
  **/
+@Slf4j
+@SuppressWarnings("all")
 public class HutoolCoreCopyClass {
     @AllArgsConstructor
     @Data
@@ -54,8 +57,8 @@ public class HutoolCoreCopyClass {
         a.setClist(cs);
         A cloneA1 = (A) a.clone();
         A cloneA2 = (A) a.clone();
-        System.out.println(cloneA1);
-        System.out.println(cloneA2);
-        System.out.println(cloneA1 == cloneA2);
+        log.info(String.valueOf(cloneA1));
+        log.info(String.valueOf(cloneA2));
+        log.info("cloneA2== cloneA1", cloneA1 == cloneA2);
     }
 }

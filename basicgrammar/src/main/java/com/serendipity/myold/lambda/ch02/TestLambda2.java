@@ -1,5 +1,6 @@
 package com.serendipity.myold.lambda.ch02;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -25,6 +26,8 @@ import java.util.function.Supplier;
  * <p>
  * Predicate<T> 断言型接口
  */
+@Slf4j
+@SuppressWarnings("all")
 public class TestLambda2 {
     // 断言型接口
     public void test4() {
@@ -45,7 +48,7 @@ public class TestLambda2 {
     // 函数式接口
     public void test03() {
         String xxx = filterStr2("xxx", (x) -> x.toUpperCase());
-        System.out.println(xxx);
+        log.info(xxx);
     }
 
     public String filterStr2(String str, Function<String, String> function) {

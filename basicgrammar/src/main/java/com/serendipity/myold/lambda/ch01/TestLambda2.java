@@ -1,3 +1,5 @@
+import lombok.extern.slf4j.Slf4j;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -18,34 +20,37 @@ import java.util.stream.Stream;
  * <p>
  * https://www.pdai.tech/md/java/java8/java8-stream.html
  */
+@SuppressWarnings("all")
+@Slf4j
 public class TestLambda2 {
+    private List<Integer> list = new ArrayList<>();
 
-    private static List<Integer> list = new ArrayList<>();
-
-    static {
+    @Before
+    public void beforeTest() {
         for (int i = 0; i < 10; i++) {
-            list.add(i);
+            list.add((int) (Math.random() * 1000));
         }
     }
 
     // lambda 表达式
+    @Test
     public void test01() {
         // 如果对输入参数有变动就无法写成方法引用
-        list.forEach(x -> System.out.println(x + 1));
-        list.forEach(System.out::println);
+        list.forEach(x -> log.info("x+1={}", x + 1));
     }
 
+
+    @Test
     public void test02() {
         List<Integer> list = Arrays.asList(2, 3, 5, 7);
         // lambda域外的局部变量只能访问，不能修改
         int fa = 2;
         list.forEach(ele -> {
-//            fa++; 这里会报错
+            // fa++; 这里会报错
         });
-
         // 访问是可以的
         list.forEach(ele -> {
-            System.out.println(fa * ele);
+            log.info("fa*ele={}", fa * ele);
         });
     }
 
@@ -56,12 +61,10 @@ public class TestLambda2 {
         Stream<Integer> integerStream = list.stream()
                                             .filter(f -> f > 5)
                                             .filter(f -> f.equals(6));
-
         // 及早求值方法
         // collect最终会从Stream产生新值，拥有终止操作。
         List<Integer> collect = integerStream.collect(Collectors.toList());
     }
-
 
     // 顺序流和并行流
     // 数据量大的时候采用并行流的效率要高很多
@@ -92,10 +95,7 @@ public class TestLambda2 {
         Arrays.asList(new String[]{"a", "c", "b"})
               .stream()
               .forEach(TestLambda2::println);
-
-        System.out.println("-------------------------------------------------");
-
-
+        log.info("-------------------------------------------------");
         // 构造器引用ClassName :: new
         // 构造器引用适用于lambda表达式主体中仅仅调用了某个类的构造函数返回实例的场景
         Supplier<List<String>> supplier = new Supplier() {
@@ -104,14 +104,11 @@ public class TestLambda2 {
                 return new ArrayList<String>();
             }
         };
-
         Supplier<List<String>> listSupplier = () -> new ArrayList<>();
         Supplier<String> ar = String::new;
         String s = ar.get();
-
-        System.out.println("-----------------------------------------");
+        log.info("-----------------------------------------");
         // 类的任意对象的实例方法引用
-
         String[] s1 = {"d", "b", "c", "d"};
         Arrays.sort(s1, new Comparator<String>() {
             @Override
@@ -121,7 +118,6 @@ public class TestLambda2 {
         });
         Arrays.sort(s1, (o1, o2) -> o1.compareToIgnoreCase(o2));
         Arrays.sort(s1, String::compareToIgnoreCase);
-
         // 特定对象的实例方法引用
     }
 
@@ -129,56 +125,107 @@ public class TestLambda2 {
     // @Test
     public void test06() {
         List<String> languages = Arrays.asList("Java", "Scala", "C++", "Haskell", "Lisp");
-
-        System.out.println("Languages which starts with J :");
+        log.info("Languages which starts with J :");
         filter(languages, (str) -> str.startsWith("J"));
-
-        System.out.println("Languages which ends with a ");
+        log.info("Languages which ends with a ");
         filter(languages, (str) -> str.endsWith("a"));
-
-        System.out.println("Print all languages :");
+        log.info("Print all languages :");
         filter(languages, (str) -> true);
-
-        System.out.println("Print no language : ");
+        log.info("Print no language : ");
         filter(languages, (str) -> false);
-
-        System.out.println("Print language whose length greater than 4:");
+        log.info("Print language whose length greater than 4:");
         filter(languages, (str) -> str.length() > 4);
     }
 
-
-    public static void filter(List<String> names, Predicate<String> condition) {
+    public void filter(List<String> names, Predicate<String> condition) {
         names.stream()
              .filter(condition)
              .forEach(System.out::println);
-        System.out.println("------------------");
+        log.info("------------------");
     }
-
 
     // 多个Predicate组成filter
     @Test
     public void test07() {
         List<String> languages = Arrays.asList("Java", "Scala", "C++", "Haskell", "Lisp");
-
         // 断言的规则
         Predicate<String> stringPredicate = (n) -> n.startsWith("J");
         Predicate<String> predicateLength = (n) -> n.length() > 4;
         languages.stream()
                  .filter(stringPredicate.and(predicateLength))
                  .forEach(System.out::println);
+        log.info("languages={}", languages);
     }
 
-
+    @Test
     public void test08() {
         List<Integer> costBeforeTax = Arrays.asList(100, 200, 300, 400, 500);
         Double aDouble = costBeforeTax.stream()
                                       .map(x -> (x + x * 0.12))
                                       .reduce(Double::sum)
                                       .get();
-        System.out.println(aDouble);
+        log.info("aDouble={}", aDouble);
+    }
+
+    @Test
+    public void test09() {
+        List<Integer> list = Arrays.asList(100, 200, 300, 400, 500);
+        Integer integer = list.stream()
+                              .reduce(Integer::sum)
+                              .get();
+        log.info("sum = {}", integer);
+
+        Integer integer1 = list.stream()
+                               .reduce(0, (a, b) -> {
+                                   return a + b;
+                               });
+        log.info("sum={}", integer1);
+
+
+        Integer reduce = list.stream()
+                             .reduce(0, (a, b) -> {
+                                 return a + b;
+                             }, (a, b) -> a + b);
+
+        log.info("sum ={}", reduce);
+    }
+
+    /*
+    reduce 操作
+     */
+    @Test
+    public void test10() {
+        /*
+           reduce 求和
+         */
+        Integer sum1 = list.stream()
+                           .reduce(Integer::sum)
+                           .get();
+
+        log.info("sum1 = {}", sum1);
+
+        Integer sum2 = list.stream()
+                           .reduce((a, b) -> {
+                               return a + b;
+                           })
+                           .get();
+
+        log.info("sum2={}", sum2);
+
+
+        Integer sum3 = list.stream()
+                           .reduce(0, (a, b) -> {
+                               return a + b;
+                           });
+        log.info("sum3={}", sum3);
+
+
+        Integer sum4 = list.stream()
+                           .reduce(0, Integer::sum);
+        log.info("sum4={}", sum4);
     }
 
     public static void println(String s) {
-        System.out.println(s + 1);
+        log.info("s+1={}", s + 1);
     }
 }

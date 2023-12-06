@@ -2,11 +2,14 @@ package com.serendipity.myold.hutools;
 
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.Calendar;
 import java.util.Date;
 
+@Slf4j
+@SuppressWarnings("all")
 public class HutoolCoreDateUtilTest {
     // Calendar -> DateTime
     // long -> DateTime
@@ -15,15 +18,15 @@ public class HutoolCoreDateUtilTest {
     public void test01() {
         // 当前时间
         DateTime date1 = DateUtil.date();
-        System.out.println(date1);
+        log.info(String.valueOf(date1));
         DateTime date2 = DateUtil.date(Calendar.getInstance());
-        System.out.println(date2);
+        log.info(String.valueOf(date2));
         DateTime date3 = DateUtil.date(System.currentTimeMillis());
-        System.out.println(date3);
+        log.info(String.valueOf(date3));
         String now = DateUtil.now();
-        System.out.println(now);
+        log.info(now);
         String today = DateUtil.today();
-        System.out.println(today);
+        log.info(today);
     }
 
     // str -> DateTime

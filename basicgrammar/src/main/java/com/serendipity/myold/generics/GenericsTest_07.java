@@ -1,14 +1,17 @@
 package com.serendipity.myold.generics;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
+@Slf4j
 @SuppressWarnings("all")
 public class GenericsTest_07 {
     public static void test1() {
         ArrayList<String> list1 = new ArrayList<>();
         ArrayList<Integer> list2 = new ArrayList<>();
-        System.out.println(list2.getClass() == list1.getClass());
+        log.info(String.valueOf(list2.getClass() == list1.getClass()));
     }
 
     public static void test2() throws NoSuchMethodException, InvocationTargetException, IllegalAccessException {
@@ -18,7 +21,6 @@ public class GenericsTest_07 {
         list1.getClass()
              .getMethod("add", Object.class)
              .invoke(list1, "asd");
-
         list1.forEach(System.out::println);
     }
 
@@ -44,7 +46,7 @@ public class GenericsTest_07 {
         Number add3 = GenericsTest_07.<Number>add(1, 1.2);
     }
 
-    public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+    public static void main(String[] args) throws Exception {
         test2();
     }
 }

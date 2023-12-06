@@ -1,5 +1,7 @@
 package com.serendipity.myold.generics;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 
 /**
@@ -9,9 +11,9 @@ import java.util.ArrayList;
  * Date 2023-02-02:23:30
  * Version 1.0
  **/
+@Slf4j
 @SuppressWarnings("all")
 public class GenericsTest_08 {
-
     public static void main(String[] args) {
         ArrayList<String> arrayList = new ArrayList<>();
         arrayList.add("1");

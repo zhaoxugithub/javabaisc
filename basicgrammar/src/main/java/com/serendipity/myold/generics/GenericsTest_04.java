@@ -1,8 +1,12 @@
 package com.serendipity.myold.generics;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.Iterator;
 import java.util.List;
 
+@Slf4j
+@SuppressWarnings("all")
 public class GenericsTest_04 {
 
     private <T> int max() {
@@ -38,21 +42,17 @@ public class GenericsTest_04 {
      * @throws InstantiationException
      * @throws IllegalAccessException
      */
-    public <T> T getObject(Class<T> c) throws InstantiationException, IllegalAccessException {
-        T t = c.newInstance();
-        return t;
+    public <T> T getObject(Class<T> c) throws Exception {
+        return c.newInstance();
     }
 
-    public static void testGetObject() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public static void testGetObject() throws Exception {
         GenericsTest_04 genericsTest04 = new GenericsTest_04();
         Object object = genericsTest04.getObject(Class.forName("com.old.generics.A"));
         if (object instanceof GenericsTest_06.A) {
-            System.out.println("is A");
+            log.info("is A");
         } else {
-            System.out.println("error");
+            log.info("error");
         }
-    }
-
-    public static void main(String[] args) {
     }
 }

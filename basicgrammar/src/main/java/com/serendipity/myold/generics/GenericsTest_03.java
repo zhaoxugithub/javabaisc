@@ -73,7 +73,6 @@ public class GenericsTest_03 {
         }
     }
 
-
     public void test5() {
         // 不指定范型
         Integer add = GenericsTest_03.add(1, 2);
@@ -108,7 +107,6 @@ public class GenericsTest_03 {
         // new ArrayList<String>().add(22); //编译错误
         String str2 = new ArrayList<String>().get(0); // 返回类型就是String
     }
-
 
     private <E extends Comparable<? super E>> E max(List<? extends E> e1) {
         if (e1 == null) {

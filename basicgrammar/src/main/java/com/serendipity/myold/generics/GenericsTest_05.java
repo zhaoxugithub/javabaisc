@@ -1,5 +1,9 @@
 package com.serendipity.myold.generics;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+@SuppressWarnings("all")
 public class GenericsTest_05 {
     public static void main(String args[]) {
         // 返回泛型数组
@@ -17,9 +21,9 @@ public class GenericsTest_05 {
 
     // 输出
     public static <T> void fun2(T[] param) {
-        System.out.print("接收泛型数组：");
+        log.info("接收泛型数组：");
         for (T t : param) {
-            System.out.print(t + "、");
+            log.info("t={}", t);
         }
     }
 }

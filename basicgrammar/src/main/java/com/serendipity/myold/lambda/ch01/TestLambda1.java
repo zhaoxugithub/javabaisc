@@ -1,9 +1,12 @@
 package com.serendipity.myold.lambda.ch01;
 
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
 import java.util.*;
 
+@Slf4j
+@SuppressWarnings("all")
 public class TestLambda1 {
     @Test
     public void test01() {
@@ -17,6 +20,7 @@ public class TestLambda1 {
     }
 
     // 采用lambda
+    @Test
     public void test02() {
         Comparator<Integer> comparator = (o1, o2) -> o1.compareTo(o2);
         TreeSet<Integer> integers = new TreeSet<>(comparator);

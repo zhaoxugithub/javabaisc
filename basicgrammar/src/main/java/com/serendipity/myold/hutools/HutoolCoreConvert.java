@@ -2,11 +2,11 @@ package com.serendipity.myold.hutools;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.CharsetUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -18,8 +18,9 @@ import java.util.concurrent.TimeUnit;
  * Date 2023-07-29:0:38
  * Version 1.0
  **/
+@Slf4j
+@SuppressWarnings("all")
 public class HutoolCoreConvert {
-
     /**
      * 转成string
      */
@@ -27,11 +28,11 @@ public class HutoolCoreConvert {
     public void test01() {
         int a = 1;
         String aStr = Convert.toStr(a);
-        System.out.println(aStr);
+        log.info(aStr);
 
         long[] b = {1, 2, 3, 4, 5};
         String bStr = Convert.toStr(b);
-        System.out.println(bStr);
+        log.info(bStr);
     }
 
     /**
@@ -41,11 +42,11 @@ public class HutoolCoreConvert {
     public void test02() {
         String[] b = {"1", "2", "3", "4", "5"};
         Integer[] intArray = Convert.toIntArray(b);
-        System.out.println(Arrays.toString(intArray));
+        log.info(Arrays.toString(intArray));
 
         long[] c = {1, 2, 3, 4, 5, 6};
         Integer[] intArray1 = Convert.toIntArray(c);
-        System.out.println(Arrays.toString(intArray1));
+        log.info(Arrays.toString(intArray1));
     }
 
     @Test
@@ -53,10 +54,11 @@ public class HutoolCoreConvert {
         String a = "2017-05-06";
         Date date = Convert.toDate(a);
         System.out.println(date);
+        log.info(String.valueOf(date));
 
         Object[] objects = {"a", "你", "好", "", 1};
         List<?> list = Convert.toList(objects);
-        System.out.println(list);
+        log.info(String.valueOf(list));
     }
 
 
@@ -67,7 +69,7 @@ public class HutoolCoreConvert {
     public void test04() {
         String a = "我是一个小小的可爱的字符串";
         String unicode = Convert.strToUnicode(a);
-        System.out.println(unicode);
+        log.info(unicode);
         String raw = Convert.unicodeToStr(unicode);
         Assert.assertEquals("ok", a, raw);
     }
@@ -90,7 +92,7 @@ public class HutoolCoreConvert {
     public void test06() {
         long a = 4535345;
         long l = Convert.convertTime(a, TimeUnit.SECONDS, TimeUnit.MINUTES);
-        System.out.println(l);
+        log.info("l={}", l);
     }
 
     // 金额大小写转换
@@ -98,13 +100,12 @@ public class HutoolCoreConvert {
     public void test07() {
         double a = 1234.555;
         String s = Convert.digitToChinese(a);
-        System.out.println(s);
-
+        log.info(s);
         // ONE HUNDRED AND CENTS TWENTY THREE ONLY
         String format = Convert.numberToWord(100.23);
-        System.out.println(format);
+        log.info(format);
         // 1.2k
         String format1 = Convert.numberToSimple(1200);
-        System.out.println(format1);
+        log.info(format1);
     }
 }

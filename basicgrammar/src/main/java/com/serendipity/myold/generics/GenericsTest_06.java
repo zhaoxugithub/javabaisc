@@ -7,9 +7,7 @@ public class GenericsTest_06<T> {
     class A {
         @Override
         public String toString() {
-            return "A{" +
-                    "name='" + "zhaoxu" + '\'' +
-                    '}';
+            return "A{" + "name='" + "zhaoxu" + '\'' + '}';
         }
     }
 
@@ -34,8 +32,6 @@ public class GenericsTest_06<T> {
     }
 
     /**
-     * h床
-     *
      * @param type
      * @param size
      * @return
