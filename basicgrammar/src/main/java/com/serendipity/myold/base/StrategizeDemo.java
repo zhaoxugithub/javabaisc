@@ -1,7 +1,6 @@
 package com.serendipity.myold.base;
 // functional/Strategize.java
 
-
 import org.junit.Test;
 
 public class StrategizeDemo {

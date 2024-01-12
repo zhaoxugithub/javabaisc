@@ -25,8 +25,8 @@ public class RandomDemo {
         for (int i = 0; i < 100; i++) {
             Random random1 = new Random(10);
             Random random2 = new Random(10);
-            log.info("random1.nextInt()={}", random1);
-            log.info("random2.nextInt()={}", random2);
+            log.info("random1.nextInt()={}", random1.nextInt());
+            log.info("random2.nextInt()={}", random2.nextInt());
         }
     }
 

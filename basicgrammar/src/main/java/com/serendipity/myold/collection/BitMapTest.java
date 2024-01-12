@@ -11,15 +11,11 @@ import java.util.BitSet;
  **/
 public class BitMapTest {
     public static void main(String[] args) {
-
         BitSet bitSet = new BitSet();
         for (int i = 0; i < 10000 * 10000 * 2; i++) {
-            if (i % 5 == 0) {
-                bitSet.set(1);
-            } else {
-                bitSet.set(0);
-            }
+            bitSet.set(i, i % 5 == 0);
         }
         System.out.println(bitSet.length());
+        System.out.println(bitSet.cardinality());
     }
 }

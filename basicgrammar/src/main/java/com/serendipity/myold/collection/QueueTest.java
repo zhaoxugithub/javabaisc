@@ -16,10 +16,12 @@ public class QueueTest {
     @Test
     public void test01() {
         ArrayBlockingQueue<Object> objects = new ArrayBlockingQueue<>(10);
-        // Object remove = objects.remove(); // 抛出异常
+        // remove 底层就是poll
+        Object remove = objects.remove(); // 抛出异常
         Object poll = objects.poll();
         // 返回空
         System.out.println(poll);
+        System.out.println(remove);
     }
 }
 

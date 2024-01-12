@@ -46,11 +46,7 @@ public class StreamsDemo {
     @Test
     void test() {
         final List<Task> tasks = Arrays.asList(new Task(Status.OPEN, 5), new Task(Status.OPEN, 13), new Task(Status.CLOSED, 8));
-
-        final int sum = tasks.stream()
-                             .filter(task -> task.status == Status.OPEN)
-                             .mapToInt(Task::getPonints)
-                             .sum();
+        final int sum = tasks.stream().filter(task -> task.status == Status.OPEN).mapToInt(Task::getPonints).sum();
         log.info("Total points: " + sum);
     }
 }
