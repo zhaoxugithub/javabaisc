@@ -22,12 +22,10 @@ public class OptionalDemo {
         // 如果是空取None,否则就是fullName
         log.info("Full Name :" + fullName.orElse("[none]"));
         // 如果不为空就拼接，否则就是hey Stranger
-        log.info(fullName.map(s -> "Hey " + s + "|")
-                         .orElse("Hey Stranger"));
+        log.info(fullName.map(s -> "Hey " + s + "|").orElse("Hey Stranger"));
         final Optional<String> firstName = Optional.of("Tom");
         log.info("First Name is set? " + firstName.isPresent());
         log.info("First Name : " + firstName.orElseGet(() -> "[None]"));
-        log.info(firstName.map(s -> "Hey " + s + "!")
-                          .orElse("Hey Stranger!"));
+        log.info(firstName.map(s -> "Hey " + s + "!").orElse("Hey Stranger!"));
     }
 }
