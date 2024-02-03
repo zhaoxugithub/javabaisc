@@ -21,7 +21,7 @@ import java.util.List;
 public class TestCustomMethodAnnotationDemo {
 
     @Override
-    @MyMethodAnnotation(title = "toStringMethod", description = "override toString method")
+    @MyMethodAnnotation(title = "toStringMetod", description = "override toString method")
     public String toString() {
         return "Override toString method";
     }
@@ -56,7 +56,7 @@ public class TestCustomMethodAnnotationDemo {
         ClassLoader classLoader = TestCustomMethodAnnotationDemo.class.getClassLoader();
         log.info("classLoader ={}", classLoader);
         // 获取自定义注解的class对象
-        Class<?> aClass = classLoader.loadClass("com.old.annotation.custom.TestMethodAnnotation");
+        Class<?> aClass = classLoader.loadClass("com.serendipity.myold.annotation.TestCustomMethodAnnotationDemo");
         log.info("class = {}", aClass);
         // 获取注解的所有方法
         Method[] methods = aClass.getMethods();

@@ -9,7 +9,6 @@ import org.junit.Test;
 @SuppressWarnings("all")
 @Slf4j
 public class PrivateOverrideDemo {
-
     class PrivateOverride {
         private void f() {
             System.out.println("private f()");
