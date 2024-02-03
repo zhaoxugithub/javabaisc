@@ -1,6 +1,7 @@
 package com.serendipity.myold.generics;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
 
 import java.util.Iterator;
 import java.util.List;
@@ -44,6 +45,21 @@ public class GenericsTest_04 {
      */
     public <T> T getObject(Class<T> c) throws Exception {
         return c.newInstance();
+    }
+
+    @Test
+    public void test() throws Exception {
+        GenericsTest_04 genericsTest04 = getObject(GenericsTest_04.class);
+        log.info(genericsTest04.toString());
+
+        String str = getObject(String.class);
+        log.info(str);
+        str = "sss";
+        log.info(str);
+
+        Integer integ = getObject(Integer.class);
+        integ = 10;
+        log.info(String.valueOf(integ));
     }
 
     public static void testGetObject() throws Exception {
