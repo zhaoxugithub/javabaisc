@@ -61,7 +61,6 @@ public class HutoolCoreConvert {
         log.info(String.valueOf(list));
     }
 
-
     /**
      * Unicode和字符串转换
      */

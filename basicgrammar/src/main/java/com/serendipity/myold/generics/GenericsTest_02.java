@@ -1,5 +1,7 @@
 package com.serendipity.myold.generics;
 
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,18 +13,18 @@ import java.util.List;
  * Description: com.base
  */
 public class GenericsTest_02 {
-    static class A {
+    class A {
     }
 
-    static class B extends A {
+    class B extends A {
     }
 
     // 如下两个方法不会报错
-    private static void funA(A a) {
+    private void funA(A a) {
         // ...
     }
 
-    private static void funB(B b) {
+    private void funB(B b) {
         funA(b);
         // ...
     }
@@ -35,14 +37,15 @@ public class GenericsTest_02 {
 //        funC(listB); // Unresolved compilation problem: The method doPrint(List<A>) in the type test is not applicable for the arguments (List<B>)
 //        // ...
 //    }
-    public static void funC(List<? extends A> listA) {
+    public void funC(List<? extends A> listA) {
     }
 
-    public static void funD(List<B> listB) {
+    public void funD(List<B> listB) {
         funC(listB);
     }
 
-    public static void main(String[] args) {
-        funD(new ArrayList<>());
+    @Test
+    public void test() {
+        funD(new ArrayList<B>());
     }
 }
