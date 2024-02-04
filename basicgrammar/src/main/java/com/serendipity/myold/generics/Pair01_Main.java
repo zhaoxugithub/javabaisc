@@ -1,6 +1,7 @@
 package com.serendipity.myold.generics;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 
 /**
  * Copyright (C), 2017-2022, 赵旭
@@ -35,6 +36,7 @@ public class Pair01_Main {
         }
     }
 
+    @Test
     public void test() {
         Pair01<String> stringStringPair = new Pair01<>("key", "value");
         String key = stringStringPair.getFirst();
@@ -43,6 +45,7 @@ public class Pair01_Main {
         log.info("value={}", value);
     }
 
+    @Test
     // 局限二：无法取得带泛型的Class。观察以下代码
     public void test02() {
         Pair01<String> p1 = new Pair01<>("Hello", "world");
@@ -53,11 +56,13 @@ public class Pair01_Main {
         log.info("c1==Pair01.class:{}", c1 == Pair01.class);
     }
 
+    @Test
     // 局限一：<T>不能是基本类型，例如int，因为实际类型是Object，Object类型无法持有基本类型：
     public void test03() {
         // Pair<int> p = new Pair<>(1, 2); // compile error
     }
 
+    @Test
     // 局限三：无法判断带泛型的类型：
     public void test04() {
         // 原因和前面一样，并不存在Pair<String>.class，而是只有唯一的Pair.class。
@@ -66,6 +71,7 @@ public class Pair01_Main {
         // }
     }
 
+    @Test
     // 局限四：不能实例化T类型：
     public void test05() {
         /*

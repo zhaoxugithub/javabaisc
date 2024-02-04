@@ -9,6 +9,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+
 /*
     一、方法引用：若 Lambda 体中的内容有方法已经实现了，我们可以使用"方法引用"
             （可以理解为方法引用是 Lambda 表达式的另外一种表现形式）
@@ -36,8 +37,8 @@ public class TestLambda3 {
         PrintStream out = System.out;
         Consumer<String> consumer = out::print;
         consumer.accept("ssss");
-//        Consumer<String> consumer1 = System.out::print;
-//        consumer.accept("cccc");
+//      Consumer<String> consumer1 = System.out::print;
+//      consumer.accept("cccc");
     }
 
     @Test
@@ -46,14 +47,13 @@ public class TestLambda3 {
             @Override
             public Employee get() {
                 return new Employee();
-
             }
         };
         // 传统
         Supplier<Employee> supplier = () -> new Employee("张三", 10, 10.00);
         Employee employee = supplier.get();
         System.out.print(employee);
-        //    对象::实例方法名
+        // 对象::实例方法名
         Employee employee1 = new Employee("张三", 10, 10.00);
         String name = employee1.getName();
         Supplier<String> getName = employee1::getName;

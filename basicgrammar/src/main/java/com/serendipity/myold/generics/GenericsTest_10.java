@@ -1,5 +1,7 @@
 package com.serendipity.myold.generics;
 
+import org.junit.Test;
+
 import java.util.Date;
 
 /**
@@ -10,7 +12,7 @@ import java.util.Date;
  * Version 1.0
  **/
 public class GenericsTest_10 {
-    private static class Pair<T> {
+    private class Pair<T> {
         private T value;
 
         public T getValue() {
@@ -22,7 +24,7 @@ public class GenericsTest_10 {
         }
     }
 
-    private static class DateInter extends Pair<Date> {
+    private class DateInter extends Pair<Date> {
         @Override
         public void setValue(Date value) {
             super.setValue(value);
@@ -34,7 +36,8 @@ public class GenericsTest_10 {
         }
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void test() {
         DateInter dateInter = new DateInter();
         dateInter.setValue(new Date());
         // dateInter.setValue(new Object()); 编译错误

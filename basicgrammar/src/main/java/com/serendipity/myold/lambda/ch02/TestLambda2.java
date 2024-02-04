@@ -35,6 +35,7 @@ public class TestLambda2 {
         filterStr(strings, (x) -> x.length() > 3).forEach(System.out::print);
     }
 
+    // 一般这种函数会跟着 一个元素或者列表和一个函数式接口
     public List<String> filterStr(List<String> list, Predicate<String> predicate) {
         List<String> list1 = new ArrayList<>();
         for (String str : list) {

@@ -116,16 +116,16 @@ public class TestLambda1 {
     // Stream 优化
     public void test09() {
         employees.stream()
-                 .filter((x) -> x.getSalary() > 35)
-                 .limit(1)
-                 .forEach(System.out::print);
+                .filter((x) -> x.getSalary() > 35)
+                .limit(1)
+                .forEach(System.out::print);
     }
 
     // Stream 优化+lambda
     @Test
     public void test10() {
         employees.stream()
-                 .map(Employee::getName)
-                 .forEach(System.out::println);
+                .map(Employee::getName)
+                .forEach(System.out::println);
     }
 }

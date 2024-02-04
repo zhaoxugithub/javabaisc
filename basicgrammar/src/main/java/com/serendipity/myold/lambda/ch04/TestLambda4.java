@@ -42,8 +42,8 @@ public class TestLambda4 {
     @Test
     public void test04() {
         Optional<Employee> op = Optional.ofNullable(new Employee("张三", 18, 888.88));
-        /*Optional<String> str = op.map((e) -> e.getName());
-        System.out.println(str.get());*/
+        Optional<String> str = op.map((e) -> e.getName());
+        System.out.println(str.get());
         Optional<String> str2 = op.flatMap((e) -> Optional.of(e.getName()));
         System.out.println(str2.get());
     }
