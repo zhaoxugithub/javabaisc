@@ -12,10 +12,8 @@ package com.serendipity.myold.reflect;
 动态代理
  */
 public class ReflectDemo02 {
-    public static void main(String[] args) {
+    interface Hello {
+        void morning(String name);
     }
 }
 
-interface Hello {
-    void morning(String name);
-}

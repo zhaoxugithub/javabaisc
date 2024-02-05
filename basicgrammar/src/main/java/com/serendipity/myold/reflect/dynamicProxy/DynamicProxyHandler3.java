@@ -30,8 +30,7 @@ public class DynamicProxyHandler3 {
 
     private Object getProxyClass(Object target) {
         Enhancer enhancer = new Enhancer();
-        enhancer.setClassLoader(target.getClass()
-                                      .getClassLoader());
+        enhancer.setClassLoader(target.getClass().getClassLoader());
         enhancer.setSuperclass(target.getClass());
         enhancer.setCallback(new InvocationHandler() {
             @Override
@@ -44,7 +43,6 @@ public class DynamicProxyHandler3 {
         });
         return enhancer.create();
     }
-
 
     private Object getProxyClass2(Class<?> clazz) {
         Enhancer enhancer = new Enhancer();
@@ -86,5 +84,4 @@ public class DynamicProxyHandler3 {
         A proxyClass = (A) getProxyClass2(A.class);
         proxyClass.function2("sdfdsff");
     }
-
 }

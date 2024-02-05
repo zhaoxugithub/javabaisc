@@ -64,17 +64,13 @@ public class DynamicProxyHandler2 {
     }
 
     public Object getProxyClass(Object target) {
-        return Proxy.newProxyInstance(target.getClass()
-                                            .getClassLoader(), target.getClass()
-                                                                     .getInterfaces(), new DynamicProxyHandlerDemo(target));
+        return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), new DynamicProxyHandlerDemo(target));
     }
 
 
     // 自带jdk生成动态代理对象
     private Object getProxyClass2(Object target) {
-        return Proxy.newProxyInstance(target.getClass()
-                                            .getClassLoader(), target.getClass()
-                                                                     .getInterfaces(), (proxy, method, args) -> {
+        return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), (proxy, method, args) -> {
             System.out.println("动态代理对象开始....." + method.getName() + "---params:" + Arrays.toString(args));
             if (StrUtil.equals(method.getName(), "play")) {
                 // todo 如果被代理对象有多个方法，则需要进行对每一个方法单独处理
@@ -122,7 +118,6 @@ public class DynamicProxyHandler2 {
         // bi2.play();
         // 思考一个问题： 如果被代理的对象实现了多个接口，怎么让代理对象具有所有的接口的方法
         // 解决方法： 申明一个顶级接口，包含了子接口的所有的方法，可以实现，但是很显然，这种方法不好
-
 
         // 再思考一个问题。如果被代理的对象有多个方法都需要被代理怎么操作？
         // 是不是需要在代理对象单独判断某一个方法的处理逻辑

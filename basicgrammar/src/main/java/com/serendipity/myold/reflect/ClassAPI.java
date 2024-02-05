@@ -20,8 +20,7 @@ public class ClassAPI {
             // 什么都不加 是0 ， public  是1 ，private 是 2 ，protected 是 4，static 是 8 ，final 是 16
             log.info("field = {}", field.toString());
             // getDeclaringClass() 获取成员变量的的所属类
-            log.info("fieldName={},fieldType={},fieldModifiers = {},FieldDeclaringClass={}",
-                    field.getName(), field.getType(), field.getModifiers(), field.getDeclaringClass());
+            log.info("fieldName={},fieldType={},fieldModifiers = {},FieldDeclaringClass={}", field.getName(), field.getType(), field.getModifiers(), field.getDeclaringClass());
         }
         System.out.println("===============================");
         // 此方法返回的是当前类（不包含父类）的所有属性，不仅仅局限于 公共访问修饰符，所有的访问修饰符都可以拿到
@@ -29,7 +28,6 @@ public class ClassAPI {
         for (Field field : declaredFields) {
             log.info("field={}", field);
         }
-
         System.out.println("===============================");
         // 反在在一定程度上破坏了封装性，需要合理使用,获取private 变量
         Field address = aClass.getDeclaredField("address");
@@ -43,13 +41,11 @@ public class ClassAPI {
             log.info("student address={}", student.getAddress());
         }
         System.out.println("=================================");
-
         // 获取成员方法、包括子类及父类，同时只能包含公共方法
         Method[] methods = aClass.getMethods();
         for (Method method : methods) {
             log.info("class = {},method = {}", method.getDeclaringClass(), method.getName());
         }
-
         System.out.println("=================================");
         // 获取当前类的所有方法，包括私有方法
         Method[] declaredMethods = aClass.getDeclaredMethods();
@@ -66,18 +62,15 @@ public class ClassAPI {
         for (Constructor constructor : constructors) {
             log.info("constructor={}", constructor.getName());
         }
-
         System.out.println("------------------");
         Constructor<?>[] declaredConstructors = aClass.getDeclaredConstructors();
         for (Constructor constructor : declaredConstructors) {
             System.out.println(constructor);
         }
-
         System.out.println("-----------------");
         Constructor<?> declaredConstructor = aClass.getDeclaredConstructor(String.class, int.class, String.class);
         declaredConstructor.setAccessible(true);
         Student ss = (Student) declaredConstructor.newInstance("22", 22, "ss");
         System.out.println(ss);
-
     }
 }

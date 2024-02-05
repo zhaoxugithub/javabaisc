@@ -19,12 +19,10 @@ public class TestLambda6 {
     // 内部迭代：迭代操作由 Stream API 完成
     @Test
     public void test1() {
-        employees.stream()
-                 .filter((x) -> {
-                     System.out.println("内部迭代");
-                     return x.getAge() > 5;
-                 })
-                 .forEach(System.out::print);
+        employees.stream().filter((x) -> {
+            System.out.println("内部迭代");
+            return x.getAge() > 5;
+        }).forEach(System.out::print);
     }
 
     // 外部迭代
@@ -45,21 +43,14 @@ public class TestLambda6 {
      */
     @Test
     public void test3() {
-        employees.stream()
-                 .filter((e) -> {
-                     System.out.println("短路！");//&&  ||
-                     return e.getSalary() > 500;
-                 })
-                 .limit(2)
-                 .forEach(System.out::println);
+        employees.stream().filter((e) -> {
+            System.out.println("短路！");//&&  ||
+            return e.getSalary() > 500;
+        }).limit(2).forEach(System.out::println);
     }
 
     public void test4() {
-        employees.stream()
-                 .filter((e) -> e.getSalary() > 5000)
-                 .skip(2)
-                 .distinct()
-                 .forEach(System.out::println);
+        employees.stream().filter((e) -> e.getSalary() > 5000).skip(2).distinct().forEach(System.out::println);
     }
 
 }

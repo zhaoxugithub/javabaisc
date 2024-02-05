@@ -10,7 +10,6 @@ import java.lang.reflect.Proxy;
  * Description: com.reflect.dynamicProxy
  */
 public class DynamicProxyHandler {
-
     private Object object = null;
 
     public DynamicProxyHandler(Object object) {
