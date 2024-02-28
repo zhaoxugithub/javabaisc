@@ -2,6 +2,7 @@ package com.serendipity.sysio;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Scanner;
 
 /**
  * @author: 马士兵教育
@@ -10,8 +11,9 @@ import java.net.Socket;
 public class SocketClient {
     public static void main(String[] args) {
         try {
-            Socket client = new Socket("192.168.150.11", 9090);
+            Socket client = new Socket("1.15.149.196", 9090);
             // 设置客户端缓冲区大小
+            Scanner scanner = new Scanner(System.in);
             client.setSendBufferSize(20);
             // 设置是否立即发送,意思是写一个发一个
             // 如果设置为flase,表示积攒一部分数据再发送，这个时候可以无视缓冲区的大小，意味着可以超过缓冲区的限制
@@ -26,6 +28,9 @@ public class SocketClient {
                     for (byte b : bb) {
                         out.write(b);
                     }
+                } else {
+                    String s = scanner.nextLine();
+                    out.write(s.getBytes());
                 }
             }
         } catch (IOException e) {

@@ -7,23 +7,25 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class SocketIO {
-
+public class SocketServerIO {
     public static void main(String[] args) throws Exception {
         ServerSocket server = new ServerSocket(9090, 20);
         System.out.println("step1: new ServerSocket(9090) ");
         while (true) {
-            //返回的是客户端连接的fd
-            Socket client = server.accept();  //阻塞1
-            System.out.println("step2:client\t" + client.getPort());
+            // 返回的是客户端连接的fd
+            Socket client = server.accept();  // 阻塞1
+            System.out.printf("clientIP:%s,clientPort:%s%n\n", client.getLocalAddress()
+                                                                     .getHostAddress(), client.getPort());
             new Thread(() -> {
-                InputStream in = null;
+                System.out.printf("thread:%s\n", Thread.currentThread()
+                                                       .getName());
+                InputStream in;
                 try {
                     in = client.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(in));
                     while (true) {
-                        String dataline = reader.readLine(); //阻塞2
-
+                        System.out.println("accept client data....");
+                        String dataline = reader.readLine(); // 阻塞2
                         if (null != dataline) {
                             System.out.println(dataline);
                         } else {
@@ -32,7 +34,6 @@ public class SocketIO {
                         }
                     }
                     System.out.println("客户端断开");
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
