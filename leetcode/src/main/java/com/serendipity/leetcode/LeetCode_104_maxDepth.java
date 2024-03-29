@@ -1,8 +1,7 @@
 package com.serendipity.leetcode;
 
 public class LeetCode_104_maxDepth {
-
-    public class TreeNode {
+    public static class TreeNode {
         int val;
         TreeNode left;
         TreeNode right;
@@ -21,18 +20,14 @@ public class LeetCode_104_maxDepth {
         }
     }
 
-
     public int maxDepth(TreeNode root) {
-
         if (root == null) {
             return 0;
         }
         int leftDepth = maxDepth(root.left) + 1;
         int rightDepth = maxDepth(root.right) + 1;
         return Math.max(leftDepth, rightDepth);
-
     }
-
 
     public static void main(String[] args) {
 

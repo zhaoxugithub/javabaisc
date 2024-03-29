@@ -11,7 +11,6 @@ import java.util.List;
  * Version 1.0
  **/
 public class LeetCode_22_generateParenthesis {
-
     public List<String> generateParenthesis(int n) {
         if (n < 1) {
             return new ArrayList<>();
@@ -21,6 +20,7 @@ public class LeetCode_22_generateParenthesis {
         process(res, sb, n);
         return res;
     }
+
     public int findTheDistanceValue(int[] arr1, int[] arr2, int d) {
         if (arr1 == null || arr2 == null) {
             return 0;
@@ -44,6 +44,7 @@ public class LeetCode_22_generateParenthesis {
         }
         return 0;
     }
+
     private void process(List<String> res, StringBuilder sb, int n) {
         if (n <= 0) {
             res.add(sb.toString());

@@ -1,9 +1,7 @@
 package com.serendipity.leetcode;
 
-public class  LeetCode_70_ClimbStairs {
-
+public class LeetCode_70_ClimbStairs {
     public int climbStairs(int n) {
-
         if (n < 4) {
             return n;
         }
@@ -11,6 +9,5 @@ public class  LeetCode_70_ClimbStairs {
     }
 
     public static void main(String[] args) {
-
     }
 }

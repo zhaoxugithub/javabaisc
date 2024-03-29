@@ -24,7 +24,6 @@ public class Code_01_Exist {
                         }
                         characters[3] = board[i + 1][j + 1];
                     } else {
-
                     }
                     map.put(character, characters);
                 }

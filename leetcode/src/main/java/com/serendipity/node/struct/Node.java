@@ -10,7 +10,6 @@ import java.util.ArrayList;
  * Version 1.0
  **/
 public class Node {
-
     // 是图节点的编号，可以是string类型
     public int value;
     // 入度

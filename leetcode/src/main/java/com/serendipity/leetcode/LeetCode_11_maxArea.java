@@ -8,7 +8,6 @@ package com.serendipity.leetcode;
  * Version 1.0
  **/
 public class LeetCode_11_maxArea {
-
     public static int maxArea(int[] height) {
         if (height == null || height.length == 0) {
             return 0;

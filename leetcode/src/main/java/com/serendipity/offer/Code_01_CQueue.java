@@ -14,7 +14,6 @@ public class Code_01_CQueue {
     Stack<Integer> s2 = new Stack<>();
 
     public Code_01_CQueue() {
-
     }
 
     public void appendTail(int value) {
@@ -22,7 +21,6 @@ public class Code_01_CQueue {
     }
 
     public int deleteHead() {
-
         if (s2.empty()) {
             while (!s1.empty()) {
                 Integer pop = s1.pop();

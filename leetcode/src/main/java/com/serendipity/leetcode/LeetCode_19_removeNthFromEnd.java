@@ -10,7 +10,6 @@ import com.serendipity.node.ListNode;
  * Version 1.0
  **/
 public class LeetCode_19_removeNthFromEnd {
-
     public ListNode removeNthFromEnd(ListNode head, int n) {
         if (head == null) {
             return head;
@@ -18,7 +17,6 @@ public class LeetCode_19_removeNthFromEnd {
 
         ListNode dumpNext = new ListNode(-1);
         dumpNext.next = head;
-
         ListNode nNode = findNNode(dumpNext, n + 1);
         nNode.next = nNode.next.next;
         return dumpNext.next;
@@ -38,6 +36,5 @@ public class LeetCode_19_removeNthFromEnd {
     }
 
     public static void main(String[] args) {
-
     }
 }

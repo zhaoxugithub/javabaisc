@@ -1,44 +1,48 @@
 package com.serendipity.leetcode;
 
 public class LeetCode_110_IsBalanced {
-
-
     private static class TreeNode {
-     int val;
-     TreeNode left;
-     TreeNode right;
-     TreeNode() {}
-     TreeNode(int val) { this.val = val; }
-     TreeNode(int val, TreeNode left, TreeNode right) {
-          this.val = val;
-          this.left = left;
-          this.right = right;
-      }
-  }
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        TreeNode() {
+        }
+
+        TreeNode(int val) {
+            this.val = val;
+        }
+
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
 
 
     public boolean isBalanced(TreeNode root) {
         if (root == null) {
             return true;
-        }else {
+        } else {
             int leftHeight = getHeight(root.left);
             int rightHeight = getHeight(root.right);
-            if (Math.abs(leftHeight-rightHeight)>1) {
+            if (Math.abs(leftHeight - rightHeight) > 1) {
                 return false;
             } else {
-                boolean  f1= isBalanced(root.left);
+                boolean f1 = isBalanced(root.left);
                 boolean f2 = isBalanced(root.right);
                 return f1 && f2;
             }
         }
     }
 
-    public int getHeight(TreeNode node){
+    public int getHeight(TreeNode node) {
         if (node == null) {
             return 0;
         }
         int height = Math.max(getHeight(node.left), getHeight(node.right));
-        return height+1;
+        return height + 1;
     }
 
     public static void main(String[] args) {

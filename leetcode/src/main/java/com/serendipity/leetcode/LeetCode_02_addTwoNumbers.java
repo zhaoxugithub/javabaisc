@@ -54,7 +54,6 @@ public class LeetCode_02_addTwoNumbers {
     }
 
     public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-
         Stack<Integer> stack1 = new Stack<>();
         Stack<Integer> stack2 = new Stack<>();
         ListNode p1 = l1;
@@ -77,17 +76,14 @@ public class LeetCode_02_addTwoNumbers {
             list.add(re);
             temp = a + b > 9 ? 1 : 0;
         }
-
         while (!stack1.isEmpty()) {
             Integer pop = stack1.pop();
             list.add(pop);
         }
-
         while (!stack2.isEmpty()) {
             Integer pop = stack2.pop();
             list.add(pop);
         }
-
         ListNode head = new ListNode(list.get(0));
         p1 = head;
         for (int i = 1; i < list.size(); i++) {
@@ -101,11 +97,9 @@ public class LeetCode_02_addTwoNumbers {
         ListNode listNode = new ListNode(2);
         listNode.next = new ListNode(4);
         listNode.next.next = new ListNode(3);
-
         ListNode listNode2 = new ListNode(5);
         listNode2.next = new ListNode(6);
         listNode2.next.next = new ListNode(4);
-
         ListNode listNode1 = addTwoNumbers(listNode, listNode2);
         while (listNode1 != null) {
             System.out.println(listNode1.val);

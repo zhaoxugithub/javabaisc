@@ -8,14 +8,11 @@ package com.serendipity.leetcode;
  * Version 1.0
  **/
 public class LeetCode_62_UniquePaths {
-
     public int uniquePaths(int m, int n) {
         if (m == 1 || n == 1) {
             return 1;
         }
-
         int[][] dp = new int[m][n];
-
         for (int i = 0; i < m; i++) {
             dp[i][0] = 1;
         }

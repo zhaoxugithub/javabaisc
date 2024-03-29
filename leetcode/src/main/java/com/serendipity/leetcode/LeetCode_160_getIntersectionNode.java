@@ -10,7 +10,6 @@ import com.serendipity.node.ListNode;
  * Version 1.0
  **/
 public class LeetCode_160_getIntersectionNode {
-
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         ListNode p1 = headA;
         ListNode p2 = headB;
@@ -18,6 +17,5 @@ public class LeetCode_160_getIntersectionNode {
     }
 
     public static void main(String[] args) {
-
     }
 }

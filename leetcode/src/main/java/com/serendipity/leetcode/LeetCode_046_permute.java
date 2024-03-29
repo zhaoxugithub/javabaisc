@@ -11,9 +11,7 @@ import java.util.List;
  * Version 1.0
  **/
 public class LeetCode_046_permute {
-
     public static void main(String[] args) {
-
     }
 
     public List<List<Integer>> permute(int[] nums) {

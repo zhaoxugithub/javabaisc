@@ -40,7 +40,6 @@ package com.serendipity.offer;
  * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class Code_01_findNumberIn2DArray {
-
     public boolean findNumberIn2DArray(int[][] matrix, int target) {
         for (int i1 = 0; i1 < matrix.length; i1++) {
             for (int i = matrix[0].length - 1; i >= 0; i--) {

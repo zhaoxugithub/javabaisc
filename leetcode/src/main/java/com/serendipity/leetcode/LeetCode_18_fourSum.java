@@ -11,8 +11,6 @@ import java.util.List;
  * Version 1.0
  **/
 public class LeetCode_18_fourSum {
-
-
     public List<List<Integer>> fourSum(int[] nums, int target) {
         if (nums == null || nums.length == 0) {
             return new ArrayList<>();
@@ -22,13 +20,13 @@ public class LeetCode_18_fourSum {
         process(res, visited, nums, new ArrayList<Integer>(), target);
         return res;
     }
-    public void process(List<List<Integer>> res, boolean[] visited,
-                        int[] nums, ArrayList<Integer> temp, int target) {
+
+    public void process(List<List<Integer>> res, boolean[] visited, int[] nums, ArrayList<Integer> temp, int target) {
         if (temp.size() == 4) {
             return;
         }
     }
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
     }
 }

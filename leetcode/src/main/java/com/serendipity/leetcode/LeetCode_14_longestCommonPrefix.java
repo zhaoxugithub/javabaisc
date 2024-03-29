@@ -23,6 +23,5 @@ public class LeetCode_14_longestCommonPrefix {
     }
 
     public static void main(String[] args) {
-
     }
 }

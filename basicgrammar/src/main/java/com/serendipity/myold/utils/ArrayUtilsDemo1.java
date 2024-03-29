@@ -90,7 +90,6 @@ public class ArrayUtilsDemo1 {
         System.out.println(Arrays.deepEquals(test1, test2));
     }
 
-
     /*
      Array.copu of
      */
@@ -175,5 +174,20 @@ public class ArrayUtilsDemo1 {
         List<Integer> collect = Arrays.stream(arr)
                                       .collect(Collectors.toList());
         System.out.println(collect);
+    }
+
+    // 帮我写一段冒泡排序
+    public void test14() {
+        int[] arr = {1, 2, 3, 4, 5};
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+        System.out.println(Arrays.toString(arr));
     }
 }

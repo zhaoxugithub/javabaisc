@@ -16,6 +16,7 @@ public class LeetCode_69_MySqrt {
         }
         return 0;
     }
+
     public static void main(String[] args) {
     }
 }

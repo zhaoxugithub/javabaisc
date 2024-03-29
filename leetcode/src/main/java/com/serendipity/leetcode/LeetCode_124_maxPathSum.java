@@ -24,11 +24,9 @@ public class LeetCode_124_maxPathSum {
         return root.value + left + right;
     }
 
-
     public static int maxPathSum2(TreeNode root) {
         return 0;
     }
-
 
     public void preShow(TreeNode root) {
         if (root == null) {

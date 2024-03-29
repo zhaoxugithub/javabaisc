@@ -13,7 +13,6 @@ import java.util.Stack;
  * Version 1.0
  **/
 public class LeetCode_393_ValidUtf8 {
-
     public static boolean validUtf8(int[] data) {
         int oneNum = 0;
         for (int i = 0; i < data.length; i++) {
@@ -94,7 +93,6 @@ public class LeetCode_393_ValidUtf8 {
                 stack.add(c);
             }
         }
-
         for (int i = 0; i < s.toCharArray().length; i++) {
             char c = s.charAt(i);
             if (Character.isLetter(c) || Character.isDigit(c)) {
@@ -116,9 +114,6 @@ public class LeetCode_393_ValidUtf8 {
         }
         char[] chars = s.toCharArray();
         List<List<String>> result = new ArrayList<>();
-
-
-
         return result;
     }
 

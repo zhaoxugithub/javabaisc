@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LeetCode_144_PreorderTraversal {
-
     public class TreeNode {
         int val;
         LeetCode_104_maxDepth.TreeNode left;
@@ -24,10 +23,10 @@ public class LeetCode_144_PreorderTraversal {
         }
     }
 
-    //二叉树的前序遍历NLR
+    // 二叉树的前序遍历NLR
     public List<Integer> preorderTraversal(LeetCode_104_maxDepth.TreeNode root) {
         List<Integer> list = new ArrayList<>();
-        preorderTraversal(root,list);
+        preorderTraversal(root, list);
         return list;
     }
 
@@ -38,5 +37,4 @@ public class LeetCode_144_PreorderTraversal {
             preorderTraversal(node.right, list);
         }
     }
-
 }

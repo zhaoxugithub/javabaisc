@@ -22,20 +22,15 @@ import java.util.Map;
  * 输出：2 或 3
  */
 public class Code_01_FindRepeatNumber {
-
     public int findRepeatNumber(int[] nums) {
-
         Map<Integer, Integer> result = new HashMap<>();
         for (int i = 0; i < nums.length; i++) {
             if (result.containsKey(nums[i])) {
                 return nums[i];
-//                int i1 = result.get(nums[i]);
-//                result.replace(nums[i], i1 + 1);
             } else {
                 result.put(nums[i], 1);
             }
         }
-
         return 0;
     }
 }

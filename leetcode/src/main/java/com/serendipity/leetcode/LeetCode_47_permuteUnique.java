@@ -19,9 +19,7 @@ public class LeetCode_47_permuteUnique {
         if (nums == null || nums.length == 0) {
             return result;
         }
-
         boolean[] visited = new boolean[nums.length];
-
         process(nums, new ArrayList<Integer>(), visited);
         return result;
     }
@@ -61,7 +59,6 @@ public class LeetCode_47_permuteUnique {
     @Test
     public void test() {
         int[] arr = new int[]{1, 1, 2};
-
         permuteUnique(arr);
         System.out.println(result);
     }

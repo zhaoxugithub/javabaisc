@@ -11,7 +11,6 @@ import java.util.HashSet;
  * Version 1.0
  **/
 public class Graph {
-
     // 描述具体的点，Key表示的图节点的编号，value表示的节点
     public HashMap<Integer, Node> nodes;
     // 描述的是图的边

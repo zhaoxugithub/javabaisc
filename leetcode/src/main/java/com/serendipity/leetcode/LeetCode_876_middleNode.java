@@ -10,7 +10,6 @@ import com.serendipity.node.ListNode;
  * Version 1.0
  **/
 public class LeetCode_876_middleNode {
-
     public ListNode middleNode(ListNode head) {
         if (head == null) {
             return null;

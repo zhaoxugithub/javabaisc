@@ -11,7 +11,6 @@ import com.serendipity.node.TreeNode;
  * Version 1.0
  **/
 public class Leetcode_108_sortedArrayToBST {
-
     public TreeNode sortedArrayToBST(int[] nums) {
         return null;
     }

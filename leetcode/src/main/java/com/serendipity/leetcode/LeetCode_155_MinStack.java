@@ -3,7 +3,6 @@ package com.serendipity.leetcode;
 import java.util.Stack;
 
 public class LeetCode_155_MinStack {
-
     Stack<Integer> stack = null;
     Stack<Integer> minStack = null;
 
@@ -20,7 +19,7 @@ public class LeetCode_155_MinStack {
     }
 
     public void pop() {
-        if (!stack.isEmpty() ) {
+        if (!stack.isEmpty()) {
             Integer pop = stack.pop();
             if (pop.equals(minStack.peek())) {
                 minStack.pop();
@@ -48,9 +47,5 @@ public class LeetCode_155_MinStack {
         stack1.pop();
 
         System.out.println(stack1.getMin());
-
-
     }
-
-
 }

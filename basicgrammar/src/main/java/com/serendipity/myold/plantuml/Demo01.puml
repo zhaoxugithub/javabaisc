@@ -1,0 +1,102 @@
+@startuml
+class Animal {
+    void eat()
+}
+
+class Dog extends Animal {
+    void bark()
+}
+@enduml
+
+
+@startuml
+interface Shape {
+    void draw()
+}
+
+class Circle implements Shape {
+    void draw()
+}
+@enduml
+
+
+@startuml
+class Engine {
+    + start()
+}
+
+note "局部变成，参数，返回值" as N
+
+class Car {
+    + Car(engine: Engine)
+    Engine ()
+}
+
+Car ..> Engine : depends
+
+@enduml
+
+@startuml
+
+title Dependency
+
+class Vehicle {
+    move(MoveBehavior)
+}
+
+interface MoveBehavior {
+    move()
+}
+
+note "MoveBehavior.move()" as N
+
+Vehicle ..> MoveBehavior
+
+Vehicle .. N
+
+@enduml
+
+@startuml
+class Address {
+    + street: String
+    + city: String
+}
+
+class Person {
+    + name: String
+    - address: Address
+}
+
+Person "1" --> "1" Address : has
+
+@enduml
+
+@startuml
+class Employee {
+    + name: String
+}
+
+class Department {
+    + name: String
+    - employees: List<Employee>
+}
+
+
+Department o-- "0..*" Employee : contains
+
+@enduml
+
+
+@startuml
+class Engine {
+    + type: String
+}
+
+class Car {
+    + model: String
+    - engine: Engine
+}
+
+Car *-- Engine : has-a
+
+@enduml

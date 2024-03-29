@@ -11,9 +11,7 @@ import java.util.Map;
  * Version 1.0
  **/
 public class LeetCode_1366_rankTeams {
-
     public static String rankTeams(String[] votes) {
-
         if (votes == null || votes.length == 0) {
             return "";
         }
@@ -42,11 +40,11 @@ public class LeetCode_1366_rankTeams {
         return sb.toString();
     }
 
-
     public static Character getE(Map<Character, int[]> map, String vote, int target) {
         int max = 0;
         char maxTeam = ' ';
-        for (int i = 0; i < map.keySet().size(); i++) {
+        for (int i = 0; i < map.keySet()
+                               .size(); i++) {
             char team = vote.charAt(i);
             int[] ints = map.get(team);
             int ans = 0;
@@ -62,7 +60,6 @@ public class LeetCode_1366_rankTeams {
         }
         return maxTeam;
     }
-
 
     public static void main(String[] args) {
         String[] str = {"BCA", "CAB", "CBA", "ABC", "ACB", "BAC"};
