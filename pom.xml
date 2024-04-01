@@ -16,6 +16,7 @@
         <module>thread</module>
         <module>effectivejava</module>
         <module>designerPattern</module>
+        <module>commonUtils</module>
     </modules>
     <dependencies>
         <dependency>

@@ -93,6 +93,45 @@ public class LeetCode_02_addTwoNumbers {
         return head;
     }
 
+    public static ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        int more = 0;
+        ListNode p1 = l1;
+        ListNode p2 = l2;
+
+        return null;
+    }
+
+    // 反转ListNode,迭代方法
+    public static ListNode reverseList(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
+    public static ListNode reverseList3(ListNode head) {
+        ListNode pre = null;
+        ListNode cur = head;
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+        return pre;
+    }
+
+    // 反转ListNode,递归
+    public static ListNode reverseList2(ListNode head) {
+        return null;
+    }
+
+
     public static void main(String[] args) {
         ListNode listNode = new ListNode(2);
         listNode.next = new ListNode(4);
@@ -100,7 +139,7 @@ public class LeetCode_02_addTwoNumbers {
         ListNode listNode2 = new ListNode(5);
         listNode2.next = new ListNode(6);
         listNode2.next.next = new ListNode(4);
-        ListNode listNode1 = addTwoNumbers(listNode, listNode2);
+        ListNode listNode1 = addTwoNumbers2(listNode, listNode2);
         while (listNode1 != null) {
             System.out.println(listNode1.val);
             listNode1 = listNode1.next;
