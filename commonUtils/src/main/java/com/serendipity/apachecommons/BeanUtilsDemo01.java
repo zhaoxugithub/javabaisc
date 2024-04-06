@@ -16,7 +16,6 @@ import java.util.Map;
  */
 public class BeanUtilsDemo01 {
 
-
     /*
         PropertyUtils 方法的使用
      */
@@ -34,10 +33,8 @@ public class BeanUtilsDemo01 {
         String province = (String) PropertyUtils.getProperty(person, "address.province");
         System.out.println("province = " + province);
 
-
         Address address = (Address) PropertyUtils.getProperty(person, "address");
         System.out.println("address = " + address);
-
 
         PropertyUtils.setProperty(person, "address", new Address("江苏", "苏州"));
         System.out.println(person);
@@ -53,12 +50,9 @@ public class BeanUtilsDemo01 {
 
         Person target = new Person();
         PropertyUtils.copyProperties(source, target);
-
         System.out.println(target);
-
         System.out.println(target.getAddress() == source.getAddress());
     }
-
 
     @Test
     public void test03() throws InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {
