@@ -62,15 +62,13 @@ public class BeanUtilsDemo01 {
         person.setAddress(new Address("江苏", "南京"));
         Person p2 = (Person) BeanUtils.cloneBean(person);
         System.out.println(p2);
-        System.out.println(p2.getAddress()
-                             .hashCode() == person.getAddress()
-                                                  .hashCode());
+        System.out.println(p2.getAddress().hashCode() == person.getAddress().hashCode());
 
-        person.getAddress()
-              .setCity("苏州");
+        person.getAddress().setCity("苏州");
 
         // 浅拷贝
         System.out.println(p2.getAddress());
+        //
         System.out.println(person.getAddress());
     }
 
@@ -94,12 +92,16 @@ public class BeanUtilsDemo01 {
         person.setName("Tom");
         person.setAge(20);
         person.setAddress(new Address("江苏", "南京"));
-
         Map<String, String> describe = BeanUtils.describe(person);
         System.out.println(describe);
 
         describe.forEach((k, v) -> {
             System.out.println(k + " = " + v);
         });
+    }
+
+
+    public void test06() {
+
     }
 }
