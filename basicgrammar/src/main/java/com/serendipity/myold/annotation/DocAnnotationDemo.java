@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import java.lang.annotation.*;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 
 /**
  * https://www.pdai.tech/md/java/basic/java-basic-x-annotation.html#java-%E5%9F%BA%E7%A1%80---%E6%B3%A8%E8%A7%A3%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3
@@ -41,14 +42,12 @@ public class DocAnnotationDemo {
 
     @Test
     public void test() {
-        Method[] methods = A.class.getMethods();
-        for (Method method : methods) {
-            if (method.isAnnotationPresent(TestDocAnnotation.class)) {
-                Annotation[] annotations = method.getAnnotations();
-                for (Annotation annotation : annotations) {
-                    System.out.println(annotation);
-                }
-            }
-        }
+        Arrays.stream(A.class.getMethods())
+                .filter(method -> {
+                    return method.isAnnotationPresent(TestDocAnnotation.class);
+                })
+                .forEach(method -> {
+                    System.out.println(Arrays.toString(method.getAnnotations()));
+                });
     }
 }
