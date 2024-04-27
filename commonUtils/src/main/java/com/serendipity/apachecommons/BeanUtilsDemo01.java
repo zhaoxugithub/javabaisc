@@ -15,7 +15,6 @@ import java.util.Map;
  * @createTime: 2024/04/01 23:47
  */
 public class BeanUtilsDemo01 {
-
     /*
         PropertyUtils 方法的使用
      */
