@@ -54,16 +54,72 @@ public class ListDemo {
 
 
     /**
-     * subList
+     * 匿名实现类 + 方法块
      */
     @Test
-    public void testSubList() {
+    public void testSubClass() {
         ArrayList<@Nullable Object> objects = Lists.newArrayList();
         // 匿名内部类
-        ArrayList<String> strings = new ArrayList<>() {{
+        ArrayList<String> strings = new ArrayList<>() {
+            // 方法块
+            {
+                add("a");
+                add("b");
+                add("c");
+            }
+
+            @Override
+            public String get(int index) {
+                return "hhhhh";
+            }
+        };
+        System.out.println(strings);
+        System.out.println(strings.get(1));
+    }
+
+    @Test
+    public void subList() {
+        List<String> list = new ArrayList<String>() {{
             add("a");
             add("b");
             add("c");
         }};
+        // strings是list的一个视图，对strings的操作会影响list
+        List<String> strings = list.subList(0, 1);
+        System.out.println(strings);
+        strings.add("d");
+        // a b c d
+        System.out.println(list);
+
+        // 下面这个代码有异常
+        // ArrayList<String> subList = list.subList(0, 2);
+
+        list.add("e");
+        System.out.println(list);
     }
+
+    @Test
+    public void testSubList2() {
+        List<String> sourceList = new ArrayList<String>() {{
+            add("H");
+            add("O");
+            add("L");
+            add("L");
+            add("I");
+            add("S");
+        }};
+        List<String> subList = sourceList.subList(2, 5);
+
+        System.out.println("sourceList: " + sourceList);
+        System.out.println("subList: " + subList);
+
+        sourceList.add("666");
+
+        System.out.println("sourceList: " + sourceList);
+        // java.util.ConcurrentModificationException
+        System.out.println("subList: " + subList);
+    }
+
+    public void test(){}
+
 }
