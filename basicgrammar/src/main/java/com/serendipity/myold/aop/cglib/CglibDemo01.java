@@ -12,7 +12,6 @@ import java.lang.reflect.Method;
  * 使用Cglib实现动态代理
  */
 public class CglibDemo01 {
-
     public class UserServiceImpl {
         void play() {
             System.out.println("Cglib UserServiceImpl play");
@@ -28,7 +27,6 @@ public class CglibDemo01 {
             enhancer.setCallback(this);
             return enhancer.create();
         }
-
 
         @Override
         public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {

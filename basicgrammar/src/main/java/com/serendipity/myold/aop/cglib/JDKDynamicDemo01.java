@@ -13,7 +13,6 @@ import java.lang.reflect.Proxy;
 @SuppressWarnings("all")
 public class JDKDynamicDemo01 {
 
-
     // 定义一个接口
     public interface UserService {
         void play();

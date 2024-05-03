@@ -35,7 +35,7 @@ public class GenericsTest_03 {
         // list 里面装的是string[]
         List<String[]> li = new ArrayList<>();
         // 数组元素是一个list
-        // List<String>[] lii = new ArrayList<String>[100];
+//         List<String>[] lii = new ArrayList<String>[100];
         List<?>[] list15 = new ArrayList<?>[10]; // OK
         list15[1] = new LinkedList<>();
         List<String>[] list6 = new ArrayList[10]; // OK，但是会有警告

@@ -53,9 +53,14 @@ public class AwaitSignalExample {
     public static void main(String[] args) {
         ExecutorService executorService = Executors.newCachedThreadPool();
         AwaitSignalExample example = new AwaitSignalExample();
-
+        /*
+            方法参数里面实际上是没有办法传入 一个方法的，只能传入一个对象
+                  所以如果想传入一个方法，只能传入一个 函数式接口对象
+         */
         executorService.execute(example::before);
         executorService.execute(example::before);
+        executorService.execute(()->{
+        });
         executorService.shutdown();
     }
 }

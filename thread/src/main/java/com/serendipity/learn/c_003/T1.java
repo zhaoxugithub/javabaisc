@@ -9,6 +9,14 @@ import java.util.concurrent.TimeUnit;
  * FileName: T1
  * Description: com.java.thread.c_003
  */
+
+
+
+/*
+     interrupt: 中断线程,线程被标记为中断
+     interrupted: 判断线程是否是中断状态,并清除中断状态
+     isInterrupted: 判断线程是否是中断状态，不会清除中断状态
+ */
 @SuppressWarnings("all")
 public class T1 {
     public static void main(String[] args) {
