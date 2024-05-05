@@ -26,7 +26,7 @@ public class TicketSeller5 {
     public static void main(String[] args) {
         for (int i = 0; i < Constants.THREAD_COUNT; i++) {
             new Thread(() -> {
-                while (list.size() > 0) {
+                while (!list.isEmpty()) {
                     try {
                         TimeUnit.SECONDS.sleep(TIMEOUT);
                     } catch (InterruptedException e) {
