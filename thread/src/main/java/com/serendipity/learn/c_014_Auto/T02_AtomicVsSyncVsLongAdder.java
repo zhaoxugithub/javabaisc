@@ -15,13 +15,11 @@ import java.util.concurrent.atomic.LongAdder;
 public class T02_AtomicVsSyncVsLongAdder {
     static long count2 = 0L;
     static AtomicLong count1 = new AtomicLong(0L);
-
     // 这个类的性能比较高，但是也有局限性，只能用于统计和计数
     static LongAdder count3 = new LongAdder();
 
     public static void main(String[] args) throws Exception {
         Thread[] threads = new Thread[1000];
-
         for (int i = 0; i < threads.length; i++) {
             threads[i] =
                     new Thread(() -> {
@@ -41,7 +39,6 @@ public class T02_AtomicVsSyncVsLongAdder {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
-
                             for (int k = 0; k < 100000; k++)
                                 synchronized (lock) {
                                     count2++;
@@ -76,5 +73,4 @@ public class T02_AtomicVsSyncVsLongAdder {
             e.printStackTrace();
         }
     }
-
 }
