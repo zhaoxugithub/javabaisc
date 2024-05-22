@@ -1,5 +1,8 @@
 package com.serendipity.learn.c_029_sellticket;
 
+import lombok.val;
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -24,7 +27,9 @@ public class TicketSeller1 {
     public static void main(String[] args) {
         for (int i = 0; i < Constants.THREAD_COUNT; i++) {
             new Thread(() -> {
+                // list.size() > 0 这个条件会被多个线程同时判断，然后同时进入到if语句中，然后同时执行remove方法，就会出现数组越界的情况
                 while (list.size() > 0) {
+                    // list.size(),list.remove() 都不是原子操作
                     System.out.println(Thread.currentThread().getName() + "售出了票" + list.remove(0));
                     try {
                         TimeUnit.SECONDS.sleep(1);
@@ -34,5 +39,13 @@ public class TicketSeller1 {
                 }
             }, "t" + i).start();
         }
+    }
+
+
+    @Test
+    public void tet() {
+        ArrayList<String> strings = new ArrayList<>();
+        val remove = strings.remove(0);
+        System.out.println(remove);
     }
 }

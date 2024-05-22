@@ -41,7 +41,7 @@ public class MyContainer1<T> {
     }
 
     public synchronized T get() {
-        while (list.size() == 0) {
+        while (list.isEmpty()) {
             try {
                 //阻塞消费者
                 this.wait();
@@ -61,7 +61,7 @@ public class MyContainer1<T> {
         for (int i = 0; i < 2; i++) {
             new Thread(() -> {
                 for (int j = 0; j < 25; j++) {
-                    String str = "zz" + String.valueOf(j);
+                    String str = "zz" + j;
                     container1.put(str);
                 }
             }, "productor" + i).start();

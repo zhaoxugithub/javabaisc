@@ -36,18 +36,13 @@ public class AnnotationDemo {
 
     class Student extends Person {
         public void test() {
-            Class<Student> studentClass = Student.class;
-            // 获取Student上的所有注解（注解有继承）
-            Annotation[] annotations = studentClass.getAnnotations();
-            for (Annotation annotation : annotations) {
-                log.info("annotation ={}", annotation);
-            }
         }
     }
 
     @Test
     public void test() {
-        new Student().test();
+        // 获取Student上的所有注解（注解有继承）
+        log.info("获取Student上的所有注解:{}", Student.class.getAnnotations());
     }
 }
 

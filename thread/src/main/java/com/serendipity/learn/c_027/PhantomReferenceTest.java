@@ -26,6 +26,10 @@ import java.util.LinkedList;
  *
  *     事实上，虚引用有一个很重要的用途就是用来做堆外内存的释放，
  *     DirectByteBuffer就是通过虚引用来实现堆外内存的释放的。
+ *
+ *     虚引用：当GC的时候
+ *
+ *
  */
 public class PhantomReferenceTest {
 

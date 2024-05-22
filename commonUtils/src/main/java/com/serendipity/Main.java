@@ -12,5 +12,6 @@ public class Main {
         Person mock = JMockData.mock(Person.class);
         System.out.println(mock);
         System.out.println("Hello world!");
+        System.out.println("test2");
     }
 }
