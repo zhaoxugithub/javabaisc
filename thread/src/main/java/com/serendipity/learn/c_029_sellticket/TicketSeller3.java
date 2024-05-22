@@ -11,31 +11,33 @@ import java.util.LinkedList;
  */
 public class TicketSeller3 {
 
-    private static LinkedList<String> list  = new LinkedList<>();
+    private static final LinkedList<String> list = new LinkedList<>();
 
     static {
         for (int i = 0; i < Constants.TICKET_NUMS; i++) {
-            list.add("票号："+i);
+            list.add("票号：" + i);
         }
     }
 
     public static void main(String[] args) {
         for (int i = 0; i < Constants.THREAD_COUNT; i++) {
-            new Thread(()->{
-                while(true){
-                    synchronized (list){
-                        if(list.size() <= 0) break;
+            new Thread(() -> {
+                while (true) {
+
+                    // 加锁 可以保证 list.size() 和 list.remove() 之间的原子性
+                    synchronized (list) {
+                        if (list.isEmpty()) break;
 
 //                        try {
 //                            TimeUnit.SECONDS.sleep(1);
 //                        } catch (InterruptedException e) {
 //                            e.printStackTrace();
 //                        }
-                        System.out.println(Thread.currentThread().getName()+"售出了票" + list.remove(0));
+                        System.out.println(Thread.currentThread().getName() + "售出了票" + list.remove(0));
                     }
 
                 }
-            },"t"+i).start();
+            }, "t" + i).start();
         }
     }
 

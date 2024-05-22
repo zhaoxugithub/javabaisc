@@ -14,6 +14,11 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * <p>
  * 读写锁（共享锁和排他锁）
  */
+/*
+    读读 不互斥
+    读写 互斥
+    写写 互斥
+ */
 public class T {
     private static Lock reLock = new ReentrantLock();
     static ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
@@ -23,6 +28,7 @@ public class T {
 
     public static void read(Lock lock) {
         try {
+            Thread.sleep(10);
             lock.lock();
             Thread.sleep(1000);
             System.out.println(Thread.currentThread().getName() + ":read over");
@@ -36,7 +42,7 @@ public class T {
     public static void write(Lock lock, int value) {
         try {
             lock.lock();
-            Thread.sleep(1000);
+            Thread.sleep(10000);
             v = value;
             System.out.println(Thread.currentThread().getName() + ":write over");
         } catch (Exception e) {
@@ -52,11 +58,17 @@ public class T {
                 read(readLock);
             }).start();
         }
-        for (int i = 0; i < 5; i++) {
+
+        new Thread(() -> {
+            write(writeLock, 10);
+        }).start();
+
+
+/*        for (int i = 0; i < 5; i++) {
             int finalI = i;
             new Thread(() -> {
                 write(writeLock, finalI);
             }).start();
-        }
+        }*/
     }
 }

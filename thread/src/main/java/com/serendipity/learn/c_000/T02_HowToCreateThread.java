@@ -8,10 +8,20 @@ import lombok.extern.slf4j.Slf4j;
  * Date: 2021/8/31 12:12 上午
  * FileName: T02_HowToCreateThread
  * Description: com.java.thread.c_001
+ *
+ * Runnable接口将任务逻辑与线程分离，提供更好的代码组织和可复用性，而Thread类则提供了更多的线程控制和状态管理功能。
  */
 @Slf4j
 @SuppressWarnings("all")
 public class T02_HowToCreateThread {
+
+    /*
+        Thread: 一个Thread实例代表一个线程，线程之间资源不共享, 一个线程独享
+        Runnable: 一个Runnable实例代表一个任务，多个线程可以共享同一个Runnable实例，线程之间资源共享
+
+        可以简单理解：  runnable 任务逻辑
+                      Thread   线程
+     */
     public static class MyThread extends Thread {
         @Override
         public void run() {

@@ -51,6 +51,11 @@ public class WeakReferenceTest {
             假设： 如果ThreadLocalMap中的key是由强引用指向的，那么当tl=null,gc回收ThreadLocal回回收不了，因为被另外一个强引用指向着；
             所以结论：tl 强引用指向ThreadLocal 对象，而ThreadLocalMap 中的key （ThreadLocal对象） 是由于弱引用指向的
             第二：使用ThreadLocal 一定要手动remove掉不用的value,因为当ThreadLocal 对象（key）被回收了，但是value依旧存在,如果不remove会产生内存泄漏
+
+            ThreadLocal: 线程与线程之间是相互隔离的
+                         一个线程 对应的是第一个 ThreadLocalMap
+                         一个ThreadLocalMap 有多个Entry<ThreadLocal,Value>
+                         一个Entry 的key = ThreadLocal对象, Value 是实际值
          */
         ThreadLocal<M> tl = new ThreadLocal<>();
         tl.set(new M());
