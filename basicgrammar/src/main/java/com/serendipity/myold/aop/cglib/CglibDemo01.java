@@ -37,7 +37,6 @@ public class CglibDemo01 {
         }
     }
 
-
     @Test
     public void test() {
         CglibProxy cglibProxy = new CglibProxy();

@@ -62,9 +62,7 @@ public class BeanUtilsDemo01 {
         Person p2 = (Person) BeanUtils.cloneBean(person);
         System.out.println(p2);
         System.out.println(p2.getAddress().hashCode() == person.getAddress().hashCode());
-
         person.getAddress().setCity("苏州");
-
         // 浅拷贝
         System.out.println(p2.getAddress());
         //

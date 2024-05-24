@@ -14,7 +14,7 @@ import java.lang.annotation.*;
  **/
 public class TestInheritedAnnotationDemo {
 
-    @TestInheritedAnnotation(value = {"value"}, number = 10)
+    @TestInheritedAnnotation(value = {"123456"}, number = 10)
     class Person {
     }
 

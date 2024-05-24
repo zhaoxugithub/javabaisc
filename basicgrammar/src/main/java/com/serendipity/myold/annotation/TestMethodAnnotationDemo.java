@@ -37,7 +37,7 @@ public class TestMethodAnnotationDemo {
     @SuppressWarnings({"unchecked", "deprecation"})
     @MyMethodAnnotation(title = "test method", description = "suppress warning static method")
     public static void genericsTest() throws FileNotFoundException {
-        List l = new ArrayList();
+        List<String> l = new ArrayList<String>();
         l.add("abc");
         oldMethod();
     }
