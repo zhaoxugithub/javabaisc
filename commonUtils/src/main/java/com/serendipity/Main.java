@@ -2,6 +2,7 @@ package com.serendipity;
 
 import com.github.jsonzou.jmockdata.JMockData;
 import com.serendipity.pojo.Person;
+import org.junit.Test;
 
 /**
  * @author: 11931
@@ -12,5 +13,18 @@ public class Main {
         Person mock = JMockData.mock(Person.class);
         System.out.println(mock);
         System.out.println("Hello world!");
+    }
+
+    @Test
+    public void test() {
+        process1();
+    }
+
+    private void process1() {
+        System.out.println("test1");
+        System.out.println("test2");
+        System.out.println("test3");
+        System.out.println("test4");
+        System.out.println("test5");
     }
 }

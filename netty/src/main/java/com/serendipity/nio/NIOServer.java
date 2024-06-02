@@ -32,7 +32,7 @@ public class NIOServer {
         serverSocketChannel.configureBlocking(false);
         // 指明服务端的端口地址
         serverSocketChannel.socket()
-                           .bind(new InetSocketAddress(8889));
+                .bind(new InetSocketAddress(8889));
         // 将ServerSocketChannel注册到Selector中，关心事件为是是否有连接OP_ACCEPT
         serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
         // 进行循环监听

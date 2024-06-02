@@ -23,20 +23,21 @@ public class NettyGroupClient {
         Bootstrap bootstrap = new Bootstrap();
         try {
             ChannelFuture future = bootstrap.group(eventExecutors)
-                                            .channel(NioSocketChannel.class)
-                                            .handler(new ChannelInitializer<NioSocketChannel>() {
-                                                @Override
-                                                protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
-                                                    ChannelPipeline pipeline = nioSocketChannel.pipeline();
-                                                    // 加入相关handler
-                                                    pipeline.addLast("decoder", new StringDecoder());
-                                                    pipeline.addLast("encoder", new StringEncoder());
-                                                    // 加入自定义的handler
-                                                    pipeline.addLast(new NettyGroupClientHandler());
-                                                }
-                                            })
-                                            .connect(host, port)
-                                            .sync();
+                    .channel(NioSocketChannel.class)
+                    .handler(new ChannelInitializer<NioSocketChannel>() {
+                        @Override
+                        protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
+                            ChannelPipeline pipeline = nioSocketChannel.pipeline();
+                            // 加入相关handler
+                            pipeline.addLast("decoder", new StringDecoder());
+                            pipeline.addLast("encoder", new StringEncoder());
+                            // 加入自定义的handler
+                            pipeline.addLast(new NettyGroupClientHandler());
+                            pipeline.addLast(new NettyGroupClientHandler());
+                        }
+                    })
+                    .connect(host, port)
+                    .sync();
             future.addListener(new ChannelFutureListener() {
                 @Override
                 public void operationComplete(ChannelFuture channelFuture) {
