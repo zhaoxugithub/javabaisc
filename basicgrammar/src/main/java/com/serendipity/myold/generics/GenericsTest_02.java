@@ -46,6 +46,6 @@ public class GenericsTest_02 {
 
     @Test
     public void test() {
-        funD(new ArrayList<B>());
+        funD(new ArrayList<>());
     }
 }

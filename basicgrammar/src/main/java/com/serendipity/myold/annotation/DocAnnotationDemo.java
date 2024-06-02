@@ -38,6 +38,10 @@ public class DocAnnotationDemo {
         @TestDocAnnotation("test2")
         public void test2() {
         }
+
+        @Test
+        public void test03() {
+        }
     }
 
     @Test

@@ -43,6 +43,18 @@
             <artifactId>jmockdata</artifactId>
             <version>4.3.0</version>
         </dependency>
-    </dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>31.1-jre</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>2.9.3</version>
+        </dependency>
+
+     </dependencies>
 
 </project>
