@@ -1,5 +1,7 @@
 package com.serendipity.myold.base;
 
+import cn.hutool.core.map.MapUtil;
+import com.google.common.collect.Maps;
 import org.junit.Test;
 
 import java.io.Console;
@@ -40,10 +42,11 @@ public class SystemDemo {
     @Test
     public void test01() {
         Map<String, String> env = System.getenv();
-        System.out.println(env);
-        for (Map.Entry<String, String> entry : env.entrySet()) {
-            System.out.println(entry.getKey() + "=" + entry.getValue());
-        }
+        env.entrySet()
+                .stream()
+                .forEach(entry -> {
+                    System.out.printf(String.format("%s=>%s\n", entry.getKey(), entry.getValue()));
+                });
     }
 
     @Test

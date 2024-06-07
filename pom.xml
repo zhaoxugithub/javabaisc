@@ -17,6 +17,7 @@
         <module>effectivejava</module>
         <module>designerPattern</module>
         <module>commonUtils</module>
+        <module>newFeature</module>
     </modules>
     <dependencies>
         <dependency>
