@@ -14,7 +14,7 @@ public class TypeParameterAndTypeUseAnnotationDemo {
 
     // 自定义ElementType.TYPE_PARAMETER注解
     @Retention(RetentionPolicy.RUNTIME)
-// 作用在方法参数中
+    // 作用在方法参数中
     @Target(ElementType.TYPE_PARAMETER)
     @interface MyNotEmpty {
     }

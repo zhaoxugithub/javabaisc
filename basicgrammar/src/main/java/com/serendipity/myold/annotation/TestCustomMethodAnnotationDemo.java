@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.lang.annotation.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -55,6 +56,8 @@ public class TestCustomMethodAnnotationDemo {
     public void test1() throws ClassNotFoundException {
         ClassLoader classLoader = TestCustomMethodAnnotationDemo.class.getClassLoader();
         log.info("classLoader ={}", classLoader);
+
+        System.out.println(Arrays.toString(classLoader.getDefinedPackages()));
         // 获取自定义注解的class对象
         Class<?> aClass = classLoader.loadClass("com.serendipity.myold.annotation.TestCustomMethodAnnotationDemo");
         log.info("class = {}", aClass);

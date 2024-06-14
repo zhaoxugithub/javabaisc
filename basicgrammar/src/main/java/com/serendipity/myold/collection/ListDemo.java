@@ -120,6 +120,7 @@ public class ListDemo {
         System.out.println("subList: " + subList);
     }
 
-    public void test(){}
+    public void test() {
+    }
 
 }

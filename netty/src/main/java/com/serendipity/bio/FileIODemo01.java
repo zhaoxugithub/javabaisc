@@ -20,7 +20,7 @@ public class FileIODemo01 {
     @Test
     public void test01() throws IOException {
         // Unicode 默认中文3个字节
-        FileInputStream fileInputStream = new FileInputStream("D:\\document\\idea\\javabaisc\\netty\\src\\main\\java\\com\\serendipity\\bio\\file01.txt");
+        FileInputStream fileInputStream = new FileInputStream("file01.txt");
         // 获取可用的字节数
         int available = fileInputStream.available();
         log.info("available={}", available);

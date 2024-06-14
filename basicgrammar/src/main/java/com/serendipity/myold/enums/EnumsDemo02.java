@@ -1,6 +1,7 @@
 package com.serendipity.myold.enums;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Test;
 
 /**
  * Copyright (C), 2017-2022, 赵旭
@@ -54,6 +55,48 @@ public class EnumsDemo02 {
             return "WeekDay03{" + "dataValue=" + dataValue + ", chinese='" + chinese + '\'' + '}';
         }
     }
+
+    @Test
+    public void test() {
+        // 所有美剧类型
+        WeekDay01[] values = WeekDay01.values();
+        // 区分大小写
+        WeekDay01 sun = WeekDay01.valueOf("SUN");
+        System.out.println(sun.name());
+
+        for (WeekDay01 value : values) {
+            System.out.println(value.name());
+        }
+    }
+
+    @Test
+    public void test2() {
+        WeekDay02[] values = WeekDay02.values();
+        WeekDay02 mon1 = WeekDay02.valueOf("MON");
+        for (WeekDay02 value : values) {
+            System.out.println(value.dayValue);
+        }
+        WeekDay02 mon = WeekDay02.MON;
+        int dayValue = mon.dayValue;
+    }
+
+    @Test
+    public void test3() {
+        WeekDay03[] values = WeekDay03.values();
+        WeekDay03 mon = WeekDay03.valueOf("MON");
+
+        for (WeekDay03 value : values) {
+            System.out.println(value.dataValue);
+            System.out.println(value.getChinese());
+        }
+
+        WeekDay03 mon1 = WeekDay03.MON;
+        String chinese = mon1.getChinese();
+        int dataValue = mon1.dataValue;
+
+        System.out.println(chinese + "---" + dataValue);
+    }
+
 
     public static void main(String[] args) {
         WeekDay01 mon = WeekDay01.MON;
