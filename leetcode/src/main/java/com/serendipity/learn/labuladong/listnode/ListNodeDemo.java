@@ -134,9 +134,4 @@ public class ListNodeDemo {
         print();
     }
 
-    public void test(){
-
-    }
-
-
 }
