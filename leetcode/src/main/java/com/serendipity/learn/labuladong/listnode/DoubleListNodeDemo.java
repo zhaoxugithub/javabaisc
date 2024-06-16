@@ -3,8 +3,6 @@ package com.serendipity.learn.labuladong.listnode;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.HexFormat;
-
 
 // 双链表
 public class DoubleListNodeDemo {
@@ -175,33 +173,3 @@ public class DoubleListNodeDemo {
         print();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

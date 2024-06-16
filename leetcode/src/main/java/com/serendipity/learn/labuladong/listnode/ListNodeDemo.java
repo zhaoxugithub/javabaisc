@@ -116,7 +116,6 @@ public class ListNodeDemo {
         print();
     }
 
-
     // 随机删除
     @Test
     public void removeRangeNode() {
@@ -133,5 +132,4 @@ public class ListNodeDemo {
 
         print();
     }
-
 }
