@@ -1,9 +1,14 @@
 package com.serendipity.leetcode;
 
 
+import com.serendipity.node.ListNode;
+import com.serendipity.utils.LinkedListUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+
+import static com.serendipity.utils.LinkedListUtils.createListNode;
 
 /*
 
@@ -36,70 +41,6 @@ import java.util.Stack;
  */
 public class LeetCode_02_addTwoNumbers {
 
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int x) {
-            val = x;
-        }
-
-        ListNode(int x, ListNode next) {
-            this.val = x;
-            this.next = next;
-        }
-    }
-
-    public static ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        Stack<Integer> stack1 = new Stack<>();
-        Stack<Integer> stack2 = new Stack<>();
-        ListNode p1 = l1;
-        ListNode p2 = l2;
-
-        while (p1 != null) {
-            stack1.push(p1.val);
-            p1 = p1.next;
-        }
-        while (p2 != null) {
-            stack2.push(p2.val);
-            p2 = p2.next;
-        }
-        List<Integer> list = new ArrayList<>();
-        int temp = 0;
-        while (!stack2.isEmpty() && !stack1.isEmpty()) {
-            Integer b = stack2.pop();
-            Integer a = stack1.pop();
-            int re = (a + b + temp) % 10;
-            list.add(re);
-            temp = a + b > 9 ? 1 : 0;
-        }
-        while (!stack1.isEmpty()) {
-            Integer pop = stack1.pop();
-            list.add(pop);
-        }
-        while (!stack2.isEmpty()) {
-            Integer pop = stack2.pop();
-            list.add(pop);
-        }
-        ListNode head = new ListNode(list.get(0));
-        p1 = head;
-        for (int i = 1; i < list.size(); i++) {
-            p1.next = new ListNode(list.get(i));
-            p1 = p1.next;
-        }
-        return head;
-    }
-
-    public static ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
-        int more = 0;
-        ListNode p1 = l1;
-        ListNode p2 = l2;
-
-        return null;
-    }
 
     // 反转ListNode,迭代方法
     public static ListNode reverseList(ListNode head) {
@@ -132,17 +73,95 @@ public class LeetCode_02_addTwoNumbers {
     }
 
 
-    public static void main(String[] args) {
-        ListNode listNode = new ListNode(2);
-        listNode.next = new ListNode(4);
-        listNode.next.next = new ListNode(3);
-        ListNode listNode2 = new ListNode(5);
-        listNode2.next = new ListNode(6);
-        listNode2.next.next = new ListNode(4);
-        ListNode listNode1 = addTwoNumbers2(listNode, listNode2);
-        while (listNode1 != null) {
-            System.out.println(listNode1.val);
-            listNode1 = listNode1.next;
+    //
+    public static ListNode<Integer> addTwoNumbers111(ListNode<Integer> l1, ListNode<Integer> l2) {
+        ListNode preHead = new ListNode(0);
+        ListNode cur = preHead;
+        // 进位符
+        int carry = 0;
+
+        while (l1 != null && l2 != null) {
+            int num1 = l1.val;
+            int num2 = l2.val;
+            int sum = num1 + num2 + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            cur.next = new ListNode(sum);
+
+            cur = cur.next;
+            l1 = l1.next;
+            l2 = l2.next;
         }
+
+        while (l1 != null) {
+            int sum = l1.val + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            cur.next = new ListNode(sum);
+            cur = cur.next;
+            l1 = l1.next;
+        }
+
+        while (l2 != null) {
+            int sum = l2.val + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            cur.next = new ListNode(sum);
+            cur = cur.next;
+            l2 = l2.next;
+        }
+
+        if (carry > 0) {
+            cur.next = new ListNode(carry);
+        }
+        return preHead.next;
+    }
+
+    /**
+     * 优化版本
+     *
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public static ListNode<Integer> addTwoNumbers22(ListNode<Integer> l1, ListNode<Integer> l2) {
+
+        ListNode preHead = new ListNode(-1);
+        ListNode cur = preHead;
+
+        int carry = 0;
+        while (l1 != null || l2 != null) {
+            int num1 = l1 == null ? 0 : l1.val;
+            int num2 = l2 == null ? 0 : l2.val;
+
+            int sum = num1 + num2 + carry;
+
+            carry = sum / 10;
+            sum = sum % 10;
+
+            cur.next = new ListNode(sum);
+            cur = cur.next;
+
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+
+            if (l2 != null) {
+                l2 = l2.next;
+            }
+        }
+        if (carry > 0) {
+            cur.next = new ListNode(carry);
+        }
+        return preHead.next;
+    }
+
+
+    public static void main(String[] args) {
+        ListNode<Integer> listNode1 = createListNode(9, 9, 9, 9, 9, 9, 9);
+        ListNode<Integer> listNode2 = createListNode(9, 9, 9, 9);
+        ListNode<Integer> integerListNode = addTwoNumbers22(listNode1, listNode2);
+        LinkedListUtils.printListNode(integerListNode);
+
     }
 }
