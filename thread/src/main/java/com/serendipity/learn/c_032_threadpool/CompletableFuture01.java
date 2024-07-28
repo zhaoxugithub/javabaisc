@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -15,21 +16,24 @@ import java.util.concurrent.TimeUnit;
  * https://juejin.cn/post/6844904195162636295
  **/
 public class CompletableFuture01 {
+    /*
+       supplyAsync ---> thenAccept
+     */
     @Test
     public void test01() throws InterruptedException {
         CompletableFuture.supplyAsync(() -> {
-                             System.out.println("[" + System.currentTimeMillis() + "]:电饭煲开始做饭");
-                             try {
-                                 TimeUnit.SECONDS.sleep(3);
-                             } catch (InterruptedException e) {
-                                 throw new RuntimeException(e);
-                             }
-                             return "白米饭";
-                         })
-                         .thenAccept(result -> {
-                             // 基于回调通知,当上述方法完成之后就会调用这个这里面的代码块
-                             System.out.println("[" + System.currentTimeMillis() + "]:开始吃" + result);
-                         });
+                    System.out.println("[" + System.currentTimeMillis() + "]:电饭煲开始做饭");
+                    try {
+                        TimeUnit.SECONDS.sleep(3);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return "白米饭";
+                })
+                .thenAccept(result -> {
+                    // 基于回调通知,当上述方法完成之后就会调用这个这里面的代码块
+                    System.out.println("[" + System.currentTimeMillis() + "]:开始吃" + result);
+                });
         System.out.println("[" + System.currentTimeMillis() + "]:我想去搞点牛奶和鸡蛋");
         System.out.println("[" + System.currentTimeMillis() + "]:main start...");
         Thread.sleep(4000);
@@ -43,22 +47,22 @@ public class CompletableFuture01 {
          */
     }
 
-
+    // supplyAsync ---> thenAccept
     @Test
     public void test02() throws InterruptedException {
         CompletableFuture<Void> future = CompletableFuture.supplyAsync(() -> {
-                                                              System.out.println("[" + System.currentTimeMillis() + "]:电饭煲开始做饭");
-                                                              try {
-                                                                  TimeUnit.SECONDS.sleep(3);
-                                                              } catch (InterruptedException e) {
-                                                                  throw new RuntimeException(e);
-                                                              }
-                                                              return "白米饭";
-                                                          })
-                                                          .thenAccept(result -> {
-                                                              // 基于回调通知,当上述方法完成之后就会调用这个这里面的代码块
-                                                              System.out.println("[" + System.currentTimeMillis() + "]:开始吃" + result);
-                                                          });
+                    System.out.println("[" + System.currentTimeMillis() + "]:电饭煲开始做饭");
+                    try {
+                        TimeUnit.SECONDS.sleep(3);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return "白米饭";
+                })
+                .thenAccept(result -> {
+                    // 基于回调通知,当上述方法完成之后就会调用这个这里面的代码块
+                    System.out.println("[" + System.currentTimeMillis() + "]:开始吃" + result);
+                });
         System.out.println("[" + System.currentTimeMillis() + "]:我想去搞点牛奶和鸡蛋");
         future.join();
         System.out.println("[" + System.currentTimeMillis() + "]:main start...");
@@ -77,11 +81,13 @@ public class CompletableFuture01 {
     public void test03() {
         // 异步任务，无返回值，采用内部的forkjoin线程池
         CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> {
-            System.out.println("步任务，无返回值，采用内部的forkjoin线程池");
+            System.out.println("异步任务，无返回值，采用内部的forkjoin线程池");
         });
 
         // 异步任务,无返回值,使用自定义线程池
-        CompletableFuture<Void> future2 = CompletableFuture.runAsync(() -> System.out.println("异步任务,无返回值,使用自定义线程池"));
+        CompletableFuture<Void> future2 = CompletableFuture.runAsync(() -> {
+            System.out.println("异步任务,无返回值,使用自定义线程池");
+        }, Executors.newSingleThreadExecutor());
 
         // 异步任务,有返回值,使用内部默认的线程池
         CompletableFuture<String> future3 = CompletableFuture.supplyAsync(() -> {
@@ -96,70 +102,74 @@ public class CompletableFuture01 {
         CompletableFuture.allOf(future2, future3);
     }
 
+
+    /*
+         supplyAsync ---> thenAccept ---> thenRun
+     */
     @Test
     public void test04() throws ExecutionException, InterruptedException {
         /**
          * supplyAsync -> thenAcceptAsync ->thenRunAsync 这三个方法是串行的,只不过是提交给了另外的线程池去执行
          */
         CompletableFuture<Void> future = CompletableFuture.supplyAsync(() -> {
-                                                              try {
-                                                                  System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
-                                                                                                                                     .getName() + ":[supplyAsync start]");
-                                                                  TimeUnit.SECONDS.sleep(5);
-                                                                  System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
-                                                                                                                                     .getName() + ":[supplyAsync end]");
-                                                              } catch (InterruptedException e) {
-                                                                  throw new RuntimeException(e);
-                                                              }
-                                                              return "over1";
-                                                          })
-                                                          .thenAcceptAsync(result -> {
-                                                              try {
-                                                                  System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
-                                                                                                                                     .getName() + ":[thenAcceptAsync start]");
-                                                                  TimeUnit.SECONDS.sleep(3);
-                                                              } catch (InterruptedException e) {
-                                                                  throw new RuntimeException(e);
-                                                              }
-                                                              System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
-                                                                                                                                 .getName() + ":[thenAcceptAsync end]");
-                                                          })
-                                                          .thenRunAsync(() -> {
-                                                              try {
-                                                                  System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
-                                                                                                                                     .getName() + ":[thenRunAsync start]");
-                                                                  TimeUnit.SECONDS.sleep(1);
-                                                              } catch (InterruptedException e) {
-                                                                  throw new RuntimeException(e);
-                                                              }
-                                                              System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
-                                                                                                                                 .getName() + ":[thenRunAsync end]");
-                                                          });
+                    try {
+                        System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
+                                .getName() + ":[supplyAsync start]");
+                        TimeUnit.SECONDS.sleep(5);
+                        System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
+                                .getName() + ":[supplyAsync end]");
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    return "over1";
+                })
+                .thenAcceptAsync(result -> {
+                    try {
+                        System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
+                                .getName() + ":[thenAcceptAsync start]");
+                        TimeUnit.SECONDS.sleep(3);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
+                            .getName() + ":[thenAcceptAsync end]");
+                })
+                .thenRunAsync(() -> {
+                    try {
+                        System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
+                                .getName() + ":[thenRunAsync start]");
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
+                            .getName() + ":[thenRunAsync end]");
+                });
 
         // thread.sleep/future.join 的原因: 防止主线程提前结束,上面打印不出来
         // Thread.sleep(10000);
         future.join();
         System.out.println(Thread.currentThread()
-                                 .getName() + ":over");
+                .getName() + ":over");
 
     }
 
     private void printMsg(String msg) {
         System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
-                                                                           .getName() + ":[" + msg + "]");
+                .getName() + ":[" + msg + "]");
     }
 
     @Test
     public void test06() throws InterruptedException {
         CompletableFuture<String> future1 = CompletableFuture.supplyAsync(() -> {
             System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
-                                                                               .getName() + ":[supplyAsync1 start]");
+                    .getName() + ":[supplyAsync1 start]");
             return "supplyAsync1 end";
         });
 
         CompletableFuture<String> future2 = CompletableFuture.supplyAsync(() -> {
             System.out.println("[" + System.currentTimeMillis() + "]:" + Thread.currentThread()
-                                                                               .getName() + ":[supplyAsync2 start]");
+                    .getName() + ":[supplyAsync2 start]");
             return "supplyAsync2 end";
         });
 
@@ -199,50 +209,50 @@ public class CompletableFuture01 {
         // whenCompleteAsync：处理完成或异常，无返回值
         // handleAsync：处理完成或异常，有返回值
         CompletableFuture.supplyAsync(() -> {
-                             printMsg("开始煮米饭");
-                             // todo something
-                             return "煮熟的米饭";
-                         })
-                         .whenCompleteAsync((rich, exception) -> {
-                             if (exception != null) {
-                                 printMsg("电饭锅坏了,米饭没做熟");
-                             } else {
-                                 printMsg("米饭熟了,可以吃了");
-                             }
-                         });
+                    printMsg("开始煮米饭");
+                    // todo something
+                    return "煮熟的米饭";
+                })
+                .whenCompleteAsync((rich, exception) -> {
+                    if (exception != null) {
+                        printMsg("电饭锅坏了,米饭没做熟");
+                    } else {
+                        printMsg("米饭熟了,可以吃了");
+                    }
+                });
 
         // 有返回值
         CompletableFuture.supplyAsync(() -> {
-                             printMsg("开始煮米饭");
-                             return "煮熟的米饭";
-                         })
-                         .handleAsync((rich, exception) -> {
-                             if (exception != null) {
-                                 printMsg("电饭锅坏了,米饭没做熟");
-                             } else {
-                                 printMsg("米饭熟了,可以吃了");
-                             }
+                    printMsg("开始煮米饭");
+                    return "煮熟的米饭";
+                })
+                .handleAsync((rich, exception) -> {
+                    if (exception != null) {
+                        printMsg("电饭锅坏了,米饭没做熟");
+                    } else {
+                        printMsg("米饭熟了,可以吃了");
+                    }
 
-                             return "准备冷一冷再吃米饭";
-                         });
+                    return "准备冷一冷再吃米饭";
+                });
 
         // 异常处理
         CompletableFuture.supplyAsync(() -> {
-                             printMsg("开始煮米饭");
-                             return "煮熟的米饭";
-                         })
-                         .handleAsync((rich, exception) -> {
-                             if (exception != null) {
-                                 printMsg("电饭煲坏了,米饭没做熟");
-                             } else {
-                                 printMsg("米饭熟了,可以吃了");
-                             }
-                             return "准备冷一冷再吃米饭";
-                         })
-                         .exceptionally((exception) -> {
-                             // 前置动作必须的是一个又返回值的操作，不能是那种返回值的那种
-                             return "";
-                         });
+                    printMsg("开始煮米饭");
+                    return "煮熟的米饭";
+                })
+                .handleAsync((rich, exception) -> {
+                    if (exception != null) {
+                        printMsg("电饭煲坏了,米饭没做熟");
+                    } else {
+                        printMsg("米饭熟了,可以吃了");
+                    }
+                    return "准备冷一冷再吃米饭";
+                })
+                .exceptionally((exception) -> {
+                    // 前置动作必须的是一个又返回值的操作，不能是那种返回值的那种
+                    return "";
+                });
         Thread.sleep(10000);
     }
 }
