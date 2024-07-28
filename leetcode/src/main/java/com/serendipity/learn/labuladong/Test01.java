@@ -121,4 +121,41 @@ public class Test01 {
         }
         return head.next;
     }
+
+
+    public int[] twoSum3(int[] nums, int target) {
+        HashMap<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int another = target - nums[i];
+            if (map.containsKey(another)) {
+                return new int[]{map.get(another), i};
+            } else {
+                map.put(nums[i], i);
+            }
+        }
+        return new int[]{-1, -1};
+    }
+    //
+    public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
+        if (l1 == null || l2 == null) {
+            return null;
+        }
+
+        ListNode head = null;
+        ListNode tail = null;
+
+        // 进位
+        int carry = 0;
+        while (l1 != null || l2 != null) {
+            int n1 = l1 != null ? l1.val : 0;
+            int n2 = l2 != null ? l2.val : 0;
+
+
+        }
+
+        return head;
+
+
+    }
+
 }
