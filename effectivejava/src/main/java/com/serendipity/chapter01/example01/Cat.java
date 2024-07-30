@@ -1,4 +1,4 @@
-package com.serendipity.ch01;
+package com.serendipity.chapter01.example01;
 
 import lombok.Data;
 

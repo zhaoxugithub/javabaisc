@@ -1,4 +1,4 @@
-package com.serendipity.ch02;
+package com.serendipity.chapter02.ch02;
 
 public class NutritionFacts {
 

@@ -1,9 +1,13 @@
 package com.serendipity.myold.collection;
 
+import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
+import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.Test;
 
 import java.util.BitSet;
+import java.util.HashMap;
+import java.util.function.BiFunction;
 
 /**
  * ClassName MapDemo
@@ -33,5 +37,29 @@ public class MapDemo {
     public void test() {
         BitMapDemo bitMapDemo = new BitMapDemo();
         bitMapDemo.testBitSet();
+    }
+
+
+    @Test
+    public void testComputerIf() {
+        HashMap<String, String> map = Maps.newHashMap();
+        map.put("A", "a1");
+        map.put("B", "b1");
+        map.put("C", "c1");
+        map.computeIfPresent("A", new BiFunction<String, String, String>() {
+            // s: key
+            // s2: value
+            @Override
+            public String apply(String s, String s2) {
+                return s + s2;
+            }
+        });
+
+        // 简单写法
+        map.computeIfPresent("B", (key, value) -> {
+            return key + value;
+        });
+
+        System.out.println(map.toString());
     }
 }
