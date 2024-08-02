@@ -25,7 +25,5 @@ public final class MathUtils {
 
         System.out.println("add = " + add);
         System.out.println("multiply = " + multiply);
-
     }
-
 }
