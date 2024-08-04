@@ -8,7 +8,8 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
- * https://www.pdai.tech/md/java/basic/java-basic-x-annotation.html#java-%E5%9F%BA%E7%A1%80---%E6%B3%A8%E8%A7%A3%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3
+ * https://www.pdai.tech/md/java/basic/java-basic-x-annotation
+ * .html#java-%E5%9F%BA%E7%A1%80---%E6%B3%A8%E8%A7%A3%E6%9C%BA%E5%88%B6%E8%AF%A6%E8%A7%A3
  * Copyright (C), 2017-2021, 赵旭
  * Author: serendipity
  * Date: 2021/9/18 10:30 上午
@@ -46,12 +47,11 @@ public class DocAnnotationDemo {
 
     @Test
     public void test() {
-        Arrays.stream(A.class.getMethods())
-                .filter(method -> {
-                    return method.isAnnotationPresent(TestDocAnnotation.class);
-                })
-                .forEach(method -> {
-                    System.out.println(Arrays.toString(method.getAnnotations()));
-                });
+        Arrays.stream(A.class.getMethods()).filter(method -> {
+            log.info("method ={}", method.getName());
+            return method.isAnnotationPresent(TestDocAnnotation.class);
+        }).forEach(method -> {
+            System.out.println(Arrays.toString(method.getAnnotations()));
+        });
     }
 }

@@ -8,6 +8,12 @@ import java.lang.annotation.ElementType;
 import java.lang.annotation.Target;
 import java.util.ArrayList;
 
+/*
+    @Documented
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(value={CONSTRUCTOR, FIELD, LOCAL_VARIABLE, METHOD, PACKAGE, PARAMETER, TYPE})
+*/
+
 /**
  * ClassName Test
  * Description TODO
@@ -35,5 +41,4 @@ public class DocAnnotationArrayDemo {
         DocAnnotationArrayDemo test = new DocAnnotationArrayDemo();
         test.testDoc();
     }
-
 }

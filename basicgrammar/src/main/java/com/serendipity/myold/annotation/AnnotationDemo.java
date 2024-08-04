@@ -6,6 +6,9 @@ import org.junit.Test;
 import java.lang.annotation.*;
 
 /**
+ * 学习参考： https://www.pdai.tech/md/java/basic/java-basic-x-annotation.html
+ * <p>
+ * <p>
  * Copyright (C), 2017-2021, 赵旭
  * Author: serendipity
  * Date: 2021/9/18 10:41 上午
@@ -17,10 +20,16 @@ import java.lang.annotation.*;
 public class AnnotationDemo {
 
     /*
+       这四个是元注解:
+        是否可以继承;
+        注解保留范围：运行期，编译期，源文件期间
+        作用范围： 方法，类，方法参数等等
+     * @Documented
      * @Inherited 具有继承
      * @Retention(RetentionPolicy.RUNTIME) 在运行时有效
      * @Target({ElementType.TYPE, ElementType.METHOD})作用于方法和类上
      */
+    @Documented
     @Inherited
     @Retention(RetentionPolicy.RUNTIME)
     @Target({ElementType.TYPE, ElementType.METHOD})

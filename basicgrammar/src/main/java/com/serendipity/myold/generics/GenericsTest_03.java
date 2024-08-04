@@ -66,8 +66,7 @@ public class GenericsTest_03 {
         strings.add(11);
         // 报错
         // strings.add(22);
-        Method add = strings.getClass()
-                            .getMethod("add", Object.class);
+        Method add = strings.getClass().getMethod("add", Object.class);
         add.invoke(strings, "qweqwr");
         // add.invoke(strings,new Date());
         for (int i = 0; i < strings.size(); i++) {
@@ -76,14 +75,15 @@ public class GenericsTest_03 {
     }
 
     public void test5() {
-        // 不指定范型
-        Integer add = GenericsTest_03.add(1, 2);
-        Number add1 = GenericsTest_03.add(1, 2.22);
-        Object sdas = GenericsTest_03.add(1, "sdas");
-        // 指定范型
-        int a = GenericsTest_03.<Integer>add(1, 2); // 指定了Integer，所以只能为Integer类型或者其子类
-        // int b = GenericsTest_03.<Integer>add(1, 2.2); // 编译错误，指定了Integer，不能为Float
-        Number c = GenericsTest_03.<Number>add(1, 2.2); // 指定为Number，所以可以为Integer和Float
+        /**不指定泛型的时候*/
+        int i = GenericsTest_03.add(1, 2); //这两个参数都是Integer，所以T为Integer类型
+        Number f = GenericsTest_03.add(1, 1.2); //这两个参数一个是Integer，一个是Float，所以取同一父类的最小级，为Number
+        Object o = GenericsTest_03.add(1, "asd"); //这两个参数一个是Integer，一个是String，所以取同一父类的最小级，为Object
+
+        /**指定泛型的时候*/
+        int a = GenericsTest_03.<Integer>add(1, 2); //指定了Integer，所以只能为Integer类型或者其子类
+//        int b = GenericsTest_03.<Integer>add(1, 2.2); //编译错误，指定了Integer，不能为Float
+        Number c = GenericsTest_03.<Number>add(1, 2.2); //指定为Number，所以可以为Integer和Float
     }
 
     public static <T> T add(T a, T b) {
@@ -101,12 +101,18 @@ public class GenericsTest_03 {
         list1.add("1"); // 编译通过
         // list1.add(1); //编译错误
         String str1 = list1.get(0); // 返回类型就是String
+        System.out.println(str1);
+
         ArrayList list2 = new ArrayList<String>();
         list2.add("1"); // 编译通过
         list2.add(1); // 编译通过
         Object object = list2.get(0); // 返回类型就是Object
+        System.out.println(object);
+
         new ArrayList<String>().add("11"); // 编译通过
         // new ArrayList<String>().add(22); //编译错误
+        boolean add = new ArrayList<>().add("11");
+        new ArrayList<>().add(11);
         String str2 = new ArrayList<String>().get(0); // 返回类型就是String
     }
 
@@ -126,8 +132,10 @@ public class GenericsTest_03 {
         return result;
     }
 
-    public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException, IllegalAccessException {
+    public static void main(String[] args) throws InvocationTargetException, NoSuchMethodException,
+            IllegalAccessException {
         // new GenericsTest_03().max(new ArrayList<E>())
         GenericsTest_03 genericsTest_03 = new GenericsTest_03();
+        genericsTest_03.test06();
     }
 }
