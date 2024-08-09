@@ -58,7 +58,6 @@ public class ReflectDemo03 {
             System.out.println(anInterface.getSimpleName());
         }
 
-
         // 获取父类
         System.out.println(dogClass.getSuperclass().getSimpleName());
 
