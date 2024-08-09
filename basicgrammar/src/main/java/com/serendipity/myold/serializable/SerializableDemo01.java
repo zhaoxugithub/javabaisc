@@ -45,6 +45,4 @@ public class SerializableDemo01 {
         serializableArray();
         deSerializeArray();
     }
-
-
 }
