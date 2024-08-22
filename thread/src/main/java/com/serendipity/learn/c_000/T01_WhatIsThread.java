@@ -23,9 +23,9 @@ public class T01_WhatIsThread {
                 try {
                     TimeUnit.MICROSECONDS.sleep(1);
                 } catch (InterruptedException e) {
-                    record("exception={}%n", e.getMessage());
+                    record("exception= %s", e.getMessage());
                 }
-                record("thread name ={}", Thread.currentThread().getName());
+                record("thread name = %s", Thread.currentThread().getName());
             }
         }
     }
@@ -38,9 +38,9 @@ public class T01_WhatIsThread {
             try {
                 TimeUnit.MICROSECONDS.sleep(1);
             } catch (InterruptedException e) {
-                record("exception={}", e.getMessage());
+                record("exception= %s", e.getMessage());
             }
-            record("main thread = {}", Thread.currentThread().getName());
+            record("main thread = %s", Thread.currentThread().getName());
         }
     }
 }
