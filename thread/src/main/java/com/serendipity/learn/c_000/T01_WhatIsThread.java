@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;
 
+import static com.serendipity.learn.MyLogUtils.record;
+
 /**
  * Copyright (C), 2017-2021, 赵旭
  * Author: serendipity
@@ -21,9 +23,9 @@ public class T01_WhatIsThread {
                 try {
                     TimeUnit.MICROSECONDS.sleep(1);
                 } catch (InterruptedException e) {
-                    log.error("exception={}", e.getMessage());
+                    record("exception={}%n", e.getMessage());
                 }
-                log.info("thread name ={}", Thread.currentThread().getName());
+                record("thread name ={}", Thread.currentThread().getName());
             }
         }
     }
@@ -36,9 +38,9 @@ public class T01_WhatIsThread {
             try {
                 TimeUnit.MICROSECONDS.sleep(1);
             } catch (InterruptedException e) {
-                log.error("exception={}", e.getMessage());
+                record("exception={}", e.getMessage());
             }
-            log.info("main thread = {}", Thread.currentThread().getName());
+            record("main thread = {}", Thread.currentThread().getName());
         }
     }
 }

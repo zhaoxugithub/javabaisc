@@ -9,6 +9,7 @@ import org.checkerframework.checker.nullness.qual.Nullable;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -47,11 +48,9 @@ public class ListDemo {
         System.out.println(mockList);
         mockList.removeIf(s -> s.equals("a"));
         System.out.println(mockList);
-
         List<String> b = mockList.stream().filter(s -> !s.equals("b")).toList();
         System.out.println(b);
     }
-
 
     /**
      * 匿名实现类 + 方法块
@@ -90,10 +89,8 @@ public class ListDemo {
         strings.add("d");
         // a b c d
         System.out.println(list);
-
         // 下面这个代码有异常
         // ArrayList<String> subList = list.subList(0, 2);
-
         list.add("e");
         System.out.println(list);
     }
@@ -109,18 +106,18 @@ public class ListDemo {
             add("S");
         }};
         List<String> subList = sourceList.subList(2, 5);
-
         System.out.println("sourceList: " + sourceList);
         System.out.println("subList: " + subList);
-
         sourceList.add("666");
-
         System.out.println("sourceList: " + sourceList);
         // java.util.ConcurrentModificationException
         System.out.println("subList: " + subList);
     }
 
     public void test() {
+        LinkedList<String> aa = new LinkedList<>() {{
+            add("aa");
+        }};
     }
 
 }

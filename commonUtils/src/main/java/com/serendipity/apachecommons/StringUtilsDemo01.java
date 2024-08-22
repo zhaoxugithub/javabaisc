@@ -98,7 +98,7 @@ public class StringUtilsDemo01 {
     @Test
     public void testAbb() {
         // abbreviate(String str, int maxWidth): 缩短字符串到指定长度，通常在末尾加上省略号
-        System.out.println(StringUtils.abbreviate("Hello World", 8));  // "Hello..."
+        System.out.println(StringUtils.abbreviate("Hello World", 10));  // "Hello W..."
         // capitalize(String str): 将字符串的首字母大写。
         System.out.println(StringUtils.capitalize("hello"));  // "Hello"
         // repeat(String str, int repeat): 重复字符串指定次数。
@@ -109,5 +109,18 @@ public class StringUtilsDemo01 {
         System.out.println(StringUtils.rightPad("abc", 5));  // "abc  "
         // center(String str, int size): 居中填充，使字符串达到指定长度。
         System.out.println(StringUtils.center("abc", 7));  // "  abc  "
+    }
+
+    //  removeXXX 移除 trimXXX 去空  reverseXXX 翻转 stripXXX 移除
+    @Test
+    public void testRemove() {
+        System.out.println(StringUtils.remove(words, "H"));
+        System.out.println(StringUtils.removeIgnoreCase(words, "H"));
+        System.out.println(StringUtils.trim(null));  // return null
+        System.out.println(StringUtils.trimToEmpty(null)); // Null  -> ""
+        System.out.println(StringUtils.trimToNull("")); // "" -> null
+        System.out.println(StringUtils.reverse(words));
+        // 移除一个单词
+        System.out.println(StringUtils.strip(words, "h"));
     }
 }

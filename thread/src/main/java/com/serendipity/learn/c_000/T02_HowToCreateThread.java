@@ -2,6 +2,8 @@ package com.serendipity.learn.c_000;
 
 import lombok.extern.slf4j.Slf4j;
 
+import static com.serendipity.learn.MyLogUtils.record;
+
 /**
  * Copyright (C), 2017-2021, 赵旭
  * Author: serendipity
@@ -14,18 +16,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @SuppressWarnings("all")
 public class T02_HowToCreateThread {
-
     /*
         Thread: 一个Thread实例代表一个线程，线程之间资源不共享, 一个线程独享
         Runnable: 一个Runnable实例代表一个任务，多个线程可以共享同一个Runnable实例，线程之间资源共享
-
         可以简单理解：  runnable 任务逻辑
                       Thread   线程
      */
     public static class MyThread extends Thread {
         @Override
         public void run() {
-            log.info("MyThread start ...");
+            record("MyThread start...");
         }
     }
 
@@ -56,8 +56,9 @@ public class T02_HowToCreateThread {
         t2.start();
         t1.join();
         t2.join();
-        System.out.println(myRun.num);
+        record(myRun.num);
     }
+
     // new Thread(方法 / 实现线程runnable,继承Thread 的类   )
     public static void main(String[] args) throws InterruptedException {
         // 第一种方法
@@ -68,11 +69,11 @@ public class T02_HowToCreateThread {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                log.info("myRun start ........");
+                record("myRun start ........");
             }
         }).start();
         // 第四种方法
-        new Thread(() -> log.info("my start...")).start();
+        new Thread(() -> record("my start...")).start();
         new Thread(T02_HowToCreateThread::method).start();
     }
 }
