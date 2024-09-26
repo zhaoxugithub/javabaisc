@@ -97,7 +97,6 @@ public class BeanUtilsDemo01 {
         });
     }
 
-
     public void test06() {
 
     }

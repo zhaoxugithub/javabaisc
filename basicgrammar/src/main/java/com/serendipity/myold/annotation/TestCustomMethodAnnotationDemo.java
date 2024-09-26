@@ -56,9 +56,9 @@ public class TestCustomMethodAnnotationDemo {
     public void test1() throws ClassNotFoundException {
         ClassLoader classLoader = TestCustomMethodAnnotationDemo.class.getClassLoader();
         log.info("classLoader ={}", classLoader);
-
+        // 获取所有已加载的包
         System.out.println(Arrays.toString(classLoader.getDefinedPackages()));
-        // 获取自定义注解的class对象
+        // 获取自定义注解的class对象,不会执行初始化方法
         Class<?> aClass = classLoader.loadClass("com.serendipity.myold.annotation.TestCustomMethodAnnotationDemo");
         log.info("class = {}", aClass);
         // 获取注解的所有方法

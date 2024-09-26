@@ -9,16 +9,16 @@ public final class Config {
         throw new RuntimeException("");
     }
 
-
     // 静态属性和方法
     private static final Properties practice = new Properties();
 
     static {
         try (InputStream input = Config.class.getClassLoader().getResourceAsStream("config.properties")) {
-            if (input == null) {
-                System.out.println("111111");
+            if (input != null) {
+                System.out.println("input is not null");
+                practice.load(input);
             }
-            practice.load(input);
+            System.out.println("practice = " + practice);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

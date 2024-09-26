@@ -1,7 +1,6 @@
 package com.serendipity.myold.log;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
 
 /**
  * Copyright (C), 2017-2022, 赵旭
@@ -25,8 +24,8 @@ TRACE
  */
 public class LogDemo02 {
     public static void main(String[] args) {
-        Log log = LogFactory.getLog(LogDemo02.class);
-        log.info("start ....");
-        log.warn("end..");
+        // Log log = LogFactory.getLog(LogDemo02.class);
+        // log.info("start ....");
+        // log.warn("end..");
     }
 }

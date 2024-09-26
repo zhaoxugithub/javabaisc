@@ -2,7 +2,6 @@ package com.serendipity.myold.reflect.dynamicProxy;
 
 import cn.hutool.core.util.StrUtil;
 import org.junit.Test;
-import org.springframework.util.StringUtils;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

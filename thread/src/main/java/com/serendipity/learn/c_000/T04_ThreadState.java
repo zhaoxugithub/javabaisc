@@ -2,6 +2,8 @@ package com.serendipity.learn.c_000;
 
 import lombok.extern.slf4j.Slf4j;
 
+import static com.serendipity.learn.MyLogUtils.record;
+
 /**
  * Copyright (C), 2017-2021, 赵旭
  * Author: serendipity
@@ -29,33 +31,34 @@ public class T04_ThreadState {
         @Override
         public void run() {
             // RUNNABLE,等待操作系统执行
-            log.info(String.valueOf(this.getState()));
+            record("state=%s", this.getState());
             for (int i = 0; i < 10; i++) {
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
-                    log.error("exception={}", e.getMessage());
+                    record("exception=%s", e.getMessage());
                 }
-                log.info("i={}", i);
+                record("i=%s", i);
             }
-        }
-    }
 
-    public static void main(String[] args) {
-        MyThread myThread = new MyThread();
-        // NEW,线程对象已经创建完成
-        log.info(String.valueOf(myThread.getState()));
-        myThread.start();
-        try {
-            // mythread线程强制执行,其他线程必须等到mythread 线程执行完毕之后才能执行
-            myThread.join();
-        } catch (InterruptedException e) {
-            log.error("exception={}", e.getMessage());
         }
-        for (int i = 0; i < 10; i++) {
-            log.info("main thread:{}", i);
+
+        public static void main(String[] args) {
+            MyThread myThread = new MyThread();
+            // NEW,线程对象已经创建完成
+            record("state1=%s", myThread.getState());
+            myThread.start();
+            try {
+                // mythread线程强制执行,其他线程必须等到mythread 线程执行完毕之后才能执行
+                myThread.join();
+            } catch (InterruptedException e) {
+                record("exception=%s", e.getMessage());
+            }
+            for (int i = 0; i < 10; i++) {
+                record("main thread={}", i);
+            }
+            // TERMINATED
+            record("myState=%s", myThread.getState());
         }
-        // TERMINATED
-        log.info("myState={}", myThread.getState());
     }
 }

@@ -45,14 +45,24 @@ public class TestLambda01 {
     @Test
     public void test02() {
         String[] strArr = {"ss1", "ss2", "", "ss4"};
-        Stream.of(strArr).forEach(System.out::print);
-        Stream.iterate(1, (i) -> i + 1).limit(10).forEach(System.out::print);
+        Stream.of(strArr)
+              .forEach(System.out::print);
+        Stream.iterate(1, (i) -> i + 1)
+              .limit(10)
+              .forEach(System.out::print);
     }
 
     @Test
     public void test03() {
         String[] strArr = {"s1", "b2", "abc3", "s4", ""};
-        String d = Stream.of(strArr).filter(i -> !i.isEmpty()).sorted().limit(1).map(i -> i.replace("3", "d")).flatMap(i -> Stream.of(i.split(""))).sorted().collect(Collectors.joining());
+        String d = Stream.of(strArr)
+                         .filter(i -> !i.isEmpty())
+                         .sorted()
+                         .limit(1)
+                         .map(i -> i.replace("3", "d"))
+                         .flatMap(i -> Stream.of(i.split("")))
+                         .sorted()
+                         .collect(Collectors.joining());
         System.out.println(d);
     }
 

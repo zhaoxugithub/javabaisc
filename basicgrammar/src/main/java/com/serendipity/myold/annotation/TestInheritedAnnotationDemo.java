@@ -35,7 +35,7 @@ public class TestInheritedAnnotationDemo {
         Class<Student> stringClass = Student.class;
         Annotation[] annotations = stringClass.getAnnotations();
         for (Annotation annotation : annotations) {
-            System.out.println(annotation.toString());
+            System.out.println(annotation);
         }
     }
 }

@@ -2,6 +2,8 @@ package com.serendipity.learn.c_000;
 
 import lombok.extern.slf4j.Slf4j;
 
+import static com.serendipity.learn.MyLogUtils.record;
+
 /**
  * Copyright (C), 2017-2021, 赵旭
  * Author: serendipity
@@ -31,11 +33,11 @@ public class T03_Sleep_Yield_Join {
     public static void testJoin() {
         Thread thread = new Thread(() -> {
             for (int i = 0; i < 10; i++) {
-                log.info("A={}", i);
+                record("A=%s", i);
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
-                    log.error("exception={}", e.getMessage());
+                    record("exception=%s", e.getMessage());
                 }
             }
         });
@@ -45,14 +47,14 @@ public class T03_Sleep_Yield_Join {
                 // 先去执行thread方法，底层是调用wait方法，让当前线程先进入到等待队列
                 thread.join();
             } catch (InterruptedException e) {
-                log.error("exception={}", e.getMessage());
+                record("exception=%s", e.getMessage());
             }
             for (int i = 0; i < 10; i++) {
-                log.info("B={}", i);
+                record("B=%s", i);
                 try {
                     Thread.sleep(500);
                 } catch (InterruptedException e) {
-                    log.error("exception={}", e.getMessage());
+                    record("exception=%s", e.getMessage());
                 }
             }
         });
@@ -70,14 +72,14 @@ public class T03_Sleep_Yield_Join {
     public static void testYield() {
         new Thread(() -> {
             for (int i = 0; i < 100; i++) {
-                log.info("A" + i);
+                record("A=%s", i);
                 // 虽然yield，但是并不表示其他线程就一定执行，有可能依然是当前线程执行
                 if (i % 2 == 0) Thread.yield();
             }
         }).start();
         new Thread(() -> {
             for (int i = 0; i < 100; i++) {
-                log.info("B" + i);
+                record("B=%s", i);
                 if (i % 2 == 1) Thread.yield();
             }
         }).start();
@@ -93,11 +95,11 @@ public class T03_Sleep_Yield_Join {
     public static void testSleep() {
         new Thread(() -> {
             for (int i = 0; i < 100; i++) {
-                log.info("A={}" + i);
+                record("A=%s", i);
                 try {
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
-                    log.error("exception={}", e.getMessage());
+                    record("exception=%s", e.getMessage());
                 }
             }
         }).start();

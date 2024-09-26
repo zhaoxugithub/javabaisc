@@ -8,6 +8,8 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import static com.serendipity.learn.MyLogUtils.record;
+
 /**
  * Copyright (C), 2017-2021, 赵旭
  * Author: serendipity
@@ -22,11 +24,16 @@ public class AwaitSignalExample {
     private Condition condition = lock.newCondition();
 
     public void before() {
-        log.info("threadName={},threadState={},before", Thread.currentThread().getName(), Thread.currentThread().getState());
 
+        record("threadName=%s, threadState=%s, method=%s", Thread.currentThread().getName(),
+                Thread.currentThread().getState(), "before");
+
+        // boolean res = lock.tryLock();
+        // record("thread:%s obtain lock = %s", Thread.currentThread().getName(), res);
         lock.lock();
         try {
-            System.out.println(Thread.currentThread().getName() + ":" + Thread.currentThread().getState() + ":" + "before");
+            System.out.println(Thread.currentThread().getName() + ":" + Thread.currentThread().getState() + ":" +
+                    "before");
             // condition.signalAll();
             Thread.sleep(10000);
         } catch (InterruptedException e) {
@@ -41,7 +48,8 @@ public class AwaitSignalExample {
         try {
             // await现
             condition.await();
-            System.out.println(Thread.currentThread().getName() + ":" + Thread.currentThread().getState() + ":" + "after");
+            System.out.println(Thread.currentThread().getName() + ":" + Thread.currentThread().getState() + ":" +
+                    "after");
             log.info(Thread.currentThread().getName());
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -59,8 +67,6 @@ public class AwaitSignalExample {
          */
         executorService.execute(example::before);
         executorService.execute(example::before);
-        executorService.execute(()->{
-        });
         executorService.shutdown();
     }
 }

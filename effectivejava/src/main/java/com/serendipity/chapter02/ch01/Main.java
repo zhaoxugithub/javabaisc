@@ -6,13 +6,8 @@ public class Main {
 
     @Test
     public void test01() {
-        Person01 person = Person01.builder()
-                .age(10)
-                .address("shanghai")
-                .firstName("zhan")
-                .lastName("si")
-                .phoneNumber("123")
-                .build();
+        Person01 person =
+                Person01.builder().age(10).address("shanghai").firstName("zhan").lastName("si").phoneNumber("123").build();
         System.out.println(person);
         person.setFirstName("modify");
         System.out.println(person);
@@ -20,6 +15,7 @@ public class Main {
 
         // Person person1 = new Person();
         // 无参构造会失败
+        Person01 person01 = Person01.builder().build();
     }
 
     @Test
@@ -34,11 +30,7 @@ public class Main {
 
     @Test
     public void test03() {
-        Person03 per = Person03.builder()
-                .address("ss")
-                .age(20)
-                .firstName("zx")
-                .build();
+        Person03 per = Person03.builder().address("ss").age(20).firstName("zx").build();
         System.out.println(per);
 
         per.setAge(999);

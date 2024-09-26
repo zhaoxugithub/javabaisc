@@ -3,48 +3,78 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <artifactId>basicgrammar</artifactId>
+
     <parent>
         <groupId>com.serendipity</groupId>
         <artifactId>javabaisc</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>basicgrammar</artifactId>
+    <!--
+  区别总结:
+    dependencyManagement：主要用于集中管理依赖的版本和配置，但不实际引入这些依赖。通常在父POM中使用，以便子模块可以继承这些配置。
+    dependencies：用于实际引入项目所需的依赖，将其添加到项目的构建路径中。通常在每个模块的POM文件中使用。
+    结合使用
+    在实际项目中，通常会结合使用dependencyManagement和dependencies。父POM中使用dependencyManagement来统一管理依赖版本，
+    子模块中使用dependencies来实际引入需要的依赖。
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>6.0.15</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-    <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
     <dependencies>
+
+        <!-- 添加JUnit Jupiter依赖，用于单元测试 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- 添加JUnit依赖，用于单元测试 -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- 添加Reactor Core依赖，用于响应式编程 -->
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-core</artifactId>
             <version>3.1.16.RELEASE</version>
         </dependency>
+
+        <!-- 添加Reactor Test依赖，用于响应式编程测试 -->
         <dependency>
             <groupId>io.projectreactor</groupId>
             <artifactId>reactor-test</artifactId>
             <version>3.1.16.RELEASE</version>
         </dependency>
+
+        <!-- 添加Spring Boot依赖，并排除Spring Core依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot</artifactId>
-            <version>2.7.5</version>
+            <version>3.1.6</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework</groupId>
+                    <artifactId>spring-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
+        <!-- 添加CGLIB依赖，用于动态代理 -->
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib</artifactId>
@@ -57,11 +87,19 @@
             <artifactId>jmockdata</artifactId>
             <version>4.3.0</version>
         </dependency>
+
+        <!-- 添加Guava依赖，用于Java工具库 -->
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>32.1.3-jre</version>
         </dependency>
+
     </dependencies>
 
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
 </project>
