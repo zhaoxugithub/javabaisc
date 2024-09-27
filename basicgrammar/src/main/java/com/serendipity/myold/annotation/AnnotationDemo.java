@@ -1,7 +1,12 @@
 package com.serendipity.myold.annotation;
 
+import com.github.jsonzou.jmockdata.JMockData;
+import com.github.jsonzou.jmockdata.MockConfig;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.lang.annotation.*;
 
@@ -18,7 +23,6 @@ import java.lang.annotation.*;
 @Slf4j
 @SuppressWarnings("all")
 public class AnnotationDemo {
-
     /*
        这四个是元注解:
         是否可以继承;
@@ -39,19 +43,75 @@ public class AnnotationDemo {
         int number();
     }
 
+
+    // Builder注解 只能用于 静态内部类 或者外部类
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
     @TestInheritedAnnotation(values = {"value"}, number = 10)
     class Person {
+        private String name;
+        private int age;
+        public String remark;
+        public String email;
+
+        public void sayHello() {
+            System.out.println("Hello, " + name + "!");
+        }
+
+        private void fun() {
+            System.out.println("fun");
+        }
     }
 
     class Student extends Person {
-        public void test() {
+        private String name;
+        private int age;
+        public String remark;
+
+
+        public void sayHello() {
+            System.out.println("Student Hello, " + name + "!");
         }
+
+        private void fun() {
+            System.out.println("Student fun");
+        }
+    }
+
+
+    class Teacher {
+        private String name;
+        private int age;
+
+        Teacher() {
+
+        }
+    }
+
+    static MockConfig config = null;
+
+    static {
+        config = new MockConfig().globalConfig()
+                                 .setEnabledStatic(true)
+                                 .setEnabledCircle(true)
+                                 .setEnabledPrivate(true)
+                                 .setEnabledPublic(true)
+                                 .setEnabledProtected(true);
     }
 
     @Test
     public void test() {
-        // 获取Student上的所有注解（注解有继承）
-        log.info("获取Student上的所有注解:{}", Student.class.getAnnotations());
+
+    }
+
+    public static void main(String[] args) {
+        // Person person = JMockData.mock(new TypeReference<Person>() {
+        // }, config);
+        // System.out.println(person);
+
+        Teacher mock = JMockData.mock(AnnotationDemo.Teacher.class, config);
+        System.out.println(mock);
     }
 }
 

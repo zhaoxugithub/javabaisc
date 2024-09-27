@@ -2,7 +2,7 @@ package com.serendipity.myold.base;
 
 import cn.hutool.core.map.MapUtil;
 import com.google.common.collect.Maps;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.Console;
 import java.util.Arrays;

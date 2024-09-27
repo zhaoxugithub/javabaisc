@@ -3,7 +3,7 @@ package com.serendipity.myold.lambda.ch05;
 import com.google.common.collect.Lists;
 import com.serendipity.myold.lambda.ch01.Employee;
 import lombok.NonNull;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

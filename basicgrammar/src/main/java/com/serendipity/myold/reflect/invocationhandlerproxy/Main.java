@@ -1,6 +1,6 @@
 package com.serendipity.myold.reflect.invocationhandlerproxy;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;

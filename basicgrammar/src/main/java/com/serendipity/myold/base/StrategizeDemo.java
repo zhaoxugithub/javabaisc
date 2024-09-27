@@ -1,7 +1,7 @@
 package com.serendipity.myold.base;
 // functional/Strategize.java
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class StrategizeDemo {
     private interface Strategy {

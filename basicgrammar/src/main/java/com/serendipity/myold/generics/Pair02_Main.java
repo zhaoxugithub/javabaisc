@@ -1,7 +1,7 @@
 package com.serendipity.myold.generics;
 
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Copyright (C), 2017-2022, 赵旭

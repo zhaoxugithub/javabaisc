@@ -3,7 +3,7 @@ package com.serendipity.myold.collection;
 import com.google.common.collect.Maps;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.Nullable;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.BitSet;
 import java.util.HashMap;

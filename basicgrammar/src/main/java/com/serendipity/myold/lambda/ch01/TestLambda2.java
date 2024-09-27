@@ -2,11 +2,10 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -30,7 +29,7 @@ public class TestLambda2 {
 
     private List<Integer> list = new ArrayList<>();
 
-    @Before
+    @BeforeEach
     public void beforeTest() {
         for (int i = 0; i < 10; i++) {
             list.add((int) (Math.random() * 1000));

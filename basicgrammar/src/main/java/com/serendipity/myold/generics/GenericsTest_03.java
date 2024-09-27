@@ -1,7 +1,7 @@
 package com.serendipity.myold.generics;
 
 import com.serendipity.myold.reflect.Person;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;

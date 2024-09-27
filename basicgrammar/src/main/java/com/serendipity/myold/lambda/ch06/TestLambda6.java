@@ -1,7 +1,7 @@
 package com.serendipity.myold.lambda.ch06;
 
 import com.serendipity.myold.lambda.ch01.Employee;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Iterator;

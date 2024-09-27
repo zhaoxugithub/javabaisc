@@ -1,7 +1,7 @@
 package com.serendipity.myold.lambda.ch03;
 
 import com.serendipity.myold.lambda.ch01.Employee;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.PrintStream;
 import java.util.Comparator;

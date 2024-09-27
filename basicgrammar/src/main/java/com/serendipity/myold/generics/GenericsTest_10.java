@@ -1,6 +1,6 @@
 package com.serendipity.myold.generics;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Date;
 
