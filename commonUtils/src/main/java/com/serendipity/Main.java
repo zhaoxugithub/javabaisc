@@ -14,6 +14,11 @@ public class Main {
         System.out.println(mock);
         System.out.println("Hello world!");
         System.out.println("test2");
+
+        Integer mock1 = JMockData.mock(Integer.class);
+
+
+        System.out.println(mock1);
     }
 
     @Test
