@@ -33,15 +33,10 @@ public class SequencedCollectionTest {
         // [3,2,1,0]
         System.out.println(reversed);
 
-        Integer i = arrayList.removeFirst();
-        Integer i1 = arrayList.removeLast();
+        Integer i1 = arrayList.removeFirst();
+        Integer i2 = arrayList.removeLast();
 
         System.out.println(arrayList);
         System.out.println(reversed);
-    }
-
-
-    public static void main(String[] args) {
-
     }
 }

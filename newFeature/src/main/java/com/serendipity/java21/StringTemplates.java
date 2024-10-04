@@ -3,9 +3,6 @@ package com.serendipity.java21;
 import com.github.jsonzou.jmockdata.JMockData;
 import org.junit.Test;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 
 public class StringTemplates {
 
@@ -22,19 +19,19 @@ public class StringTemplates {
         System.out.println(message3);
 
         // 新的方式
-        String mess = STR."Greeings \{person.getName()},\{person.getCity()},\{person.getAge()}";
-        System.out.println(mess);
+        // String mess = STR."Greeings \{person.getName()},\{person.getCity()},\{person.getAge()}";
+        // System.out.println(mess);
     }
 
     @Test
     public void test2() {
-        String time = STR."The current time is \{
-                DateTimeFormatter
-                        .ofPattern("HH:mm:ss")
-                        .format(LocalTime.now())
-                }.";
-
-        System.out.println(time);
+        // String time = STR."The current time is \{
+        //         DateTimeFormatter
+        //                 .ofPattern("HH:mm:ss")
+        //                 .format(LocalTime.now())
+        //         }.";
+        //
+        // System.out.println(time);
     }
 
     public static void main(String[] args) {
