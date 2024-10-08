@@ -1,5 +1,6 @@
 package com.serendipity.myold.annotation;
 
+import com.serendipity.myold.annotation.annotation.TestDocAnnotation;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -20,15 +21,7 @@ import java.util.Arrays;
  */
 
 @Slf4j
-@SuppressWarnings("all")
-public class DocAnnotationDemo {
-    @Retention(RetentionPolicy.RUNTIME)
-    @Documented
-    @Target({ElementType.FIELD, ElementType.METHOD})
-    public @interface TestDocAnnotation {
-        public String value() default "default";
-    }
-
+public class TestDocAnnotationDemo {
     class A {
         @TestDocAnnotation("dsdasd")
         public void test1() {
@@ -47,10 +40,10 @@ public class DocAnnotationDemo {
     @Test
     public void test() {
         Arrays.stream(A.class.getMethods())
-              .filter(method -> method.isAnnotationPresent(TestDocAnnotation.class))
-              .forEach(method -> {
-                  log.info("method ={}", method.getName());
-                  System.out.println(Arrays.toString(method.getAnnotations()));
-              });
+                .filter(method -> method.isAnnotationPresent(TestDocAnnotation.class))
+                .forEach(method -> {
+                    log.info("method ={}", method.getName());
+                    System.out.println(Arrays.toString(method.getAnnotations()));
+                });
     }
 }

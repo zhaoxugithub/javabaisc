@@ -1,5 +1,6 @@
 package com.serendipity.myold.annotation;
 
+import com.serendipity.myold.annotation.annotation.MyMethodAnnotation;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
@@ -19,7 +20,7 @@ import java.util.List;
  **/
 @Slf4j
 @SuppressWarnings("all")
-public class TestCustomMethodAnnotationDemo {
+public class MyMethodAnnotationDemo {
 
     @Override
     @MyMethodAnnotation(title = "toStringMetod", description = "override toString method")
@@ -41,20 +42,12 @@ public class TestCustomMethodAnnotationDemo {
         oldMethod();
     }
 
-    @Target(ElementType.METHOD)
-    @Retention(RetentionPolicy.RUNTIME)
-    @interface MyMethodAnnotation {
-        String title() default "";
-
-        String description() default "";
-    }
-
     /**
      * 通过反射的反射获取哪些类或者方法上标注了哪些注解
      */
     @Test
     public void test1() throws ClassNotFoundException {
-        ClassLoader classLoader = TestCustomMethodAnnotationDemo.class.getClassLoader();
+        ClassLoader classLoader = MyMethodAnnotationDemo.class.getClassLoader();
         log.info("classLoader ={}", classLoader);
         // 获取所有已加载的包
         System.out.println(Arrays.toString(classLoader.getDefinedPackages()));
@@ -66,13 +59,13 @@ public class TestCustomMethodAnnotationDemo {
         // Arrays.stream(methods).forEach(System.out::println);
         for (Method method : methods) {
             // 判断method方法上是否含有MyMethodAnnotation类型的注解
-            if (method.isAnnotationPresent(TestCustomMethodAnnotationDemo.MyMethodAnnotation.class)) {
+            if (method.isAnnotationPresent(MyMethodAnnotation.class)) {
                 // 获取方法上的注解（排除继承父类的）
                 for (Annotation declaredAnnotation : method.getDeclaredAnnotations()) {
                     log.info("Annotation is Method :" + method + ":" + declaredAnnotation);
                 }
                 // 获取这个注解的详细信息
-                TestCustomMethodAnnotationDemo.MyMethodAnnotation annotation = method.getAnnotation(TestCustomMethodAnnotationDemo.MyMethodAnnotation.class);
+                MyMethodAnnotation annotation = method.getAnnotation(MyMethodAnnotation.class);
                 log.info("annotition title = {},description = {}", annotation.title(), annotation.description());
             }
         }
