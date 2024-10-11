@@ -11,7 +11,7 @@ public class StringNew {
         char[] charArray = str.toCharArray();
     }
 
-
+    @Test
     public void test() {
         String str = "Hello World,获取字符串的内存大小";
         int size = str.getBytes().length;
@@ -19,7 +19,7 @@ public class StringNew {
     }
 
     @Test
-    public void test03(){
+    public void test03() {
 
         String str = """
                 Hello World,

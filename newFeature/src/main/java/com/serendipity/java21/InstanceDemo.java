@@ -14,7 +14,6 @@ public class InstanceDemo {
             System.out.println(i);
         }
 
-
         // jdk 14 之后，可以直接强转
         if(obj instanceof Integer i){
             System.out.println(i);

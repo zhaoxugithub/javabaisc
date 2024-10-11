@@ -15,10 +15,11 @@ import java.lang.annotation.*;
 public class TestInheritedAnnotationDemo {
 
     @TestInheritedAnnotation(value = {"123456"}, number = 10)
+    static
     class Person {
     }
 
-    class Student extends Person {
+    static class Student extends Person {
     }
 
     @Inherited // 注解可以被继承

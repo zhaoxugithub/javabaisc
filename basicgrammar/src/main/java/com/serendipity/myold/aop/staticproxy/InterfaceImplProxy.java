@@ -1,4 +1,4 @@
-package com.serendipity.myold.reflect.staticproxy;
+package com.serendipity.myold.aop.staticproxy;
 
 /**
  * Copyright (C), 2017-2022, 赵旭

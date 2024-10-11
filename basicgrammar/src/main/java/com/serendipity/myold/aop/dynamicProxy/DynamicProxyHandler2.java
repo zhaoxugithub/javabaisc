@@ -1,4 +1,4 @@
-package com.serendipity.myold.reflect.dynamicProxy;
+package com.serendipity.myold.aop.dynamicProxy;
 
 import cn.hutool.core.util.StrUtil;
 import org.junit.jupiter.api.Test;

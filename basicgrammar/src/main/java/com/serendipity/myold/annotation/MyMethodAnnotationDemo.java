@@ -52,7 +52,7 @@ public class MyMethodAnnotationDemo {
         // 获取所有已加载的包
         System.out.println(Arrays.toString(classLoader.getDefinedPackages()));
         // 获取自定义注解的class对象,不会执行初始化方法
-        Class<?> aClass = classLoader.loadClass("com.serendipity.myold.annotation.TestCustomMethodAnnotationDemo");
+        Class<?> aClass = classLoader.loadClass("com.serendipity.myold.annotation.MyMethodAnnotationDemo");
         log.info("class = {}", aClass);
         // 获取注解的所有方法
         Method[] methods = aClass.getMethods();

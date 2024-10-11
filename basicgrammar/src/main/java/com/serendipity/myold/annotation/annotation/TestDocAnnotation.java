@@ -1,9 +1,8 @@
 package com.serendipity.myold.annotation.annotation;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
+@Retention(RetentionPolicy.RUNTIME)
 @Documented
 @Target({ElementType.METHOD, ElementType.TYPE})
 public @interface TestDocAnnotation {

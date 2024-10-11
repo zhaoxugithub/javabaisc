@@ -26,13 +26,12 @@ public class AnnotationDemo {
     private static MockConfig config = null;
 
     static {
-        config = new MockConfig()
-                .globalConfig()
-                .setEnabledStatic(true)
-                .setEnabledCircle(true)
-                .setEnabledPrivate(true)
-                .setEnabledPublic(true)
-                .setEnabledProtected(true);
+        config = new MockConfig().globalConfig()
+                                 .setEnabledStatic(true)
+                                 .setEnabledCircle(true)
+                                 .setEnabledPrivate(true)
+                                 .setEnabledPublic(true)
+                                 .setEnabledProtected(true);
     }
 
     @Test
@@ -59,11 +58,10 @@ public class AnnotationDemo {
     @Test
     public void test3() {
         Arrays.stream(Person.class.getAnnotations())
-                .forEach(System.out::println);
-
+              .forEach(System.out::println);
 
         Arrays.stream(Student.class.getAnnotations())
-                .forEach(System.out::println);
+              .forEach(System.out::println);
 
     }
 }

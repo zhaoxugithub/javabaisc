@@ -1,5 +1,8 @@
 package com.serendipity.myold.annotation;
 
+import com.serendipity.myold.annotation.annotation.MyMethodAnnotation;
+import org.junit.jupiter.api.Test;
+
 import java.io.FileNotFoundException;
 import java.lang.annotation.*;
 import java.lang.reflect.Method;
@@ -14,13 +17,6 @@ import java.util.List;
  * Description: com.anno
  */
 public class TestMethodAnnotationDemo {
-    @Target(ElementType.METHOD)
-    @Retention(RetentionPolicy.RUNTIME)
-    public @interface MyMethodAnnotation {
-        String title() default "";
-
-        String description() default "";
-    }
 
     @Override
     @MyMethodAnnotation(title = "toStringMethod", description = "override toString method")
@@ -34,7 +30,6 @@ public class TestMethodAnnotationDemo {
         System.out.println("old method, don't use it.");
     }
 
-    @SuppressWarnings({"unchecked", "deprecation"})
     @MyMethodAnnotation(title = "test method", description = "suppress warning static method")
     public static void genericsTest() throws FileNotFoundException {
         List<String> l = new ArrayList<String>();
@@ -42,7 +37,8 @@ public class TestMethodAnnotationDemo {
         oldMethod();
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void test() {
         Method[] methods = TestMethodAnnotationDemo.class.getMethods();
         for (Method method : methods) {
             // boolean isAnnotationPresent(Class<?extends Annotation> annotationClass)
