@@ -75,9 +75,14 @@ public class DynamicProxyHandlerTest {
         }
     }
 
+    private <T> T getProxyInstance(T t) {
+        DynamicProxyHandler<T> dynamicProxyHandler = new DynamicProxyHandler(t);
+        return  dynamicProxyHandler.getProxy();
+    }
+
     public static void test(Object object) throws InterruptedException {
         DynamicProxyHandler dynamicProxyHandler = new DynamicProxyHandler(object);
-        Object handler = dynamicProxyHandler.handler();
+        Object handler = dynamicProxyHandler.getProxy();
 
         switch (handler) {
             case Hello hello -> {

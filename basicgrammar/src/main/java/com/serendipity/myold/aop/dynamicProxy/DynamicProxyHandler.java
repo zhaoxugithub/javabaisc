@@ -2,6 +2,8 @@ package com.serendipity.myold.aop.dynamicProxy;
 
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 /**
@@ -12,31 +14,32 @@ import java.lang.reflect.Proxy;
  * Description: com.reflect.dynamicProxy
  */
 @Slf4j
-public class DynamicProxyHandler {
+public class DynamicProxyHandler<T> implements InvocationHandler {
     // 实际代理对象
-    private final Object object;
-    private final Class<?>[] interfaces;
+    private final T object;
 
-    public DynamicProxyHandler(Object object) {
+    public DynamicProxyHandler(T object) {
         this.object = object;
-        this.interfaces = object.getClass()
-                                .getInterfaces();
     }
 
-    public Object handler() {
-        return Proxy.newProxyInstance(object.getClass()
-                                            .getClassLoader(),
-                interfaces,
-                (proxy, method, args) -> {
+    @SuppressWarnings("unchecked")
+    public T getProxy() {
+        return (T) Proxy.newProxyInstance(
+                object.getClass().getClassLoader(),
+                object.getClass().getInterfaces(),
+                this
+        );
+    }
 
-            long startTime = System.currentTimeMillis();
-            log.info("start time: {}, method: {}, args: {}", startTime, method.getName(), args);
+    @Override
+    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        long startTime = System.currentTimeMillis();
+        log.info("Start time: {}, Method: {}, Args: {}", startTime, method.getName(), args);
 
-            Object result = method.invoke(object, args);
+        Object result = method.invoke(object, args);
 
-            long endTime = System.currentTimeMillis();
-            log.info("cost time: {}, result: {}", endTime - startTime, result);
-            return result;
-        });
+        long endTime = System.currentTimeMillis();
+        log.info("Cost time: {}, Result: {}", endTime - startTime, result);
+        return result;
     }
 }
