@@ -75,16 +75,14 @@ public class DynamicProxyHandlerTest {
         }
     }
 
-    private <T> T getProxyInstance(T t) {
-        DynamicProxyHandler<T> dynamicProxyHandler = new DynamicProxyHandler(t);
-        return  dynamicProxyHandler.getProxy();
+    private static <T> T getProxyInstance(T t) {
+        DynamicProxyHandler<T> dynamicProxyHandler = new DynamicProxyHandler<>(t);
+        return dynamicProxyHandler.getProxy();
     }
 
     public static void test(Object object) throws InterruptedException {
-        DynamicProxyHandler dynamicProxyHandler = new DynamicProxyHandler(object);
-        Object handler = dynamicProxyHandler.getProxy();
-
-        switch (handler) {
+        Object instance = getProxyInstance(object);
+        switch (instance) {
             case Hello hello -> {
                 hello.morning();
                 hello.afternoon();
@@ -101,7 +99,8 @@ public class DynamicProxyHandlerTest {
     public static void main(String[] args) throws InterruptedException {
         test(new HelloImpl());
         test(new WorldImpl());
-
         test(new Hello2Impl());
+
+        getProxyInstance(new HelloImpl()).morning();
     }
 }
