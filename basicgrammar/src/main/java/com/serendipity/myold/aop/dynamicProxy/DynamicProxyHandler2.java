@@ -18,7 +18,7 @@ public class DynamicProxyHandler2 {
         void function1(String param1);
     }
 
-    private class A implements AInterface {
+    private static class A implements AInterface {
         private String name;
 
         public void function1(String param1) {
@@ -63,13 +63,18 @@ public class DynamicProxyHandler2 {
     }
 
     public Object getProxyClass(Object target) {
-        return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), new DynamicProxyHandlerDemo(target));
+        return Proxy.newProxyInstance(target.getClass()
+                                            .getClassLoader(), target.getClass()
+                                                                     .getInterfaces(),
+                new DynamicProxyHandlerDemo(target));
     }
 
 
     // 自带jdk生成动态代理对象
     private Object getProxyClass2(Object target) {
-        return Proxy.newProxyInstance(target.getClass().getClassLoader(), target.getClass().getInterfaces(), (proxy, method, args) -> {
+        return Proxy.newProxyInstance(target.getClass()
+                                            .getClassLoader(), target.getClass()
+                                                                     .getInterfaces(), (proxy, method, args) -> {
             System.out.println("动态代理对象开始....." + method.getName() + "---params:" + Arrays.toString(args));
             if (StrUtil.equals(method.getName(), "play")) {
                 // todo 如果被代理对象有多个方法，则需要进行对每一个方法单独处理
