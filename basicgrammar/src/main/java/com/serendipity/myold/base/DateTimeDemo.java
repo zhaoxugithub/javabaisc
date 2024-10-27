@@ -1,5 +1,7 @@
 package com.serendipity.myold.base;
 
+import org.junit.jupiter.api.Test;
+
 import java.time.*;
 
 /**
@@ -10,6 +12,31 @@ import java.time.*;
  * Description: com.java8.base
  */
 public class DateTimeDemo {
+
+    /**
+     * GET the System clock as UTC offset
+     * UTC 世界协调时间。与北京的东八区CST 慢 8个小时
+     * UTC+8 = CST
+     */
+    @Test
+    public void testClock() {
+        Clock clock1 = Clock.systemUTC();
+        System.out.println(clock1.getZone());
+        System.out.println(clock1.instant());
+        System.out.println(clock1.millis());
+
+        Clock clock2 = Clock.systemDefaultZone();
+        System.out.println(clock2.getZone());
+        System.out.println(clock2.instant());
+        System.out.println(clock2.millis());
+    }
+
+    @Test
+    public void LocalDateTest() {
+        LocalDate now = LocalDate.now();
+        System.out.println(now);
+    }
+
 
     public static void main(String[] args) {
         // GET the System clock as UTC offset

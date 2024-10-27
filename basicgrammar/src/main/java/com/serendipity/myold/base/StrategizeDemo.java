@@ -8,14 +8,14 @@ public class StrategizeDemo {
         String approach(String msg);
     }
 
-    private class Soft implements Strategy {
+    private static class Soft implements Strategy {
         @Override
         public String approach(String msg) {
             return msg.toLowerCase() + "?";
         }
     }
 
-    private class Unrelated {
+    private static class Unrelated {
         static String twice(String msg) {
             return msg + " " + msg;
         }
