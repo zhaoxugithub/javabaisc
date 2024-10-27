@@ -1,6 +1,4 @@
-package com.serendipity.myold.aop.dynamicProxy;
-
-import lombok.SneakyThrows;
+package com.serendipity.myold.aop.dynamicProxy.demo01;
 
 /**
  * Copyright (C), 2017-2022, 赵旭
@@ -100,7 +98,6 @@ public class DynamicProxyHandlerTest {
         test(new HelloImpl());
         test(new WorldImpl());
         test(new Hello2Impl());
-
-        getProxyInstance(new HelloImpl()).morning();
+        Object o = getProxyInstance(new HelloImpl());
     }
 }

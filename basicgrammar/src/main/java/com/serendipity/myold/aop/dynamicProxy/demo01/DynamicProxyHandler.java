@@ -1,4 +1,4 @@
-package com.serendipity.myold.aop.dynamicProxy;
+package com.serendipity.myold.aop.dynamicProxy.demo01;
 
 import lombok.extern.slf4j.Slf4j;
 
