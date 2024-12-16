@@ -23,6 +23,9 @@ public class TestLambda02 {
 
         Person() {
 
+
+
+
         }
 
         Person(String name, String message, Integer age) {
