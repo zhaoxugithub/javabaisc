@@ -1,6 +1,7 @@
 package com.serendipity.learn.labuladong;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * ClassName Test01
@@ -92,6 +93,27 @@ public class Test01 {
         return result.next;
     }
 
+
+    public int[] twoSumTest(int[] nums, int target) {
+
+        Map<Integer, Integer> maps = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int another = target - nums[i];
+            if (maps.containsKey(another)) {
+                return new int[]{maps.get(another), i};
+            } else {
+                maps.put(nums[i], i);
+            }
+        }
+        return new int[]{-1, -1};
+    }
+
+
+    public void test() {
+
+    }
+
+
     public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
         if (list1 == null) return list2;
         if (list2 == null) return list1;
@@ -135,6 +157,7 @@ public class Test01 {
         }
         return new int[]{-1, -1};
     }
+
     //
     public ListNode addTwoNumbers2(ListNode l1, ListNode l2) {
         if (l1 == null || l2 == null) {
@@ -149,13 +172,8 @@ public class Test01 {
         while (l1 != null || l2 != null) {
             int n1 = l1 != null ? l1.val : 0;
             int n2 = l2 != null ? l2.val : 0;
-
-
         }
-
         return head;
-
-
     }
 
 }
