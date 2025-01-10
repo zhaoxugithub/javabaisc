@@ -172,7 +172,7 @@ public class ArrayUtilsDemo1 {
     public void test13() {
         Integer[] arr = {1, 2, 3, 4, 5};
         List<Integer> collect = Arrays.stream(arr)
-                                      .collect(Collectors.toList());
+                .collect(Collectors.toList());
         System.out.println(collect);
     }
 

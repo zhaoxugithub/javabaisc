@@ -19,7 +19,6 @@ public class SpringUtils {
         mock(new Student());
     }
 
-
     public void mock(Object p) {
         if (p instanceof Person person) {
             System.out.println(person.getEmail());
@@ -29,6 +28,4 @@ public class SpringUtils {
             System.out.println("unknown type");
         }
     }
-
-
 }

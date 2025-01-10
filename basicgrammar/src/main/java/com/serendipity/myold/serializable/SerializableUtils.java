@@ -34,8 +34,6 @@ public class SerializableUtils {
         ois.close();
     }
 
-
-
     /**
      * 反序列化
      *
@@ -51,5 +49,4 @@ public class SerializableUtils {
         }
         ois.close();
     }
-
 }
