@@ -1,8 +1,5 @@
 package com.serendipity.myold.collection;
 
-import com.github.jsonzou.jmockdata.JMockData;
-import com.github.jsonzou.jmockdata.MockConfig;
-import com.github.jsonzou.jmockdata.TypeReference;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.checkerframework.checker.nullness.qual.Nullable;
@@ -58,7 +55,6 @@ public class ListDemo {
     @Test
     public void testSubClass() {
         ArrayList<@Nullable Object> objects = Lists.newArrayList();
-        // 匿名内部类
         ArrayList<String> strings = new ArrayList<>() {
             // 方法块
             {

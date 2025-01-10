@@ -25,13 +25,13 @@ import java.util.concurrent.Executors;
 public class MyThreadBase01 {
 
     private class ThreadUnsafeExample {
-        private Integer cnt = 0;
+        private Long cnt = 1L;
 
         public void add() {
-            cnt = cnt + 1;
+            cnt = cnt+1;
         }
 
-        public Integer get() {
+        public Long get() {
             return cnt;
         }
     }

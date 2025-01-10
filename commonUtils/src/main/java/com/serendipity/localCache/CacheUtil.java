@@ -1,7 +1,6 @@
 package com.serendipity.localCache;
 
 import lombok.Data;
-import lombok.extern.slf4j.XSlf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

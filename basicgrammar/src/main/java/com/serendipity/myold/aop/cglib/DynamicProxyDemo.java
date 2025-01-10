@@ -35,13 +35,13 @@ public class DynamicProxyDemo {
 
         public UserService getProxy() {
             return (UserService) Proxy.newProxyInstance(object.getClass()
-                                                              .getClassLoader(),
+                            .getClassLoader(),
 
                     new Class[]{UserService.class},
 
                     (proxy, method, args) -> {
                         log.info("proxy:{},method: {}, args: {}", proxy.getClass()
-                                                                       .getSimpleName(), method.getName(), args);
+                                .getSimpleName(), method.getName(), args);
 
                         Object invoke = method.invoke(object, args);
                         log.info("after invoke");
