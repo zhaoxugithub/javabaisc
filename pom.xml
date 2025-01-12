@@ -42,8 +42,6 @@
         <module>newFeature</module>
     </modules>
 
-
-
     <!--
     区别总结:
         dependencyManagement：主要用于集中管理依赖的版本和配置，但不实际引入这些依赖。通常在父POM中使用，以便子模块可以继承这些配置。
@@ -54,8 +52,6 @@
     -->
     <dependencyManagement>
         <dependencies>
-
-
             <dependency>
                 <groupId>ch.qos.logback</groupId>
                 <artifactId>logback-classic</artifactId>
