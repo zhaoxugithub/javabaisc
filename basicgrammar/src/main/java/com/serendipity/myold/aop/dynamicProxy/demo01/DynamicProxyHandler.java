@@ -33,13 +33,19 @@ public class DynamicProxyHandler<T> implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        long startTime = System.currentTimeMillis();
+        long startTime = System.nanoTime();
         log.info("Start time: {}, Method: {}, Args: {}", startTime, method.getName(), args);
 
-        Object result = method.invoke(object, args);
+        Object result;
+        try {
+            result = method.invoke(object, args);
+        } catch (Exception e) {
+            log.error("Method invocation failed: {}", e.getMessage(), e);
+            throw e;
+        }
 
-        long endTime = System.currentTimeMillis();
-        log.info("Cost time: {}, Result: {}", endTime - startTime, result);
+        long endTime = System.nanoTime();
+        log.info("Cost time: {} ns, Result: {}", endTime - startTime, result);
         return result;
     }
 }

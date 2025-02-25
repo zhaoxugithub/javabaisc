@@ -15,6 +15,8 @@ public class DynamicProxyDemo {
     // 定义一个接口
     public interface UserService {
         void play();
+
+        void run();
     }
 
     // 定义一个实现类
@@ -22,6 +24,11 @@ public class DynamicProxyDemo {
         @Override
         public void play() {
             System.out.println("userServiceImpl play");
+        }
+
+        @Override
+        public void run() {
+            System.out.println("userServiceImpl run");
         }
     }
 
@@ -36,13 +43,10 @@ public class DynamicProxyDemo {
         public UserService getProxy() {
             return (UserService) Proxy.newProxyInstance(object.getClass()
                             .getClassLoader(),
-
                     new Class[]{UserService.class},
-
                     (proxy, method, args) -> {
                         log.info("proxy:{},method: {}, args: {}", proxy.getClass()
                                 .getSimpleName(), method.getName(), args);
-
                         Object invoke = method.invoke(object, args);
                         log.info("after invoke");
                         return invoke;
@@ -55,6 +59,6 @@ public class DynamicProxyDemo {
         ProxyHandler proxyHandler = new ProxyHandler(new UserServiceImpl());
         UserService proxy = proxyHandler.getProxy();
         proxy.play();
+        proxy.run();
     }
-
 }

@@ -1,16 +1,9 @@
 package com.serendipity.hot100;
 
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.*;
 
-//https://leetcode.cn/problems/longest-consecutive-sequence/?envType=study-plan-v2&envId=top-100-liked
+// https://leetcode.cn/problems/longest-consecutive-sequence/?envType=study-plan-v2&envId=top-100-liked
 public class LeetCode_128_longestConsecutive {
-
-
-    private static final Logger log = LoggerFactory.getLogger(LeetCode_128_longestConsecutive.class);
 
     // 方法一： 排序+双指针
     public int longestConsecutive01(int[] nums) {

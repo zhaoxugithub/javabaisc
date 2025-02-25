@@ -1,11 +1,7 @@
 package com.serendipity.hot100;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class LeetCode_11_maxArea {
-
-    private static final Logger log = LoggerFactory.getLogger(LeetCode_11_maxArea.class);
 
     // 方法一：暴力破解， 时间复杂度太高过不去
     public int maxArea01(int[] height) {

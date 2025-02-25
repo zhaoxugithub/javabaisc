@@ -99,5 +99,7 @@ public class DynamicProxyHandlerTest {
         test(WorldImpl.class);
         test(Hello2Impl.class);
         Object o = getProxyInstance(HelloImpl.class);
+        // Hello proxyInstance = getProxyInstance(Hello.class);
+        // proxyInstance.morning();
     }
 }
