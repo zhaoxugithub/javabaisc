@@ -47,6 +47,7 @@ public class ListDemo {
         System.out.println(mockList);
         List<String> b = mockList.stream().filter(s -> !s.equals("b")).toList();
         System.out.println(b);
+
     }
 
     /**

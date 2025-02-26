@@ -1,6 +1,10 @@
 package com.serendipity.myold.base;
 
+import java.util.Optional;
+
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
@@ -14,18 +18,24 @@ import java.util.Optional;
 @Slf4j
 @SuppressWarnings("all")
 public class OptionalDemo {
+    private static final Logger log = LoggerFactory.getLogger(OptionalDemo.class);
+
     public static void main(String[] args) {
         // 断言
         Optional<String> fullName = Optional.ofNullable(null);
-        // 判断是否为空，空就是false
-        log.info("Full Name is set?" + fullName.isPresent());
-        // 如果是空取None,否则就是fullName
-        log.info("Full Name :" + fullName.orElse("[none]"));
+        logPresenceAndValue(fullName, "Full Name");
+
         // 如果不为空就拼接，否则就是hey Stranger
-        log.info(fullName.map(s -> "Hey " + s + "|").orElse("Hey Stranger"));
+        log.info("Greeting: {}", fullName.map(s -> "Hey " + s + "|").orElse("Hey Stranger"));
+
         final Optional<String> firstName = Optional.of("Tom");
-        log.info("First Name is set? " + firstName.isPresent());
-        log.info("First Name : " + firstName.orElseGet(() -> "[None]"));
-        log.info(firstName.map(s -> "Hey " + s + "!").orElse("Hey Stranger!"));
+        logPresenceAndValue(firstName, "First Name");
+        log.info("Greeting: {}", firstName.map(s -> "Hey " + s + "!").orElse("Hey Stranger!"));
+    }
+
+    private static void logPresenceAndValue(Optional<String> optional, String label) {
+        boolean isPresent = optional.isPresent();
+        log.info("{} is set? {}", label, isPresent);
+        log.info("{} : {}", label, isPresent ? optional.get() : "[none]");
     }
 }
