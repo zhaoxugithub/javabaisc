@@ -1,4 +1,4 @@
-package com.serendipity.localCache;
+package com.serendipity.cache;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;

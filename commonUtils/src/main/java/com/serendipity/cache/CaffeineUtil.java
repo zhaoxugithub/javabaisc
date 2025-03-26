@@ -1,10 +1,12 @@
-package com.serendipity.localCache;
+package com.serendipity.cache;
 
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 public class CaffeineUtil {
 
     public static void testCaffeine() throws InterruptedException {
@@ -34,6 +36,7 @@ public class CaffeineUtil {
             System.out.println(k);
             return "key1 is not found.";
         });
+        log.info(key1);
         System.out.println(key2);
     }
 

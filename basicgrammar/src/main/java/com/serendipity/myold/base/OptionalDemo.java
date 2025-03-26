@@ -18,8 +18,6 @@ import java.util.Optional;
 @Slf4j
 @SuppressWarnings("all")
 public class OptionalDemo {
-    private static final Logger log = LoggerFactory.getLogger(OptionalDemo.class);
-
     public static void main(String[] args) {
         // 断言
         Optional<String> fullName = Optional.ofNullable(null);

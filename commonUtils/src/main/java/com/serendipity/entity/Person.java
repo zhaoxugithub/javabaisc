@@ -1,4 +1,4 @@
-package com.serendipity.pojo;
+package com.serendipity.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,13 +7,14 @@ import lombok.ToString;
 
 /**
  * @author: 11931
- * @createTime: 2024/04/02 1:07
+ * @createTime: 2024/04/02 0:58
  */
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Data
-public class Address {
-    private String province;
-    private String city;
+public class Person {
+    private String name;
+    private int age;
+    private Address address;
 }

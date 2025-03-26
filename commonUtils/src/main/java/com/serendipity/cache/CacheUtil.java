@@ -1,4 +1,4 @@
-package com.serendipity.localCache;
+package com.serendipity.cache;
 
 import lombok.Data;
 import org.slf4j.Logger;

@@ -1,10 +1,8 @@
-package com.serendipity.hutools.cache;
+package com.serendipity.cache;
 
 
 import cn.hutool.cache.CacheUtil;
 import cn.hutool.cache.impl.LRUCache;
-import cn.hutool.core.thread.ThreadUtil;
-import cn.hutool.core.util.RandomUtil;
 import org.junit.Test;
 
 public class LRUTest {

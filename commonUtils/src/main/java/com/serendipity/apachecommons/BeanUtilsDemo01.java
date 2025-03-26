@@ -1,7 +1,7 @@
 package com.serendipity.apachecommons;
 
-import com.serendipity.pojo.Address;
-import com.serendipity.pojo.Person;
+import com.serendipity.entity.Address;
+import com.serendipity.entity.Person;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.junit.Test;
@@ -65,7 +65,6 @@ public class BeanUtilsDemo01 {
         person.getAddress().setCity("苏州");
         // 浅拷贝
         System.out.println(p2.getAddress());
-        //
         System.out.println(person.getAddress());
     }
 
@@ -91,13 +90,6 @@ public class BeanUtilsDemo01 {
         person.setAddress(new Address("江苏", "南京"));
         Map<String, String> describe = BeanUtils.describe(person);
         System.out.println(describe);
-
-        describe.forEach((k, v) -> {
-            System.out.println(k + " = " + v);
-        });
-    }
-
-    public void test06() {
-
+        describe.forEach((k, v) -> System.out.println(k + " = " + v));
     }
 }

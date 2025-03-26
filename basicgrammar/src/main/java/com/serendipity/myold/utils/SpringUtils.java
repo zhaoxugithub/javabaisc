@@ -2,9 +2,11 @@ package com.serendipity.myold.utils;
 
 import com.serendipity.myold.annotation.entity.Person;
 import com.serendipity.myold.annotation.entity.Student;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.util.Assert;
 
+@Slf4j
 public class SpringUtils {
     @Test
     public void test() {

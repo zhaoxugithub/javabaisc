@@ -24,9 +24,6 @@ import java.util.stream.Stream;
 @SuppressWarnings("all")
 @Slf4j
 public class TestLambda2 {
-
-    private static final Log log = LogFactory.get();
-
     private List<Integer> list = new ArrayList<>();
 
     @BeforeEach
@@ -61,9 +58,7 @@ public class TestLambda2 {
     // 惰性求值方法和
     public void test03() {
         // 这行代码并未做什么实际性的工作，filter只是描述了Stream，没有产生新的集合。
-        Stream<Integer> integerStream = list.stream()
-                                            .filter(f -> f > 5)
-                                            .filter(f -> f.equals(6));
+        Stream<Integer> integerStream = list.stream().filter(f -> f > 5).filter(f -> f.equals(6));
         // 及早求值方法
         // collect最终会从Stream产生新值，拥有终止操作。
         List<Integer> collect = integerStream.collect(Collectors.toList());
@@ -74,30 +69,21 @@ public class TestLambda2 {
     @Test
     public void test04() {
         // 顺序流
-        List<Integer> collect = list.stream()
-                                    .filter(f -> f > 5)
-                                    .collect(Collectors.toList());
+        List<Integer> collect = list.stream().filter(f -> f > 5).collect(Collectors.toList());
         Integer[] integers = list.toArray(new Integer[0]);
         // 并行流
-        List<Integer> collect1 = list.stream()
-                                     .parallel()
-                                     .filter(f -> f > 5)
-                                     .collect(Collectors.toList());
+        List<Integer> collect1 = list.stream().parallel().filter(f -> f > 5).collect(Collectors.toList());
     }
 
     // 方法引用
     @Test
     public void test05() {
         // 1.静态方法引用ClassName :: staticMethodName
-        Arrays.asList("d", "b", "c", "a")
-              .forEach(TestLambda2::println);
+        Arrays.asList("d", "b", "c", "a").forEach(TestLambda2::println);
         // lambda表达式使用：
-        Arrays.asList(new String[]{"a", "c", "b"})
-              .forEach(s -> TestLambda2.println(s));
+        Arrays.asList(new String[]{"a", "c", "b"}).forEach(s -> TestLambda2.println(s));
         // 静态方法引用：
-        Arrays.asList(new String[]{"a", "c", "b"})
-              .stream()
-              .forEach(TestLambda2::println);
+        Arrays.asList(new String[]{"a", "c", "b"}).stream().forEach(TestLambda2::println);
         log.info("-------------------------------------------------");
         // 构造器引用ClassName :: new
         // 构造器引用适用于lambda表达式主体中仅仅调用了某个类的构造函数返回实例的场景
@@ -141,9 +127,7 @@ public class TestLambda2 {
     }
 
     public void filter(List<String> names, Predicate<String> condition) {
-        names.stream()
-             .filter(condition)
-             .forEach(System.out::println);
+        names.stream().filter(condition).forEach(System.out::println);
         log.info("------------------");
     }
 
@@ -154,42 +138,33 @@ public class TestLambda2 {
         // 断言的规则
         Predicate<String> stringPredicate = (n) -> n.startsWith("J");
         Predicate<String> predicateLength = (n) -> n.length() > 4;
-        languages.stream()
-                 .filter(stringPredicate.and(predicateLength))
-                 .forEach(System.out::println);
+        languages.stream().filter(stringPredicate.and(predicateLength)).forEach(System.out::println);
         log.info("languages={}", languages);
     }
 
     @Test
     public void test08() {
         List<Integer> costBeforeTax = Arrays.asList(100, 200, 300, 400, 500);
-        Double aDouble = costBeforeTax.stream()
-                                      .map(x -> (x + x * 0.12))
-                                      .reduce(Double::sum)
-                                      .get();
+        Double aDouble = costBeforeTax.stream().map(x -> (x + x * 0.12)).reduce(Double::sum).get();
         log.info("aDouble={}", aDouble);
     }
 
     @Test
     public void test09() {
         List<Integer> list = Arrays.asList(100, 200, 300, 400, 500);
-        Integer integer = list.stream()
-                              .reduce(Integer::sum)
-                              .get();
+        Integer integer = list.stream().reduce(Integer::sum).get();
         log.info("sum = {}", integer);
 
-        Integer integer1 = list.stream()
-                               .reduce(0, (a, b) -> {
-                                   return a + b;
-                               });
+        Integer integer1 = list.stream().reduce(0, (a, b) -> {
+            return a + b;
+        });
         log.info("sum={}", integer1);
 
         // a = 两个数之和，b=下一个元素
-        Integer reduce = list.stream()
-                             .reduce(0, (a, b) -> {
-                                 log.info("a={},b={}", a, b);
-                                 return a + b;
-                             }, (a, b) -> a + b);
+        Integer reduce = list.stream().reduce(0, (a, b) -> {
+            log.info("a={},b={}", a, b);
+            return a + b;
+        }, (a, b) -> a + b);
 
         log.info("sum ={}", reduce);
     }
@@ -202,23 +177,17 @@ public class TestLambda2 {
         /*
            reduce 求和
          */
-        Integer sum1 = list.stream()
-                           .reduce(Integer::sum)
-                           .get();
+        Integer sum1 = list.stream().reduce(Integer::sum).get();
         log.info("sum1 = {}", sum1);
-        Integer sum2 = list.stream()
-                           .reduce((a, b) -> {
-                               return a + b;
-                           })
-                           .get();
+        Integer sum2 = list.stream().reduce((a, b) -> {
+            return a + b;
+        }).get();
         log.info("sum2={}", sum2);
-        Integer sum3 = list.stream()
-                           .reduce(0, (a, b) -> {
-                               return a + b;
-                           });
+        Integer sum3 = list.stream().reduce(0, (a, b) -> {
+            return a + b;
+        });
         log.info("sum3={}", sum3);
-        Integer sum4 = list.stream()
-                           .reduce(0, Integer::sum);
+        Integer sum4 = list.stream().reduce(0, Integer::sum);
         log.info("sum4={}", sum4);
     }
 
@@ -241,11 +210,10 @@ public class TestLambda2 {
         A c = new A("name3", 100, 8, 9);
 
         List<A> list = Arrays.asList(a, b, c);
-        list.stream()
-            .reduce((a1, a2) -> {
-                a1.setA(a1.a + a2.a);
-                return a1;
-            });
+        list.stream().reduce((a1, a2) -> {
+            a1.setA(a1.a + a2.a);
+            return a1;
+        });
 
         System.out.println(list);
 
