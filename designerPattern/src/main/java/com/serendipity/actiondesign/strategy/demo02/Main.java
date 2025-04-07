@@ -11,10 +11,9 @@ public class Main {
                 new Cat(2, 4), new Cat(5, 0)};
 
         new Sort<Cat>().sort(cats, new CatComparator());
-
-        Arrays.asList(cats).forEach(x -> System.out.println(x));
-
-
+        System.out.println("排序后：");
+        Arrays.asList(cats).forEach(System.out::println);
+        System.out.println();
         new Sort<Cat>().sort(cats, new Comparator<Cat>() {
             @Override
             public int compareTo(Cat o1, Cat o2) {

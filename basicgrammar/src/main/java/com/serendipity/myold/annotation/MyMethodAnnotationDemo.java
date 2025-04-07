@@ -48,26 +48,45 @@ public class MyMethodAnnotationDemo {
     @Test
     public void test1() throws ClassNotFoundException {
         ClassLoader classLoader = MyMethodAnnotationDemo.class.getClassLoader();
-        log.info("classLoader ={}", classLoader);
         // 获取所有已加载的包
-        System.out.println(Arrays.toString(classLoader.getDefinedPackages()));
+        Arrays.stream(classLoader.getDefinedPackages()).forEach(System.out::println);
         // 获取自定义注解的class对象,不会执行初始化方法
         Class<?> aClass = classLoader.loadClass("com.serendipity.myold.annotation.MyMethodAnnotationDemo");
-        log.info("class = {}", aClass);
         // 获取注解的所有方法
         Method[] methods = aClass.getMethods();
-        // Arrays.stream(methods).forEach(System.out::println);
-        for (Method method : methods) {
-            // 判断method方法上是否含有MyMethodAnnotation类型的注解
-            if (method.isAnnotationPresent(MyMethodAnnotation.class)) {
-                // 获取方法上的注解（排除继承父类的）
-                for (Annotation declaredAnnotation : method.getDeclaredAnnotations()) {
-                    log.info("Annotation is Method :" + method + ":" + declaredAnnotation);
-                }
-                // 获取这个注解的详细信息
-                MyMethodAnnotation annotation = method.getAnnotation(MyMethodAnnotation.class);
-                log.info("annotition title = {},description = {}", annotation.title(), annotation.description());
-            }
-        }
+
+        Arrays.stream(methods)
+                .forEach(method -> {
+                    // 判断method方法上是否含有MyMethodAnnotation类型的注解
+                    if (method.isAnnotationPresent(MyMethodAnnotation.class)) {
+                        // 获取方法上的注解（排除继承父类的）
+                        for (Annotation declaredAnnotation : method.getDeclaredAnnotations()) {
+                            log.info("Annotation is Method :" + method + ":" + declaredAnnotation);
+                        }
+                        // 获取这个注解的详细信息
+                        MyMethodAnnotation annotation = method.getAnnotation(MyMethodAnnotation.class);
+                        log.info("annotition title = {},description = {}", annotation.title(), annotation.description());
+                    }
+                });
+    }
+
+    @Test
+    public void test2() {
+        // 直接获取类引用，避免反射加载
+        Class<?> targetClass = MyMethodAnnotationDemo.class;
+
+        Arrays.stream(targetClass.getDeclaredMethods())
+                .filter(method -> method.isAnnotationPresent(MyMethodAnnotation.class))
+                .forEach(method -> {
+                    MyMethodAnnotation annotation = method.getAnnotation(MyMethodAnnotation.class);
+                    // 合并注解处理与日志输出
+                    Arrays.stream(method.getDeclaredAnnotations())
+                            .forEach(declaredAnnotation ->
+                                    log.info("Annotation on Method {}: {}", method, declaredAnnotation));
+                    log.info("Annotation details - title: {}, description: {}",
+                            annotation.title(), annotation.description());
+                });
+
+        // 移除已兼容的包打印逻辑
     }
 }

@@ -15,7 +15,6 @@ public class DynamicProxyDemo {
     // 定义一个接口
     public interface UserService {
         void play();
-
         void run();
     }
 

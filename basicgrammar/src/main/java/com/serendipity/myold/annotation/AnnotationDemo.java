@@ -40,6 +40,10 @@ public class AnnotationDemo {
         Person person = JMockData.mock(Person.class, config);
         person.sayHello();
         System.out.println(person);
+
+        Student student = JMockData.mock(Student.class, config);
+        student.sayHello();
+        System.out.println(student);
     }
 
     @Test
