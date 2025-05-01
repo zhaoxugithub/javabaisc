@@ -5,12 +5,12 @@ import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 
 @Slf4j
-public class CgLibDynamicProxyHandler<T>  {
+public class CgLibDynamicProxyHandler<T> {
 
     private final Class<T> clazz;
 
-    public CgLibDynamicProxyHandler(Class<T> clazz){
-       this.clazz = clazz;
+    public CgLibDynamicProxyHandler(Class<T> clazz) {
+        this.clazz = clazz;
     }
 
     public T getProxy() {
@@ -19,13 +19,11 @@ public class CgLibDynamicProxyHandler<T>  {
         enhancer.setCallback((MethodInterceptor) (obj, method, args, proxy) -> {
             long startTime = System.currentTimeMillis();
             log.info("Start time: {}, Method: {}, Args: {}", startTime, method.getName(), args);
-
             Object result = proxy.invokeSuper(obj, args);
-
             long endTime = System.currentTimeMillis();
             log.info("Cost time: {}, Result: {}", endTime - startTime, result);
             return result;
         });
-        return (T)enhancer.create();
+        return (T) enhancer.create();
     }
 }

@@ -95,9 +95,7 @@ public class BytebufApi {
         ChannelFuture send = client.writeAndFlush(buf);
         send.sync();
         // 马老师的多线程
-        sync.channel()
-            .closeFuture()
-            .sync();
+        sync.channel().closeFuture().sync();
         System.out.println("client over....");
     }
 
@@ -123,9 +121,7 @@ public class BytebufApi {
         ChannelFuture send = client.writeAndFlush(byteBuf);
         send.sync();
         // 当服务端断开连接的时候就会断开，阻塞同步
-        sync.channel()
-            .closeFuture()
-            .sync();
+        sync.channel().closeFuture().sync();
         System.out.println("client over...");
     }
 
@@ -137,10 +133,7 @@ public class BytebufApi {
         pipeline.addLast(new MyAcceptHandler(thread, new MyInHandler()));
         thread.register(server);
         ChannelFuture bind = server.bind(new InetSocketAddress("192.168.1.100", 9991));
-        bind.sync()
-            .channel()
-            .closeFuture()
-            .sync();
+        bind.sync().channel().closeFuture().sync();
     }
 
     public void serverModel2() {

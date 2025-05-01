@@ -21,8 +21,7 @@ public class GroupChatServer {
             // 创建一个selector
             selector = Selector.open();
             // 绑定一个端口
-            serverSocketChannel.socket()
-                               .bind(new InetSocketAddress(8889));
+            serverSocketChannel.socket().bind(new InetSocketAddress(8889));
             // 设置非阻塞
             serverSocketChannel.configureBlocking(false);
             // serverSocket绑定selector
@@ -33,8 +32,7 @@ public class GroupChatServer {
     }
 
     public void listen() {
-        log.info("currentThread is ={}", Thread.currentThread()
-                                               .getName());
+        log.info("currentThread is ={}", Thread.currentThread().getName());
         while (true) {
             try {
                 // 阻塞两秒

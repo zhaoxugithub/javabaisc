@@ -15,7 +15,6 @@ public class GenericsBase05 {
     }
 
     public static void funA(A a) {
-
     }
 
     public static void funB(B b) {
@@ -33,7 +32,6 @@ public class GenericsBase05 {
 
 
     public static void funC(List<? extends A> listA) {
-
     }
 
     public static void funD(List<B> listB) {
@@ -116,7 +114,7 @@ public class GenericsBase05 {
         if (e1 == null) {
             return null;
         }
-        //迭代器返回的元素属于 E 的某个子类型
+        // 迭代器返回的元素属于 E 的某个子类型
         Iterator<? extends E> iterator = e1.iterator();
         E result = iterator.next();
         while (iterator.hasNext()) {

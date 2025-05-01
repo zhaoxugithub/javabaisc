@@ -10,19 +10,14 @@ import java.util.List;
  * 泛型数组
  */
 public class GenericsBase06 {
-
-
     @Test
     public void test01() {
         // 编译错误，非法创建
 //        List<String>[] list = new ArrayList<String>[10];
-
-
     }
 
 
     class Pair<T> {
-
         private T value;
 
         public T getValue() {

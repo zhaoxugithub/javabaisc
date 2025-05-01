@@ -25,9 +25,8 @@ public class GenericsTest_01 {
 
     @Test
     public void test() {
-        String s = test01("01");
-        int test = test01(123);
-        Ed<String> ed = new Ed<>();
-        ed.test01("sss");
+        test01("01");
+        test01(123);
+        new Ed<>().test01("01");
     }
 }

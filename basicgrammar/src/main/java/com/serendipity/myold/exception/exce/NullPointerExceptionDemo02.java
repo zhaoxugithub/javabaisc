@@ -5,7 +5,7 @@ import java.util.Optional;
 public class NullPointerExceptionDemo02 {
 
     public static void main(String[] args) {
-        Optional<String> dfdsf = test("33");
+        Optional<String> dfdsf = test("ok");
         // 通过isPresent 方法返回判断是否是null
         System.out.println(dfdsf.isPresent());
         if (dfdsf.isPresent()) {

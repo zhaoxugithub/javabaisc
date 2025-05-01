@@ -34,7 +34,7 @@ public class GenericsBase07 {
     @Test
     public void test() {
         // 生成GenericType 子类对象
-        GenericType<String> genericType = new GenericType<String>() {
+        GenericType<String> genericType = new GenericType<>() {
         };
         Type genericSuperclass = genericType.getClass().getGenericSuperclass();
         Type[] actualTypeArguments = ((ParameterizedType) genericSuperclass).getActualTypeArguments();

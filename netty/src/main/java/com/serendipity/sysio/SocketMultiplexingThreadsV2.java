@@ -19,7 +19,7 @@ public class SocketMultiplexingThreadsV2 {
         EventLoopGroup worker = new EventLoopGroup(3);
         ServerBootStrap b = new ServerBootStrap();
         b.group(boss, worker)
-         .bind(9090);
+                .bind(9090);
         System.in.read();
     }
 }
@@ -134,7 +134,7 @@ class ServerAcceptr implements Handler {
                 public void run() {
                     try {
                         System.out.println("socket...send...to " + eventLoop.name + " client port : " + client.socket()
-                                                                                                              .getPort());
+                                .getPort());
                         client.register(eventLoop.selector, SelectionKey.OP_READ, cHandler);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -207,9 +207,7 @@ class EventLoop implements Executor {
                     try {
                         thread = Thread.currentThread();
                         EventLoop.this.run();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
+                    } catch (InterruptedException | IOException e) {
                         e.printStackTrace();
                     }
                 }

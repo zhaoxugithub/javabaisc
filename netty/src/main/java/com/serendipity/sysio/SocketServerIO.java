@@ -14,11 +14,9 @@ public class SocketServerIO {
         while (true) {
             // 返回的是客户端连接的fd
             Socket client = server.accept();  // 阻塞1
-            System.out.printf("clientIP:%s,clientPort:%s%n\n", client.getLocalAddress()
-                                                                     .getHostAddress(), client.getPort());
+            System.out.printf("clientIP:%s,clientPort:%s%n\n", client.getLocalAddress().getHostAddress(), client.getPort());
             new Thread(() -> {
-                System.out.printf("thread:%s\n", Thread.currentThread()
-                                                       .getName());
+                System.out.printf("thread:%s\n", Thread.currentThread().getName());
                 InputStream in;
                 try {
                     in = client.getInputStream();

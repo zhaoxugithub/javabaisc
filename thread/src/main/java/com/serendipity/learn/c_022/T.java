@@ -11,14 +11,14 @@ import java.util.concurrent.Exchanger;
  */
 public class T {
 
-    //只适用于两个线程之间交换数据
+    // 只适用于两个线程之间交换数据
     private static Exchanger<String> exchanger = new Exchanger();
 
     public static void main(String[] args) {
         new Thread(() -> {
             String s = "T1";
             try {
-                //如果只有一个新线程启动，当前线程阻塞
+                // 如果只有一个新线程启动，当前线程阻塞
                 s = exchanger.exchange(s);
             } catch (InterruptedException e) {
                 e.printStackTrace();

@@ -65,6 +65,7 @@ public class EnumsDemo02 {
         System.out.println(sun.name());
 
         for (WeekDay01 value : values) {
+            System.out.println(value);
             System.out.println(value.name());
         }
     }
@@ -74,6 +75,7 @@ public class EnumsDemo02 {
         WeekDay02[] values = WeekDay02.values();
         WeekDay02 mon1 = WeekDay02.valueOf("MON");
         for (WeekDay02 value : values) {
+            System.out.println(value);
             System.out.println(value.dayValue);
         }
         WeekDay02 mon = WeekDay02.MON;

@@ -25,13 +25,13 @@ public class VirtualThread01 {
         try (ExecutorService executor = Executors.newCachedThreadPool()) {
             // 向executor提交1000000个任务
             IntStream.range(0, 1000000)
-                     .forEach(_ -> executor.submit(() -> {
-                         try {
-                             Thread.sleep(Duration.ofSeconds(1));
-                         } catch (InterruptedException e) {
-                             throw new RuntimeException(e);
-                         }
-                     }));
+                    .forEach(_ -> executor.submit(() -> {
+                        try {
+                            Thread.sleep(Duration.ofSeconds(1));
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -43,13 +43,13 @@ public class VirtualThread01 {
         try (ExecutorService executor = Executors.newVirtualThreadPerTaskExecutor()) {
             // 向executor提交1000000个任务
             IntStream.range(0, 1000000)
-                     .forEach(_ -> executor.submit(() -> {
-                         try {
-                             Thread.sleep(Duration.ofSeconds(1));
-                         } catch (InterruptedException e) {
-                             throw new RuntimeException(e);
-                         }
-                     }));
+                    .forEach(_ -> executor.submit(() -> {
+                        try {
+                            Thread.sleep(Duration.ofSeconds(1));
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }));
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
