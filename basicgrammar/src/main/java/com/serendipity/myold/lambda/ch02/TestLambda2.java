@@ -10,6 +10,7 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.stream.IntStream;
 
 /**
  * JAVA8  内置的四大核心函数式接口
@@ -37,13 +38,14 @@ public class TestLambda2 {
 
     // 一般这种函数会跟着 一个元素或者列表和一个函数式接口
     public List<String> filterStr(List<String> list, Predicate<String> predicate) {
-        List<String> list1 = new ArrayList<>();
-        for (String str : list) {
-            if (predicate.test(str)) {
-                list1.add(str);
-            }
+        if (list == null || list.isEmpty()) {
+            return new ArrayList<>();
         }
-        return list1;
+
+        // 使用Stream API简化过滤操作
+        return list.stream()
+                .filter(predicate)
+                .collect(java.util.stream.Collectors.toList());
     }
 
     // 函数式接口
@@ -61,13 +63,17 @@ public class TestLambda2 {
         filterStr3(10, () -> (int) (Math.random() * 100)).forEach(System.out::print);
     }
 
-    public List<Integer> filterStr3(int nu, Supplier<Integer> supplier) {
-        List<Integer> res = new ArrayList<>();
-        for (int i = 0; i < nu; i++) {
-            Integer integer = supplier.get();
-            res.add(integer);
+    public List<Integer> filterStr3(int count, Supplier<Integer> supplier) {
+        // 参数校验
+        if (count < 0) {
+            throw new IllegalArgumentException("数量不能为负数");
         }
-        return res;
+        // 预先分配合适大小的列表
+        List<Integer> result = new ArrayList<>(count);
+        // 使用Stream API优化生成过程
+        return IntStream.range(0, count)
+                .mapToObj(i -> supplier.get())
+                .collect(java.util.stream.Collectors.toList());
     }
 
     // 消费性接口

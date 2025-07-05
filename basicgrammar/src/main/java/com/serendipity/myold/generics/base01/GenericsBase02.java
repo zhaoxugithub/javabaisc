@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 */
 @SuppressWarnings("all")
 public class GenericsBase02 {
-
     // 定义一个泛型类
     class Point<T> {
         private T var;
@@ -20,7 +19,6 @@ public class GenericsBase02 {
             this.var = var;
         }
     }
-
 
     class Notepad<K, V> {       // 此处指定了两个泛型类型
         private K key;     // 此变量的类型由外部决定
@@ -41,7 +39,6 @@ public class GenericsBase02 {
         public void setValue(V value) {
             this.value = value;
         }
-
     }
 
     @Test

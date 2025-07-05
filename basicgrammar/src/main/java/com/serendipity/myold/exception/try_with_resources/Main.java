@@ -71,14 +71,14 @@ public class Main {
     }
 
     public static void main(String[] args) throws MyException {
-    /*
+        /*
         AutoClose autoClose = new AutoClose();
             try {
                 autoClose.work();
             } finally {
                 autoClose.close();
             }
-    */
+        */
         // 这个可以把所有的异常全部抛出来
         try (AutoClose autoClose1 = new AutoClose()) {
             autoClose1.work();

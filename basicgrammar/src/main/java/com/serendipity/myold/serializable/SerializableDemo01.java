@@ -10,9 +10,11 @@ public class SerializableDemo01 {
     Integer[] array2 = {1, 2, null, 4, null, 5, 6};
 
     transient Integer[] array3 = new Integer[10];
+
     {
         array3[0] = 1;
     }
+
     /**
      * 序列化数组
      */

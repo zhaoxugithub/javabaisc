@@ -24,11 +24,7 @@ public class DynamicProxyHandler<T> implements InvocationHandler {
 
     @SuppressWarnings("unchecked")
     public T getProxy() {
-        return (T) Proxy.newProxyInstance(
-                object.getClass().getClassLoader(),
-                object.getClass().getInterfaces(),
-                this
-        );
+        return (T) Proxy.newProxyInstance(object.getClass().getClassLoader(), object.getClass().getInterfaces(), this);
     }
 
     @Override

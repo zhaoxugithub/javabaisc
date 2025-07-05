@@ -32,7 +32,7 @@ public class TestLambda3 {
     // 对象::实例方法名
     @Test
     public void test01() {
-        Consumer<String> com = (x) -> System.out.print(x);
+        Consumer<String> com = System.out::print;
         com.accept("aaa");
         PrintStream out = System.out;
         Consumer<String> consumer = out::print;
@@ -43,12 +43,7 @@ public class TestLambda3 {
 
     @Test
     public void test02() {
-        Supplier<Employee> supplier1 = new Supplier<Employee>() {
-            @Override
-            public Employee get() {
-                return new Employee();
-            }
-        };
+        Supplier<Employee> supplier1 = () -> new Employee();
         // 传统
         Supplier<Employee> supplier = () -> new Employee("张三", 10, 10.00);
         Employee employee = supplier.get();
@@ -84,7 +79,7 @@ public class TestLambda3 {
     // 构造器引用
     // 有参构造
     public void test05() {
-        Function<Integer, Employee> function = (x) -> new Employee(x);
+        Function<Integer, Employee> function = Employee::new;
         Employee apply = function.apply(10);
         System.out.println(apply);
         Function<Integer, Employee> integerEmployeeFunction = Employee::new;
@@ -94,7 +89,7 @@ public class TestLambda3 {
 
     // 无参构造
     public void test06() {
-        Supplier<Employee> supplier = () -> new Employee();
+        Supplier<Employee> supplier = Employee::new;
         Employee employee = supplier.get();
         System.out.println(employee);
         Supplier<Employee> supplier1 = Employee::new;

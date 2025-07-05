@@ -10,7 +10,7 @@ import java.util.Optional;
 
 1.  Optional 容器类的常用方法
     Optional.of(T t): 创建一个Optional 实例
-    Optional.empty()：创建一个空的Optional 实例
+    Optional.empty(): 创建一个空的Optional 实例
     Optional.ofNullable(T t)  若t不为null，创建Optional实例，否则创建空实例
 
     isPresent():判断是否包含值
@@ -22,7 +22,7 @@ public class TestLambda4 {
 
     @Test
     public void test01() {
-        Optional<Employee> employee = Optional.of(null);
+        Optional<Employee> employee = Optional.ofNullable(null);
         System.out.println(employee.get());
     }
 

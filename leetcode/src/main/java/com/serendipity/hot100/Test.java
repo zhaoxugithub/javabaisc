@@ -60,5 +60,4 @@ public class Test {
     public int longestConsecutive(int[] nums) {
         return 0;
     }
-
 }

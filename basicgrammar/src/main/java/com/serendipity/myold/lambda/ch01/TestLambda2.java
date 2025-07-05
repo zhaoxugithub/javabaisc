@@ -70,6 +70,7 @@ public class TestLambda2 {
     public void test04() {
         // 顺序流
         List<Integer> collect = list.stream().filter(f -> f > 5).collect(Collectors.toList());
+
         Integer[] integers = list.toArray(new Integer[0]);
         // 并行流
         List<Integer> collect1 = list.stream().parallel().filter(f -> f > 5).collect(Collectors.toList());
@@ -193,8 +194,6 @@ public class TestLambda2 {
 
     @Test
     public void test11() {
-
-
         @AllArgsConstructor
         @Data
         class A {
@@ -203,20 +202,15 @@ public class TestLambda2 {
             private int b;
             private int c;
         }
-
-
         A a = new A("name1", 1, 2, 3);
         A b = new A("name2", 4, 5, 6);
         A c = new A("name3", 100, 8, 9);
-
         List<A> list = Arrays.asList(a, b, c);
         list.stream().reduce((a1, a2) -> {
             a1.setA(a1.a + a2.a);
             return a1;
         });
-
         System.out.println(list);
-
     }
 
     public static void println(String s) {

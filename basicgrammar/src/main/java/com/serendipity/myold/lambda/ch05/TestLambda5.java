@@ -85,8 +85,7 @@ public class TestLambda5 {
         List<String> list = new ArrayList<>();
         Stream<String> stream = list.stream();
         // 2. 通过 Arrays 中的静态方法 stream() 获取数组流
-        String[] strings = new String[10];
-        Stream<String> stream1 = Arrays.stream(strings);
+        Stream<String> stream1 = Arrays.stream( new String[10]);
         // 3. 通过 Stream 类中的静态方法
         Stream<String> a = Stream.of("a", "b", "c");
         List<Integer> integers = List.of(1, 2, 3, 4);
@@ -97,10 +96,10 @@ public class TestLambda5 {
                .forEach(System.out::print);
         // 生成
         System.out.println();
-        Stream.generate(() -> Math.random())
+        Stream.generate(Math::random)
               .limit(5)
               .forEach(System.out::println);
-        Stream<Double> limit = Stream.generate(() -> Math.random())
+        Stream<Double> limit = Stream.generate(Math::random)
                                      .limit(10);
     }
 

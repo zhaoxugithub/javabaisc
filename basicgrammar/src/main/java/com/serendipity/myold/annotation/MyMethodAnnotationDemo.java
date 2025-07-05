@@ -54,7 +54,6 @@ public class MyMethodAnnotationDemo {
         Class<?> aClass = classLoader.loadClass("com.serendipity.myold.annotation.MyMethodAnnotationDemo");
         // 获取注解的所有方法
         Method[] methods = aClass.getMethods();
-
         Arrays.stream(methods)
                 .forEach(method -> {
                     // 判断method方法上是否含有MyMethodAnnotation类型的注解
@@ -74,7 +73,6 @@ public class MyMethodAnnotationDemo {
     public void test2() {
         // 直接获取类引用，避免反射加载
         Class<?> targetClass = MyMethodAnnotationDemo.class;
-
         Arrays.stream(targetClass.getDeclaredMethods())
                 .filter(method -> method.isAnnotationPresent(MyMethodAnnotation.class))
                 .forEach(method -> {
@@ -86,7 +84,6 @@ public class MyMethodAnnotationDemo {
                     log.info("Annotation details - title: {}, description: {}",
                             annotation.title(), annotation.description());
                 });
-
         // 移除已兼容的包打印逻辑
     }
 }

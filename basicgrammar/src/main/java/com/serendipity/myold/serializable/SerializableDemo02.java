@@ -25,5 +25,4 @@ public class SerializableDemo02 {
         serializableUtils.serializablePerson(person);
         serializableUtils.deSerializePerson();
     }
-
 }

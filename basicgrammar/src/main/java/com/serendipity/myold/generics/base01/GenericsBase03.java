@@ -12,7 +12,6 @@ public class GenericsBase03 {
     }
 
     class InfoImpl<T> implements Info<T> {
-
         private T var;
 
         public InfoImpl(T var) {

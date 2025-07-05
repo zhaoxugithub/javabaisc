@@ -50,25 +50,22 @@ public class AnnotationDemo {
     public void test2() {
         Person person = new Person();
         System.out.println(person);
-        System.out.printf("Person name: %s, age: %d, remark: %s, email: %s\n", person.getName(), Person.age,
-                person.getRemark(), person.getEmail());
+        System.out.printf("Person name: %s, age: %d, remark: %s, email: %s\n",
+                person.getName(), Person.age, person.getRemark(), person.getEmail());
 
         Student student = new Student();
         System.out.println(student);
-        System.out.printf("Student name: %s, age: %d, remark: %s, email: %s\n", student.getName(), Student.age,
-                student.getRemark(), student.getEmail());
-        System.out.printf("Student name: %s, age: %d, remark: %s, email: %s\n", student.getName(), Student.age,
-                student.remark, student.email);
+
+        System.out.printf("Student name: %s, age: %d, remark: %s, email: %s\n",
+                student.getName(), Student.age, student.getRemark(), student.getEmail());
+        System.out.printf("Student name: %s, age: %d, remark: %s, email: %s\n",
+                student.getName(), Student.age, student.remark, student.email);
     }
 
     @Test
     public void test3() {
-        Arrays.stream(Person.class.getAnnotations())
-                .forEach(System.out::println);
-
-        Arrays.stream(Student.class.getAnnotations())
-                .forEach(System.out::println);
-
+        Arrays.stream(Person.class.getAnnotations()).forEach(System.out::println);
+        Arrays.stream(Student.class.getAnnotations()).forEach(System.out::println);
     }
 }
 
