@@ -44,13 +44,11 @@ public class PrivateOverrideDemo {
     @Test
     public void test() {
         // 报错
-        /*
             PrivateOverride po = new Derived();
             po.f();// private f()
             po.m();// child public
             po.d();
-        */
-        PrivateOverride po = new PrivateOverride();
-        po.c();
+/*        PrivateOverride po = new PrivateOverride();
+        po.c();*/
     }
 }

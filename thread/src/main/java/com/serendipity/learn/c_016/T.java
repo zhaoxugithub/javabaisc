@@ -13,9 +13,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class T {
 
     public static void main(String[] args) {
-
         ReentrantLock lock = new ReentrantLock();
-
         Thread t1 = new Thread(() -> {
             try {
                 lock.lock();
@@ -29,10 +27,19 @@ public class T {
             }
         });
         t1.start();
+        Thread t2 = getThread(lock);
+        try {
+            TimeUnit.SECONDS.sleep(10);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        t2.interrupt();
+    }
 
+    private static Thread getThread(ReentrantLock lock) {
         Thread t2 = new Thread(() -> {
             try {
-//                lock.lock();
+                // lock.lock();
                 boolean b = lock.tryLock();
                 if (!b) {
                     System.out.println("fdfsafsadfdf");
@@ -47,20 +54,12 @@ public class T {
                 e.printStackTrace();
                 System.out.println("t2 interrupted!");
             } finally {
-                if(lock.tryLock()){
+                if (lock.tryLock()) {
                     lock.unlock();
                 }
             }
         });
-
         t2.start();
-
-        try {
-            TimeUnit.SECONDS.sleep(10);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        t2.interrupt();
-
+        return t2;
     }
 }

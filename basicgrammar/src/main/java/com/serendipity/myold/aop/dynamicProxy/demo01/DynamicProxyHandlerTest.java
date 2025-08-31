@@ -8,17 +8,14 @@ package com.serendipity.myold.aop.dynamicProxy.demo01;
  * Description: com.reflect.dynamicProxy
  */
 public class DynamicProxyHandlerTest {
-
     interface Hello {
         void morning() throws InterruptedException;
-
         void afternoon();
 
         void evening();
     }
 
     static class HelloImpl implements Hello {
-
         @Override
         public void morning() throws InterruptedException {
             Thread.sleep(1000);

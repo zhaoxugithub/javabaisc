@@ -4,7 +4,6 @@ public class Main {
     public static void main(String[] args) {
         Content content = new Content();
         System.out.println(content.msg);
-
         CopyCommand copyCommand = new CopyCommand(content);
         copyCommand.doit();
         System.out.println(content.msg);

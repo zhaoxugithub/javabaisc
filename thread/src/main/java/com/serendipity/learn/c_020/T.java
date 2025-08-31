@@ -58,13 +58,9 @@ public class T {
                 read(readLock);
             }).start();
         }
-
-        new Thread(() -> {
-            write(writeLock, 10);
-        }).start();
-
-
-/*        for (int i = 0; i < 5; i++) {
+        new Thread(() -> write(writeLock, 10)).start();
+        /*
+        for (int i = 0; i < 5; i++) {
             int finalI = i;
             new Thread(() -> {
                 write(writeLock, finalI);

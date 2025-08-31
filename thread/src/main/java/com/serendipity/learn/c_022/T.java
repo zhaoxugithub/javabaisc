@@ -12,7 +12,7 @@ import java.util.concurrent.Exchanger;
 public class T {
 
     // 只适用于两个线程之间交换数据
-    private static Exchanger<String> exchanger = new Exchanger();
+    private static final Exchanger<String> exchanger = new Exchanger<>();
 
     public static void main(String[] args) {
         new Thread(() -> {

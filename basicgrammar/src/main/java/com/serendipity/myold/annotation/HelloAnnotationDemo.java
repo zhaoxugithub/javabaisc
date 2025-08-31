@@ -4,6 +4,9 @@ import com.serendipity.myold.annotation.annotation.Hello2;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 /**
  * ClassName HelloAnnotationDemo
  * Description TODO
@@ -24,6 +27,20 @@ public class HelloAnnotationDemo {
 
     @Test
     public void test() {
-        // todo 解析
+        // 获取注解字段和方法上注解信息
+        Method[] declaredMethods = HelloAnnotationDemo.class.getDeclaredMethods();
+        Field[] fields = HelloAnnotationDemo.class.getFields();
+        for (Method declaredMethod : declaredMethods) {
+            if (declaredMethod.isAnnotationPresent(Hello2.class)) {
+                Hello2 annotation = declaredMethod.getAnnotation(Hello2.class);
+                System.out.printf(String.format("type:%s,level:%s,value:%s", annotation.type(), annotation.level(), annotation.value()));
+            }
+        }
+        for (Field field : fields) {
+            if (field.isAnnotationPresent(Hello2.class)) {
+                Hello2 annotation = field.getAnnotation(Hello2.class);
+                System.out.printf(String.format("type:%s,level:%s,value:%s", annotation.type(), annotation.level(), annotation.value()));
+            }
+        }
     }
 }

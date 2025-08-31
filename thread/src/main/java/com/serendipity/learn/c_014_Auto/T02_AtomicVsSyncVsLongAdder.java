@@ -21,10 +21,9 @@ public class T02_AtomicVsSyncVsLongAdder {
     public static void main(String[] args) throws Exception {
         Thread[] threads = new Thread[1000];
         for (int i = 0; i < threads.length; i++) {
-            threads[i] =
-                    new Thread(() -> {
-                        for (int k = 0; k < 100000; k++) count1.incrementAndGet();
-                    });
+            threads[i] = new Thread(() -> {
+                for (int k = 0; k < 100000; k++) count1.incrementAndGet();
+            });
         }
         long start = System.currentTimeMillis();
         for (Thread t : threads) t.start();
@@ -35,16 +34,15 @@ public class T02_AtomicVsSyncVsLongAdder {
         //-----------------------------------------------------------
         Object lock = new Object();
         for (int i = 0; i < threads.length; i++) {
-            threads[i] =
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            for (int k = 0; k < 100000; k++)
-                                synchronized (lock) {
-                                    count2++;
-                                }
+            threads[i] = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for (int k = 0; k < 100000; k++)
+                        synchronized (lock) {
+                            count2++;
                         }
-                    });
+                }
+            });
         }
         start = System.currentTimeMillis();
         for (Thread t : threads) t.start();
@@ -53,10 +51,9 @@ public class T02_AtomicVsSyncVsLongAdder {
         System.out.println("Sync: " + count2 + " time " + (end - start));
         //----------------------------------
         for (int i = 0; i < threads.length; i++) {
-            threads[i] =
-                    new Thread(() -> {
-                        for (int k = 0; k < 100000; k++) count3.increment();
-                    });
+            threads[i] = new Thread(() -> {
+                for (int k = 0; k < 100000; k++) count3.increment();
+            });
         }
         start = System.currentTimeMillis();
         for (Thread t : threads) t.start();

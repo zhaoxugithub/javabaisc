@@ -30,9 +30,9 @@ public class BookShelf implements Aggregate {
         return new BookSelfIterator(this);
     }
 
-    class BookSelfIterator implements Iterator {
+    static class BookSelfIterator implements Iterator {
 
-        private BookShelf bookShelf;
+        private final BookShelf bookShelf;
         private int index;
 
         public BookSelfIterator(BookShelf bookShelf) {
@@ -42,10 +42,7 @@ public class BookShelf implements Aggregate {
 
         @Override
         public boolean hasNext() {
-            if (index < bookShelf.getLength()) {
-                return true;
-            }
-            return false;
+            return index < bookShelf.getLength();
         }
 
         @Override

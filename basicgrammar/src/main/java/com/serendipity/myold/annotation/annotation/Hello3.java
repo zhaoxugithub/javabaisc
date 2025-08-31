@@ -7,8 +7,6 @@ import java.lang.annotation.Target;
         ElementType.FIELD})
 public @interface Hello3 {
     int type() default 0;
-
     String level() default "info";
-
     String value() default "";
 }

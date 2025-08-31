@@ -15,8 +15,7 @@ import java.lang.annotation.*;
 public class TestInheritedAnnotationDemo {
 
     @TestInheritedAnnotation(value = {"123456"}, number = 10)
-    static
-    class Person {
+    static class Person {
     }
 
     static class Student extends Person {
@@ -27,7 +26,6 @@ public class TestInheritedAnnotationDemo {
     @Target({ElementType.TYPE, ElementType.METHOD})  // 注解作用方法，类、接口、枚举类
     public @interface TestInheritedAnnotation {
         String[] value();
-
         int number();
     }
 

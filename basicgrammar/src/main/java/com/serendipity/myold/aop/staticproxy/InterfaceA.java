@@ -9,6 +9,5 @@ package com.serendipity.myold.aop.staticproxy;
  */
 public interface InterfaceA {
     void run();
-
     void play();
 }

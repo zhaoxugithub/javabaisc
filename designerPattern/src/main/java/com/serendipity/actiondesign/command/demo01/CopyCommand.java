@@ -1,8 +1,7 @@
 package com.serendipity.actiondesign.command.demo01;
 
 public class CopyCommand extends Command {
-
-    private Content c;
+    private final Content c;
     public String strToInsert = "http://www.mashibin.com";
 
     public CopyCommand(Content c) {

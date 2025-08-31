@@ -18,6 +18,5 @@ import java.lang.annotation.*;
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface TestInheritedAnnotation {
     String[] values();
-
     int number();
 }

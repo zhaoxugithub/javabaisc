@@ -26,13 +26,11 @@ import java.util.concurrent.locks.ReentrantLock;
  * ReentrantLock还可以指定为公平锁
  */
 public class T {
-    //公平鎖
+    // 公平鎖
     private static ReentrantLock lock = new ReentrantLock(true);
 
     public void run() {
-
         for (int i = 0; i < 100; i++) {
-
             try {
                 lock.lock();
                 System.out.println(Thread.currentThread().getName() + ":" + i);
@@ -43,7 +41,6 @@ public class T {
                 lock.unlock();
             }
         }
-
     }
 
     public static void main(String[] args) {

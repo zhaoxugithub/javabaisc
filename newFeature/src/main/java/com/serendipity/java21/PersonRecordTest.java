@@ -9,5 +9,9 @@ public class PersonRecordTest {
         System.out.println(john.name());
         System.out.println(john.age());
         john.study();
+
+        // True
+        PersonRecord john1 = new PersonRecord("John", "25");
+        System.out.println(john1.equals(john));
     }
 }

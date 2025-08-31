@@ -14,7 +14,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class T1 {
 
     // 底层使用了无锁算法CAS
-    Lock lock = new ReentrantLock();
+    private final Lock lock = new ReentrantLock();
 
     void m1() {
         lock.lock();
@@ -48,7 +48,8 @@ public class T1 {
         T1 t1 = new T1();
         Thread thread1 = new Thread(t1::m1);
         Thread thread2 = new Thread(t1::m2);
-        thread1.start();thread2.start();
+        thread1.start();
+        thread2.start();
         System.out.println(thread2.getState());
     }
 }

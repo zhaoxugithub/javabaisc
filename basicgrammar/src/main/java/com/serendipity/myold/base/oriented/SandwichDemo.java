@@ -13,6 +13,12 @@ public class SandwichDemo {
      * 父类静态 - 子类静态  - 父类非静态代码块 - 父类构造方法 - 子类非静态代码块  - 子类构造方法
      */
     private class Meal {
+        static {
+            System.out.println("Meal static");
+        }
+        {
+            System.out.println("Meal() non-static");
+        }
         Meal() {
             System.out.println("Meal()");
         }
@@ -58,6 +64,7 @@ public class SandwichDemo {
         }
     }
 
+    // meal -->Lunch-->PortableLunch -->Bread-->Cheese-->Lettuce-->Sandwich
     @Test
     public void test01() {
         new Sandwich();

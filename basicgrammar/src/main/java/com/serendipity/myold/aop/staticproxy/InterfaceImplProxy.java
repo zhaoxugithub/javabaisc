@@ -8,7 +8,6 @@ package com.serendipity.myold.aop.staticproxy;
  * Description: com.reflect.staticproxy
  */
 public class InterfaceImplProxy implements InterfaceA {
-
     InterfaceA target = null;
 
     public InterfaceImplProxy(InterfaceA target) {

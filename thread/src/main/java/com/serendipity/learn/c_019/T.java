@@ -38,9 +38,7 @@ public class T {
                     // 线程调用 await() 表示自己已经到达栅栏
                     barrier.await();
                     System.out.println("start ....");
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } catch (BrokenBarrierException e) {
+                } catch (InterruptedException | BrokenBarrierException e) {
                     e.printStackTrace();
                 }
             }).start();

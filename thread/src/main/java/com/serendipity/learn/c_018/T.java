@@ -14,7 +14,7 @@ public class T {
     public static void main(String[] args) {
         T t = new T();
         t.usingCountDownLatch();
-//        t.usingJoin();
+        // t.usingJoin();
     }
     public void usingCountDownLatch() {
         Thread[] threads = new Thread[100];
@@ -32,7 +32,7 @@ public class T {
             threads[i].start();
         }
         try {
-            //  latch.countDown(); 门栓变成0的时候才会执行后面的代码
+            // latch.countDown(); 门栓变成0的时候才会执行后面的代码
             latch.await();
         } catch (InterruptedException e) {
             e.printStackTrace();

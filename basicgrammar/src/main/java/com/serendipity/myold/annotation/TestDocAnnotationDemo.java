@@ -42,10 +42,10 @@ public class TestDocAnnotationDemo {
     @Test
     public void test() {
         Arrays.stream(A.class.getMethods())
-              .filter(method -> method.isAnnotationPresent(TestDocAnnotation.class))
-              .forEach(method -> {
-                  log.info("method ={}", method.getName());
-                  System.out.println(Arrays.toString(method.getAnnotations()));
-              });
+                .filter(method -> method.isAnnotationPresent(TestDocAnnotation.class))
+                .forEach(method -> {
+                    log.info("method ={}", method.getName());
+                    System.out.println(Arrays.toString(method.getAnnotations()));
+                });
     }
 }

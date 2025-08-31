@@ -66,7 +66,11 @@ public class StringUtilsDemo01 {
         System.out.println(StringUtils.isNotEmpty(""));   // false
         System.out.println(StringUtils.isNotEmpty(" "));  // true
 
+        System.out.println("-------------------");
         System.out.println(StringUtils.isAnyEmpty(null, " ", "", "sss"));
+        System.out.println(StringUtils.isAnyBlank(null, " ", "", "sss"));
+        System.out.println(StringUtils.isAllEmpty(null, " ", "", "sss"));
+        System.out.println(StringUtils.isAllBlank(null, " ", "", "sss"));
 
         System.out.println(StringUtils.isNumeric(null));   // false
         System.out.println(StringUtils.isNumeric(""));      // false

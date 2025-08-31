@@ -17,7 +17,7 @@ package com.serendipity.myold.aop.staticproxy;
 public class Main {
     public static void main(String[] args) {
         InterfaceImplProxy proxy = new InterfaceImplProxy(new InterfaceImpl());
-//        proxy.run();
+        // proxy.run();
         proxy.play();
     }
 }

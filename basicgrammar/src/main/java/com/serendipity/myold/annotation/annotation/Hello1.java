@@ -6,8 +6,6 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface Hello1 {
     int type() default 0;
-
     String level() default "info";
-
     String value() default "";
 }

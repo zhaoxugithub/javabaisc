@@ -77,8 +77,8 @@ public class CacheUtil {
             log.info("cache is empty");
             return;
         }
-
-        cache.entrySet().removeIf(entry -> entry.getValue().getExpireTime() != null
+        cache.entrySet()
+                .removeIf(entry -> entry.getValue().getExpireTime() != null
                 && entry.getValue().getExpireTime() < System.currentTimeMillis());
     }
 

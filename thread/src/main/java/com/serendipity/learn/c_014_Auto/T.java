@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class T {
 
-    //底层实现是CAS自旋锁
+    // 底层实现是CAS自旋锁
     private final AtomicInteger integer = new AtomicInteger(0);
     private int count = 0;
 
