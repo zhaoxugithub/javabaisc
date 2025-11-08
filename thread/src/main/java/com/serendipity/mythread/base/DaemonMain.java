@@ -23,7 +23,6 @@ public class DaemonMain {
         System.out.println("main thread is running");
     }
 
-
     // 如果存在用户线程，jvm 不会退出
     // 如果只有守护线程, jvm 会退出
     public static void test2() {
@@ -41,5 +40,4 @@ public class DaemonMain {
         thread.start();
         System.out.println("main thread is running");
     }
-
 }

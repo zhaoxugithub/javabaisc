@@ -48,7 +48,11 @@ public class PrivateOverrideDemo {
             po.f();// private f()
             po.m();// child public
             po.d();
-/*        PrivateOverride po = new PrivateOverride();
-        po.c();*/
+        /*
+            PrivateOverride po = new PrivateOverride();
+            po.c();
+        */
+        PrivateOverride privateOverride = new PrivateOverride();
+        privateOverride.c();
     }
 }

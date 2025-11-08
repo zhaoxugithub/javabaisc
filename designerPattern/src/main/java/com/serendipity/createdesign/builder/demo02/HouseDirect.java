@@ -1,5 +1,8 @@
 package com.serendipity.createdesign.builder.demo02;
 
+import lombok.Setter;
+
+@Setter
 public class HouseDirect {
 
     private HouseBuilder houseBuilder;
@@ -8,16 +11,11 @@ public class HouseDirect {
         this.houseBuilder = builder;
     }
 
-    public void setHouseBuilder(HouseBuilder builder) {
-        this.houseBuilder = builder;
-    }
-
     public House constructHouse() {
         houseBuilder.buildBasic();
         houseBuilder.buildWalls();
         houseBuilder.roofed();
-        House house = houseBuilder.buildHouse();
-        return house;
+        return houseBuilder.buildHouse();
     }
 
 }

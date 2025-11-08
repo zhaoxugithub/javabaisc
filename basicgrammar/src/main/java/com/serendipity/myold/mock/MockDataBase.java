@@ -1,10 +1,7 @@
 package com.serendipity.myold.mock;
 
-import cn.hutool.aop.ProxyUtil;
-import cn.hutool.aop.aspects.TimeIntervalAspect;
 import com.github.jsonzou.jmockdata.JMockData;
 import com.serendipity.myold.mock.entity.BasicBean;
-import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -25,11 +22,8 @@ public class MockDataBase {
         String str = JMockData.mock(String.class);
     }
 
-    public void mockBasicBean(){
+    public void mockBasicBean() {
         BasicBean mock = JMockData.mock(BasicBean.class);
         System.out.println(mock);
     }
-
-
-
 }

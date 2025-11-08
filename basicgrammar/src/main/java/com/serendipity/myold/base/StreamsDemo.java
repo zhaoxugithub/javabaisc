@@ -49,7 +49,8 @@ public class StreamsDemo {
         final List<Task> tasks = Arrays.asList(
                 new Task(Status.OPEN, 5),
                 new Task(Status.OPEN, 13),
-                new Task(Status.CLOSED, 8)
+                new Task(Status.CLOSED, 8),
+                new Task(Status.CLOSED, 100)
         );
         final int sum = tasks.stream().filter(task -> task.status == Status.OPEN)
                 .mapToInt(Task::getPonints).sum();

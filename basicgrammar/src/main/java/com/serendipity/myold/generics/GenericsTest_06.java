@@ -4,7 +4,7 @@ import java.lang.reflect.Array;
 import java.util.Arrays;
 
 public class GenericsTest_06<T> {
-    class A {
+    static class A {
         @Override
         public String toString() {
             return "A{" + "name='" + "zhaoxu" + '\'' + '}';

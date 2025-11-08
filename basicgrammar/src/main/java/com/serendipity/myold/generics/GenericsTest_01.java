@@ -27,6 +27,9 @@ public class GenericsTest_01 {
     public void test() {
         test01("01");
         test01(123);
+        new Ed<String>().test01("01");
         new Ed<>().test01("01");
+        // 报错
+        // new Ed<Integer>().test01("01");
     }
 }

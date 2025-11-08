@@ -24,7 +24,15 @@ public class GenericsTest_07 {
         list1.getClass()
              .getMethod("add", Object.class)
              .invoke(list1, "asd");
+
+        // 这里打印会抛出异常
         list1.forEach(System.out::println);
+
+
+        for (int i = 0; i < list1.size(); i++) {
+
+        }
+
     }
 
     public <T> T add(T x, T y) {

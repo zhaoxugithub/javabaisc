@@ -2,7 +2,7 @@ package com.serendipity.createdesign.builder.demo02;
 
 public abstract class HouseBuilder {
 
-    private House house = new House();
+    private final House house = new House();
 
     public abstract void buildBasic();
 
