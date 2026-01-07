@@ -28,6 +28,16 @@ public class LeetCode_283_moveZeroes {
         array[b] = temp;
     }
 
+    /*
+    1,2,3,0,4,0,3,4,5
+     */
+    public void moveZeroes1(int[] nums) {
+        for (int num : nums) {
+
+        }
+    }
+
+
     public static void main(String[] args) {
         LeetCode_283_moveZeroes leetCode283MoveZeroes = new LeetCode_283_moveZeroes();
         int[] arr = {0, 1, 0, 3, 12};

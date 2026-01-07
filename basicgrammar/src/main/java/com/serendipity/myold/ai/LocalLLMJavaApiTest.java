@@ -22,7 +22,7 @@ public class LocalLLMJavaApiTest {
     private void onceChat() {
         try {
             // 设置请求的URL
-            URL url = new URL("http://192.168.31.206:11434/api/chat");
+            URL url = new URL("http://192.168.150.129:11434/api/chat");
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
             // 设置请求方法为POST

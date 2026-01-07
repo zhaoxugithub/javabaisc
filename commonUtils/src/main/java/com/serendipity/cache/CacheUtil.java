@@ -36,6 +36,7 @@ public class CacheUtil {
         executorService.scheduleAtFixedRate(CacheUtil::clearCache, 1000, 500, TimeUnit.MILLISECONDS);
     }
 
+    //
     public static void put(String key, Object value, long expire) {
         MyCache myCache = new MyCache();
         myCache.setKey(key);
@@ -79,7 +80,7 @@ public class CacheUtil {
         }
         cache.entrySet()
                 .removeIf(entry -> entry.getValue().getExpireTime() != null
-                && entry.getValue().getExpireTime() < System.currentTimeMillis());
+                        && entry.getValue().getExpireTime() < System.currentTimeMillis());
     }
 
     public static void main(String[] args) throws InterruptedException {
