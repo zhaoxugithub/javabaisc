@@ -40,8 +40,6 @@ import static com.serendipity.utils.LinkedListUtils.createListNode;
 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
  */
 public class LeetCode_02_addTwoNumbers {
-
-
     // 反转ListNode,迭代方法
     public static ListNode reverseList(ListNode head) {
         ListNode pre = null;
@@ -125,33 +123,56 @@ public class LeetCode_02_addTwoNumbers {
      * @return
      */
     public static ListNode<Integer> addTwoNumbers22(ListNode<Integer> l1, ListNode<Integer> l2) {
-
         ListNode preHead = new ListNode(-1);
         ListNode cur = preHead;
-
         int carry = 0;
         while (l1 != null || l2 != null) {
             int num1 = l1 == null ? 0 : l1.val;
             int num2 = l2 == null ? 0 : l2.val;
-
             int sum = num1 + num2 + carry;
-
             carry = sum / 10;
             sum = sum % 10;
-
             cur.next = new ListNode(sum);
             cur = cur.next;
-
             if (l1 != null) {
                 l1 = l1.next;
             }
-
             if (l2 != null) {
                 l2 = l2.next;
             }
         }
         if (carry > 0) {
             cur.next = new ListNode(carry);
+        }
+        return preHead.next;
+    }
+
+
+    public static ListNode<Integer> addTwoNumbersV2(ListNode<Integer> l1, ListNode<Integer> l2) {
+        ListNode preHead = new ListNode(0);
+        ListNode cur = preHead;
+
+        // 进位
+        int carry = 0;
+
+        while (l1 != null && l2 != null) {
+            int num1 = l1.val;
+            int num2 = l2.val;
+            int sum = num1 + num2 + carry;
+            carry = sum / 10;
+            sum = sum % 10;
+            cur.next = new ListNode<>(sum);
+            cur = cur.next;
+            if (l1 != null) {
+                l1 = l1.next;
+            }
+            if (l2 != null) {
+                l2 = l2.next;
+            }
+        }
+
+        if (carry > 0) {
+            cur.next = new ListNode<>(carry);
         }
         return preHead.next;
     }

@@ -30,10 +30,12 @@ public class T003_lock_condition {
                     condition.signal();
                     condition.await();
                 }
+                System.out.println("12312");
                 condition.signal();
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
+                System.out.println("线程结束");
                 lock.unlock();
             }
         }).start();

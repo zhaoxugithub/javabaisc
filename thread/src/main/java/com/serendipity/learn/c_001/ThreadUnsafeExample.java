@@ -62,7 +62,7 @@ public class ThreadUnsafeExample {
         System.out.println(threadUnsafeExample.get());
     }
 
-    public void test() throws InterruptedException {
+    public static void test() throws InterruptedException {
         final int threadSize = 1000;
         ThreadUnsafeExample example = new ThreadUnsafeExample();
         final CountDownLatch countDownLatch = new CountDownLatch(threadSize);
@@ -78,8 +78,8 @@ public class ThreadUnsafeExample {
         System.out.println(example.get());
     }
 
-    public static void main(String[] args) {
-        est();
+    public static void main(String[] args) throws InterruptedException {
+        test();
         // test1();
     }
 }

@@ -45,6 +45,9 @@ public class T02_HowToCreateThread {
         log.info("thread main={}", Thread.currentThread().getName());
     }
 
+    public void method2() {
+        System.out.println("123");
+    }
 
     public static void test() throws InterruptedException {
         // 通过线程池创建线程
@@ -75,5 +78,8 @@ public class T02_HowToCreateThread {
         // 第四种方法
         new Thread(() -> record("my start...")).start();
         new Thread(T02_HowToCreateThread::method).start();
+
+        T02_HowToCreateThread t02HowToCreateThread = new T02_HowToCreateThread();
+        new Thread(() -> t02HowToCreateThread.method2()).start();
     }
 }

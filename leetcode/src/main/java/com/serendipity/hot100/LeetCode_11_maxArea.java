@@ -1,8 +1,6 @@
 package com.serendipity.hot100;
 
-
 public class LeetCode_11_maxArea {
-
     // 方法一：暴力破解， 时间复杂度太高过不去
     public int maxArea01(int[] height) {
         int result = 0;
