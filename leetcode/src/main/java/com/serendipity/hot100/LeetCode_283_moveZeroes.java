@@ -51,7 +51,13 @@ public class LeetCode_283_moveZeroes {
     1,2,3,0,4,0,3,4,5
      */
     public void moveZeroes1(int[] nums) {
-        for (int num : nums) {
+        // i 一定小于 end
+        for (int i = nums.length - 1; i >= 0; i--) {
+            int end = i;
+            if (nums[i] == 0) {
+                end --;
+                continue;
+            }
 
         }
     }
