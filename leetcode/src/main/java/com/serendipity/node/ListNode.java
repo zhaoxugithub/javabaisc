@@ -10,7 +10,7 @@ package com.serendipity.node;
 
 public class ListNode<T> {
     public T val;
-    public ListNode next;
+    public ListNode<T> next;
 
     public ListNode() {
     }
@@ -19,7 +19,7 @@ public class ListNode<T> {
         this.val = value;
     }
 
-    public ListNode(T val, ListNode next) {
+    public ListNode(T val, ListNode<T> next) {
         this.val = val;
         this.next = next;
     }

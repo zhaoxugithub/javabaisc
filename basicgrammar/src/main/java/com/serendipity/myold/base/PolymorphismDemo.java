@@ -19,7 +19,6 @@ import java.util.List;
  */
 @SuppressWarnings("all")
 public class PolymorphismDemo {
-
     @AllArgsConstructor
     @Data
     class Order {
@@ -130,23 +129,14 @@ public class PolymorphismDemo {
     }
 
     public static void main(String[] args) {
-
         PolymorphismDemo polymorphismDemo = new PolymorphismDemo();
-
-
         ArrayList<PaymentStrategy> paymentStrategies = Lists.newArrayList
                 (
-                polymorphismDemo.new AlipayStrategy(polymorphismDemo.new AlipayClient()),
-                polymorphismDemo.new WechatPayStrategy()
-        );
-
+                        polymorphismDemo.new AlipayStrategy(polymorphismDemo.new AlipayClient()),
+                        polymorphismDemo.new WechatPayStrategy()
+                );
         PaymentProcessor paymentProcessor = polymorphismDemo.new PaymentProcessor(paymentStrategies);
-
         PaymentResult pay = paymentProcessor.pay(polymorphismDemo.new Order("1", 200.0), PaymentType.ALIPAY);
-
         System.out.println(pay);
-
-
     }
-
 }

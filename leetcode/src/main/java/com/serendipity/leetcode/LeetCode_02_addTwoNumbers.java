@@ -151,7 +151,6 @@ public class LeetCode_02_addTwoNumbers {
     public static ListNode<Integer> addTwoNumbersV2(ListNode<Integer> l1, ListNode<Integer> l2) {
         ListNode preHead = new ListNode(0);
         ListNode cur = preHead;
-
         // 进位
         int carry = 0;
 
@@ -170,7 +169,6 @@ public class LeetCode_02_addTwoNumbers {
                 l2 = l2.next;
             }
         }
-
         if (carry > 0) {
             cur.next = new ListNode<>(carry);
         }
@@ -183,6 +181,5 @@ public class LeetCode_02_addTwoNumbers {
         ListNode<Integer> listNode2 = createListNode(9, 9, 9, 9);
         ListNode<Integer> integerListNode = addTwoNumbers22(listNode1, listNode2);
         LinkedListUtils.printListNode(integerListNode);
-
     }
 }

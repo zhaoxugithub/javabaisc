@@ -56,7 +56,7 @@ public class BIOServer01 {
         threadPool.shutdown(); // 停止接受新任务
         try {
             // 等待现有任务完成
-            if (!threadPool.awaitTermination(60, TimeUnit.SECONDS)) {
+                if (!threadPool.awaitTermination(60, TimeUnit.SECONDS)) {
                 threadPool.shutdownNow(); // 强制终止任务
             }
         } catch (InterruptedException e) {
@@ -69,7 +69,7 @@ public class BIOServer01 {
         // 记录线程信息
         log.info("Thread ID={}, Thread Name={}", Thread.currentThread().threadId(), Thread.currentThread().getName());
         // 使用 try-with-resources 自动关闭资源
-        try (InputStream inputStream = socket.getInputStream(); Socket autoCloseSocket = socket) { // 将 socket 也纳入自动关闭范围
+        try (InputStream inputStream = socket.getInputStream(); Socket ignored = socket) { // 将 socket 也纳入自动关闭范围
             byte[] buffer = new byte[1024]; // 缓冲区大小可配置
             int bytesRead;
             // 读取客户端数据

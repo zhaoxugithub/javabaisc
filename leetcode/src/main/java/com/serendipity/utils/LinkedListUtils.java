@@ -1,6 +1,11 @@
 package com.serendipity.utils;
 
+import com.serendipity.model.Person;
 import com.serendipity.node.ListNode;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * ClassName LinkedListUtil
@@ -23,10 +28,36 @@ public class LinkedListUtils {
         ListNode<Integer> head = new ListNode<>(array[0]);
         ListNode<Integer> current = head;
         for (int i = 1; i < array.length; i++) {
-            current.next = new ListNode(array[i]);
+            current.next = new ListNode<>(array[i]);
             current = current.next;
         }
         return head;
+    }
+
+    public static <T> ListNode<T> createListNode(List<T> list) {
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+        T first = list.getFirst();
+        ListNode<T> head = new ListNode<>(first);
+        ListNode<T> current = head;
+        for (int i = 1; i < list.size(); i++) {
+            current.next = new ListNode<>(list.get(i));
+            current = current.next;
+        }
+        return head;
+    }
+
+    public static ListNode<String> createListNodeString(List<String> strings) {
+        return createListNode(strings);
+    }
+
+    public static ListNode<String> createListNodeString(String... strings) {
+        return createListNode(Arrays.asList(strings));
+    }
+
+    public static ListNode<Character> createListNodeChar(Character... chars) {
+        return createListNode(Arrays.asList(chars));
     }
 
     /**
@@ -43,20 +74,50 @@ public class LinkedListUtils {
         System.out.println(appendVal(head));
     }
 
+    public static <T> void printListNodeObj(ListNode<T> head) {
+        System.out.println(appendVal(head));
+    }
+
     /**
      * @param head
      * @return
      */
-    private static String appendVal(ListNode head) {
+    private static <T> String appendVal(ListNode<T> head) {
         StringBuilder sb = new StringBuilder();
-        ListNode current = head;
+        ListNode<T> current = head;
 
         while (current != null) {
-            sb.append(current.val);
+            sb.append(current.val.toString());
             sb.append("->");
             current = current.next;
         }
         sb.append("NULL");
         return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        // 1.创建10个Person对象
+        // 2. createListNode 参数放在 10个Person
+        // 3. printListNodeObj 一下
+        // 1. 创建10个Person对象
+        List<Person> people = new ArrayList<>();
+        for (int i = 1; i <= 10; i++) {
+            people.add(new Person("name" + i, i, "address-" + i));
+        }
+        // 2. createListNode 参数放在 10个Person
+        ListNode<Person> head = createListNode(people);
+        // 3. printListNodeObj 一下
+        printListNodeObj(head);
+
+        List<Integer> integers = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            integers.add(i);
+        }
+        printListNodeObj(createListNode(integers));
+        List<String> strings = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            strings.add("A" + i);
+        }
+        printListNodeObj(createListNode(strings));
     }
 }
