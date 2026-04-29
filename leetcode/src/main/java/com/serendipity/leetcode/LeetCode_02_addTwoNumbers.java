@@ -183,9 +183,7 @@ public class LeetCode_02_addTwoNumbers {
      */
     public static ListNode<Integer> addTwoNumberV3(ListNode<Integer> l1, ListNode<Integer> l2) {
         //
-        createListNode()
-
-
+        return null;
     }
 
 
