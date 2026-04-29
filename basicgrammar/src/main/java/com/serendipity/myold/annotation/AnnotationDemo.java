@@ -7,7 +7,6 @@ import com.serendipity.myold.annotation.entity.Student;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
-import java.lang.annotation.Annotation;
 import java.util.Arrays;
 
 /**

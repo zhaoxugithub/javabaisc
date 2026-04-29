@@ -175,6 +175,19 @@ public class LeetCode_02_addTwoNumbers {
         return preHead.next;
     }
 
+    /**
+     * 两个数相加
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public static ListNode<Integer> addTwoNumberV3(ListNode<Integer> l1, ListNode<Integer> l2) {
+        //
+        createListNode()
+
+
+    }
+
 
     public static void main(String[] args) {
         ListNode<Integer> listNode1 = createListNode(9, 9, 9, 9, 9, 9, 9);

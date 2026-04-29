@@ -4,6 +4,7 @@ import com.serendipity.myold.annotation.annotation.TestInheritedAnnotation;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 // @Data 可以被继承
 @AllArgsConstructor
@@ -22,5 +23,14 @@ public class Person {
 
     private void fun() {
         System.out.println("fun");
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", remark='" + remark + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
