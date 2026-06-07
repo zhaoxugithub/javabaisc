@@ -67,7 +67,7 @@ public class Code03_BestArrange {
         int timeLine = 0;
         TreeSet<Integer> result = new TreeSet<>();
         process3(programs, 0, 0, visited, timeLine, result);
-        return result.size() == 0 ? 0 : result.last();
+        return result.isEmpty() ? 0 : result.last();
     }
 
     private static void process3(Program[] programs, int n, int index, boolean[] visited, int timeLine, TreeSet<Integer> result) {
@@ -96,10 +96,10 @@ public class Code03_BestArrange {
         int timeLine = 0;
         int result = 0;
         // 依次遍历每一个会议，结束时间早的会议先遍历
-        for (int i = 0; i < programs.length; i++) {
-            if (timeLine <= programs[i].start) {
+        for (Program program : programs) {
+            if (timeLine <= program.start) {
                 result++;
-                timeLine = programs[i].end;
+                timeLine = program.end;
             }
         }
         return result;

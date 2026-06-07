@@ -26,8 +26,8 @@ public class Code_01_Start {
     public static void findTwoNums(int[] arr) {
         //首先先获取这两个数的异或结果
         int eor = 0;
-        for (int i = 0; i < arr.length; i++) {
-            eor ^= arr[i];
+        for (int j : arr) {
+            eor ^= j;
         }
         //因为这两个数是不相等的，所以这两个数异或的结果肯定不等于0
         //获取这个结果的最右边的那个1

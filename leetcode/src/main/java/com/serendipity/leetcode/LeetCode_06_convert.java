@@ -3,7 +3,7 @@ package com.serendipity.leetcode;
 
 public class LeetCode_06_convert {
     public String convert(String s, int numRows) {
-        if (s == null || s.length() == 0) {
+        if (s == null || s.isEmpty()) {
             return "";
         }
         Object[] objects = new Object[numRows];

@@ -15,7 +15,7 @@ public class LeetCode_03_LengthOfLongestSubstring {
         abcabcbb
      */
     public static int lengthOfLongestSubstring2(String s) {
-        if (s == null || s.length() == 0) {
+        if (s == null || s.isEmpty()) {
             return 0;
         }
         char[] charArray = s.toCharArray();

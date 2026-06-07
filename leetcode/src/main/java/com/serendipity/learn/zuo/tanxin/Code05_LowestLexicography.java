@@ -11,7 +11,7 @@ public class Code05_LowestLexicography {
             return "";
         }
         TreeSet<String> ans = process(strs);
-        return ans.size() == 0 ? "" : ans.first();
+        return ans.isEmpty() ? "" : ans.first();
     }
 
     // strs中所有字符串全排列，返回所有可能的结果
@@ -62,7 +62,7 @@ public class Code05_LowestLexicography {
             sum += st.length();
         }
         process3(strs, sum, "", set, visited);
-        return set.size() == 0 ? "" : set.first();
+        return set.isEmpty() ? "" : set.first();
     }
 
     private static void process3(String[] strs, int sum, String s, TreeSet<String> set, boolean[] visited) {

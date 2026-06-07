@@ -14,9 +14,9 @@ public class LeetCode_14_longestCommonPrefix {
         }
         int len = strs.length;
         String str = strs[0];
-        for (int i = 0; i < strs.length; i++) {
+        for (String s : strs) {
             // while (str.indexOf())
-            while (strs[i].indexOf(str) != 0) {
+            while (s.indexOf(str) != 0) {
             }
         }
         return "";

@@ -32,7 +32,7 @@ public class ArraySum {
     }
 
     public static void main(String[] args) {
-//        int[] array = generateRandomArray(10, 10, 0);
+        // int[] array = generateRandomArray(10, 10, 0);
         int[] array = {1, 3, 4, 2, 5};
         ArrayUtils.printArr(array);
         int result = getSum(array);

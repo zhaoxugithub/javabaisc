@@ -10,7 +10,7 @@ package com.serendipity.leetcode;
 public class LeetCode_05_longestPalindrome {
     // 给你一个字符串 s，找到 s 中最长的回文子串。
     public String longestPalindrome(String s) {
-        if (s == null || s.length() == 0) {
+        if (s == null || s.isEmpty()) {
             return "";
         }
         int len = s.length();

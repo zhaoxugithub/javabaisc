@@ -26,8 +26,8 @@ public class GetMax {
 
     public static void main(String[] args) {
         int[] array = generateArray();
-//        Collections.singletonList(array).forEach(System.out::print);
-        int max = getMax(array, 0, array.length-1);
+        // Collections.singletonList(array).forEach(System.out::print);
+        int max = getMax(array, 0, array.length - 1);
         System.out.println(max);
     }
 

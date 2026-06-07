@@ -29,11 +29,6 @@ public class Code01_MaxPathSum {
         if (root == null) {
             return;
         }
-
         middle(root.left);
-
-
-
-
     }
 }
